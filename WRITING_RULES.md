@@ -124,7 +124,32 @@ Module directory တိုင်းတွင် file **၅ ခု** အတိအ
 
 ---
 
-## ၆။ စစ်ဆေးရမည့် အချက်များ (Self-check — module တစ်ခု ပြီးတိုင်း)
+## ၆။ Walkthrough ဖိုင်များ (`walkthroughs/` — optional)
+
+`solution.md` ရှိ code ကို **Python အခြေခံမှ စတင်၍** လိုင်းတစ်လိုင်းချင်း ရှင်းပြသည့် ဖတ်စာ
+အပိုဖြစ်သည်။ Module တိုင်းတွင် မဖြစ်မနေ မလိုအပ် — exercise တစ်ခုအတွက် ရေးသားလိုပါက —
+
+1. နေရာ — `modules/<module>/walkthroughs/NN_<exercise_slug>.md` (NN သည် exercise နံပါတ်နှင့် ကိုက်ရမည်)။
+2. Register — ဤဖိုင်များသည် `explanation.md` ၏ "basic concept မရှင်းပြရ" စည်းမျဉ်းမှ **ကင်းလွတ်သည်**။
+   ဤနေရာတွင် dictionary၊ tuple၊ set၊ loop၊ list comprehension၊ `all()`, `assert` စသည့်
+   Python concept များကို **ရှင်းပြရမည်** — ဖတ်သူသည် ထို exercise ကို ပထမဆုံး ဖတ်သူ ဖြစ်သည်။
+3. ဖွဲ့စည်းပုံ — (က) code က ဘာကို ဖြေရှင်းပေးသည်၊ (ခ) ဤ code တွင် လေ့လာရမည့် Python concepts စာရင်း၊
+   (ဂ) နောက်ခံသဘောတရား (ဥပမာ pipeline၊ dependency)၊ (ဃ) code ကို အပိုင်းလိုက် — အပိုင်းတိုင်းတွင်
+   **code block → ရှင်းလင်းချက် → ဥပမာ → output**၊ (င) loop/progress table၊ (ဆ) ကိုယ်တိုင်လေ့ကျင့်ရန်
+   မေးခွန်း + အဖြေ (`<details>` block ဖြင့် ဖုံးထားနိုင်သည်)။
+4. **Code snippet တိုင်းသည် တကယ် run နိုင်ရမည် သို့မဟုတ် run နိုင်သော snippet တစ်ခုမှ ကောက်ထုတ်ထားသည်
+   ဖြစ်ရမည်။** Function ကို အပိုင်းလိုက် ရှင်းပြပါက အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းထားသော
+   **runnable version တစ်ခုကို အဆုံးတွင် ထည့်ပြီး ထို script ကို run ၍ ရလဒ်ကို စစ်ဆေးရမည်** —
+   ခေါင်းစီး + docstring သာ ပြထားသော function block သည် `None` ပြန်သဖြင့် ဖတ်သူ run ကြည့်ပါက
+   ဖော်ပြထားသော output မရနိုင်ပါ။
+5. ဖော်ပြထားသော output တိုင်းသည် run ရလဒ်နှင့် ကိုက်ရမည်။ `set` ၏ ပြသအစီအစဉ်ကဲ့သို့
+   run တစ်ခုနှင့်တစ်ခု ကွဲနိုင်သော output များအတွက် သတိပေးချက် comment ထည့်ရမည်။
+6. Module ၏ `README.md` တွင် walkthrough ရှိကြောင်း ဖော်ပြပြီး ဇယားတစ်ခုဖြင့်
+   walkthrough ↔ exercise ကို ချိတ်ဆက်ရမည်။
+
+---
+
+## ၇။ စစ်ဆေးရမည့် အချက်များ (Self-check — module တစ်ခု ပြီးတိုင်း)
 
 - [ ] file ၅ ခု အတိအကျ ရှိပြီး အမည် မှန်ကန်သည်
 - [ ] `README.md` ထဲတွင် မရှိသော file ကို ရည်ညွှန်းထားခြင်း မရှိ

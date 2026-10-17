@@ -196,10 +196,10 @@ optional အဖြစ် ထည့်သွင်းထားသည် — lab �
 |---|---|
 | `ModuleNotFoundError` | Core lab များတွင် မဖြစ်သင့်ပါ — Python 3.10+ ဖြစ်ကြောင်း စစ်ပါ |
 | Lab exit code `1` | `assert` ကျရှုံးသည် — `python3 <lab.py>` ကို တိုက်ရိုက် run ၍ ကျရှုံးသည့် exercise ကို ကြည့်ပါ |
-| `docker compose up` ပြီးပါက container `Restarting` ဖြစ်နေခြင်း | Neo4j entrypoint သည် `/data`, `/logs`, `/import` ကို start တိုင်း `chown` လုပ်သည် — ထို directory များအတွင်း read-only bind mount မထားရ။ ဤ repo ၏ `neo4j_init.cypher` ကို `/init` (Neo4j မစီမံသော path) တွင် mount ထားသည် |
+| `docker compose up` ပြီးပါက container `Restarting` ဖြစ်နေခြင်း | Neo4j entrypoint သည် `/data`, `/logs`, `/import` ကို start တိုင်း `chown` လုပ်သည် — ထို directory များအတွင်း read-only bind mount မထားရ။ ဤ repo ၏ `docker/neo4j_init.cypher` ကို `/init` (Neo4j မစီမံသော path) တွင် mount ထားသည် |
 | Neo4j container healthy မဖြစ်ခြင်း | heap memory setting နှင့် port `7474`/`7687` လွတ်ကြောင်း စစ်ပါ |
 | `cypher-shell` auth error | `docker compose exec neo4j cypher-shell -u neo4j -p graphrag123` ဖြင့် တိုက်ရိုက် ဝင်ကြည့်ပါ |
-| `neo4j_init.cypher` ကို ပြင်ပြီးနောက် အပြောင်းအလဲ မတွေ့ရခြင်း | single-file bind mount သည် container ဖန်တီးစဉ်က inode ကို ကိုင်ထားသည် — `docker compose up -d --force-recreate neo4j` ဖြင့် container ကို ပြန်ဖန်တီးပါ |
+| `docker/neo4j_init.cypher` ကို ပြင်ပြီးနောက် အပြောင်းအလဲ မတွေ့ရခြင်း | single-file bind mount သည် container ဖန်တီးစဉ်က inode ကို ကိုင်ထားသည် — `docker compose up -d --force-recreate neo4j` ဖြင့် container ကို ပြန်ဖန်တီးပါ |
 | M02/M03/M04 ရလဒ် မမျှော်လင့်သည့်အတိုင်း | ထို module များသည် deterministic scripted extractor သုံးသည် — output ကို ပြောင်းလိုပါက module အတွင်းရှိ `MOCK_LLM_RESPONSES`/scripted extractor data ကို ပြင်ပါ |
 
 ---

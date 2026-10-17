@@ -26,10 +26,22 @@ Module တိုင်းတွင် file ၅ ခု တူညီစွာ ရ�
 | `exercise.md` | လေ့ကျင့်ခန်း ၆ ခု (Hints နှင့် Expected behavior ပါ) |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation အပြည့်အစုံ |
 | `lab.py` | Run နိုင်၊ စစ်ဆေးနိုင်သော deterministic lab (assert-based) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ လိုင်းတစ်လိုင်းချင်း ရှင်းပြသည့် ဖတ်စာ (`walkthroughs/01_pipeline_stage_ordering.md`) |
 
 `explanation.md` subtopic များ — (၁) Course architecture နှင့် lab run ပုံ၊ (၂) RAG pipeline အခြေခံ၊
 (၃) Plain Vector RAG ၏ ကန့်သတ်ချက်များ၊ (၄) Graph RAG သို့ ရောက်ရှိသည့် လမ်းကြောင်း၊
 (၅) Knowledge Graph ၏ အစိတ်အပိုင်းများနှင့် Triple၊ (၆) Toolchain နှင့် environment။
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (dictionary၊ tuple၊ set၊ while loop၊ list comprehension၊ `all()`၊ `assert`)
+ကို ဥပမာနှင့် တွဲဖက် ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_pipeline_stage_ordering.md` | Exercise 1 — RAG Pipeline Stage Ordering (Topological Sorting) |
 
 ## Prerequisites
 
