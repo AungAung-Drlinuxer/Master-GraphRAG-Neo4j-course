@@ -24,6 +24,7 @@ unseen entity type များတွင် recall ကျဆင်းသည်�
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် လေ့ကျင့်ခန်း ၆ ခု (Hints + Expected behavior) |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation |
 | `lab.py` | Standard library သာ သုံး၍ run နိုင်သော executable lab (exercise ၆ ခု) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` တွင် အောက်ပါ subtopic များကို အစဉ်လိုက် ဖော်ပြသည် —
 
@@ -34,9 +35,27 @@ unseen entity type များတွင် recall ကျဆင်းသည်�
 5. Classical pipeline ၏ ကန့်သတ်ချက်များ — domain shift၊ training data၊ recall
 6. Evaluation — Precision၊ Recall၊ F1
 
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`zip`၊ `enumerate`၊ set operations၊ `sorted(key=…)`၊ `while` loop၊
+`finditer()`၊ callback function၊ short-circuit evaluation၊ closure) ကို ဥပမာနှင့်
+တွဲဖက် ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_regex_ner.md` | Exercise 1 — Regex-based NER |
+| `walkthroughs/02_bio_tag_decoding.md` | Exercise 2 — BIO Tag Decoding |
+| `walkthroughs/03_gazetteer_lookup.md` | Exercise 3 — Gazetteer Lookup |
+| `walkthroughs/04_pattern_relationship_extraction.md` | Exercise 4 — Pattern-based Relationship Extraction |
+| `walkthroughs/05_coreference_resolution.md` | Exercise 5 — Rule-based Coreference Resolution |
+| `walkthroughs/06_precision_recall_f1.md` | Exercise 6 — Precision, Recall, F1 |
+
 ## Prerequisites
 
-- Python အခြေခံ syntax (function၊ `dict`၊ `list`၊ `re` module) — program အခြေခံသဘောတရား ရှင်းလင်းချက် မပါဝင်ပါ
+- Python အခြေခံ syntax (function၊ `dict`၊ `list`၊ `re` module) — ဤ module ၏ ရှင်းလင်းချက်များသည်
+  program အခြေခံသဘောတရားကို ရှေးရှေးသိပြီးသားဟု ယူဆသည်။ အခြေခံမှ စတင်လိုပါက `walkthroughs/` ကို ဖတ်ပါ
 - Regular expression အခြေခံ (capture group၊ word boundary `\b`)
 - `re`, `json`, `collections` စသည့် standard library module များ အသုံးပြုနိုင်ခြင်း
 - M00 ပြီးစီးထားခြင်း (Knowledge Graph၊ Triple၊ Node၊ Relationship အခြေခံသတ်မှတ်ချက်များ)
