@@ -166,10 +166,16 @@ Dictionary ထဲက feature က —
 ဆိုရင် လိုအပ်တဲ့ entity ဟာ index ထဲမှာ ရှိတယ်လို့ ဖော်ပြပါတယ်။ အဲဒီအခါ —
 
 ```python
-not True
+print(not True)
 ```
 
-၏ result က `False` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` rule မကိုက်ညီပါဘူး။
+Output —
+
+```text
+False
+```
+
+ဒီ expression ၏ result က `False` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` rule မကိုက်ညီပါဘူး။
 
 ဒါပေမဲ့ —
 
@@ -180,10 +186,16 @@ not True
 ဆိုရင် —
 
 ```python
-not False
+print(not False)
 ```
 
-၏ result က `True` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` ကို ရွေးချယ်နိုင်ပါတယ်။
+Output —
+
+```text
+True
+```
+
+ဒီ expression ၏ result က `True` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` ကို ရွေးချယ်နိုင်ပါတယ်။
 
 Python ၏ `not` operator က Boolean value ကို ပြောင်းပြန်လှန်ပေးတာပါ။
 
@@ -410,6 +422,8 @@ lambda f: not f["required_entity_in_index"]
 
 ဖြစ်ပါတယ်။ `required_entity_in_index` က `False` ဖြစ်တဲ့အတွက် `not False` ၏ result က
 `True` ဖြစ်ပါတယ်။ ဒါကြောင့် function က —
+
+### Function က ပြန်ပေးသည့် label
 
 ```python
 return "ingestion_gap"
@@ -713,7 +727,7 @@ outcomes.values()
 
 ထဲက values တွေက —
 
-```python
+```text
 [
     "no_failure",
     "ingestion_gap",

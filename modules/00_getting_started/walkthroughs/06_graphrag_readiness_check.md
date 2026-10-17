@@ -549,6 +549,8 @@ return {
 
 ဒီ expression က Python ၏ **conditional expression** ဖြစ်ပါတယ်။
 
+### Conditional expression ၏ အသုံးပြုပုံ
+
 ```python
 "READY" if not failed else "NOT_READY"
 ```

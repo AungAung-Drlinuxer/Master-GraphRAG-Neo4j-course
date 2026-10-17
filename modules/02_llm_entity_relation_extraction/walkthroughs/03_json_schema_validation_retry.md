@@ -11,7 +11,7 @@ Exercise 2 တွင် parse လုပ်ခဲ့သည်။ သို့သ�
 "မှန်ကန်ခြင်း" မဟုတ်ပါ**။
 
 ```text
-chunk-002 ရဲ့ parse ရလဒ်
+chunk-002 ၏ parse ရလဒ်
         │
         ├─ JSON အနေနှင့် တရားဝင် (valid JSON)          ✓
         └─ entity တစ်ခုတွင် "type" မပါ                     ✗ → ဒီအမှားကို parse မဖမ်းနိုင်

@@ -95,18 +95,21 @@ false_negative = len(gold - predicted)
 | `-` | Difference — ရှေ့ကတွင် ပါဝင်ပြီး နောက်တွင် မပါ | **FP** / **FN** |
 
 ```python
-print("TP :", GOLD_TRIPLES & PRED_TRIPLES)
-print("FP :", PRED_TRIPLES - GOLD_TRIPLES)
-print("FN :", GOLD_TRIPLES - PRED_TRIPLES)
+print("TP :", sorted(GOLD_TRIPLES & PRED_TRIPLES))
+print("FP :", sorted(PRED_TRIPLES - GOLD_TRIPLES))
+print("FN :", sorted(GOLD_TRIPLES - PRED_TRIPLES))
 ```
 
 Output —
 
 ```text
-TP : {('Larry Page', 'FOUNDED', 'Google'), ('Sundar Pichai', 'CEO_OF', 'Google')}
-FP : {('Sundar Pichai', 'CEO_OF', 'Alphabet')}
-FN : {('Satya Nadella', 'CEO_OF', 'Microsoft')}
+TP : [('Larry Page', 'FOUNDED', 'Google'), ('Sundar Pichai', 'CEO_OF', 'Google')]
+FP : [('Sundar Pichai', 'CEO_OF', 'Alphabet')]
+FN : [('Satya Nadella', 'CEO_OF', 'Microsoft')]
 ```
+
+`set` ၏ repr အစီအစဉ်သည် process တစ်ခုနှင့်တစ်ခု မတူညီနိုင် (Python က hash seed ကို
+random ဖြစ်စေသည်)။ ထို့ကြောင့် ရလဒ်ကို ဖတ်ရလွယ်ပြီး run တိုင်း တူညီစေရန် `sorted()` ဖြင့် ပြထားသည်။
 
 ### အမည်များ၏ အဓိပ္ပာယ်
 

@@ -307,24 +307,34 @@ dependencies[s]
 ဥပမာ —
 
 ```python
-dependencies["chunk"]
+dependencies = {
+    "ingest": (),
+    "chunk": ("ingest",),
+}
+
+print(dependencies["chunk"])
 ```
 
 Output —
 
-```python
-("ingest",)
+```text
+('ingest',)
 ```
 
 နောက်ဥပမာ —
 
 ```python
-dependencies["ingest"]
+dependencies = {
+    "ingest": (),
+    "chunk": ("ingest",),
+}
+
+print(dependencies["ingest"])
 ```
 
 Output —
 
-```python
+```text
 ()
 ```
 
@@ -369,6 +379,8 @@ True
 ဒါပေမဲ့ —
 
 ```python
+ordered = ["ingest", "chunk"]
+
 print(all(d in ordered for d in ("ingest", "embed")))
 ```
 
@@ -520,6 +532,8 @@ return ordered
 
 Function အလုပ်လုပ်ပြီးဆုံးတဲ့အခါ ရရှိလာတဲ့ list ကို ပြန်ပေးပါတယ်။ `return` က function ၏
 result ကို function ကို ခေါ်ထားတဲ့နေရာဆီ ပြန်ပို့ပေးတာပါ။
+
+### Function ကို ခေါ်သုံးခြင်း
 
 ```python
 order = topological_order(UNORDERED_STAGES, PIPELINE_DEPENDENCIES)

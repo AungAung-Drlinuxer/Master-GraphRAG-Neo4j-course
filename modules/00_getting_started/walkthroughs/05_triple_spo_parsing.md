@@ -809,6 +809,8 @@ Function က result နှစ်ခုကို တစ်ပြိုင်န�
 Python မှာ comma ခွဲပြီး values အများအပြားကို `return` လုပ်တဲ့အခါ tuple တစ်ခုအဖြစ်
 ပြန်ရရှိပါတယ်။ ဒါကြောင့် —
 
+### Unpacking ဖြင့် လက်ခံခြင်း
+
 ```python
 triples, errors = parse_triples(TRIPLE_LINES)
 ```

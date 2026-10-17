@@ -34,7 +34,7 @@ Retrieval Modality ဆိုတာ မေးခွန်းတစ်ခုအတ
                             |
                             v
                  Feature-based Router
-              (Python ရဲ့ condition တွေ စစ်ဆေးခြင်း)
+              (Python ၏ condition တွေ စစ်ဆေးခြင်း)
                             |
           +-----------------+-----------------+
           |                 |                 |
@@ -238,7 +238,15 @@ if features["needs_corpus_wide_summary"]:
 အပိုင်းအခြားကြီးတစ်ခုအကြောင်း အကျဉ်းချုပ်ဖို့ လိုသလား စစ်ဆေးပါတယ်။
 
 ```python
-features["needs_corpus_wide_summary"]
+features = {"needs_corpus_wide_summary": True}
+
+print(features["needs_corpus_wide_summary"])
+```
+
+Output —
+
+```text
+True
 ```
 
 ဒီ value က `True` ဖြစ်ရင် အောက်ပါ result ကို ပြန်ပေးပါမယ်။
@@ -339,6 +347,8 @@ similarity အပေါ်မူတည်ပြီး ရှာဖွေဖိ�
 သင့်တော်တဲ့ default ရွေးချယ်မှု ဖြစ်နိုင်ပါတယ်။
 
 အခု Function တစ်ခုလုံးကို ပြန်ကြည့်ရအောင်။
+
+### Function တစ်ခုလုံး၏ ပုံစံ
 
 ```python
 def select_modality(features):
@@ -506,16 +516,15 @@ label ကို ပြန်ယူပါတယ်။
 Q1 အတွက်ဆိုရင် —
 
 ```python
-select_modality({
+print(select_modality({
     "hop_count": 0,
     "spans_documents": False,
     "needs_corpus_wide_summary": False,
     "needs_structured_filter": False
-})
+}))
 ```
 
-Result (print မလုပ်ထားသဖြင့် screen ပေါ်တွင် မပေါ်ပါ — function က ပြန်ပေးသည့် တန်ဖိုးကို
-ဖော်ပြထားသည်) —
+Result (`print()` ဖြင့် function က ပြန်ပေးသည့် တန်ဖိုးကို screen ပေါ်တွင် ဖော်ပြထားသည်) —
 
 ```text
 Vector Search - plain RAG
