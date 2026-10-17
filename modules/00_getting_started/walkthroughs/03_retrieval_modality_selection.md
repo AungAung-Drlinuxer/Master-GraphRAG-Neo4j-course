@@ -6,7 +6,7 @@
 
 ---
 
-ဒီ exercise မှာ Python ကို အသုံးပြုပြီး User ရဲ့ မေးခွန်းအမျိုးအစားနဲ့ လိုအပ်ချက်အပေါ် မူတည်ကာ
+ဒီ exercise မှာ Python ကို အသုံးပြုပြီး User ၏ မေးခွန်းအမျိုးအစားနဲ့ လိုအပ်ချက်အပေါ် မူတည်ကာ
 ဘယ် Retrieval နည်းလမ်းကို ရွေးချယ်မလဲဆိုတာ ဆုံးဖြတ်ခြင်း ကို လေ့လာပါမယ်။
 
 အရင် Exercise 2 မှာ Cosine Similarity ကို အသုံးပြုပြီး Query နဲ့ အနီးစပ်ဆုံးတူညီတဲ့ chunks တွေကို
@@ -66,10 +66,10 @@ def select_modality(features):
 ဒီမှာ `select_modality` ဆိုတဲ့ function ကို သတ်မှတ်ထားပါတယ်။
 
 - `select_modality` — Function အမည်။
-- `features` — Query တစ်ခုရဲ့ လိုအပ်ချက်တွေကို သိမ်းထားတဲ့ dictionary။
-- `"""..."""` — Function ရဲ့ ရည်ရွယ်ချက်ကို ရှင်းပြထားတဲ့ docstring။
+- `features` — Query တစ်ခု၏ လိုအပ်ချက်တွေကို သိမ်းထားတဲ့ dictionary။
+- `"""..."""` — Function ၏ ရည်ရွယ်ချက်ကို ရှင်းပြထားတဲ့ docstring။
 
-Function ကို ခေါ်တဲ့အခါ `features` ထဲမှာ ဘယ်လို data တွေ ပါလာမလဲဆိုတာက ဒီ Exercise ရဲ့
+Function ကို ခေါ်တဲ့အခါ `features` ထဲမှာ ဘယ်လို data တွေ ပါလာမလဲဆိုတာက ဒီ Exercise ၏
 အဓိကအချက် ဖြစ်ပါတယ်။
 
 ဥပမာ —
@@ -95,7 +95,7 @@ features = {
 
 ## 3. `features` dictionary ကို နားလည်ခြင်း
 
-ဒီ Exercise မှာ feature လေးခုကို သတ်မှတ်ထားပါတယ်။
+ဒီ Exercise မှာ feature ၄ ခုကို သတ်မှတ်ထားပါတယ်။
 
 | Feature | အဓိပ္ပာယ် |
 | --- | --- |
@@ -205,7 +205,7 @@ False
 return "GraphRAG - entity-anchored subgraph retrieval"
 ```
 
-ဆိုပြီး ဒီ Retrieval Modality ကို ရွေးချယ်ကာ function ရဲ့ result ကို ပြန်ပေးပါတယ်။
+ဆိုပြီး ဒီ Retrieval Modality ကို ရွေးချယ်ကာ function ၏ result ကို ပြန်ပေးပါတယ်။
 
 ### Entity-Anchored Subgraph Retrieval ဆိုတာဘာလဲ။
 
@@ -234,7 +234,7 @@ if features["needs_corpus_wide_summary"]:
     return "GraphRAG - community summary retrieval"
 ```
 
-ဒီ condition က Query မှာ corpus တစ်ခုလုံး၊ ဒါမှမဟုတ် knowledge graph ရဲ့
+ဒီ condition က Query မှာ corpus တစ်ခုလုံး၊ ဒါမှမဟုတ် knowledge graph ၏
 အပိုင်းအခြားကြီးတစ်ခုအကြောင်း အကျဉ်းချုပ်ဖို့ လိုသလား စစ်ဆေးပါတယ်။
 
 ```python
@@ -249,14 +249,14 @@ return "GraphRAG - community summary retrieval"
 
 ဥပမာ User က —
 
-> Our IT knowledge base ထဲက အများဆုံးတွေ့ရတဲ့ infrastructure problems တွေနဲ့ သူတို့ရဲ့
+> Our IT knowledge base ထဲက အများဆုံးတွေ့ရတဲ့ infrastructure problems တွေနဲ့ သူတို့၏
 > common causes တွေကို အကျဉ်းချုပ်ပေးပါ။
 
 လို့ မေးတယ်ဆိုပါစို့။ ဒီမေးခွန်းကို ဖြေဖို့ document တစ်ခုတည်းထဲက paragraph တစ်ခုကို
 ရှာရုံနဲ့ မလုံလောက်နိုင်ပါဘူး။ Knowledge base ထဲမှာရှိတဲ့ information အများအပြားကို
 ပေါင်းစပ်ပြီး အကျဉ်းချုပ်ဖို့ လိုလာနိုင်ပါတယ်။
 
-GraphRAG ရဲ့ community summary retrieval ပုံစံမှာ Graph ထဲက ဆက်စပ်နေတဲ့ entities နဲ့
+GraphRAG ၏ community summary retrieval ပုံစံမှာ Graph ထဲက ဆက်စပ်နေတဲ့ entities နဲ့
 relationships တွေကို community အုပ်စုများအဖြစ် စုစည်းထားပြီး အဲဒီ community summary တွေကို
 အသုံးပြုနိုင်ပါတယ်။
 
@@ -304,7 +304,7 @@ RETURN c
 ဒီဥပမာက `Cluster` entities တွေထဲမှာ `production` environment ဖြစ်ပြီး CPU usage `80`
 ထက်ကြီးတဲ့ records တွေကို ရှာဖွေဖို့ ရည်ရွယ်ထားပါတယ်။
 
-ဒီ exercise ရဲ့ Python code က Cypher ကို တကယ် generate လုပ်တာ၊ ဒါမှမဟုတ် query ကို
+ဒီ exercise ၏ Python code က Cypher ကို တကယ် generate လုပ်တာ၊ ဒါမှမဟုတ် query ကို
 database ပေါ်မှာ run လုပ်တာ မဟုတ်ပါဘူး။ `needs_structured_filter` က `True` ဖြစ်ရင်
 `"Text-to-Cypher"` ဆိုတဲ့ label ကိုသာ ပြန်ပေးပါတယ်။
 
@@ -319,7 +319,7 @@ validate လုပ်ဖို့၊ permissions ကန့်သတ်ဖို�
 return "Vector Search - plain RAG"
 ```
 
-ဒီလို `return` ကို `if` condition တွေရဲ့ အပြင်ဘက်မှာ ရေးထားပါတယ်။ ဒါကြောင့် အရင်
+ဒီလို `return` ကို `if` condition တွေ၏ အပြင်ဘက်မှာ ရေးထားပါတယ်။ ဒါကြောင့် အရင်
 condition သုံးခုစလုံး မပြည့်မီတဲ့အခါ ဒီ result ကို **default** အနေနဲ့ ပြန်ပေးပါတယ်။
 
 အဲဒီ condition သုံးခုက —
@@ -357,7 +357,7 @@ def select_modality(features):
 ```
 
 မှတ်ချက် — Docstring မှာ "cheapest retrieval modality" လို့ ရေးထားပေမဲ့ ဒီ code က
-retrieval နည်းလမ်းတစ်ခုချင်းစီရဲ့ တကယ့်ကုန်ကျစရိတ်ကို တွက်ချက်တာ မဟုတ်ပါဘူး။
+retrieval နည်းလမ်းတစ်ခုချင်းစီ၏ တကယ့်ကုန်ကျစရိတ်ကို တွက်ချက်တာ မဟုတ်ပါဘူး။
 သတ်မှတ်ထားတဲ့ condition တွေနဲ့ အစီအစဉ်အရ ရွေးချယ်တာဖြစ်ပါတယ်။ တကယ့် cheapest modality
 ကို ရွေးချယ်ဖို့ latency၊ compute cost၊ token usage နဲ့ retrieval quality စတဲ့အချက်တွေကိုပါ
 ထည့်သွင်းစဉ်းစားဖို့ လိုပါတယ်။
@@ -395,7 +395,7 @@ QUERIES = [
 ]
 ```
 
-ဒီမှာ `QUERIES` က **list တစ်ခု**ပါ။ List ထဲမှာ tuple လေးခု ပါဝင်ပြီး တစ်ခုချင်းစီမှာ —
+ဒီမှာ `QUERIES` က **list တစ်ခု**ပါ။ List ထဲမှာ tuple ၄ ခု ပါဝင်ပြီး တစ်ခုချင်းစီမှာ —
 
 - Query ID
 - Query features dictionary
@@ -411,9 +411,9 @@ QUERIES = [
 })
 ```
 
-ဒီ tuple မှာ `"Q1"` က Query ရဲ့ ID ဖြစ်ပြီး ဒုတိယ item က Query ရဲ့ features တွေဖြစ်ပါတယ်။
+ဒီ tuple မှာ `"Q1"` က Query ၏ ID ဖြစ်ပြီး ဒုတိယ item က Query ၏ features တွေဖြစ်ပါတယ်။
 
-Q1 ရဲ့ features အားလုံးက ပထမသုံးခုသော routing conditions တွေကို မပြည့်မီပါဘူး။ ဒါကြောင့်
+Q1 ၏ features အားလုံးက ပထမသုံးခုသော routing conditions တွေကို မပြည့်မီပါဘူး။ ဒါကြောင့်
 default ဖြစ်တဲ့ Vector Search ကို ရွေးချယ်ရမှာပါ။
 
 ---
@@ -461,14 +461,14 @@ Structured filtering လိုအပ်ပါတယ်။
 
 ## 10. `for query_id, features in QUERIES`
 
-Code ရဲ့ နောက်ဆုံးအပိုင်းက ဒီလိုဖြစ်ပါတယ်။
+Code ၏ နောက်ဆုံးအပိုင်းက ဒီလိုဖြစ်ပါတယ်။
 
 ```python
 for query_id, features in QUERIES:
     print("%s -> %s" % (query_id, select_modality(features)))
 ```
 
-ဒီ loop က Query လေးခုလုံးကို တစ်ခုချင်းစီ ယူပြီး modality ကို ရွေးချယ်ပေးပါတယ်။
+ဒီ loop က Query ၄ ခုလုံးကို တစ်ခုချင်းစီ ယူပြီး modality ကို ရွေးချယ်ပေးပါတယ်။
 
 ### 10.1 Tuple unpacking
 
@@ -500,7 +500,7 @@ for query_id, features in QUERIES:
 select_modality(features)
 ```
 
-ဒီ function call က လက်ရှိ Query ရဲ့ features တွေကို function ထဲပို့ပြီး သင့်တော်တဲ့ modality
+ဒီ function call က လက်ရှိ Query ၏ features တွေကို function ထဲပို့ပြီး သင့်တော်တဲ့ modality
 label ကို ပြန်ယူပါတယ်။
 
 Q1 အတွက်ဆိုရင် —
@@ -554,7 +554,7 @@ Q1 -> Vector Search - plain RAG
 
 ---
 
-## 11. Code တစ်ခုလုံးရဲ့ Expected Output
+## 11. Code တစ်ခုလုံး၏ Expected Output
 
 အပိုင်း ၂ မှ ၁၀ အထိ ရှင်းပြခဲ့သည့် အစိတ်အပိုင်းအားလုံးကို ပေါင်းစည်းလိုက်ပါက runnable
 script တစ်ခု အပြည့်အစုံ ရရှိပါတယ် —
@@ -667,4 +667,4 @@ rule precedence ကို ဂရုတစိုက် သတ်မှတ်ရ�
 Exercise 2 မှာ Vector similarity score တွေကို ranking လုပ်ခဲ့ပါတယ်။ ဒီ Exercise 3 မှာတော့
 Query features တွေအပေါ် မူတည်ပြီး retrieval နည်းလမ်းကို ရွေးချယ်ဖို့ Python `if` statements
 နဲ့ rule-based routing ကို တည်ဆောက်ခဲ့ပါတယ်။ ဒီ concept တွေကို ပေါင်းစပ်လိုက်ရင် RAG
-system တစ်ခုရဲ့ retrieval workflow ကို ပိုမိုထိရောက်အောင် ဒီဇိုင်းလုပ်နိုင်ပါတယ်။
+system တစ်ခု၏ retrieval workflow ကို ပိုမိုထိရောက်အောင် ဒီဇိုင်းလုပ်နိုင်ပါတယ်။

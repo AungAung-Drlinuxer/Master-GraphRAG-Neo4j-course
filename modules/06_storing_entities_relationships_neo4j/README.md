@@ -23,6 +23,7 @@ Triple များကို Neo4j ထဲသို့ **idempotent** ဖြစ�
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် လေ့ကျင့်ခန်း ၆ ခု |
 | `solution.md` | Reference implementation အပြည့်အစုံ |
 | `lab.py` | Standard library သာ သုံးသော executable lab (Neo4j server မလိုအပ်) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` subtopics —
 
@@ -32,6 +33,25 @@ Triple များကို Neo4j ထဲသို့ **idempotent** ဖြစ�
 4. Update နှင့် delete semantics — stale relationship၊ orphan node၊ cascade delete
 5. Batch performance — transaction batching၊ session pool၊ index အရေးပါမှု
 6. Python driver အခြေခံ — offline simulation နှင့် live driver call ဆက်စပ်မှု
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`set` နှင့် tuple key၊ set difference၊ `dict.setdefault()`၊
+`dict.get()` counting pattern၊ list comprehension၊ `str.format` ၏ `{{` `}}` escape၊
+`continue`၊ `%` formatting၊ `**params`၊ context manager `__enter__`/`__exit__`၊
+`splitlines`/`split(sep, 1)`) ကို ဥပမာနှင့် တွဲဖက် ရှင်းပြသည်။ Code snippet တိုင်း၏ output
+သည် အမှန်တကယ် run ၍ ရရှိသည့် ရလဒ် ဖြစ်သည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_unwind_batch_generator.md` | Exercise 1 — Triple → Cypher batch generator (`UNWIND`) |
+| `walkthroughs/02_idempotent_merge_simulation.md` | Exercise 2 — Idempotent merge simulator (`MERGE` vs `CREATE`) |
+| `walkthroughs/03_uniqueness_constraint_validation.md` | Exercise 3 — Uniqueness constraint validation |
+| `walkthroughs/04_relationship_diff_orphan_cleanup.md` | Exercise 4 — Relationship update/delete diff နှင့် orphan cleanup |
+| `walkthroughs/05_batch_transaction_sizing.md` | Exercise 5 — Batch transaction sizing |
+| `walkthroughs/06_driver_call_sequence.md` | Exercise 6 — Driver call sequence simulation |
 
 ## Prerequisites
 

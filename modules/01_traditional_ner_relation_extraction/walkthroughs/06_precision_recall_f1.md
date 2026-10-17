@@ -12,7 +12,7 @@ Exercise 1–5 မှာ entity နှင့် relationship တွေကို 
 အဲဒီအဖြေကို **Precision**၊ **Recall** နဲ့ **F1** နဲ့ တိုင်းတာပုံကို လုပ်ပြပါတယ်။
 
 စာမေးပွဲတစ်ခုလို စဉ်းစားပါ။ `GOLD_TRIPLES` က **အဖြေစာအုပ်** (လူက ကိုယ်တိုင်
-မှတ်ထားတဲ့ အဖြေမှန်) ဖြစ်ပြီး `PRED_TRIPLES` က **system ရဲ့ အဖြေ** ဖြစ်ပါတယ်။
+မှတ်ထားတဲ့ အဖြေမှန်) ဖြစ်ပြီး `PRED_TRIPLES` က **system ၏ အဖြေ** ဖြစ်ပါတယ်။
 
 ```text
 GOLD_TRIPLES :
@@ -201,7 +201,7 @@ f1 = (2 * precision * recall / (precision + recall)
       if (precision + recall) else 0.0)
 ```
 
-F1 က precision နဲ့ recall ရဲ့ **harmonic mean** ဖြစ်ပါတယ်။
+F1 က precision နဲ့ recall ၏ **harmonic mean** ဖြစ်ပါတယ်။
 
 ```text
 f1 = 2 * (precision * recall) / (precision + recall)
@@ -358,7 +358,7 @@ precision=0.6667 recall=0.6667 f1=0.6667
 | အဖြေစာအုပ် အလွတ် | 0 | 3 | 0 | 0.0000 | 0.0000 | 0.0000 |
 | နှစ်ခုလုံး အလွတ် | 0 | 0 | 0 | 0.0000 | 0.0000 | 0.0000 |
 
-ဇယားရဲ့ အောက်ဆုံးလိုင်းသုံးလိုင်းကို စမ်းကြည့်နိုင်ပါတယ်။
+ဇယား၏ အောက်ဆုံးလိုင်းသုံးလိုင်းကို စမ်းကြည့်နိုင်ပါတယ်။
 
 ```python
 GOLD_TRIPLES = {

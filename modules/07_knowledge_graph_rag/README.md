@@ -26,6 +26,7 @@ community-summary retrieval။ ဤ module ပြီးဆုံးချိန�
 | `exercise.md` | လေ့ကျင့်ခန်း ၆ ခု (Hints + Expected behavior) |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation |
 | `lab.py` | Standard library သာ သုံးသော executable lab (`assert` ဖြင့် စစ်ဆေး) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` သည် အောက်ပါ subtopic ၇ ခုကို အစဉ်လိုက် ဖော်ပြသည် —
 
@@ -36,6 +37,22 @@ community-summary retrieval။ ဤ module ပြီးဆုံးချိန�
 5. Text-to-Cypher — schema prompt၊ guardrail၊ read-only validation
 6. Community Detection နှင့် hierarchical summarization
 7. Evaluation — GraphRAG ကို vector-only baseline နှင့် နှိုင်းယှဉ်ခြင်း
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`dict` comprehension၊ set union၊ `deque`/BFS၊ `zip`၊ `enumerate`၊ `sorted(key=…)`၊
+`defaultdict`၊ `while` flag loop၊ `raise`/`try-except`) ကို ဥပမာနှင့် တွဲဖက် ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_entity_linking.md` | Exercise 1 — Entity Linking |
+| `walkthroughs/02_k_hop_subgraph_retrieval.md` | Exercise 2 — k-hop Subgraph Retrieval |
+| `walkthroughs/03_subgraph_prompt_serialization.md` | Exercise 3 — Subgraph → Prompt Context Serialization |
+| `walkthroughs/04_hybrid_retrieval_fusion.md` | Exercise 4 — Hybrid Retrieval Fusion |
+| `walkthroughs/05_text_to_cypher_guardrails.md` | Exercise 5 — Text-to-Cypher Guardrails |
+| `walkthroughs/06_community_detection.md` | Exercise 6 — Community Detection |
 
 ## Prerequisites
 

@@ -17,7 +17,7 @@ Query features တွေအပေါ် မူတည်ပြီး retrieval mo
 ဒီ Exercise 4 မှာတော့ RAG system က မေးခွန်းတစ်ခုကို မှန်ကန်စွာ မဖြေနိုင်တဲ့အခါ ဘယ်လို
 failure ဖြစ်နိုင်သလဲဆိုတာကို Python rules တွေနဲ့ ခွဲခြားသတ်မှတ်မှာ ဖြစ်ပါတယ်။
 
-ဥပမာ IT Help Chatbot မှာ user က Kubernetes cluster ရဲ့ configuration အကြောင်း မေးတဲ့အခါ
+ဥပမာ IT Help Chatbot မှာ user က Kubernetes cluster ၏ configuration အကြောင်း မေးတဲ့အခါ
 အဖြေမှားသွားနိုင်တဲ့ အကြောင်းရင်းတွေက အမျိုးမျိုးရှိနိုင်ပါတယ်။
 
 - လိုအပ်တဲ့ information ကို knowledge index ထဲ မထည့်ထားခြင်း။
@@ -34,7 +34,7 @@ failure ဖြစ်နိုင်သလဲဆိုတာကို Python rule
 ## 1. RAG Failure Mode ဆိုတာဘာလဲ။
 
 Failure Mode ဆိုတာ system တစ်ခု အလုပ်မလုပ်နိုင်ခြင်း သို့မဟုတ် မျှော်လင့်ထားတဲ့ရလဒ်ကို
-မရရှိခြင်းရဲ့ ပုံစံ သို့မဟုတ် အကြောင်းရင်းအမျိုးအစားကို ဆိုလိုပါတယ်။
+မရရှိခြင်း၏ ပုံစံ သို့မဟုတ် အကြောင်းရင်းအမျိုးအစားကို ဆိုလိုပါတယ်။
 
 ```text
                        User Query
@@ -66,7 +66,7 @@ ingestion status တို့ကို ထပ်မံစစ်ဆေးဖိ�
 
 ## 2. `FAILURE_RULES` — Failure Classification Rules
 
-အရင်ဆုံး code ရဲ့ ပထမအပိုင်းကို ကြည့်ပါ။
+အရင်ဆုံး code ၏ ပထမအပိုင်းကို ကြည့်ပါ။
 
 ```python
 FAILURE_RULES = (
@@ -77,7 +77,7 @@ FAILURE_RULES = (
 )
 ```
 
-ဒီမှာ `FAILURE_RULES` က tuple တစ်ခုဖြစ်ပါတယ်။ Tuple ထဲမှာ rule လေးခု ပါဝင်ပြီး rule
+ဒီမှာ `FAILURE_RULES` က tuple တစ်ခုဖြစ်ပါတယ်။ Tuple ထဲမှာ rule ၄ ခု ပါဝင်ပြီး rule
 တစ်ခုစီက tuple အတွင်းမှာ item နှစ်ခုစီ ပါပါတယ်။
 
 ပထမ item က failure label ဖြစ်ပြီး ဒုတိယ item က condition တစ်ခုကို စစ်ဆေးပေးတဲ့
@@ -91,7 +91,7 @@ lambda function ဖြစ်ပါတယ်။
 
 ဒီမှာ အစိတ်အပိုင်း နှစ်ခု ရှိပါတယ် —
 
-- `"ingestion_gap"` — Failure အမျိုးအစားရဲ့ label။
+- `"ingestion_gap"` — Failure အမျိုးအစား၏ label။
 - `lambda f: not f["required_entity_in_index"]` — Input features တွေကို စစ်ဆေးမယ့် function။
 
 Python က `FAILURE_RULES` ကို စီထားတဲ့ အစီအစဉ်အတိုင်း နောက်ပိုင်းမှာ စစ်ဆေးသွားပါမယ်။
@@ -101,7 +101,7 @@ Python က `FAILURE_RULES` ကို စီထားတဲ့ အစီအစဉ
 
 ## 3. `lambda` function ဆိုတာဘာလဲ။
 
-ဒီ Exercise ရဲ့ အရေးကြီးဆုံး Python concepts တစ်ခုက `lambda` ဖြစ်ပါတယ်။
+ဒီ Exercise ၏ အရေးကြီးဆုံး Python concepts တစ်ခုက `lambda` ဖြစ်ပါတယ်။
 
 ပုံမှန်အားဖြင့် function တစ်ခုကို `def` နဲ့ ဖန်တီးနိုင်ပါတယ်။
 
@@ -169,7 +169,7 @@ Dictionary ထဲက feature က —
 not True
 ```
 
-ရဲ့ result က `False` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` rule မကိုက်ညီပါဘူး။
+၏ result က `False` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` rule မကိုက်ညီပါဘူး။
 
 ဒါပေမဲ့ —
 
@@ -183,9 +183,9 @@ not True
 not False
 ```
 
-ရဲ့ result က `True` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` ကို ရွေးချယ်နိုင်ပါတယ်။
+၏ result က `True` ဖြစ်ပါတယ်။ ဒါကြောင့် `ingestion_gap` ကို ရွေးချယ်နိုင်ပါတယ်။
 
-Python ရဲ့ `not` operator က Boolean value ကို ပြောင်းပြန်လှန်ပေးတာပါ။
+Python ၏ `not` operator က Boolean value ကို ပြောင်းပြန်လှန်ပေးတာပါ။
 
 | Original value | `not` ဖြင့် ပြောင်းလဲပြီး |
 | --- | --- |
@@ -206,7 +206,7 @@ Metadata filters၊ permissions၊ entity extraction နဲ့ index lookup တ�
 ("global_summarization_failure", lambda f: f["needs_corpus_wide_aggregate"])
 ```
 
-ဒီ rule က corpus တစ်ခုလုံး ဒါမှမဟုတ် knowledge base ရဲ့ အပိုင်းအခြားကြီးတစ်ခုကို
+ဒီ rule က corpus တစ်ခုလုံး ဒါမှမဟုတ် knowledge base ၏ အပိုင်းအခြားကြီးတစ်ခုကို
 ပေါင်းစပ်စဉ်းစားဖို့ လိုအပ်ကြောင်း သတ်မှတ်ထားသလား စစ်ဆေးပါတယ်။
 
 ဥပမာ —
@@ -330,7 +330,7 @@ def classify_failure(features):
 
 - `for` loop နဲ့ rules တွေကို အစဉ်လိုက် စစ်ဆေးခြင်း။
 - `if rule(features)` နဲ့ လက်ရှိ rule ကို စမ်းသပ်ခြင်း။
-- `return label` နဲ့ ပထမဆုံးကိုက်ညီတဲ့ rule ရဲ့ label ကို ပြန်ပေးခြင်း။
+- `return label` နဲ့ ပထမဆုံးကိုက်ညီတဲ့ rule ၏ label ကို ပြန်ပေးခြင်း။
 
 ### Step 5.1 — `for label, rule in FAILURE_RULES`
 
@@ -338,7 +338,7 @@ def classify_failure(features):
 for label, rule in FAILURE_RULES:
 ```
 
-`FAILURE_RULES` ထဲမှာ tuple လေးခု ရှိပါတယ်။ Tuple တစ်ခုချင်းစီမှာ item နှစ်ခုစီ ပါဝင်ပါတယ်။
+`FAILURE_RULES` ထဲမှာ tuple ၄ ခု ရှိပါတယ်။ Tuple တစ်ခုချင်းစီမှာ item နှစ်ခုစီ ပါဝင်ပါတယ်။
 ဥပမာ —
 
 ```python
@@ -408,7 +408,7 @@ features = {
 lambda f: not f["required_entity_in_index"]
 ```
 
-ဖြစ်ပါတယ်။ `required_entity_in_index` က `False` ဖြစ်တဲ့အတွက် `not False` ရဲ့ result က
+ဖြစ်ပါတယ်။ `required_entity_in_index` က `False` ဖြစ်တဲ့အတွက် `not False` ၏ result က
 `True` ဖြစ်ပါတယ်။ ဒါကြောင့် function က —
 
 ```python
@@ -423,7 +423,7 @@ return "ingestion_gap"
 return "no_failure"
 ```
 
-ဒီလို `return` က `for` loop အပြင်ဘက်မှာ ရှိနေပါတယ်။ အဓိပ္ပာယ်က rules လေးခုစလုံးကို
+ဒီလို `return` က `for` loop အပြင်ဘက်မှာ ရှိနေပါတယ်။ အဓိပ္ပာယ်က rules ၄ ခုစလုံးကို
 စစ်ဆေးပြီး တစ်ခုမှ `True` မဖြစ်ခဲ့ရင် `"no_failure"` ကို default result အနေနဲ့
 ပြန်ပေးမှာ ဖြစ်ပါတယ်။
 
@@ -435,7 +435,7 @@ return "no_failure"
 
 ## 6. Rule Priority — ဘယ် Rule ကို အရင်ရွေးမလဲ။
 
-ဒီ code မှာ သတိထားရမယ့် အရေးကြီးဆုံးအချက်တစ်ခုက rule တွေရဲ့ အစီအစဉ် ဖြစ်ပါတယ်။
+ဒီ code မှာ သတိထားရမယ့် အရေးကြီးဆုံးအချက်တစ်ခုက rule တွေ၏ အစီအစဉ် ဖြစ်ပါတယ်။
 
 ဥပမာ —
 
@@ -617,7 +617,7 @@ default result ဖြစ်တဲ့ `no_failure` ကို ပြန်ပေ�
 
 ## 9. Dictionary Comprehension — ရလဒ်အားလုံးကို စုဆောင်းခြင်း
 
-အခု code ရဲ့ နောက်တစ်ပိုင်းကို ကြည့်ပါ။
+အခု code ၏ နောက်တစ်ပိုင်းကို ကြည့်ပါ။
 
 ```python
 outcomes = {
@@ -639,7 +639,7 @@ for sid, features in FAILURE_SCENARIOS:
     outcomes[sid] = classify_failure(features)
 ```
 
-ဆိုပြီး ရေးနိုင်ပါတယ်။ နှစ်ခုလုံးရဲ့ ရည်ရွယ်ချက်က တူညီပါတယ်။
+ဆိုပြီး ရေးနိုင်ပါတယ်။ နှစ်ခုလုံး၏ ရည်ရွယ်ချက်က တူညီပါတယ်။
 
 ဥပမာ — `sid = "S2"` ဆိုရင် `classify_failure(features)` က `"ingestion_gap"` ပြန်ပေးမှာ
 ဖြစ်ပါတယ်။ ဒါကြောင့် dictionary ထဲမှာ —
@@ -671,7 +671,7 @@ outcomes["S2"] = "ingestion_gap"
 from collections import Counter
 ```
 
-ဒီမှာ Python ရဲ့ `collections` standard library module ထဲက `Counter` ကို import
+ဒီမှာ Python ၏ `collections` standard library module ထဲက `Counter` ကို import
 လုပ်ထားပါတယ်။ `Counter` က items တစ်ခုချင်းစီ ဘယ်နှကြိမ် ပါဝင်သလဲဆိုတာ ရေတွက်ပေးတဲ့
 data structure ဖြစ်ပါတယ်။
 
@@ -724,7 +724,7 @@ outcomes.values()
 ```
 
 ဖြစ်ပါတယ်။ အဲဒီ values တွေကို `Counter()` ထဲ ပေးလိုက်တဲ့အတွက် failure label
-တစ်ခုစီရဲ့ အကြိမ်ရေကို ရေတွက်ပေးနိုင်ပါတယ်။
+တစ်ခုစီ၏ အကြိမ်ရေကို ရေတွက်ပေးနိုင်ပါတယ်။
 
 ဒီ exercise မှာ labels ငါးမျိုးလုံး တစ်ကြိမ်စီပဲ ပါဝင်တဲ့အတွက် result က —
 
@@ -736,7 +736,7 @@ Counter({'no_failure': 1, 'ingestion_gap': 1, 'multi_hop_failure': 1, 'global_su
 
 ---
 
-## 11. Code တစ်ခုလုံးရဲ့ Expected Output
+## 11. Code တစ်ခုလုံး၏ Expected Output
 
 အပိုင်း ၂ မှ ၁၀ အထိ ရှင်းပြခဲ့သည့် အစိတ်အပိုင်းအားလုံးကို ပေါင်းစည်းလိုက်ပါက runnable
 script တစ်ခု အပြည့်အစုံ ရရှိပါတယ် —
@@ -786,7 +786,7 @@ Terminal မှာ ဒီလို ပြပါမယ် —
 Counter({'no_failure': 1, 'ingestion_gap': 1, 'multi_hop_failure': 1, 'global_summarization_failure': 1, 'chunk_isolation': 1})
 ```
 
-Python ရဲ့ `Counter` ဟာ ပထမဆုံးတွေ့ရတဲ့ item အစီအစဉ်အတိုင်း ပြနိုင်တဲ့အတွက် ဒီ example မှာ
+Python ၏ `Counter` ဟာ ပထမဆုံးတွေ့ရတဲ့ item အစီအစဉ်အတိုင်း ပြနိုင်တဲ့အတွက် ဒီ example မှာ
 အပေါ်ပါ order အတိုင်း ပေါ်လာပါတယ်။
 
 ---
@@ -815,7 +815,7 @@ Python ရဲ့ `Counter` ဟာ ပထမဆုံးတွေ့ရတဲ့ 
 
 **အဖြေ — 2. `ingestion_gap`**
 
-အကြောင်းရင်း — ဤ features တွင် rule **လေးခုစလုံး** ကိုက်ညီသည် —
+အကြောင်းရင်း — ဤ features တွင် rule **၄ ခုစလုံး** ကိုက်ညီသည် —
 
 | Rule | စစ်ဆေးချက် | ရလဒ် |
 | --- | --- | --- |

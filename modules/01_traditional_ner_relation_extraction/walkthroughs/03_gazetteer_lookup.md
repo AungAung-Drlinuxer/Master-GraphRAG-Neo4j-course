@@ -16,7 +16,7 @@ Google LLC is a subsidiary of Alphabet. MSFT competes with Google.
 ဒီစာသားထဲမှာ —
 
 - `Google LLC` နဲ့ `Google` — တူညီတဲ့ အဖွဲ့အစည်း
-- `MSFT` — `Microsoft` ရဲ့ ticker အမည်
+- `MSFT` — `Microsoft` ၏ ticker အမည်
 - `Alphabet` — သီးခြားအဖွဲ့အစည်း
 
 ဒီအမည်တွေကို **တစ်ခုတည်းသော ID** အဖြစ် ပြောင်းပေးမှ graph ထဲမှာ node တစ်ခုတည်း
@@ -50,7 +50,7 @@ GAZETTEER = {
 }
 ```
 
-Dictionary ရဲ့ key က **alias** (စာသားထဲ ပါလာနိုင်တဲ့ အမည်) ဖြစ်ပြီး value က
+Dictionary ၏ key က **alias** (စာသားထဲ ပါလာနိုင်တဲ့ အမည်) ဖြစ်ပြီး value က
 `(label, canonical_name)` ဆိုတဲ့ tuple ဖြစ်ပါတယ်။
 
 | Alias (key) | Label | Canonical |
@@ -140,8 +140,8 @@ lengths           : [10, 9, 8, 6, 4]
 
 ### ဘာကြောင့် အရှည်ဆုံးကို အရင်စစ်ရသလဲ။
 
-Python ရဲ့ `startswith()` က **prefix** ကို စစ်တာဖြစ်လို့ အတိုတဲ့ alias က
-အရှည်တဲ့ alias ရဲ့ အစပိုင်းကို ကိုက်ညီနိုင်ပါတယ်။
+Python ၏ `startswith()` က **prefix** ကို စစ်တာဖြစ်လို့ အတိုတဲ့ alias က
+အရှည်တဲ့ alias ၏ အစပိုင်းကို ကိုက်ညီနိုင်ပါတယ်။
 
 ```python
 print("Google LLC is".startswith("Google", 0))
@@ -188,8 +188,8 @@ dict order (no sorting) : [('Google', 0), ('Alphabet', 30)]
 sorted longest first    : [('Google LLC', 0), ('Alphabet', 30)]
 ```
 
-Sorting မလုပ်ရင် `Google LLC` ရဲ့ အစိတ်အပိုင်း `Google` ကိုသာ ဖမ်းမိပြီး `LLC` က
-ကျန်ခဲ့ပါတယ်။ ဒါက **longest match first** strategy ရဲ့ အဓိကအချက်ပါ။
+Sorting မလုပ်ရင် `Google LLC` ၏ အစိတ်အပိုင်း `Google` ကိုသာ ဖမ်းမိပြီး `LLC` က
+ကျန်ခဲ့ပါတယ်။ ဒါက **longest match first** strategy ၏ အဓိကအချက်ပါ။
 
 ---
 
@@ -234,7 +234,7 @@ end = index + len(key)
 if text.startswith(key, index):
 ```
 
-`startswith(key, index)` က `text` ရဲ့ index နေရာကနေ `key` နဲ့ စမစ စစ်ပါတယ်။
+`startswith(key, index)` က `text` ၏ index နေရာကနေ `key` နဲ့ စမစ စစ်ပါတယ်။
 စစ်ပြီးရင် `end` မှာ alias ဘယ်အထိ ဆွဲသွားလဲ မှတ်ထားပါတယ်။
 
 ```python
@@ -347,7 +347,7 @@ alias အဖြစ် **ဖမ်းမိပါမယ်**။
 
 ### Regex `\b` နှင့် `isalnum()` မတူညီခြင်း
 
-ဒီအချက်က သေးငယ်ပုံရပေမဲ့ အရေးကြီးပါတယ်။ Regex ရဲ့ `\b` က word character ကို
+ဒီအချက်က သေးငယ်ပုံရပေမဲ့ အရေးကြီးပါတယ်။ Regex ၏ `\b` က word character ကို
 `[A-Za-z0-9_]` (underscore ပါဝင်သည်) အဖြစ် သတ်မှတ်ပြီး `isalnum()` က underscore ကို
 မပါဝင်စေပါဘူး။ ဒါကြောင့် နည်းလမ်းနှစ်ခုက underscore နေရာမှာ မတူညီတဲ့ ရလဒ် ပေးပါတယ်။
 
@@ -394,7 +394,7 @@ MSFT2      gazetteer=[]           regex_boundary=[]
 | `MSFT-now` | ဖမ်းမိသည် | ဖမ်းမိသည် |
 | `MSFT2` | မဖမ်းမိပါ | မဖမ်းမိပါ |
 
-ဒီ Exercise ရဲ့ code ကိုယ်တိုင် ကိုယ်ပိုင် boundary rule ကို ရေးထားတာကြောင့်
+ဒီ Exercise ၏ code ကိုယ်တိုင် ကိုယ်ပိုင် boundary rule ကို ရေးထားတာကြောင့်
 ဒီကွာခြားချက်ကို သိထားဖို့ လိုပါတယ်။ Entity အမည်တွေမှာ underscore ပါလာတဲ့အခါ
 (ဥပမာ `sg_rag_prd_m1` လို cluster အမည်) ရလဒ် ကွာနိုင်ပါတယ်။
 
@@ -413,7 +413,7 @@ else:
     index += 1
 ```
 
-Python ရဲ့ `for` loop မှာ `else` ကို တွဲရေးနိုင်ပါတယ်။ **`break` မဖြစ်ခဲ့ရင်**
+Python ၏ `for` loop မှာ `else` ကို တွဲရေးနိုင်ပါတယ်။ **`break` မဖြစ်ခဲ့ရင်**
 `else` ကို လုပ်ဆောင်ပါတယ်။ Loop က ပုံမှန်အတိုင်း ဆုံးသွားရင်လည်း `else` က
 လုပ်ဆောင်ပါတယ် — ဒါကြောင့် "loop က ပြီးဆုံးသွားတယ်" လို့ ဖတ်ရပါတယ်။
 
@@ -501,7 +501,7 @@ Graph ထဲမှာ ဒီနှစ်ခုက node တစ်ခုတည်�
 
 ---
 
-## 10. Boundary Check ရဲ့ အလုပ်ကို နှိုင်းယှဉ်ခြင်း
+## 10. Boundary Check ၏ အလုပ်ကို နှိုင်းယှဉ်ခြင်း
 
 Condition နံပါတ် ၂ နဲ့ ၃ ကို ဖျောက်ကြည့်ရင် ဘာဖြစ်လဲ။
 
@@ -546,7 +546,7 @@ MSFTX                          with boundary=[]                       without=['
 XMSFT                          with boundary=[]                       without=['MSFT']
 ```
 
-ဒီဇယားက boundary check ရဲ့ အလုပ်ကို ရှင်းရှင်းလင်းလင်း ပြပါတယ်။
+ဒီဇယားက boundary check ၏ အလုပ်ကို ရှင်းရှင်းလင်းလင်း ပြပါတယ်။
 
 | စာသား | ဘာဖြစ်သွားသနည်း | ဘယ် check က တားသနည်း |
 | --- | --- | --- |

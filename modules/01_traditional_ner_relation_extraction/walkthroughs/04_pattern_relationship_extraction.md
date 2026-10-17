@@ -103,11 +103,11 @@ Output —
 (\b[A-Z][a-z]+ [A-Z][a-z]+\b) is the CEO of ([A-Z][A-Za-z]+)
 ```
 
-`%s` နေရာမှာ `PERSON` ရဲ့ အကြောင်းအရာ တိုက်ရိုက် ဝင်သွားပါတယ်။ ဒါကြောင့် person
+`%s` နေရာမှာ `PERSON` ၏ အကြောင်းအရာ တိုက်ရိုက် ဝင်သွားပါတယ်။ ဒါကြောင့် person
 pattern ကို ပြင်ရင် rule အားလုံး က အလိုအလျောက် အသစ်ဖြစ်သွားပါတယ်။
 
 `PERSON` ကို `(...)` နဲ့ ခွေထားတာကို သတိထားပါ — အဲဒီခွေက **capturing group** ဖြစ်ပါတယ်။
-`PERSON` ရဲ့ တန်ဖိုးထဲမှာ ကိုယ်ပိုင် group တွေ မပါဝင်လို့ အပြင်ဘက် `(...)` က
+`PERSON` ၏ တန်ဖိုးထဲမှာ ကိုယ်ပိုင် group တွေ မပါဝင်လို့ အပြင်ဘက် `(...)` က
 group 1 ဖြစ်ပါတယ်။
 
 ---
@@ -150,7 +150,7 @@ Output —
 
 နောက်ဆုံးဥပမာမှာ `Acme` နဲ့ `Corp` က **သီးခြား match နှစ်ခု** ဖြစ်သွားပါတယ်။
 Space ပါတဲ့ အမည်နှစ်လုံးကို object တစ်ခုတည်းအဖြစ် ဖမ်းချင်ရင် pattern ကို
-ချဲ့ရပါမယ်။ ဒါက pattern-based extraction ရဲ့ ကန့်သတ်ချက်ပါ။
+ချဲ့ရပါမယ်။ ဒါက pattern-based extraction ၏ ကန့်သတ်ချက်ပါ။
 
 ---
 
@@ -187,7 +187,7 @@ Graph ထဲမှာ node အမည်တွေ သန့်ရှင်းန�
 for m in pattern.finditer(text):
 ```
 
-`findall()` နဲ့ `finditer()` ရဲ့ ကွာခြားချက်က အရေးကြီးပါတယ်။
+`findall()` နဲ့ `finditer()` ၏ ကွာခြားချက်က အရေးကြီးပါတယ်။
 
 ```python
 import re
@@ -208,7 +208,7 @@ finditer : ['Sundar Pichai is the CEO of Google']
 
 | Method | ပြန်ပေးတာ | သုံးရန် သင့်တော်တာ |
 | --- | --- | --- |
-| `findall()` | Group တွေရဲ့ တန်ဖိုးများ (tuple သို့ string) | ရလဒ် စာသားသာ လိုတဲ့အခါ |
+| `findall()` | Group တွေ၏ တန်ဖိုးများ (tuple သို့ string) | ရလဒ် စာသားသာ လိုတဲ့အခါ |
 | `finditer()` | **Match object** တစ်ခုချင်း | Position၊ group နံပါတ်၊ span လိုတဲ့အခါ |
 
 ဒီ Exercise မှာ `finditer()` ကို သုံးတာက ရည်ရွယ်ချက်ရှိပါတယ် — triple အတွက်
@@ -276,7 +276,7 @@ def extract_relations(text, rules):
 ```
 
 Nested comprehension မှာ **ပထမ `for` က အပြင် loop**၊ **ဒုတိယ `for` က အတွင်း loop**
-ဖြစ်ပါတယ်။ Expression `(m.group(1), relation, m.group(2))` က အတွင်း loop ရဲ့
+ဖြစ်ပါတယ်။ Expression `(m.group(1), relation, m.group(2))` က အတွင်း loop ၏
 တစ်ကြိမ်စီတွင် တန်ဖိုးတစ်ခု ထုတ်ပါတယ်။
 
 Order ကို ရှင်းရှင်းလင်းလင်း ပြရအောင် —
@@ -342,7 +342,7 @@ for triple in extract_relations(REL_TEXT, REL_RULES):
     print("  (%s, %s, %s)" % triple)
 ```
 
-`%` နောက်မှာ **tuple** ကို တိုက်ရိုက် ပေးနိုင်ပါတယ်။ Tuple ရဲ့ item တစ်ခုချင်းစီက
+`%` နောက်မှာ **tuple** ကို တိုက်ရိုက် ပေးနိုင်ပါတယ်။ Tuple ၏ item တစ်ခုချင်းစီက
 `%s` တစ်ခုစီမှာ အစဉ်လိုက် ဝင်ပါတယ်။
 
 ```python
@@ -358,7 +358,7 @@ Output —
   (Sundar Pichai, CEO_OF, Google)
 ```
 
-နှစ်လိုင်းလုံး တူညီပါတယ်။ ဒီအရေးအသားက Module 00 ရဲ့ Exercise 2 မှာ သုံးခဲ့တဲ့
+နှစ်လိုင်းလုံး တူညီပါတယ်။ ဒီအရေးအသားက Module 00 ၏ Exercise 2 မှာ သုံးခဲ့တဲ့
 `%-5s` padding format နဲ့ တူညီတဲ့ နည်းလမ်းပါ။
 
 ---
@@ -393,7 +393,7 @@ Output —
   (Larry Page, FOUNDED, Google)
 ```
 
-ဒီ triple များကို Module 05–06 ရဲ့ Cypher ဖြင့် graph ထဲ ထည့်တဲ့အခါ —
+ဒီ triple များကို Module 05–06 ၏ Cypher ဖြင့် graph ထဲ ထည့်တဲ့အခါ —
 
 ```cypher
 MERGE (s:Entity {id: $subject})

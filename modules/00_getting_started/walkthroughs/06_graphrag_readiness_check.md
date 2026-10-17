@@ -80,16 +80,16 @@ NUMERIC_CHECKS = (
 )
 ```
 
-`NUMERIC_CHECKS` က tuple တစ်ခု ဖြစ်ပါတယ်။ အတွင်းမှာ numeric checks လေးခု
+`NUMERIC_CHECKS` က tuple တစ်ခု ဖြစ်ပါတယ်။ အတွင်းမှာ numeric checks ၄ ခု
 ပါဝင်ပါတယ်။ Tuple တစ်ခုစီမှာ items သုံးခု ပါဝင်ပါတယ်။
 
 ```python
 ("entity_coverage", ">=", 0.85)
 ```
 
-အဲဒီ items တွေရဲ့ အဓိပ္ပာယ်က —
+အဲဒီ items တွေ၏ အဓိပ္ပာယ်က —
 
-- `"entity_coverage"` — စစ်ဆေးမယ့် metric ရဲ့ အမည်။
+- `"entity_coverage"` — စစ်ဆေးမယ့် metric ၏ အမည်။
 - `">="` — အသုံးပြုမယ့် comparison operator။
 - `0.85` — သတ်မှတ်ထားတဲ့ threshold သို့မဟုတ် အနည်းဆုံးတန်ဖိုး။
 
@@ -132,7 +132,7 @@ production system မှာ ဘယ် entities တွေကို denominator �
 ("relationship_density", ">=", 1.50)
 ```
 
-ဒီ metric ရဲ့တန်ဖိုးက `1.50` ထက်ကြီးရမယ်၊ ဒါမှမဟုတ် ညီရပါမယ်။
+ဒီ metric ၏တန်ဖိုးက `1.50` ထက်ကြီးရမယ်၊ ဒါမှမဟုတ် ညီရပါမယ်။
 
 ဒီ Exercise မှာ `relationship_density` ကို numeric metric တစ်ခုအဖြစ်သာ ယူဆထားပါတယ်။
 တကယ့် GraphRAG implementation မှာ ဒီ metric ကို ဘယ်လိုတွက်ချက်ထားသလဲဆိုတာ
@@ -206,7 +206,7 @@ True
 
 ဒါကြောင့် check အောင်မြင်ပါတယ်။
 
-Chunk တစ်ခုချင်းစီရဲ့ အရွယ်အစားဟာ retrieval quality၊ context completeness၊
+Chunk တစ်ခုချင်းစီ၏ အရွယ်အစားဟာ retrieval quality၊ context completeness၊
 embedding model နဲ့ LLM context window တို့အပေါ် သက်ရောက်နိုင်ပါတယ်။ ဒါပေမဲ့ `512` ဟာ
 အမြဲတမ်း အကောင်းဆုံးတန်ဖိုး မဟုတ်ပါဘူး။ သုံးမယ့် embedding model နဲ့ document type
 အပေါ် မူတည်ပြီး သတ်မှတ်သင့်ပါတယ်။
@@ -215,7 +215,7 @@ embedding model နဲ့ LLM context window တို့အပေါ် သက�
 
 ## 3. `BOOLEAN_CHECKS` — Configuration များကို စစ်ဆေးခြင်း
 
-Code ရဲ့ နောက်ထပ်အပိုင်းက —
+Code ၏ နောက်ထပ်အပိုင်းက —
 
 ```python
 BOOLEAN_CHECKS = (
@@ -232,10 +232,10 @@ BOOLEAN_CHECKS = (
 
 ### 3.1 `uniqueness_constraint`
 
-ဒီ check က Graph database မှာ entity တစ်ခုစီရဲ့ unique identity ကို ထိန်းသိမ်းပေးတဲ့
+ဒီ check က Graph database မှာ entity တစ်ခုစီ၏ unique identity ကို ထိန်းသိမ်းပေးတဲ့
 uniqueness constraint လိုအပ်ချက်ကို ကိုယ်စားပြုပါတယ်။
 
-ဥပမာ Neo4j မှာ `Entity` node တစ်ခုစီရဲ့ `id` ကို unique ဖြစ်စေချင်ရင် အဲဒီ property
+ဥပမာ Neo4j မှာ `Entity` node တစ်ခုစီ၏ `id` ကို unique ဖြစ်စေချင်ရင် အဲဒီ property
 အပေါ် constraint သတ်မှတ်နိုင်ပါတယ်။
 
 ဒီ Exercise မှာ —
@@ -315,7 +315,7 @@ if operator == ">=":
     return value >= threshold
 ```
 
-ဒီမှာ `operator` ရဲ့တန်ဖိုးက `">="` နဲ့ ညီမညီ စစ်ဆေးပါတယ်။
+ဒီမှာ `operator` ၏တန်ဖိုးက `">="` နဲ့ ညီမညီ စစ်ဆေးပါတယ်။
 
 ဥပမာ —
 
@@ -387,7 +387,7 @@ ValueError: Unsupported operator: !=
 
 ## 5. `readiness_report(metrics)` function
 
-ဒီ function က Exercise 6 ရဲ့ အဓိက logic ဖြစ်ပါတယ်။
+ဒီ function က Exercise 6 ၏ အဓိက logic ဖြစ်ပါတယ်။
 
 ```python
 def readiness_report(metrics):
@@ -412,7 +412,7 @@ def readiness_report(metrics):
 failed = []
 ```
 
-ဒီမှာ empty list တစ်ခု ဖန်တီးထားပါတယ်။ မအောင်မြင်တဲ့ checks တွေရဲ့ အမည်တွေကို ဒီ list
+ဒီမှာ empty list တစ်ခု ဖန်တီးထားပါတယ်။ မအောင်မြင်တဲ့ checks တွေ၏ အမည်တွေကို ဒီ list
 ထဲမှာ စုဆောင်းသွားမှာပါ။
 
 ဥပမာ —
@@ -441,7 +441,7 @@ for name, operator, threshold in NUMERIC_CHECKS:
         failed.append(name)
 ```
 
-ဒီမှာ `NUMERIC_CHECKS` tuple ထဲက check လေးခုကို တစ်ခုချင်းစီ ယူပါတယ်။ ဥပမာ —
+ဒီမှာ `NUMERIC_CHECKS` tuple ထဲက check ၄ ခုကို တစ်ခုချင်းစီ ယူပါတယ်။ ဥပမာ —
 
 ```python
 ("entity_coverage", ">=", 0.85)
@@ -488,7 +488,7 @@ if not _numeric_pass(metrics[name], operator, threshold):
     failed.append(name)
 ```
 
-`_numeric_pass()` က `True` ပြန်ပေးရင် check အောင်မြင်ပါတယ်။ အဲဒီ `True` ရဲ့ ရှေ့မှာ
+`_numeric_pass()` က `True` ပြန်ပေးရင် check အောင်မြင်ပါတယ်။ အဲဒီ `True` ၏ ရှေ့မှာ
 `not` ထည့်ထားတဲ့အတွက် `False` ဖြစ်သွားပါတယ်။ ဒါကြောင့် `failed.append(name)` ကို
 မလုပ်ပါဘူး။
 
@@ -545,9 +545,9 @@ return {
 ပါဝင်ပါတယ်။
 
 - `"verdict"` — Readiness result။
-- `"failed"` — မအောင်မြင်တဲ့ checks တွေရဲ့ အမည်တွေ။
+- `"failed"` — မအောင်မြင်တဲ့ checks တွေ၏ အမည်တွေ။
 
-ဒီ expression က Python ရဲ့ **conditional expression** ဖြစ်ပါတယ်။
+ဒီ expression က Python ၏ **conditional expression** ဖြစ်ပါတယ်။
 
 ```python
 "READY" if not failed else "NOT_READY"
@@ -626,7 +626,7 @@ READY_PROFILE = {
 | `fulltext_index` | `True` | `True` ဖြစ်ရမယ် | Pass |
 | `community_summary` | `True` | `True` ဖြစ်ရမယ် | Pass |
 
-Numeric checks လေးခုလုံး အောင်မြင်ပြီး Boolean checks သုံးခုလုံးလည်း `True` ဖြစ်ပါတယ်။
+Numeric checks ၄ ခုလုံး အောင်မြင်ပြီး Boolean checks သုံးခုလုံးလည်း `True` ဖြစ်ပါတယ်။
 ဒါကြောင့် —
 
 ```python
@@ -675,7 +675,7 @@ BLOCKED_PROFILE = {
 | `duplicate_entity_rate` | 0.12 | `<= 0.05` | Duplicate rate 12% ဖြစ်လို့ 5% ထက်များတယ် |
 | `avg_chunk_tokens` | 640.0 | `<= 512.0` | ပျမ်းမျှ token count က 512 ထက်များတယ် |
 
-ဒီ metric လေးခုလုံးက check မအောင်မြင်တဲ့အတွက် `failed` list ထဲ ထည့်ပါမယ်။
+ဒီ metric ၄ ခုလုံးက check မအောင်မြင်တဲ့အတွက် `failed` list ထဲ ထည့်ပါမယ်။
 
 ### 7.2 Boolean checks
 
@@ -704,7 +704,7 @@ list ထဲ ထည့်ပါမယ်။
 print(readiness_report(BLOCKED_PROFILE))
 ```
 
-ရဲ့ output က —
+၏ output က —
 
 ```text
 {'verdict': 'NOT_READY', 'failed': ['entity_coverage', 'relationship_density', 'duplicate_entity_rate', 'avg_chunk_tokens', 'fulltext_index', 'community_summary']}
@@ -818,7 +818,7 @@ Expected output —
 
 ဒီ version မှာ `_numeric_pass()` ကို နည်းနည်းပိုမိုခိုင်မာအောင် ပြင်ထားပါတယ်။ `">="` နဲ့
 `"<="` ကို ရှင်းလင်းစွာ စစ်ဆေးပြီး တခြား operator ဖြစ်လာရင် `ValueError` ထုတ်ပေးမှာ
-ဖြစ်ပါတယ်။ Readiness logic ရဲ့ ရလဒ်ကတော့ မူရင်း Exercise နဲ့ အတူတူပါပဲ။
+ဖြစ်ပါတယ်။ Readiness logic ၏ ရလဒ်ကတော့ မူရင်း Exercise နဲ့ အတူတူပါပဲ။
 
 နောက်ထပ် သတိပြုရန် — `metrics[name]` က မဖြစ်မနေ လိုအပ်တဲ့ key မရှိခဲ့ရင် `KeyError`
 ဖြစ်နိုင်ပါတယ်။ Production system မှာ ဒီ function ကို အသုံးပြုမယ်ဆိုရင် metrics
@@ -856,7 +856,7 @@ KeyError: 'relationship_density'
 ရရှိသည်။
 
 `failed` အလွတ်ဖြစ်ပါက `not []` → `True` ဖြစ်ပြီး `"READY"` ရရှိမည်။ ဤအချက်က
-`readiness_report()` ရဲ့ `"verdict"` တန်ဖိုး ဆုံးဖြတ်ပုံနှင့် တူညီသည်။
+`readiness_report()` ၏ `"verdict"` တန်ဖိုး ဆုံးဖြတ်ပုံနှင့် တူညီသည်။
 
 </details>
 
@@ -867,7 +867,7 @@ KeyError: 'relationship_density'
 ဒီ Exercise မှာ readiness checker တည်ဆောက်ဖို့ Python concepts တွေကို
 ပေါင်းစပ်အသုံးပြုခဲ့ပါတယ်။
 
-- `NUMERIC_CHECKS` က metrics တွေရဲ့ thresholds တွေကို သိမ်းထားပါတယ်။
+- `NUMERIC_CHECKS` က metrics တွေ၏ thresholds တွေကို သိမ်းထားပါတယ်။
 - `BOOLEAN_CHECKS` က မဖြစ်မနေ အောင်မြင်ရမယ့် configuration flags တွေကို
   သတ်မှတ်ထားပါတယ်။
 - `_numeric_pass()` က metric တန်ဖိုးတစ်ခု ခွင့်ပြုထားတဲ့ threshold အတွင်း ရှိမရှိ
@@ -879,5 +879,5 @@ KeyError: 'relationship_density'
 
 ဒီလို readiness checker ကို GraphRAG deployment မလုပ်ခင် validation အဆင့်တစ်ခုအဖြစ်
 အသုံးပြုနိုင်ပါတယ်။ သို့သော် `READY` ရရှိခြင်းဟာ သတ်မှတ်ထားတဲ့ checks တွေ
-အောင်မြင်ကြောင်းသာ ဆိုလိုပြီး system တစ်ခုလုံးရဲ့ accuracy၊ performance နဲ့ reliability
+အောင်မြင်ကြောင်းသာ ဆိုလိုပြီး system တစ်ခုလုံး၏ accuracy၊ performance နဲ့ reliability
 အားလုံးကို အာမမခံပါဘူး။

@@ -18,7 +18,7 @@ list comprehension, all(), assert နဲ့ function တို့ဖြစ်ပ
 
 Pipeline ဆိုတာ အလုပ်တစ်ခုကို အဆင့်ဆင့် ဆက်စပ်လုပ်ဆောင်စေတဲ့ workflow ဖြစ်ပါတယ်။
 
-ဥပမာ IT Help Chatbot မှာ user ရဲ့ မေးခွန်းကို ဖြေဖို့အတွက် knowledge documents တွေကို
+ဥပမာ IT Help Chatbot မှာ user ၏ မေးခွန်းကို ဖြေဖို့အတွက် knowledge documents တွေကို
 အရင်ပြင်ဆင်ပြီး၊ သက်ဆိုင်တဲ့ information တွေကို ရှာဖွေကာ နောက်ဆုံး LLM နဲ့ အဖြေထုတ်ရပါတယ်။
 
 - **1. ingest** — Documents များကို လက်ခံသိမ်းဆည်းခြင်း
@@ -129,7 +129,7 @@ def topological_order(stages, dependencies):
 နှစ်ခု ပါပါတယ်။
 
 - `stages` — စီစဉ်ပေးရမယ့် stage တွေ။
-- `dependencies` — Stage တစ်ခုစီရဲ့ dependency တွေ။
+- `dependencies` — Stage တစ်ခုစီ၏ dependency တွေ။
 
 Function ကို ခေါ်တဲ့အခါ —
 
@@ -142,14 +142,14 @@ order = topological_order(
 
 ဆိုပြီး arguments တွေ ပေးလိုက်တဲ့အတွက် —
 
-- `stages` ထဲကို `UNORDERED_STAGES` ရဲ့တန်ဖိုး ဝင်လာမယ်။
-- `dependencies` ထဲကို `PIPELINE_DEPENDENCIES` ရဲ့တန်ဖိုး ဝင်လာမယ်။
+- `stages` ထဲကို `UNORDERED_STAGES` ၏တန်ဖိုး ဝင်လာမယ်။
+- `dependencies` ထဲကို `PIPELINE_DEPENDENCIES` ၏တန်ဖိုး ဝင်လာမယ်။
 
 Function အတွင်းမှာ ဒီ data တွေကို အသုံးပြုပြီး အစီအစဉ်ကို တွက်ချက်မှာပါ။
 
-`"""..."""` က docstring ဖြစ်ပြီး function ရဲ့ ရည်ရွယ်ချက်ကို ရှင်းပြထားတာ ဖြစ်ပါတယ်။
+`"""..."""` က docstring ဖြစ်ပြီး function ၏ ရည်ရွယ်ချက်ကို ရှင်းပြထားတာ ဖြစ်ပါတယ်။
 
-> **မှတ်ချက်** — ဒီနေရာမှာ function ရဲ့ **ခေါင်းစီး (signature) နှင့် docstring ကိုသာ** ပြထားသည်။
+> **မှတ်ချက်** — ဒီနေရာမှာ function ၏ **ခေါင်းစီး (signature) နှင့် docstring ကိုသာ** ပြထားသည်။
 > Body ကို အောက်ပိုင်း အပိုင်း ၅ မှ ၁၂ အထိ တစ်ကြောင်းချင်း ရှင်းပြထားသည်။ Function အပြည့်အစုံကို
 > `solution.md` တွင်လည်း ကြည့်နိုင်ပြီး၊ အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းထားသော runnable version ကို
 > အပိုင်း ၁၃ တွင် ဖော်ပြထားသည်။
@@ -172,7 +172,7 @@ ordered = []
 ordered.append("ingest")
 ```
 
-အခု `ordered` ရဲ့တန်ဖိုးက —
+အခု `ordered` ၏တန်ဖိုးက —
 
 ```python
 ["ingest"]
@@ -269,7 +269,7 @@ Stage အားလုံး ရွေးချယ်ပြီးတဲ့အခ�
 
 ## 8. `ready = [...]` — Dependency ပြည့်မီတဲ့ stage ကို ရှာခြင်း
 
-ဒီအပိုင်းက code ရဲ့ အဓိက logic ဖြစ်ပါတယ်။
+ဒီအပိုင်းက code ၏ အဓိက logic ဖြစ်ပါတယ်။
 
 ```python
 ready = [
@@ -424,7 +424,7 @@ dependencies = {
 ဘယ် stage ကိုမှ အရင်စလုပ်လို့ မရတော့ပါဘူး။ ဒါကို **dependency cycle** လို့ခေါ်ပါတယ်။
 
 သတိပြုရန် — ဒီ `assert` က cycle ရှိတာတစ်ခုတည်းကို သက်သေမပြနိုင်ပါဘူး။ `ready` မရှိရခြင်းဟာ
-stage တစ်ခုရဲ့ dependency ကို dictionary ထဲမှာ မထည့်ထားတာကြောင့်လည်း ဖြစ်နိုင်ပါတယ်။
+stage တစ်ခု၏ dependency ကို dictionary ထဲမှာ မထည့်ထားတာကြောင့်လည်း ဖြစ်နိုင်ပါတယ်။
 ဒီဥပမာမှာတော့ dependency dictionary ပြည့်စုံပြီး မှန်ကန်တယ်လို့ ယူဆထားပါတယ်။
 
 ---
@@ -435,7 +435,7 @@ stage တစ်ခုရဲ့ dependency ကို dictionary ထဲမှာ �
 chosen = ready[0]
 ```
 
-`ready` ထဲမှာ dependency ပြည့်မီတဲ့ stage တွေ ရှိနေပါတယ်။ `ready[0]` က list ရဲ့ ပထမဆုံး
+`ready` ထဲမှာ dependency ပြည့်မီတဲ့ stage တွေ ရှိနေပါတယ်။ `ready[0]` က list ၏ ပထမဆုံး
 item ကို ရွေးယူတာဖြစ်ပါတယ်။ Python list indexing က `0` ကနေ စပါတယ်။
 
 ဥပမာ —
@@ -475,7 +475,7 @@ remaining.remove(chosen)
 ordered.append(chosen)
 ```
 
-ရွေးချယ်ပြီးသား stage ကို `ordered` list ရဲ့ အဆုံးမှာ ထည့်ပါတယ်။
+ရွေးချယ်ပြီးသား stage ကို `ordered` list ၏ အဆုံးမှာ ထည့်ပါတယ်။
 
 ဒုတိယကြောင်း —
 
@@ -518,7 +518,7 @@ Output —
 return ordered
 ```
 
-Function အလုပ်လုပ်ပြီးဆုံးတဲ့အခါ ရရှိလာတဲ့ list ကို ပြန်ပေးပါတယ်။ `return` က function ရဲ့
+Function အလုပ်လုပ်ပြီးဆုံးတဲ့အခါ ရရှိလာတဲ့ list ကို ပြန်ပေးပါတယ်။ `return` က function ၏
 result ကို function ကို ခေါ်ထားတဲ့နေရာဆီ ပြန်ပို့ပေးတာပါ။
 
 ```python
@@ -592,7 +592,7 @@ dependency ပြည့်မီတဲ့ stage အများအပြား�
 
 ## 15. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-ဒီ code ရဲ့ အဓိကအယူအဆကို နားလည်ဖို့ မေးခွန်းလေးတစ်ခုပါ။
+ဒီ code ၏ အဓိကအယူအဆကို နားလည်ဖို့ မေးခွန်းတစ်ခုပါ။
 
 **မေးခွန်း** — အောက်ပါ dependency ရှိတယ်ဆိုပါစို့။
 
@@ -625,7 +625,7 @@ dependencies = {
 
 </details>
 
-ဒီ code ရဲ့ အဓိကသဘောတရားက stage တစ်ခုကို dependency အားလုံး ပြည့်မီမှ ရွေးချယ်ပြီး၊
+ဒီ code ၏ အဓိကသဘောတရားက stage တစ်ခုကို dependency အားလုံး ပြည့်မီမှ ရွေးချယ်ပြီး၊
 ရွေးချယ်ပြီးတဲ့ stage ကို မှတ်တမ်းတင်ကာ နောက် stage တွေအတွက် ထပ်စစ်ဆေးခြင်း ဖြစ်ပါတယ်။
 ဒီနည်းလမ်းကို **Topological Sorting** လို့ခေါ်ပြီး workflow orchestration, build systems နဲ့
 data pipelines တွေမှာ အသုံးပြုနိုင်ပါတယ်။

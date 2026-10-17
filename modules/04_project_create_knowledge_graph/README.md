@@ -24,6 +24,7 @@ Course အတွင်း ဤ module သည် "Project: Create a Knowledge Grap
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် လေ့ကျင့်ခန်း ၆ ခု (Hints + Expected behavior) |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation |
 | `lab.py` | Run နိုင်သော end-to-end lab (exercise ၆ ခု၊ `assert` ဖြင့် စစ်ဆေးသည်) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` တွင် ဖော်ပြသည့် subtopic များ —
 
@@ -33,6 +34,23 @@ Course အတွင်း ဤ module သည် "Project: Create a Knowledge Grap
 4. Provenance tracking — source chunk id၊ confidence၊ extraction method
 5. Quality gates — empty triple၊ self-loop၊ missing endpoint၊ duplicate triple စစ်ထုတ်ခြင်း
 6. Export format — Cypher `MERGE` statements၊ JSON triple list၊ CSV (Neo4j Admin Import)
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`dict`/`tuple`/`set`၊ list comprehension၊ `sorted(key=…)`၊ `zip`၊
+`@dataclass`၊ `@property`၊ `defaultdict`၊ `assert`၊ `csv`/`json` module၊ `%` formatting) ကို
+ဥပမာနှင့် တွဲဖက် ရှင်းပြသည်။ Snippet တိုင်းတွင် တကယ် run ရရှိသော output ပါသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_corpus_normalization.md` | Exercise 1 — Corpus Normalization |
+| `walkthroughs/02_end_to_end_pipeline.md` | Exercise 2 — End-to-End Pipeline Run |
+| `walkthroughs/03_data_model_validation.md` | Exercise 3 — Data Model Validation |
+| `walkthroughs/04_provenance_metadata.md` | Exercise 4 — Provenance Metadata |
+| `walkthroughs/05_quality_gate_filtering.md` | Exercise 5 — Quality Gate Filtering |
+| `walkthroughs/06_export_cypher_json_csv.md` | Exercise 6 — Cypher / JSON / CSV Export |
 
 ## Prerequisites
 

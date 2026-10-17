@@ -44,7 +44,7 @@ Graph တည်ဆောက်တဲ့အခါ ဒီအလုပ်က အရ
 COREF_PERSONS = {"Sundar Pichai": "M", "Larry Page": "M"}
 ```
 
-Dictionary ရဲ့ key က entity အမည်၊ value က metadata (`M` = male) ဖြစ်ပါတယ်။
+Dictionary ၏ key က entity အမည်၊ value က metadata (`M` = male) ဖြစ်ပါတယ်။
 ဒီ Exercise မှာ `M`/`F` တန်ဖိုးကို တိုက်ရိုက် အသုံးမပြုပေမဲ့ လက်တွေ့ system တွေမှာ
 gender အပေါ် မူတည်ပြီး `He`/`She` ကို ခွဲခြားဖို့ အသုံးပြုပါတယ်။
 
@@ -197,12 +197,12 @@ Output —
 ['Sundar Pichai', 'He']
 ```
 
-`findall()` က group တစ်ခု ပါရင် group ရဲ့ အကြောင်းအရာကို ပြန်ပေးပါတယ်။
+`findall()` က group တစ်ခု ပါရင် group ၏ အကြောင်းအရာကို ပြန်ပေးပါတယ်။
 ဒီမှာ `Sundar Pichai` နဲ့ `He` ဆိုတဲ့ **အစဉ်လိုက် တန်ဖိုးများ** ရပါတယ်။
 ဘယ် pronoun က ဘယ်သူကို ညွှန်တာလဲ ဆိုတာကို **pattern က မသိပါဘူး** — ဒါကို
-Section 6 ရဲ့ callback function က ဆုံးဖြတ်ပါတယ်။
+Section 6 ၏ callback function က ဆုံးဖြတ်ပါတယ်။
 
-`\b` က ဘာကြောင့် လိုသလဲ။ `\b` မပါရင် `He` က `The`၊ `weather` တို့ရဲ့ အတွင်းပိုင်းကို
+`\b` က ဘာကြောင့် လိုသလဲ။ `\b` မပါရင် `He` က `The`၊ `weather` တို့၏ အတွင်းပိုင်းကို
 ကိုက်ညီသွားနိုင်ပါတယ်။
 
 ```python
@@ -275,7 +275,7 @@ Output —
 ERROR: UnboundLocalError - cannot access local variable 'last' where it is not associated with a value
 ```
 
-`inner` ထဲမှာ `last = token` လို့ ရေးလိုက်တာက `last` ကို `inner` ရဲ့ **local
+`inner` ထဲမှာ `last = token` လို့ ရေးလိုက်တာက `last` ကို `inner` ၏ **local
 variable** ဖြစ်စေပါတယ်။ ဒါကြောင့် `last` ကို မသတ်မှတ်ခင် ဖတ်တဲ့အခါ error ဖြစ်ပါတယ်။
 (`token == "NAME"` ဖြစ်ရင် သတ်မှတ်ပြီးသားဖြစ်လို့ error မဖြစ်ပါ။)
 
@@ -356,7 +356,7 @@ def replace(match):
 ```
 
 `replace()` က **match object** တစ်ခုကို လက်ခံပြီး **စာသား (string)** တစ်ခု
-ပြန်ပေးရပါတယ်။ ပြန်ပေးတဲ့ စာသားက မူရင်းစာသားရဲ့ နေရာမှာ အစားထိုးခံရပါတယ်။
+ပြန်ပေးရပါတယ်။ ပြန်ပေးတဲ့ စာသားက မူရင်းစာသား၏ နေရာမှာ အစားထိုးခံရပါတယ်။
 
 ### Branch ၁ — Entity အမည် တွေ့ခြင်း
 
@@ -366,7 +366,7 @@ if token in persons:
     return token
 ```
 
-`token in persons` က dict ရဲ့ key များထဲ ရှိမရှိ စစ်ပါတယ်။ တွေ့ရင် အဲဒီအမည်ကို
+`token in persons` က dict ၏ key များထဲ ရှိမရှိ စစ်ပါတယ်။ တွေ့ရင် အဲဒီအမည်ကို
 **လက်ရှိ antecedent** အဖြစ် မှတ်လိုက်ပါတယ်။ ပြန်ပေးတဲ့ တန်ဖိုးက မူရင်းအတိုင်း
 ဖြစ်တဲ့အတွက် စာသားမှာ ပြောင်းလဲမှု မရှိပါ။
 
@@ -377,7 +377,7 @@ if state["last"] is None:
     return token
 ```
 
-Pronoun တစ်ခုက entity တစ်ခုရဲ့ အရင်မှာ လာရင် ဘယ်သူကို ညွှန်မှန်း မသိပါဘူး။
+Pronoun တစ်ခုက entity တစ်ခု၏ အရင်မှာ လာရင် ဘယ်သူကို ညွှန်မှန်း မသိပါဘူး။
 ဒီအခါ မခန့်မှန်းဘဲ မူရင်းအတိုင်း ထားလိုက်ပါတယ်။ **မသိရင် မပြင်ခြင်း** က
 မှန်ကန်တဲ့ ဒီဇိုင်းပါ — မှားတဲ့ ခန့်မှန်းချက်ထက် မခန့်မှန်းတာ ပိုကောင်းပါတယ်။
 
@@ -392,7 +392,7 @@ if token.lower() in {"his", "her", "their"}:
 ဖြစ်ပြီး `in` ဖြင့် အမြန်ရှာနိုင်ပါတယ်။ `His` → `Sundar Pichai's` ဖြစ်သွားပါတယ်။
 
 မှတ်ချက် — `'s` ထည့်တာက ရိုးရှင်းတဲ့ ခန့်မှန်းချက်ပါ။ `Their` အတွက်တော့ `'s` က
-သဒ္ဒါအရ မမှန်ပါ၊ `They` ဆိုတဲ့ အုပ်စုကို ကိုယ်စားပြုလို့ပါ။ ဒီ Exercise ရဲ့ ရည်ရွယ်ချက်က
+သဒ္ဒါအရ မမှန်ပါ၊ `They` ဆိုတဲ့ အုပ်စုကို ကိုယ်စားပြုလို့ပါ။ ဒီ Exercise ၏ ရည်ရွယ်ချက်က
 callback logic ပြဖို့ဖြစ်လို့ ရိုးရှင်းစွာ ထားထားတာပါ။
 
 ### Branch ၄ — ကျန် Pronoun များ
@@ -466,7 +466,7 @@ Output —
 <He> said. <He> left.
 ```
 
-ဒီနည်းရဲ့ အကျိုးကျေးဇူးက **match တစ်ခုချင်းစီအတွက် မတူညီတဲ့ ဆုံးဖြတ်ချက်**
+ဒီနည်း၏ အကျိုးကျေးဇူးက **match တစ်ခုချင်းစီအတွက် မတူညီတဲ့ ဆုံးဖြတ်ချက်**
 ချနိုင်တာပါ။ ဒီ Exercise မှာ ပထမ `He` က `Sundar Pichai` ဖြစ်ပြီး `His` က
 `Sundar Pichai's` ဖြစ်တာ အဲဒီကြောင့်ပါ။
 
@@ -491,7 +491,7 @@ after : Sundar Pichai leads Google. Sundar Pichai became CEO in 2015. Sundar Pic
 | `He` | `Sundar Pichai` | နောက်ဆုံး antecedent |
 | `His` | `Sundar Pichai's` | Possessive branch |
 
-### ဒီနည်းလမ်းရဲ့ ကန့်သတ်ချက်
+### ဒီနည်းလမ်း၏ ကန့်သတ်ချက်
 
 `last` ကို **တစ်ခုတည်း** မှတ်ထားတာကြောင့် entity နှစ်ခုရှိတဲ့ စာသားမှာ မှားနိုင်ပါတယ်။
 

@@ -48,8 +48,8 @@ Tag တစ်ခုစီမှာ အပိုင်းနှစ်ခု ရ�
 | ရှေ့ဆုံး စာလုံး — `B`၊ `I`၊ `O` | Tag အမျိုးအစား |
 | နောက်ဆက် — `PER`၊ `LOC`၊ `DATE` | Entity label |
 
-- **`B-` (Begin)** — entity အသစ်တစ်ခုရဲ့ **ပထမဆုံး** token။
-- **`I-` (Inside)** — entity အသစ်ရဲ့ **ဆက်လက်** token။
+- **`B-` (Begin)** — entity အသစ်တစ်ခု၏ **ပထမဆုံး** token။
+- **`I-` (Inside)** — entity အသစ်၏ **ဆက်လက်** token။
 - **`O` (Outside)** — entity မဟုတ်တဲ့ token။
 
 ဒီ scheme ကြောင့် entity နှစ်ခု ကပ်နေတဲ့အခါ ဘယ်မှာ ခွဲရမလဲ သိနိုင်ပါတယ်။
@@ -59,7 +59,7 @@ B-PER I-PER B-PER I-PER
 Sundar Pichai Tim  Cook
 ```
 
-`B-` က entity အသစ်ရဲ့ အစကို အမြဲပြပါတယ်။ `I-` ပဲ ရှိနေရင် entity တစ်ခုတည်း
+`B-` က entity အသစ်၏ အစကို အမြဲပြပါတယ်။ `I-` ပဲ ရှိနေရင် entity တစ်ခုတည်း
 ဆက်နေတယ်လို့ ဖတ်ပါတယ်။
 
 ---
@@ -73,7 +73,7 @@ tags = ["B-PER", "I-PER", "O", "B-LOC", "O",
         "B-DATE", "I-DATE", "I-DATE", "O"]
 ```
 
-List နှစ်ခုရဲ့ အရှည် **တူညီရပါတယ်**။ Index တစ်ခုတည်းမှာ `tokens[i]` ရဲ့ tag က
+List နှစ်ခု၏ အရှည် **တူညီရပါတယ်**။ Index တစ်ခုတည်းမှာ `tokens[i]` ၏ tag က
 `tags[i]` ဖြစ်ပါတယ်။
 
 ```python
@@ -161,7 +161,7 @@ Output —
 `for index, (token, tag) in ...` လို့ ရေးပြီး အပြင်ခွေ နှစ်ခုကို `index`၊ အတွင်းခွေ
 နှစ်ခုကို `token` နဲ့ `tag` အဖြစ် ခွဲယူပါတယ်။
 
-Index က ဘာကြောင့် လိုသလဲဆိုတော့ span တစ်ခုစီရဲ့ **အစနဲ့ အဆုံး token index** ကို
+Index က ဘာကြောင့် လိုသလဲဆိုတော့ span တစ်ခုစီ၏ **အစနဲ့ အဆုံး token index** ကို
 မှတ်ထားချင်လို့ပါ။ ဒီ index တွေကို နောက်ပိုင်း graph node တွေဆီ ပြန်ညွှန်းဖို့
 (provenance) အသုံးပြုနိုင်ပါတယ်။
 
@@ -205,7 +205,7 @@ Inside tag, label = DATE
 
 ---
 
-## 6. `decode_bio()` ရဲ့ ဖွဲ့စည်းပုံ
+## 6. `decode_bio()` ၏ ဖွဲ့စည်းပုံ
 
 ```python
 def decode_bio(tokens, tags):
@@ -256,7 +256,7 @@ if tag.startswith("B-"):
 | `start` | `index` | အစ token index |
 | `end` | `index + 1` | အဆုံး index — **exclusive** |
 
-`end` က `index + 1` ဖြစ်တာက Python ရဲ့ slice အလေ့အကျင့်နဲ့ ကိုက်ညီအောင်ပါ။
+`end` က `index + 1` ဖြစ်တာက Python ၏ slice အလေ့အကျင့်နဲ့ ကိုက်ညီအောင်ပါ။
 
 ```python
 tokens = ["Sundar", "Pichai", "visited", "London"]
@@ -288,7 +288,7 @@ elif tag.startswith("I-") and current is not None and tag[2:] == current["type"]
 
 1. `tag.startswith("I-")` — tag က `I-` နဲ့ စတယ်။
 2. `current is not None` — လက်ရှိ entity တစ်ခု ရှိနေတယ်။
-3. `tag[2:] == current["type"]` — tag ရဲ့ label က `current` ရဲ့ label နဲ့ တူတူဖြစ်တယ်။
+3. `tag[2:] == current["type"]` — tag ၏ label က `current` ၏ label နဲ့ တူတူဖြစ်တယ်။
 
 ဒီအလုပ်ကို လုပ်တဲ့အခါ —
 
@@ -361,8 +361,8 @@ loose  (without type check): [('PER', 'Sundar Pichai London', 0, 3)]
 ပါသွားပါတယ်။ Condition နံပါတ် ၃ က ဒီလို မှားယွင်းတဲ့ ရောစပ်ခြင်းကို တားပေးပါတယ်။
 
 Tag sequence မှားနေရင်လည်း `else` branch ထဲ ရောက်ပြီး `current` ကို ရှင်းလိုက်ပါတယ်။
-ဒီအခြေအနေမှာ `London` ရဲ့ LOC span က ဆုံးရှုံးသွားပါတယ် — ဒါက data အရည်အသွေး
-ပြဿနာဖြစ်ကြောင်း **တိတ်တဆိတ် ဖျောက်ထားခြင်းမဟုတ်ဘဲ** ဒီ code ရဲ့ ကန့်သတ်ချက်ပါ။
+ဒီအခြေအနေမှာ `London` ၏ LOC span က ဆုံးရှုံးသွားပါတယ် — ဒါက data အရည်အသွေး
+ပြဿနာဖြစ်ကြောင်း **တိတ်တဆိတ် ဖျောက်ထားခြင်းမဟုတ်ဘဲ** ဒီ code ၏ ကန့်သတ်ချက်ပါ။
 Production pipeline တစ်ခုမှာ ဒီလို မကိုက်ညီမှုကို log ထုတ်ဖို့ လိုအပ်ပါတယ်။
 
 ---
@@ -377,7 +377,7 @@ else:
 ```
 
 `O` tag တွေနဲ့ အထက်က condition နှစ်ခုလုံး မကိုက်တဲ့ အခြေအနေတွေမှာ ဒီ branch ထဲ
-ဝင်ပါတယ်။ လုပ်ဆောင်ချက်က `B-` case ရဲ့ ပထမအဆင့်နဲ့ တူပါတယ် — `current` ရှိရင်
+ဝင်ပါတယ်။ လုပ်ဆောင်ချက်က `B-` case ၏ ပထမအဆင့်နဲ့ တူပါတယ် — `current` ရှိရင်
 `spans` ထဲ ရွှေ့ပြီး `current` ကို `None` ပြန်ထားပါတယ်။
 
 `current = None` ကို **မမေ့ရပါ**။ မထားရင် entity အဟောင်း ဆက်ရှိနေပြီး `O` token
@@ -420,7 +420,7 @@ Output —
 ```
 
 `B-LOC` အတွက် ဖန်တီးထားတဲ့ `current` က `spans` ထဲ မ၀င်လိုက်ရဘဲ ဆုံးရှုံးသွားပါတယ်။
-Function ရဲ့ ထိပ်မှာရှိတဲ့ `if current is not None: spans.append(current)` က
+Function ၏ ထိပ်မှာရှိတဲ့ `if current is not None: spans.append(current)` က
 ဒီအခြေအနေအတွက် ဖြစ်ပါတယ်။
 
 ---
@@ -590,4 +590,4 @@ index 4 ၏ `I-ORG` သည် ဆက်တွဲသည်။
 **အဓိက မှတ်ထားရန်** — Token-level tag များမှ span-level entity များသို့ ပြောင်းသည့်
 ဤ decoding အဆင့်သည် NER pipeline တိုင်းတွင် ရှိသည်။ State variable (`current`) ကို
 Loop အတွင်း ထိန်းသိမ်းခြင်း၊ Loop အပြင် နောက်ဆုံးအကြိမ် flush လုပ်ခြင်း နှင့်
-Tag များ၏ ကိုက်ညီမှုကို စစ်ဆေးခြင်း သုံးချက်သည် ဤအလုပ်ရဲ့ အဓိကအချက်များ ဖြစ်သည်။
+Tag များ၏ ကိုက်ညီမှုကို စစ်ဆေးခြင်း သုံးချက်သည် ဤအလုပ်၏ အဓိကအချက်များ ဖြစ်သည်။

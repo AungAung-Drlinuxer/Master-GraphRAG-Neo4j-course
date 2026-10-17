@@ -27,16 +27,16 @@ document chunks တွေကို ရှာဖွေဖို့ အသုံ�
 
 ## 1. Cosine Similarity ဆိုတာဘာလဲ။
 
-Cosine Similarity ဆိုတာ vector နှစ်ခုရဲ့ ဦးတည်ရာ (direction) ဘယ်လောက်တူညီသလဲဆိုတာ
+Cosine Similarity ဆိုတာ vector နှစ်ခု၏ ဦးတည်ရာ (direction) ဘယ်လောက်တူညီသလဲဆိုတာ
 တိုင်းတာတဲ့ နည်းလမ်းတစ်ခုဖြစ်ပါတယ်။
 
 RAG system မှာ text ကို embedding model နဲ့ vector အဖြစ်ပြောင်းပြီး query vector နဲ့
-document chunk vector တို့ရဲ့ similarity ကို တွက်ချက်နိုင်ပါတယ်။
+document chunk vector တို့၏ similarity ကို တွက်ချက်နိုင်ပါတယ်။
 
 Embedding model က Query နဲ့ chunks တွေကို vector ပြောင်းပေးပြီး Cosine Similarity က
 ဘယ် chunk တွေက query နဲ့ ပိုတူညီသလဲဆိုတာ အမှတ်ပေးပါတယ်။
 
-Cosine Similarity ရဲ့ formula က —
+Cosine Similarity ၏ formula က —
 
 ```text
 cosine(A, B) = (A · B) / (||A|| · ||B||)
@@ -46,7 +46,7 @@ cosine(A, B) = (A · B) / (||A|| · ||B||)
 
 - `A`, `B` — Vector နှစ်ခု
 - `A · B` — Dot product
-- `||A||`, `||B||` — Vector တစ်ခုစီရဲ့ magnitude (norm)
+- `||A||`, `||B||` — Vector တစ်ခုစီ၏ magnitude (norm)
 
 ပုံမှန်အားဖြင့် non-zero vector တွေအတွက် score က `-1` နဲ့ `1` ကြားမှာ ရှိပါတယ်။ Score က `1` နဲ့
 နီးလေလေ direction ပိုတူလေလေ ဖြစ်ပါတယ်။ ဒီ exercise ထဲက vector တွေမှာ component အားလုံး
@@ -62,7 +62,7 @@ import math
 
 `import` က အခြား module တစ်ခုထဲက functions တွေကို အသုံးပြုနိုင်ဖို့ ထည့်သွင်းပေးတာပါ။
 
-`math` ဟာ Python ရဲ့ built-in standard library module ဖြစ်ပြီး သင်္ချာဆိုင်ရာ functions တွေ
+`math` ဟာ Python ၏ built-in standard library module ဖြစ်ပြီး သင်္ချာဆိုင်ရာ functions တွေ
 ပါဝင်ပါတယ်။ ဒီ exercise မှာ —
 
 ```python
@@ -135,7 +135,7 @@ Output —
 4
 ```
 
-Vector နှစ်ခုစလုံးမှာ dimensions လေးခုစီ ရှိပါတယ်။
+Vector နှစ်ခုစလုံးမှာ dimensions ၄ ခုစီ ရှိပါတယ်။
 
 `!=` က မတူညီဘူးလို့ ဆိုလိုပါတယ်။ ဒါကြောင့် —
 
@@ -143,7 +143,7 @@ Vector နှစ်ခုစလုံးမှာ dimensions လေးခုစ�
 if len(left) != len(right):
 ```
 
-ဆိုတာ vector နှစ်ခုရဲ့ dimensions မတူညီဘူးလားလို့ စစ်တာပါ။ မတူညီရင် —
+ဆိုတာ vector နှစ်ခု၏ dimensions မတူညီဘူးလားလို့ စစ်တာပါ။ မတူညီရင် —
 
 ```python
 raise ValueError("dimension mismatch")
@@ -189,7 +189,7 @@ Output —
 [(1, 4), (2, 5), (3, 6)]
 ```
 
-ပထမ list ရဲ့ `1` ကို ဒုတိယ list ရဲ့ `4` နဲ့ တွဲပေးပြီး၊ `2` ကို `5` နဲ့၊ `3` ကို `6` နဲ့
+ပထမ list ၏ `1` ကို ဒုတိယ list ၏ `4` နဲ့ တွဲပေးပြီး၊ `2` ကို `5` နဲ့၊ `3` ကို `6` နဲ့
 တွဲပေးပါတယ်။
 
 ### Step 4.2 — `a * b`
@@ -220,7 +220,7 @@ dot = sum(a * b for a, b in zip(left, right))
 
 ဒါကြောင့် `dot = 32` ဖြစ်ပါတယ်။
 
-ဒီလို vector တစ်ခုရဲ့ component တွေကို နောက် vector ရဲ့ component တွေနဲ့ တစ်ခုချင်းမြှောက်ပြီး
+ဒီလို vector တစ်ခု၏ component တွေကို နောက် vector ၏ component တွေနဲ့ တစ်ခုချင်းမြှောက်ပြီး
 ပေါင်းထားတာကို **Dot Product** လို့ခေါ်ပါတယ်။
 
 ---
@@ -232,7 +232,7 @@ norm_left = math.sqrt(sum(a * a for a in left))
 norm_right = math.sqrt(sum(b * b for b in right))
 ```
 
-ဒီနေရာမှာ vector တစ်ခုစီရဲ့ norm ကို တွက်ပါတယ်။ Norm ဆိုတာ vector ရဲ့ magnitude သို့မဟုတ်
+ဒီနေရာမှာ vector တစ်ခုစီ၏ norm ကို တွက်ပါတယ်။ Norm ဆိုတာ vector ၏ magnitude သို့မဟုတ်
 အလျားကို ဆိုလိုပါတယ်။ Formula က —
 
 ```text
@@ -291,7 +291,7 @@ if norm_left == 0.0 or norm_right == 0.0:
 - `==` — တူညီသလား စစ်ဆေးခြင်း။
 - `or` — အခြေအနေနှစ်ခုထဲက တစ်ခုခု မှန်ရင် condition တစ်ခုလုံး မှန်ခြင်း။
 
-Vector တစ်ခုရဲ့ norm က `0.0` ဖြစ်တယ်ဆိုရင် အဲဒီ vector ဟာ zero vector ဖြစ်ပါတယ်။
+Vector တစ်ခု၏ norm က `0.0` ဖြစ်တယ်ဆိုရင် အဲဒီ vector ဟာ zero vector ဖြစ်ပါတယ်။
 Zero vector နဲ့ cosine similarity တွက်တဲ့အခါ denominator က သုညဖြစ်သွားနိုင်ပါတယ်။
 
 ```text
@@ -305,7 +305,7 @@ return 0.0
 ```
 
 နဲ့ score `0.0` ကို ပြန်ပေးထားတာပါ။ ဒီဟာက application အတွက် ရွေးချယ်ထားတဲ့ **fallback**
-ဖြစ်ပါတယ်။ သင်္ချာအရ zero vector ရဲ့ cosine similarity ကို ပုံမှန်အားဖြင့် သတ်မှတ်လို့ မရပါဘူး။
+ဖြစ်ပါတယ်။ သင်္ချာအရ zero vector ၏ cosine similarity ကို ပုံမှန်အားဖြင့် သတ်မှတ်လို့ မရပါဘူး။
 
 ---
 
@@ -315,13 +315,13 @@ return 0.0
 return dot / (norm_left * norm_right)
 ```
 
-ဒါက function ရဲ့ အဓိကတွက်ချက်မှု ဖြစ်ပါတယ်။
+ဒါက function ၏ အဓိကတွက်ချက်မှု ဖြစ်ပါတယ်။
 
 ```text
 cosine(A, B) = (A · B) / (||A|| · ||B||)
 ```
 
-အပေါ်မှာ တွက်ထားတဲ့ dot product ကို vector နှစ်ခုရဲ့ norm မြှောက်လဒ်နဲ့ စားပေးပါတယ်။
+အပေါ်မှာ တွက်ထားတဲ့ dot product ကို vector နှစ်ခု၏ norm မြှောက်လဒ်နဲ့ စားပေးပါတယ်။
 
 ဥပမာ —
 
@@ -349,7 +349,7 @@ QUERY_VECTOR = [0.90, 0.10, 0.00, 0.20]
 ```
 
 ဒီ list က user query ကို ကိုယ်စားပြုတဲ့ vector ဖြစ်ပါတယ်။ ဒီဥပမာမှာ vector dimensions
-လေးခု ရှိပါတယ်။
+၄ ခု ရှိပါတယ်။
 
 တကယ့် RAG system မှာ embedding model က query text ကို vector အဖြစ် ပြောင်းပေးတာဖြစ်ပြီး
 ဒီနံပါတ်တွေကို ကိုယ်တိုင် ရွေးထည့်လေ့မရှိပါဘူး။ ဒီ exercise ကတော့ cosine similarity ကို
@@ -357,7 +357,7 @@ QUERY_VECTOR = [0.90, 0.10, 0.00, 0.20]
 
 ---
 
-## 9. `CHUNK_VECTORS` — Document chunks တွေရဲ့ vectors
+## 9. `CHUNK_VECTORS` — Document chunks တွေ၏ vectors
 
 ```python
 CHUNK_VECTORS = {
@@ -381,7 +381,7 @@ Query vector နဲ့ chunk vector တစ်ခုချင်းစီကိ�
 CHUNK_VECTORS["chunk-01"]
 ```
 
-ဒီလိုရေးရင် `chunk-01` ရဲ့ vector ကို ပြန်ရပါတယ်။ Chunk ID တွေကို key အဖြစ်
+ဒီလိုရေးရင် `chunk-01` ၏ vector ကို ပြန်ရပါတယ်။ Chunk ID တွေကို key အဖြစ်
 အသုံးပြုထားတဲ့အတွက် similarity score တစ်ခုချင်းစီဟာ ဘယ် chunk နဲ့ သက်ဆိုင်တယ်ဆိုတာ
 သိနိုင်ပါတယ်။
 
@@ -399,7 +399,7 @@ def rank_chunks(query, chunks):
     return scored
 ```
 
-ဒီ function ရဲ့ ရည်ရွယ်ချက်က chunk တစ်ခုချင်းစီရဲ့ similarity score ကို တွက်ချက်ပြီး
+ဒီ function ၏ ရည်ရွယ်ချက်က chunk တစ်ခုချင်းစီ၏ similarity score ကို တွက်ချက်ပြီး
 score အမြင့်ဆုံးကနေ အနိမ့်ဆုံးအထိ စီပေးဖို့ ဖြစ်ပါတယ်။
 
 ### Step 10.1 — `chunks.items()`
@@ -408,7 +408,7 @@ score အမြင့်ဆုံးကနေ အနိမ့်ဆုံးအ�
 for chunk_id, vector in chunks.items()
 ```
 
-Dictionary ရဲ့ `.items()` က key နဲ့ value ကို တွဲပြီး ထုတ်ပေးပါတယ်။
+Dictionary ၏ `.items()` က key နဲ့ value ကို တွဲပြီး ထုတ်ပေးပါတယ်။
 
 ဥပမာ —
 
@@ -450,7 +450,7 @@ scored = [
 Tuple ထဲမှာ —
 
 - Chunk ID
-- အဲဒီ chunk ရဲ့ cosine similarity score
+- အဲဒီ chunk ၏ cosine similarity score
 
 တို့ ပါဝင်ပါတယ်။ ဥပမာ result က ဒီလိုပုံစံ ဖြစ်ပါမယ်။
 
@@ -522,7 +522,7 @@ item = ("chunk-01", 0.991173)
 
 ### ဘာကြောင့် `-item[1]` သုံးတာလဲ။
 
-Python ရဲ့ `sort()` က ပုံမှန်အားဖြင့် ascending order နဲ့ စီပါတယ်။
+Python ၏ `sort()` က ပုံမှန်အားဖြင့် ascending order နဲ့ စီပါတယ်။
 
 ```python
 scores = [0.20, 0.99, 0.76]
@@ -659,7 +659,7 @@ Output —
 print("%d. %s similarity=%.6f" % (rank, chunk_id, score))
 ```
 
-ဒီဟာက Python ရဲ့ old-style string formatting ဖြစ်ပါတယ်။
+ဒီဟာက Python ၏ old-style string formatting ဖြစ်ပါတယ်။
 
 | Format | အဓိပ္ပာယ် |
 | --- | --- |
@@ -685,7 +685,7 @@ Output —
 
 ---
 
-## 12. Code တစ်ခုလုံးရဲ့ Output — အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းခြင်း
+## 12. Code တစ်ခုလုံး၏ Output — အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းခြင်း
 
 အပိုင်း ၂ မှ ၁၁ အထိ ရှင်းပြခဲ့သည့် အစိတ်အပိုင်းအားလုံးကို ပေါင်းစည်းလိုက်ပါက runnable
 script တစ်ခု အပြည့်အစုံ ရရှိပါတယ် —
@@ -739,8 +739,8 @@ Terminal မှာ ဒီလို ပြပါမယ် —
 - `chunk-02` — Similarity ပိုနည်းပါတယ်။
 - `chunk-03` — ဒီ query နဲ့ similarity အနည်းဆုံး ဖြစ်ပါတယ်။
 
-ဒီ score တွေက vector တွေရဲ့ ဦးတည်ရာတူညီမှုကို ဖော်ပြတာဖြစ်ပြီး၊ စာသားအဓိပ္ပာယ်ကို
-လူတစ်ယောက်က နားလည်သလို တိုက်ရိုက်တိုင်းတာတာ မဟုတ်ပါဘူး။ ရလဒ်ရဲ့ အရည်အသွေးက
+ဒီ score တွေက vector တွေ၏ ဦးတည်ရာတူညီမှုကို ဖော်ပြတာဖြစ်ပြီး၊ စာသားအဓိပ္ပာယ်ကို
+လူတစ်ယောက်က နားလည်သလို တိုက်ရိုက်တိုင်းတာတာ မဟုတ်ပါဘူး။ ရလဒ်၏ အရည်အသွေးက
 အသုံးပြုထားတဲ့ embedding model နဲ့ data ပေါ်လည်း မူတည်ပါတယ်။
 
 ---
@@ -759,7 +759,7 @@ Terminal မှာ ဒီလို ပြပါမယ် —
 ဒီ exercise က အဓိကအားဖြင့် **retrieve** အဆင့်မှာ similarity score တွက်ပြီး chunks တွေကို
 ranking လုပ်တဲ့ logic ကို လေ့ကျင့်ပေးတာ ဖြစ်ပါတယ်။
 
-တကယ့် production RAG system တွေမှာတော့ vector database ရဲ့ similarity search,
+တကယ့် production RAG system တွေမှာတော့ vector database ၏ similarity search,
 approximate nearest neighbor (ANN), metadata filtering နဲ့ reranking model တွေကိုလည်း
 အသုံးပြုနိုင်ပါတယ်။
 
@@ -794,5 +794,5 @@ approximate nearest neighbor (ANN), metadata filtering နဲ့ reranking model
 
 </details>
 
-**အဓိက မှတ်ထားရန်** — ဒီ code က query တစ်ခုနဲ့ chunk တစ်ခုချင်းစီရဲ့ cosine similarity ကို
+**အဓိက မှတ်ထားရန်** — ဒီ code က query တစ်ခုနဲ့ chunk တစ်ခုချင်းစီ၏ cosine similarity ကို
 တွက်တယ်၊ score အလိုက် စီတယ်၊ နောက်ဆုံးမှာ အနီးစပ်ဆုံး chunk ကို rank 1 အဖြစ် ပြပေးပါတယ်။

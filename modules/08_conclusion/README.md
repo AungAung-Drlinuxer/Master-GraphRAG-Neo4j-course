@@ -25,6 +25,7 @@ decision criteria ကို သတ်မှတ်ပြီး၊ ကိုယ်
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် လေ့ကျင့်ခန်း ၆ ခု |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation |
 | `lab.py` | Standard library သာ သုံး၍ run နိုင်သော executable lab |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` ၏ subtopic များ —
 
@@ -35,6 +36,23 @@ decision criteria ကို သတ်မှတ်ပြီး၊ ကိုယ်
 5. Monitoring — pipeline health၊ extraction quality၊ retrieval quality၊ cost alert
 6. GraphRAG သုံးသင့်/မသုံးသင့် decision criteria
 7. ဆက်လက်လေ့လာရန် လမ်းကြောင်းများနှင့် Capstone design
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`OrderedDict`၊ `all()`၊ generator expression၊ `zip`၊ `assert`၊
+set operations၊ `hashlib`၊ class၊ `any()`၊ tuple unpacking) ကို ဥပမာနှင့် တွဲဖက်
+ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_full_pipeline_recap.md` | Exercise 1 — Full pipeline recap (stage ordering) |
+| `walkthroughs/02_cost_latency_model.md` | Exercise 2 — Cost / latency model |
+| `walkthroughs/03_build_vs_buy_scorer.md` | Exercise 3 — Build-vs-buy decision scorer |
+| `walkthroughs/04_incremental_update_planner.md` | Exercise 4 — Incremental update planner |
+| `walkthroughs/05_production_architecture_checklist.md` | Exercise 5 — Production architecture checklist |
+| `walkthroughs/06_mini_graphrag_integration_test.md` | Exercise 6 — End-to-end mini GraphRAG integration test |
 
 ## Prerequisites
 

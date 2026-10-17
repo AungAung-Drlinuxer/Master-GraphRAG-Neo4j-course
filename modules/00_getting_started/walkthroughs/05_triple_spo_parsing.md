@@ -51,7 +51,7 @@ Alice Chen | works_at | Acme Corp | chunk-02
 | Object | `Acme Corp` | ဆက်စပ်နေတဲ့ entity |
 | Source | `chunk-02` | ဤ triple ကို ထုတ်ယူခဲ့တဲ့ document chunk |
 
-ဒီနေရာမှာ `chunk-02` က SPO triple ရဲ့ အစိတ်အပိုင်းသုံးခုထဲက တစ်ခု မဟုတ်ပါဘူး။ Triple ကို
+ဒီနေရာမှာ `chunk-02` က SPO triple ၏ အစိတ်အပိုင်းသုံးခုထဲက တစ်ခု မဟုတ်ပါဘူး။ Triple ကို
 ဘယ် source chunk ကနေ ထုတ်ယူထားသလဲဆိုတာ မှတ်သားပေးတဲ့ **provenance information**
 ဖြစ်ပါတယ်။
 
@@ -62,7 +62,7 @@ GraphRAG မှာ ဒီလို triples တွေကို graph nodes နဲ
 
 ## 2. `import re` နဲ့ `from dataclasses import dataclass`
 
-Code ရဲ့ ပထမအပိုင်းက —
+Code ၏ ပထမအပိုင်းက —
 
 ```python
 import re
@@ -71,11 +71,11 @@ from dataclasses import dataclass
 
 ### `import re`
 
-`re` က Python ရဲ့ Regular Expression module ဖြစ်ပါတယ်။ Regular Expression (Regex) ဆိုတာ
+`re` က Python ၏ Regular Expression module ဖြစ်ပါတယ်။ Regular Expression (Regex) ဆိုတာ
 စာသားတွေမှာ သတ်မှတ်ထားတဲ့ pattern နဲ့ ကိုက်ညီမှုရှိမရှိ ရှာဖွေ၊ စစ်ဆေး၊ ခွဲခြမ်းစိတ်ဖြာဖို့
 အသုံးပြုတဲ့ နည်းလမ်းဖြစ်ပါတယ်။
 
-ဒီ Exercise မှာ Regex ကို အသုံးပြုပြီး line တစ်ကြောင်းမှာ fields လေးခုကို `|` နဲ့
+ဒီ Exercise မှာ Regex ကို အသုံးပြုပြီး line တစ်ကြောင်းမှာ fields ၄ ခုကို `|` နဲ့
 မှန်ကန်စွာ ခွဲထားသလားဆိုတာ စစ်ဆေးပါမယ်။
 
 ### `dataclass`
@@ -84,7 +84,7 @@ from dataclasses import dataclass
 သတ်မှတ်နိုင်စေပါတယ်။
 
 ဥပမာ SPO triple တစ်ခုစီမှာ Subject၊ Predicate၊ Object နဲ့ Source Chunk ဆိုတဲ့ fields
-လေးခု ပါဝင်ပါတယ်။ အဲဒီ fields တွေကို Python object အဖြစ် ကိုယ်စားပြုဖို့ dataclass ကို
+၄ ခု ပါဝင်ပါတယ်။ အဲဒီ fields တွေကို Python object အဖြစ် ကိုယ်စားပြုဖို့ dataclass ကို
 အသုံးပြုမှာပါ။
 
 ---
@@ -126,7 +126,7 @@ r"\s+"
 ^ ... $
 ```
 
-ဒီနှစ်ခုက စာသားရဲ့ အစနဲ့ အဆုံးကို ကိုယ်စားပြုပါတယ်။
+ဒီနှစ်ခုက စာသား၏ အစနဲ့ အဆုံးကို ကိုယ်စားပြုပါတယ်။
 
 - `^` — စာသားအစ။
 - `$` — စာသားအဆုံး။
@@ -140,7 +140,7 @@ r"\s+"
 ```
 
 ဒီအပိုင်းက စာသားထဲက field တစ်ခုကို match လုပ်ပြီး `s` ဆိုတဲ့အမည်နဲ့ သိမ်းပေးပါတယ်။
-Regex ရဲ့ named group syntax က —
+Regex ၏ named group syntax က —
 
 ```text
 (?P<name>...)
@@ -250,7 +250,7 @@ triple = Triple(
 )
 ```
 
-အခု `triple` ထဲမှာ field လေးခု ပါဝင်တဲ့ object တစ်ခု ရရှိပါတယ်။ Field တစ်ခုချင်းစီကို
+အခု `triple` ထဲမှာ field ၄ ခု ပါဝင်တဲ့ object တစ်ခု ရရှိပါတယ်။ Field တစ်ခုချင်းစီကို
 ဒီလို ပြန်ဖတ်နိုင်ပါတယ်။
 
 ```python
@@ -349,7 +349,7 @@ Output —
 - `[works_at]` — Relationship။
 - `(Acme Corp)` — Object node။
 
-`source_chunk` ကို `to_spo()` ရဲ့ output ထဲမှာ မထည့်ထားပါဘူး။ ဒီ method က graph
+`source_chunk` ကို `to_spo()` ၏ output ထဲမှာ မထည့်ထားပါဘူး။ ဒီ method က graph
 relationship ကိုသာ ဖော်ပြပေးတာ ဖြစ်ပါတယ်။
 
 **အရေးကြီးချက်** — သင့်မူရင်း code မှာ `to_spo()` ကို သတ်မှတ်ထားပေမဲ့ နောက်ဆုံး `print()`
@@ -365,7 +365,7 @@ def _normalize(text):
     return re.sub(r"\s+", " ", text).strip()
 ```
 
-ဒီ function က field တစ်ခုချင်းစီရဲ့ whitespace တွေကို ပုံမှန်ဖြစ်အောင် ပြုပြင်ပေးပါတယ်။
+ဒီ function က field တစ်ခုချင်းစီ၏ whitespace တွေကို ပုံမှန်ဖြစ်အောင် ပြုပြင်ပေးပါတယ်။
 
 ### 5.1 `re.sub()`
 
@@ -409,7 +409,7 @@ Space အများအပြားနဲ့ tab ကို single spaces တွ
 .strip()
 ```
 
-`strip()` က စာသားရဲ့ အစနဲ့ အဆုံးမှာရှိတဲ့ whitespace တွေကို ဖယ်ရှားပေးပါတယ်။
+`strip()` က စာသား၏ အစနဲ့ အဆုံးမှာရှိတဲ့ whitespace တွေကို ဖယ်ရှားပေးပါတယ်။
 
 ဥပမာ —
 
@@ -435,14 +435,14 @@ def _normalize(text):
 ဟာ whitespace အများအပြားကို single space ပြောင်းပေးပြီး အစနဲ့အဆုံးက whitespace တွေကို
 ဖယ်ရှားပေးပါတယ်။
 
-`_normalize` ရဲ့ ရှေ့မှာ underscore `_` ထည့်ထားတာက ဒီ function ဟာ module အတွင်းသုံးတဲ့
+`_normalize` ၏ ရှေ့မှာ underscore `_` ထည့်ထားတာက ဒီ function ဟာ module အတွင်းသုံးတဲ့
 helper function ဖြစ်ကြောင်း ဖော်ပြတဲ့ Python naming convention ဖြစ်ပါတယ်။
 
 ---
 
 ## 6. `parse_triples(lines)` — Main Parsing Function
 
-အခု Exercise ရဲ့ အဓိက function ကို လေ့လာကြည့်ရအောင်။
+အခု Exercise ၏ အဓိက function ကို လေ့လာကြည့်ရအောင်။
 
 ```python
 def parse_triples(lines):
@@ -464,7 +464,7 @@ def parse_triples(lines):
     return triples, errors
 ```
 
-ဒီ function ရဲ့ ရည်ရွယ်ချက်က input lines တွေကို စစ်ဆေးပြီး မှန်ကန်တဲ့ triples တွေကို
+ဒီ function ၏ ရည်ရွယ်ချက်က input lines တွေကို စစ်ဆေးပြီး မှန်ကန်တဲ့ triples တွေကို
 တစ်စု၊ errors တွေကို တစ်စု ခွဲထုတ်ပေးဖို့ ဖြစ်ပါတယ်။
 
 ### 6.1 `triples = []` နဲ့ `errors = []`
@@ -489,7 +489,7 @@ triples.append("valid data")
 errors.append((5, "malformed_field_count"))
 ```
 
-`append()` က list ရဲ့ အဆုံးမှာ item အသစ်ထည့်ပေးပါတယ်။
+`append()` က list ၏ အဆုံးမှာ item အသစ်ထည့်ပေးပါတယ်။
 
 ### 6.2 `enumerate(lines, start=1)`
 
@@ -530,7 +530,7 @@ Output —
 match = TRIPLE_PATTERN.match(raw.strip())
 ```
 
-ပထမဆုံး `raw.strip()` က line ရဲ့ အစနဲ့ အဆုံးက whitespace တွေကို ဖယ်ရှားပါတယ်။
+ပထမဆုံး `raw.strip()` က line ၏ အစနဲ့ အဆုံးက whitespace တွေကို ဖယ်ရှားပါတယ်။
 
 ဥပမာ —
 
@@ -571,7 +571,7 @@ Regex pattern နဲ့ line တစ်ကြောင်းလုံး ကိ�
 Broken|line
 ```
 
-ဒီ line မှာ fields နှစ်ခုသာ ရှိပါတယ်။ ဒါပေမဲ့ Regex က field လေးခုကို မျှော်လင့်ထားတဲ့အတွက်
+ဒီ line မှာ fields နှစ်ခုသာ ရှိပါတယ်။ ဒါပေမဲ့ Regex က field ၄ ခုကို မျှော်လင့်ထားတဲ့အတွက်
 match မဖြစ်ပါဘူး။ ဒါကြောင့် —
 
 ```python
@@ -583,7 +583,7 @@ errors.append((5, "malformed_field_count"))
 - `5` — Error ဖြစ်တဲ့ line number။
 - `"malformed_field_count"` — Error အမျိုးအစား။
 
-`continue` က လက်ရှိ iteration ရဲ့ ကျန်ရှိတဲ့ code တွေကို ကျော်ပြီး နောက် line ကို
+`continue` က လက်ရှိ iteration ၏ ကျန်ရှိတဲ့ code တွေကို ကျော်ပြီး နောက် line ကို
 ဆက်စစ်စေပါတယ်။ ဒါကြောင့် match မဖြစ်တဲ့ line တွေကို `Triple` အဖြစ် ဖန်တီးဖို့
 မကြိုးစားတော့ပါဘူး။
 
@@ -718,7 +718,7 @@ if not subject:
 
 ဆိုတာ `subject` က empty string ဖြစ်နေသလား စစ်တာပါ။
 
-ဒီနေရာမှာ `or` ကို သုံးထားတဲ့အတွက် fields လေးခုထဲက တစ်ခုခု empty ဖြစ်ရင် condition
+ဒီနေရာမှာ `or` ကို သုံးထားတဲ့အတွက် fields ၄ ခုထဲက တစ်ခုခု empty ဖြစ်ရင် condition
 တစ်ခုလုံး `True` ဖြစ်ပါတယ်။ အဲဒီအခါ —
 
 ```python
@@ -756,7 +756,7 @@ TRIPLE_PATTERN = re.compile(
 match လုပ်နိုင်ပါတယ်။ ထို့နောက် `if not subject ...` validation က `empty_field` ကို
 ရှာဖွေပေးနိုင်ပါတယ်။
 
-ဒီပြောင်းလဲမှုက မူရင်း code ရဲ့ စုစုပေါင်း valid records နဲ့ error counts ကို
+ဒီပြောင်းလဲမှုက မူရင်း code ၏ စုစုပေါင်း valid records နဲ့ error counts ကို
 မပြောင်းလဲစေပေမဲ့၊ error အမျိုးအစားအလိုက် မှတ်တမ်းတင်ပုံကို ပြောင်းလဲစေပါတယ်။
 
 ---
@@ -791,7 +791,7 @@ Triple(
 | `source_chunk` | `chunk-01` |
 
 `triples.append(...)` က ဒီ object ကို list ထဲ ထည့်ပါတယ်။ ဒါကြောင့် valid line တစ်ကြောင်းကို
-အောင်မြင်စွာ parse လုပ်တိုင်း `triples` list ရဲ့ အရွယ်အစား တစ်ခုတိုးလာပါတယ်။
+အောင်မြင်စွာ parse လုပ်တိုင်း `triples` list ၏ အရွယ်အစား တစ်ခုတိုးလာပါတယ်။
 
 ---
 
@@ -804,7 +804,7 @@ return triples, errors
 Function က result နှစ်ခုကို တစ်ပြိုင်နက် ပြန်ပေးပါတယ်။
 
 - `triples` — Parse လုပ်ထားတဲ့ valid `Triple` objects။
-- `errors` — Parse မအောင်မြင်တဲ့ lines တွေရဲ့ error records။
+- `errors` — Parse မအောင်မြင်တဲ့ lines တွေ၏ error records။
 
 Python မှာ comma ခွဲပြီး values အများအပြားကို `return` လုပ်တဲ့အခါ tuple တစ်ခုအဖြစ်
 ပြန်ရရှိပါတယ်။ ဒါကြောင့် —
@@ -841,7 +841,7 @@ TRIPLE_LINES = [
 
 | Line | စစ်ဆေးချက် | ရလဒ် |
 | --- | --- | --- |
-| 1 | Field လေးခုရှိပြီး normalize လုပ်လို့ရတယ် | Valid Triple |
+| 1 | Field ၄ ခုရှိပြီး normalize လုပ်လို့ရတယ် | Valid Triple |
 | 2 | Line 1 နဲ့ normalize ပြီးနောက် တူညီတယ် | Valid Triple၊ နောက်ပိုင်း duplicate ဖြစ်မယ် |
 | 3 | SPO နဲ့ chunk fields မှန်ကန်တယ် | Valid Triple |
 | 4 | Fields မှန်ကန်ပြီး Predicate ကို normalize လုပ်မယ် | Valid Triple |
@@ -849,7 +849,7 @@ TRIPLE_LINES = [
 | 6 | Subject field အလွတ်ဖြစ်နေတယ် | Regex match မဖြစ်လို့ Error |
 
 ဒီ input မှာ ပထမ line က ရှေ့နောက် spaces အချို့ ပါဝင်ပေမဲ့ normalization လုပ်ပြီးနောက်
-ဒုတိယ line နဲ့ တူညီသွားပါတယ်။ ဒါကြောင့် valid `Triple` objects လေးခုကို
+ဒုတိယ line နဲ့ တူညီသွားပါတယ်။ ဒါကြောင့် valid `Triple` objects ၄ ခုကို
 ဖန်တီးထားပေမဲ့ unique triples အရေအတွက်က သုံးခုပဲ ရှိပါမယ်။
 
 ---
@@ -894,7 +894,7 @@ Set က insertion order ကို အခြေခံထားတဲ့ display o
 ဒီ Exercise မှာ `Triple` ကို `@dataclass(frozen=True)` နဲ့ ဖန်တီးထားတဲ့အတွက် fields
 တန်ဖိုးအားလုံး တူညီတဲ့ objects တွေကို `set` က duplicate အဖြစ် သတ်မှတ်နိုင်ပါတယ်။
 
-ပထမနဲ့ ဒုတိယ line တွေကို normalization လုပ်ပြီးတဲ့အခါ object နှစ်ခုစလုံးရဲ့ fields တွေက —
+ပထမနဲ့ ဒုတိယ line တွေကို normalization လုပ်ပြီးတဲ့အခါ object နှစ်ခုစလုံး၏ fields တွေက —
 
 ```python
 Triple(
@@ -908,7 +908,7 @@ Triple(
 အတိုင်း တူညီနေပါတယ်။ ဒါကြောင့် `set(triples)` လုပ်တဲ့အခါ အဲဒီ duplicate နှစ်ခုထဲက
 တစ်ခုသာ ကျန်ပါတယ်။
 
-သတိပြုရန် — ဒီ code က Subject၊ Predicate၊ Object နဲ့ `source_chunk` လေးခုစလုံး
+သတိပြုရန် — ဒီ code က Subject၊ Predicate၊ Object နဲ့ `source_chunk` ၄ ခုစလုံး
 တူညီတဲ့ `Triple` objects တွေကိုပဲ duplicate အဖြစ် သတ်မှတ်ပါတယ်။ SPO သုံးခုတူပေမဲ့
 source chunk မတူရင် objects တွေက မတူညီသေးတဲ့အတွက် နှစ်ခုစလုံးကို ထိန်းထားပါမယ်။
 
@@ -993,7 +993,7 @@ record တစ်ခုက သုံးကြိမ်ပါနေရင် အ�
 
 အဓိပ္ပာယ်က —
 
-- `4` — Valid records လေးခုကို parse လုပ်နိုင်ခဲ့တယ်။
+- `4` — Valid records ၄ ခုကို parse လုပ်နိုင်ခဲ့တယ်။
 - `2` — Invalid lines နှစ်ကြောင်းကို error အဖြစ် မှတ်တမ်းတင်ခဲ့တယ်။
 - `1` — Duplicate record တစ်ခုကို ဖယ်ရှားနိုင်ခဲ့တယ်။
 
@@ -1001,7 +1001,7 @@ record တစ်ခုက သုံးကြိမ်ပါနေရင် အ�
 
 ## 14. Code တစ်ခုလုံး — သန့်စင်ပြီး Run လုပ်နိုင်သော Version
 
-အောက်မှာ ဒီ Exercise ရဲ့ runnable version ကို စုစည်းပေးထားပါတယ်။ မူရင်း logic ကို
+အောက်မှာ ဒီ Exercise ၏ runnable version ကို စုစည်းပေးထားပါတယ်။ မူရင်း logic ကို
 ထိန်းထားပြီး code formatting ကို ပြင်ဆင်ထားပါတယ်။
 
 ```python
@@ -1098,7 +1098,7 @@ Network Team|manages|Core Switch 01
 1. `triples` — Valid Triple အဖြစ်
 2. `errors` — `malformed_field_count` အဖြစ်
 3. `errors` — `empty_field` အဖြစ်
-4. Field လေးခုရှိလို့ နှစ်ခုလုံးထဲ ရောက်မယ်
+4. Field ၄ ခုရှိလို့ နှစ်ခုလုံးထဲ ရောက်မယ်
 
 <details>
 <summary>အဖြေ ကြည့်ရန်</summary>
@@ -1106,7 +1106,7 @@ Network Team|manages|Core Switch 01
 **အဖြေ — 2. `errors` — `malformed_field_count` အဖြစ်**
 
 အကြောင်းရင်း — Regex သည် `Subject|Predicate|Object|SourceChunk` ဆိုသည့် field
-**လေးခု**ကို မျှော်လင့်သည်။ ဤ line တွင် field သုံးခုသာ ရှိသဖြင့် — `|` သုံးခု
+**၄ ခု**ကို မျှော်လင့်သည်။ ဤ line တွင် field သုံးခုသာ ရှိသဖြင့် — `|` သုံးခု
 (`Network Team`၊ `manages`၊ `Core Switch 01`) — `TRIPLE_PATTERN.match()` သည်
 `None` ပြန်သည်။ ထို့ကြောင့် `match is None` branch သို့ ရောက်ပြီး
 `malformed_field_count` အဖြစ် မှတ်တမ်းဝင်သည်။

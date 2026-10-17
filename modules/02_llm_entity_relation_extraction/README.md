@@ -26,6 +26,7 @@ malformed output handling၊ Entity Resolution နှင့် grounding-based H
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် exercise ၆ ခု |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation |
 | `lab.py` | Standard library သာ သုံး၍ run နိုင်သော executable lab (offline) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` တွင် ဖော်ပြမည့် subtopic များ —
 
@@ -35,6 +36,24 @@ malformed output handling၊ Entity Resolution နှင့် grounding-based H
 4. Entity resolution — alias mapping နှင့် fuzzy matching
 5. Extraction quality control — hallucination filter၊ grounding check
 6. Cost၊ latency နှင့် ကန့်သတ်ချက်များ — token cost၊ prompt injection၊ rate limit
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`str.format()`၊ `dict`/`set`၊ `re.DOTALL`၊ `(?:...)`၊ recursion၊
+`enumerate`၊ `try`/`except`၊ tuple unpacking၊ `max(key=…)`၊ `math.ceil` နှင့်
+`max(1, …)`, substring attestation၊ truthiness short-circuit) ကို ဥပမာနှင့်
+တွဲဖက် ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_extraction_prompt_template.md` | Exercise 1 — Extraction prompt template |
+| `walkthroughs/02_parsing_llm_output.md` | Exercise 2 — Parsing scripted LLM output |
+| `walkthroughs/03_json_schema_validation_retry.md` | Exercise 3 — JSON Schema validation နှင့် retry |
+| `walkthroughs/04_entity_resolution.md` | Exercise 4 — Entity resolution |
+| `walkthroughs/05_hallucination_grounding_filter.md` | Exercise 5 — Hallucination filter / grounding check |
+| `walkthroughs/06_token_cost_latency.md` | Exercise 6 — Token cost နှင့် latency |
 
 ## Prerequisites
 

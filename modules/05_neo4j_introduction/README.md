@@ -22,6 +22,7 @@
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် လေ့ကျင့်ခန်း ၆ ခု (Hints + Expected behavior) |
 | `solution.md` | Exercise တိုင်းအတွက် reference implementation နှင့် အဓိကအယူအဆ |
 | `lab.py` | Standard library သာ သုံး၍ run နိုင်သော executable lab (`assert` ၆ ခု) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 `explanation.md` ၏ subtopic များ — (၁) Property Graph Model — Node၊ Label၊ typed directed Relationship၊
 Property · (၂) Neo4j architecture — index-free adjacency၊ storage၊ Bolt protocol၊ Neo4j Browser ·
@@ -29,6 +30,23 @@ Property · (၂) Neo4j architecture — index-free adjacency၊ storage၊ Bolt
 (၄) Constraint နှင့် Index — uniqueness၊ range၊ full-text နှင့် query plan သက်ရောက်မှု ·
 (၅) Parameterization — `$param` နှင့် Cypher injection ကာကွယ်ခြင်း ·
 (၆) Neo4j နှင့် အခြား graph database နှိုင်းယှဉ်ချက် — decision criteria
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+`@dataclass`၊ `field(default_factory=…)`၊ `sorted(key=…)`၊ list comprehension၊
+`re.finditer()`၊ generator နှင့် `any()`၊ `collections.deque`၊ BFS၊ `math.log()`/`math.ceil()`
+စသည့် concept များကို ဥပမာနှင့် တွဲဖက် ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_property_graph_model.md` | Exercise 1 — Property Graph in-memory model |
+| `walkthroughs/02_cypher_merge_generation.md` | Exercise 2 — Cypher `MERGE` generation |
+| `walkthroughs/03_cypher_statement_validation.md` | Exercise 3 — Cypher statement validation |
+| `walkthroughs/04_constraints_and_indexes.md` | Exercise 4 — Constraint နှင့် Index definitions |
+| `walkthroughs/05_parameterized_query_builder.md` | Exercise 5 — Parameterized query builder နှင့် injection defense |
+| `walkthroughs/06_index_free_adjacency.md` | Exercise 6 — Index-free adjacency traversal |
 
 ## Prerequisites
 

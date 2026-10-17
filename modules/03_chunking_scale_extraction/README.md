@@ -25,11 +25,29 @@ Idempotency/failure recovery ကို တိုင်းတာနိုင်�
 | `exercise.md` | ကိုယ်တိုင် implement လုပ်ရမည့် လေ့ကျင့်ခန်း ၆ ခု (Hints + Expected behavior) |
 | `solution.md` | Exercise ၆ ခုအတွက် reference implementation အပြည့်အစုံ |
 | `lab.py` | Standard library သာ သုံးသော executable lab (exercise ၆ ခု၊ `assert` ဖြင့် စစ်ဆေး) |
+| `walkthroughs/` | Exercise တိုင်းအတွက် Python အခြေခံမှစ၍ အပိုင်းလိုက် ရှင်းပြသည့် ဖတ်စာ |
 
 **explanation.md subtopics** — (၁) Chunk size နှင့် extraction quality၊ (၂) Token budget နှင့် Context Window
 အပေါ် အခြေခံသော size/overlap ရွေးချယ်မှု၊ (၃) Map-Reduce extraction pattern၊ (၄) Cross-chunk relationship
 reconnection၊ (၅) Triple deduplication နှင့် merge၊ (၆) Batching၊ concurrency၊ Checkpoint၊ Idempotency နှင့်
 failure recovery။
+
+### Walkthroughs
+
+`solution.md` ရှိ code များကို Python အခြေခံမှ စတင်၍ အပိုင်းလိုက် လိုက်ဖတ်လိုပါက
+`walkthroughs/` folder ကို ကြည့်ပါ။ Walkthrough တစ်ခုစီသည် exercise တစ်ခုစီအတွက် ဖြစ်ပြီး —
+concept အသစ်များ (`while` loop၊ chained comparison၊ dict comprehension၊ `setdefault()`၊
+`all()`၊ `zip()`၊ `dict.fromkeys()`၊ class နှင့် `self`၊ fixed-seed LCG၊ `while ... else`) ကို
+ဥပမာနှင့် တွဲဖက် ရှင်းပြသည်။
+
+| Walkthrough | Exercise |
+|---|---|
+| `walkthroughs/01_fixed_size_chunking.md` | Exercise 1 — Fixed-size chunking |
+| `walkthroughs/02_chunk_overlap.md` | Exercise 2 — Overlap ထည့်ခြင်း |
+| `walkthroughs/03_map_reduce_aggregation.md` | Exercise 3 — Map-Reduce triple aggregation |
+| `walkthroughs/04_cross_chunk_relationships.md` | Exercise 4 — Cross-chunk relationship ပြန်ချိတ်ခြင်း |
+| `walkthroughs/05_triple_dedup_merge.md` | Exercise 5 — Triple deduplication နှင့် merge |
+| `walkthroughs/06_idempotent_batch_runner.md` | Exercise 6 — Idempotent batch runner |
 
 ## Prerequisites
 
