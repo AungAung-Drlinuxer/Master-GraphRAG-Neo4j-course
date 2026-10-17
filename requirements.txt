@@ -1,0 +1,12 @@
+# Core modules — Python standard library only.
+# Nothing below is required to run the module labs (run_all_labs.py).
+
+# --- Optional: live Neo4j integration (M05, M06, M07 live tests) ---
+neo4j>=5.20.0
+
+# --- Optional: live vector search next to the graph (M07 hybrid lane) ---
+psycopg[binary]>=3.1.18
+pgvector>=0.2.5
+
+# --- Optional: numerical helpers when extending the labs past stdlib ---
+numpy>=1.26.0
