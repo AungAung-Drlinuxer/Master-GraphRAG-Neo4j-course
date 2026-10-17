@@ -45,6 +45,8 @@ concept အသစ်များ (dictionary၊ tuple၊ set၊ while loop၊ li
 | `walkthroughs/02_cosine_similarity_ranking.md` | Exercise 2 — Cosine Similarity Ranking |
 | `walkthroughs/03_retrieval_modality_selection.md` | Exercise 3 — Retrieval Modality Selection |
 | `walkthroughs/04_rag_failure_mode_classification.md` | Exercise 4 — RAG Failure Mode Classification |
+| `walkthroughs/05_triple_spo_parsing.md` | Exercise 5 — Triple (SPO) Parsing |
+| `walkthroughs/06_graphrag_readiness_check.md` | Exercise 6 — GraphRAG Readiness Check |
 
 ## Prerequisites
 
