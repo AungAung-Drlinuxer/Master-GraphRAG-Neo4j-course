@@ -7,10 +7,10 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Document အသစ်တစ်ခု ဝင်လာတိုင်း graph တစ်ခုလုံးကို ပြန်တည်ဆောက်ရင် ကုန်ကျစရိတ်
-အလွန်မြင့်ပါတယ်။ ပိုကောင်းတဲ့ နည်းက **ကွာခြားချက် (diff) ကိုသာ** ရေးတာပါ။
-လက်ရှိ graph နဲ့ triple အသစ်များကို နှိုင်းယှဉ်ပြီး လိုအပ်တဲ့ operation များကို
-ထုတ်ပေးပါတယ်။
+Document အသစ်တစ်ခု ဝင်လာတိုင်း graph တစ်ခုလုံးကို ပြန်တည်ဆောက်လျှင် ကုန်ကျစရိတ်
+အလွန်မြင့်သည်။ ပိုကောင်းသော နည်းက **ကွာခြားချက် (diff) ကိုသာ** ရေးခြင်း ဖြစ်သည်။
+လက်ရှိ graph နှင့် triple အသစ်များကို နှိုင်းယှဉ်ပြီး လိုအပ်သော operation များကို
+ထုတ်ပေးသည်။
 
 ```text
 current edges/nodes + new triples
@@ -22,10 +22,10 @@ current edges/nodes + new triples
    updated graph  --->  signature (hash) ဖြင့် စစ်ဆေး
 ```
 
-**Idempotency** အရေးကြီးပါတယ် — document တူတူကို နှစ်ခါ ingest လုပ်ရင် graph က
-**မပြောင်း** ရပါ။ ဤ code က signature-based verification ဖြင့် ဒါကို စစ်ပါတယ်။
+**Idempotency** အရေးကြီးသည် — document တူတူကို နှစ်ခါ ingest လုပ်လျှင် graph က
+**မပြောင်း** ရပါ။ ဤ code က signature-based verification ဖြင့် ၎င်းကို စစ်သည်။
 
-ဒီ Exercise မှာ လေ့လာရမယ့် Python concepts —
+ဤ Exercise တွင် လေ့လာရမည့် Python concepts —
 
 - Set (`{"LEADS", "MANAGES"}`) နှင့် `in` membership test
 - List of tuples နှင့် tuple indexing (`e[1]`, `e[2]`)
@@ -64,13 +64,13 @@ MANAGES
 ```
 
 Edge တိုင်းက **tuple သုံးလုံး** — `(subject, relation, object)`။ `base_edges[0][1]` က
-ပထမဆုံး edge ၏ **ဒုတိယ item** `MANAGES` ကို ဆွဲထုတ်ပါတယ်။
+ပထမဆုံး edge ၏ **ဒုတိယ item** `MANAGES` ကို ဆွဲထုတ်သည်။
 
-Node စာရင်းကို **set** အဖြစ် ထားပါတယ်။ Set က duplicate ကို ဖယ်ပေးပြီး membership
-စစ်တာ O(1) ဖြစ်ပါတယ် — planner က `endpoint not in nodes` ကို node တိုင်းအတွက်
-ခေါ်လို့ အရေးကြီးပါတယ်။
+Node စာရင်းကို **set** အဖြစ် ထားသည်။ Set က duplicate ကို ဖယ်ပေးပြီး membership
+စစ်ဆေးခြင်းသည် O(1) ဖြစ်သည် — planner က `endpoint not in nodes` ကို node တိုင်းအတွက်
+ခေါ်ရသောကြောင့် အရေးကြီးသည်။
 
-> **သတိ** — set ကို `print()` ဖြင့် တိုက်ရိုက် ပြရင် အစီအစဉ်က run တစ်ခုနှင့်တစ်ခု
+> **သတိ** — set ကို `print()` ဖြင့် တိုက်ရိုက် ပြလျှင် အစီအစဉ်က run တစ်ခုနှင့်တစ်ခု
 > **ကွဲနိုင်သည်** (hash-randomised)။ ထို့ကြောင့် set ကို ပြသည့်အခါ `sorted(...)`
 > ဖြင့် ပြပါ။
 
@@ -89,9 +89,9 @@ True
 False
 ```
 
-`sorted(base_nodes)` က set ကို list အဖြစ် စီပြီး ပြသပါတယ် — output က run တိုင်း တူပါတယ်။
-`"Dave" in base_nodes` က `False` ရတာက `Dave` ကို နောက်ပိုင်း `ADD_NODE` လုပ်ရမည့်
-အကြောင်းရင်း ဖြစ်ပါတယ်။
+`sorted(base_nodes)` က set ကို list အဖြစ် စီပြီး ပြသသည် — output က run တိုင်း တူသည်။
+`"Dave" in base_nodes` က `False` ရခြင်းသည် `Dave` ကို နောက်ပိုင်း `ADD_NODE` လုပ်ရမည့်
+အကြောင်းရင်း ဖြစ်သည်။
 
 ---
 
@@ -109,8 +109,8 @@ def graph_signature(edges, nodes):
 
 ### 2.1 `sorted(nodes)` နှင့် `sorted(edges)`
 
-Node နဲ့ edge ကို **စီ** လိုက်တာက hash ကို **တည်ငြိမ်** စေပါတယ်။ စီမထားရင် set
-iteration order က run တိုင်း ကွဲနိုင်လို့ hash လည်း ပြောင်းနိုင်ပါတယ်။
+Node နှင့် edge ကို **စီ** ခြင်းသည် hash ကို **တည်ငြိမ်** စေသည်။ စီမထားလျှင် set
+iteration order က run တိုင်း ကွဲနိုင်သောကြောင့် hash လည်း ပြောင်းနိုင်သည်။
 
 ```python
 import json
@@ -127,8 +127,8 @@ Output —
 '{"nodes": ["a", "b"], "edges": [["x", "r", "y"]]}'
 ```
 
-Tuple `("x", "r", "y")` ကို JSON မှာ **array** `["x", "r", "y"]` အဖြစ်
-ပြောင်းပါတယ်။
+Tuple `("x", "r", "y")` ကို JSON တွင် **array** `["x", "r", "y"]` အဖြစ်
+ပြောင်းသည်။
 
 ### 2.2 `sort_keys=True` — Key များကို စီခြင်း
 
@@ -148,9 +148,9 @@ Output —
 True
 ```
 
-`sort_keys=True` က dict ၏ key များကို **alphabetical** စီစေပါတယ် — `"edges"` က
-`"nodes"` အရင်။ Dict ကို ရေးတဲ့အစီအစဉ် မတူပေမဲ့ `sort_keys=True` ရှိလို့
-string နှစ်ခု **တူညီ** သွားပါတယ်။ ဒါက hash ကို reproducible ဖြစ်စေပါတယ်။
+`sort_keys=True` က dict ၏ key များကို **alphabetical** စီစေသည် — `"edges"` က
+`"nodes"` အရင်။ Dict ကို ရေးသည့်အစီအစဉ် မတူသော်လည်း `sort_keys=True` ရှိသောကြောင့်
+string နှစ်ခု **တူညီ** သွားသည်။ ၎င်းသည် hash ကို reproducible ဖြစ်စေသည်။
 
 ### 2.3 `hashlib.sha256(...).hexdigest()[:16]`
 
@@ -171,9 +171,9 @@ ba7816bf
 ```
 
 `sha256` က byte sequence တစ်ခုအတွက် **hexadecimal 64 character** (32 byte) hash
-ထုတ်ပါတယ်။ `.encode("utf-8")` က string ကို byte အဖြစ် ပြောင်းပါတယ် — hash
-function များက byte ကိုသာ လက်ခံလို့ပါ။ `[:16]` က ပထမ ၁၆ လုံးကိုသာ ယူပါတယ် —
-ကျန်တာအားလုံး နှိုင်းယှဉ်စရာ မလိုဘဲ လုံလောက်ပါတယ်။
+ထုတ်သည်။ `.encode("utf-8")` က string ကို byte အဖြစ် ပြောင်းသည် — hash
+function များက byte ကိုသာ လက်ခံသောကြောင့် ဖြစ်သည်။ `[:16]` က ပထမ ၁၆ လုံးကိုသာ ယူသည် —
+ကျန်သည့်အရာအားလုံး နှိုင်းယှဉ်စရာ မလိုဘဲ လုံလောက်သည်။
 
 ---
 
@@ -208,9 +208,9 @@ def plan_incremental_update(current_edges, current_nodes, new_triples):
 
 ### 3.1 `list(current_edges)` နှင့် `set(current_nodes)` — Copy
 
-`edges = list(current_edges)` က **copy** တစ်ခု ဖန်တီးပါတယ်။ ဒါကြောင့် function က
-`edges.remove(...)` လုပ်လို့ caller ၏ `current_edges` **မပြောင်း** ပါ။ ဒါက
-immutability ကို ထိန်းပြီး caller က base graph ကို ပြန်သုံးလို့ ရပါတယ်။
+`edges = list(current_edges)` က **copy** တစ်ခု ဖန်တီးသည်။ ထို့ကြောင့် function က
+`edges.remove(...)` လုပ်သော်လည်း caller ၏ `current_edges` **မပြောင်း** ပါ။ ၎င်းသည်
+immutability ကို ထိန်းပြီး caller က base graph ကို ပြန်သုံးနိုင်သည်။
 
 ```python
 original = [("A", "FRIEND", "B")]
@@ -244,9 +244,9 @@ False
 ['LEADS', 'MANAGES']
 ```
 
-`LEADS` နဲ့ `MANAGES` က **single-valued** ဖြစ်ပါတယ် — subject တစ်ခုတည်းသာ
-object တစ်ခုတည်းကို leads/manages လုပ်နိုင်ပါတယ်။ \"ဘယ်သူက Payments Squad ကို
-leads\" ဆိုတဲ့ question မှာ အဖြေ **တစ်ခုတည်း** ဖြစ်ရပါတယ်။ `BUILDS` ကတော့
+`LEADS` နှင့် `MANAGES` က **single-valued** ဖြစ်သည် — subject တစ်ခုတည်းသာ
+object တစ်ခုတည်းကို leads/manages လုပ်နိုင်သည်။ \"ဘယ်သူက Payments Squad ကို
+leads\" ဆိုသည့် question တွင် အဖြေ **တစ်ခုတည်း** ဖြစ်ရသည်။ `BUILDS` မှာ
 single-valued မဟုတ်ပါ (service တစ်ခုကို အဖွဲ့အများအပြား build လုပ်နိုင်)။
 
 ---
@@ -271,9 +271,9 @@ Output —
 ['Alice', 'Dave', 'Payments Squad']
 ```
 
-`for endpoint in (subject, obj):` က subject နဲ့ object **နှစ်ခုလုံး** ကို စစ်ပါတယ်။
-မရှိသေးတဲ့ endpoint တိုင်းအတွက် `nodes.add(...)` နဲ့ `("ADD_NODE", endpoint)`
-operation ထည့်ပါတယ်။ `"Payments Squad"` က ရှိပြီးလို့ ကျော်သွားပါတယ်။
+`for endpoint in (subject, obj):` က subject နှင့် object **နှစ်ခုလုံး** ကို စစ်သည်။
+မရှိသေးသော endpoint တိုင်းအတွက် `nodes.add(...)` နှင့် `("ADD_NODE", endpoint)`
+operation ထည့်သည်။ `"Payments Squad"` က ရှိပြီးဖြစ်သောကြောင့် ကျော်သွားသည်။
 
 ---
 
@@ -300,9 +300,9 @@ Output —
 [('A', 'FRIEND', 'B')]
 ```
 
-`new_edge in edges` က triple က ရှိပြီးသား လား စစ်ပါတယ် — tuple comparison ဖြစ်လို့
-item တိုင်း တူညီရပါတယ်။ ရှိပြီးရင် `"NOOP"` (no operation) မှတ်ပြီး `continue` ဖြင့်
-loop ၏ ကျန်တာ မလုပ်တော့ပါ။ **`continue` က ဒီ iteration ကို ရပ်ပြီး နောက်
+`new_edge in edges` က triple က ရှိပြီးသား ဖြစ်/မဖြစ် စစ်ဆေးသည် — tuple comparison ဖြစ်သောကြောင့်
+item တိုင်း တူညီရသည်။ ရှိပြီးလျှင် `"NOOP"` (no operation) မှတ်ပြီး `continue` ဖြင့်
+loop ၏ ကျန်သည့်အပိုင်းကို မလုပ်တော့ပါ။ **`continue` က ဤ iteration ကို ရပ်ပြီး နောက်
 iteration ကို ဆက်သည်**။
 
 ```python
@@ -341,9 +341,9 @@ Output —
 ```
 
 `[e for e in edges if e[1] == relation and e[2] == obj]` က **list comprehension**
-ဖြစ်ပါတယ်။ `e[1]` က relation၊ `e[2]` က object။ Condition နှစ်ခုလုံး မှန်တဲ့ edge
-များကို စုပါတယ် — ဒီနေရာမှာ `("Dave", "LEADS", "Other")` က object မတူလို့ မပါပါ။
-အလွတ် list `[]` ရရင်လည်း ရပါတယ် —
+ဖြစ်သည်။ `e[1]` က relation၊ `e[2]` က object။ Condition နှစ်ခုလုံး မှန်သော edge
+များကို စုသည် — ဤနေရာတွင် `("Dave", "LEADS", "Other")` က object မတူသောကြောင့် မပါပါ။
+အလွတ် list `[]` ရလျှင်လည်း ရသည် —
 
 ```python
 edges = [("Alice", "MANAGES", "Payments Squad")]
@@ -374,10 +374,10 @@ DELETE_EDGE
 ('Carol', 'LEADS', 'Payments Squad')
 ```
 
-`("DELETE_EDGE",)` မှာ comma ပါတာကို သတိထားပါ — comma မပါရင် `("DELETE_EDGE")`
-သည် tuple မဟုတ်ဘဲ **string သက်သက်** ဖြစ်ပါတယ်။ `+` က tuple နှစ်ခုကို
-**ဆက်စပ်** ပေးလို့ `("DELETE_EDGE", "Carol", "LEADS", "Payments Squad")`
-၄ လုံး tuple ရပါတယ်။
+`("DELETE_EDGE",)` တွင် comma ပါခြင်းကို သတိထားပါ — comma မပါလျှင် `("DELETE_EDGE")`
+သည် tuple မဟုတ်ဘဲ **string သက်သက်** ဖြစ်သည်။ `+` က tuple နှစ်ခုကို
+**ဆက်စပ်** ပေးသဖြင့် `("DELETE_EDGE", "Carol", "LEADS", "Payments Squad")`
+၄ လုံး tuple ရသည်။
 
 ```python
 print(("DELETE_EDGE")[0])
@@ -461,7 +461,7 @@ Output —
 base signature=5354f4bd285ccbb7 -> updated signature=94ac803b9cd59a9f
 ```
 
-Operation သုံးခု ထွက်ပါတယ် —
+Operation သုံးခု ထွက်သည် —
 
 | အစဉ် | Op | အကြောင်းရင်း |
 | --- | --- | --- |
@@ -470,8 +470,8 @@ Operation သုံးခု ထွက်ပါတယ် —
 | 3 | `ADD_EDGE Dave LEADS Payments Squad` | edge အသစ် ထည့် |
 
 `" ".join(str(part) for part in op)` က tuple ထဲက item တိုင်းကို string အဖြစ်
-ပြောင်းပြီး space နဲ့ ဆက်ပါတယ်။ `str(part)` မလိုဘဲ `" ".join(op)` ရေးရင် item များ
-string မဟုတ်လို့ `TypeError` ဖြစ်ပါတယ်။
+ပြောင်းပြီး space နှင့် ဆက်သည်။ `str(part)` မလိုဘဲ `" ".join(op)` ရေးလျှင် item များ
+string မဟုတ်သောကြောင့် `TypeError` ဖြစ်သည်။
 
 ```python
 print(" ".join(str(part) for part in ("ADD_NODE", "Dave")))
@@ -546,10 +546,10 @@ Output —
 True
 ```
 
-Document တူတူကို ဒုတိယအကြိမ် ingest လုပ်ရင် triple က ရှိပြီးသားဖြစ်လို့ `NOOP` **သာ**
-ထွက်ပါတယ်။ Graph မပြောင်းလို့ signature လည်း **တူညီ** နေပါတယ်။ ဒါက
+Document တူတူကို ဒုတိယအကြိမ် ingest လုပ်လျှင် triple က ရှိပြီးသား ဖြစ်သောကြောင့် `NOOP` **သာ**
+ထွက်သည်။ Graph မပြောင်းသောကြောင့် signature လည်း **တူညီ** နေသည်။ ၎င်းသည်
 **idempotency** ၏ အထောက်အထားပါ — operation တိုင်းကို diff အဖြစ် ဖော်ခြင်းဖြင့်
-ရရှိပါတယ်။
+ရရှိသည်။
 
 ---
 
@@ -562,7 +562,7 @@ Document တူတူကို ဒုတိယအကြိမ် ingest လု�
 | `("X","LEADS","Y")` | graph အလွတ် | `ADD_NODE X`၊ `ADD_NODE Y`၊ `ADD_EDGE X LEADS Y` |
 | `("A","FRIEND","B")` | `("A","FRIEND","B")` ရှိပြီးသား | `NOOP` |
 
-`FRIEND` က `SINGLE_VALUED` မဟုတ်လို့ `ADD_EDGE` လုပ်တဲ့အခါ အဟောင်း မဖယ်ပါ။
+`FRIEND` က `SINGLE_VALUED` မဟုတ်သောကြောင့် `ADD_EDGE` လုပ်သည့်အခါ အဟောင်း မဖယ်ပါ။
 
 ---
 
@@ -651,8 +651,8 @@ idempotent: True
 | Signature တကယ် ပြောင်း | `after != before` | `True` |
 
 Node တူညီသော Relationship နှစ်ခု ဆက်ရှိနေပါက \"ဘယ်သူက Leads\" ဆိုသည့်
-question သည် အဖြေနှစ်ခု ရနိုင်ပြီး generator သည် မှားနိုင်ပါတယ်။ ထို့ကြောင့်
-single-valued Relationship ကို အဟောင်း ဖယ်ရှားရပါတယ်။
+question သည် အဖြေနှစ်ခု ရနိုင်ပြီး generator သည် မှားနိုင်သည်။ ထို့ကြောင့်
+single-valued Relationship ကို အဟောင်း ဖယ်ရှားရသည်။
 
 ---
 
@@ -696,21 +696,21 @@ print(ops)
 **အဖြေ — 2. `[("ADD_NODE", "Alice"), ("ADD_EDGE", "Alice", "MANAGES", "Payments Squad")]`**
 
 အကြောင်းရင်း — `Alice` က `nodes` တွင် မရှိသဖြင့် `ADD_NODE Alice` ထွက်သည်။
-`Payments Squad` က ရှိပြီးသားမို့ ကျော်သည်။ `new_edge` က `edges` တွင် မရှိသဖြင့်
+`Payments Squad` က ရှိပြီးသားဖြစ်သောကြောင့် ကျော်သည်။ `new_edge` က `edges` တွင် မရှိသဖြင့်
 `NOOP` မဟုတ်ပါ။
 
 အဓိက — `stale` filter က `e[1] == "MANAGES" and e[2] == "Payments Squad"` ဖြစ်သည်။
-လက်ရှိ edge က `("Carol", "LEADS", "Payments Squad")` ဖြစ်လို့ `e[1]` က `"LEADS"` —
+လက်ရှိ edge က `("Carol", "LEADS", "Payments Squad")` ဖြစ်သောကြောင့် `e[1]` က `"LEADS"` —
 `"MANAGES"` နှင့် မကိုက်ညီပါ။ ထို့ကြောင့် `stale` က အလွတ် `[]` ဖြစ်ပြီး
 `DELETE_EDGE` **မထွက်** ပါ။ ဆန့်ကျင်ဘက် relation ကို ရှာသဖြင့် Carol မဖယ်ခံရပါ —
-graph တွင် `MANAGES` နှင့် `LEADS` သည် relation မတူလို့ နှစ်ခုလုံး ဆက်ရှိသည်။
+graph တွင် `MANAGES` နှင့် `LEADS` သည် relation မတူသောကြောင့် နှစ်ခုလုံး ဆက်ရှိသည်။
 
 </details>
 
 ---
 
 **အဓိက မှတ်ထားရန်** — Idempotency သည် `MERGE` ကို သုံးခြင်းဖြင့် အလိုအလျောက်
-မရနိုင်ဘဲ၊ operation တိုင်းကို diff အဖြစ် ဖော်ခြင်းဖြင့် ရပါတယ်။ Signature-based
-verification သည် re-ingestion ကြောင့် graph မပြောင်းကြောင်း test အတွက် တိကျတဲ့
-အထောက်အထား ဖြစ်ပါတယ်။ Set display order က run တိုင်း ကွဲနိုင်လို့ output မှာ
-`sorted()` ဖြင့် ပြသရန် လိုပါတယ်။
+မရနိုင်ဘဲ၊ operation တိုင်းကို diff အဖြစ် ဖော်ခြင်းဖြင့် ရသည်။ Signature-based
+verification သည် re-ingestion ကြောင့် graph မပြောင်းကြောင်း test အတွက် တိကျသော
+အထောက်အထား ဖြစ်သည်။ Set display order က run တိုင်း ကွဲနိုင်သောကြောင့် output တွင်
+`sorted()` ဖြင့် ပြသရန် လိုအပ်သည်။

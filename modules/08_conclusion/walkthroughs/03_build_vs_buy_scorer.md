@@ -7,10 +7,10 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-GraphRAG ကို **ကိုယ်တိုင် build** မလား၊ **managed service** ကို **buy** မလား။
-ဒီမေးခွန်းကို ခံစားချက်နဲ့ ဖြေလို့ မရပါ။ Criteria တိုင်းကို 0–5 scale ဖြင့် score
+GraphRAG ကို **ကိုယ်တိုင် build** မည်လား၊ **managed service** ကို **buy** မည်လား။
+ဤမေးခွန်းကို ခံစားချက်နှင့် ဖြေ၍ မရပါ။ Criteria တိုင်းကို 0–5 scale ဖြင့် score
 ပေးပြီး၊ အဖွဲ့အစည်း အတွက် အရေးကြီးမှုကို **weight** အဖြစ် သတ်မှတ်ပြီးမှ
-weighted total ကို နှိုင်းယှဉ်ရပါတယ်။
+weighted total ကို နှိုင်းယှဉ်ရသည်။
 
 ```text
 criteria tိုင်း: weight (0..1) x score (0..5) = weighted term
@@ -21,10 +21,10 @@ criteria tိုင်း: weight (0..1) x score (0..5) = weighted term
                      score_build > score_buy ? "build" : "buy"
 ```
 
-အဓိက အချက်က — **weight ပြောင်းလိုက်ရင် ဆုံးဖြတ်ချက် ပြောင်းနိုင်သည်**။ ဒါကြောင့်
-\"GraphRAG ကို build လုပ်သင့်သည်\" ဆိုတဲ့ universal အဖြေ မရှိပါ။
+အဓိက အချက်က — **weight ပြောင်းလိုက်လျှင် ဆုံးဖြတ်ချက် ပြောင်းနိုင်သည်**။ ထို့ကြောင့်
+\"GraphRAG ကို build လုပ်သင့်သည်\" ဆိုသည့် universal အဖြေ မရှိပါ။
 
-ဒီ Exercise မှာ လေ့လာရမယ့် Python concepts —
+ဤ Exercise တွင် လေ့လာရမည့် Python concepts —
 
 - `OrderedDict` နှင့် criteria စာရင်း
 - `sum()` — list နှင့် **generator expression**
@@ -79,13 +79,13 @@ Output —
 5.0
 ```
 
-Dict သုံးခုလုံးမှာ **key ငါးခု တူညီ** ပါတယ် — criteria အမည်တူကို ကိုးကားလို့ပါ။
-Key တူညီတာက အရေးကြီးပါတယ် — `weighted_score` က `scores[key]` လို့ key ဖြင့်
-တွဲဖတ်လို့ပါ။
+Dict သုံးခုလုံးတွင် **key ငါးခု တူညီ** သည် — criteria အမည်တူကို ကိုးကားသောကြောင့် ဖြစ်သည်။
+Key တူညီခြင်းသည် အရေးကြီးသည် — `weighted_score` က `scores[key]` အနေဖြင့် key ဖြင့်
+တွဲဖတ်နိုင်သောကြောင့် ဖြစ်သည်။
 
 `BUILD_VS_BUY_WEIGHTS` က criteria တိုင်း၏ **အလေးချိန်** ဖြစ်ပြီး ပေါင်းလဒ်က
-`1.0` ဖြစ်ရပါတယ် (normalized weights)။ `BUILD_SCORES` နဲ့ `BUY_SCORES` က
-option နှစ်ခုအတွက် **0–5 score** ဖြစ်ပါတယ်။
+`1.0` ဖြစ်ရသည် (normalized weights)။ `BUILD_SCORES` နှင့် `BUY_SCORES` က
+option နှစ်ခုအတွက် **0–5 score** ဖြစ်သည်။
 
 ```python
 print(BUILD_VS_BUY_WEIGHTS["engineering_capacity"])
@@ -101,14 +101,14 @@ Output —
 5.0
 ```
 
-ဒီဇယားက ဆန့်ကျင်ဘက် ဖြစ်ပါတယ် — build က engineering capacity နည်း (`2.0`)၊
-buy က မြင့် (`5.0`)။ Managed service က engineering ကို အစားထိုးပေးလို့ပါ။
+ဤဇယားက ဆန့်ကျင်ဘက် ဖြစ်သည် — build က engineering capacity နည်း (`2.0`)၊
+buy က မြင့် (`5.0`)။ Managed service က engineering ကို အစားထိုးပေးသောကြောင့် ဖြစ်သည်။
 
 ---
 
 ## 2. `sum()` — List နှင့် Generator ဖြင့်
 
-`sum(iterable)` က item များကို ပေါင်းပါတယ်။
+`sum(iterable)` က item များကို ပေါင်းသည်။
 
 ```python
 numbers = [1, 2, 3, 4]
@@ -129,7 +129,7 @@ Output —
 - ဒုတိယလိုင်း — **generator expression** `(x * 2 for x in numbers)` ကို ပေါင်း။
 - တတိယလိုင်း — အလွတ် iterable အတွက် `0` ပြန်သည် (ပေါင်းစရာ မရှိ)။
 
-Weight များ၏ ပေါင်းလဒ် စစ်တဲ့အခါ `dict.values()` ကို သုံးပါတယ်။
+Weight များ၏ ပေါင်းလဒ် စစ်သည့်အခါ `dict.values()` ကို သုံးသည်။
 
 ```python
 from collections import OrderedDict
@@ -146,8 +146,8 @@ Output —
 True
 ```
 
-`weights.values()` က value များ (`0.25, 0.20, …`) ကို ပြန်ပါတယ်။ ပေါင်းလဒ်က `1.0`
-တိတိကျကျ ရပါတယ်။
+`weights.values()` က value များ (`0.25, 0.20, …`) ကို ပြန်သည်။ ပေါင်းလဒ်က `1.0`
+တိတိကျကျ ရသည်။
 
 ---
 
@@ -199,10 +199,10 @@ total = 3.450
 | engineering_capacity | 0.20 | 2.0 | 0.4000 |
 | **total (build)** | | | **3.450** |
 
-`weights.items()` က `(key, value)` tuple များကို ပြန်ပါတယ်။ `for key, weight in ...`
-လို့ tuple unpacking နဲ့ ခွဲယူပါတယ်။ `total += term` က running sum ဖြစ်ပါတယ်။
+`weights.items()` က `(key, value)` tuple များကို ပြန်သည်။ `for key, weight in ...`
+ဟူ၍ tuple unpacking ဖြင့် ခွဲယူသည်။ `total += term` က running sum ဖြစ်သည်။
 
-Function အနေဖြင့် ပြန်ရေးရင် **generator expression** ဖြင့် တစ်လိုင်းတည်း —
+Function အနေဖြင့် ပြန်ရေးလျှင် **generator expression** ဖြင့် တစ်လိုင်းတည်း —
 `sum(scores[key] * weight for key, weight in weights.items())`။
 
 ---
@@ -235,16 +235,16 @@ Output —
 AssertionError: weights must sum to 1.0
 ```
 
-`assert condition, message` က `condition` မှန်ရင် ဘာမှ မလုပ်ဘဲ ဆက်၊ မှားရင်
-`AssertionError` ကို `message` နှင့်တကွ ပစ်ပါတယ်။ ဒီနေရာမှာ weight များ ပေါင်းလဒ်က
-`1.0` မဖြစ်ရင် **program ကို ရပ်တန့်** စေပါတယ်။
+`assert condition, message` က `condition` မှန်လျှင် ဘာမှ မလုပ်ဘဲ ဆက်၊ မှားလျှင်
+`AssertionError` ကို `message` နှင့်တကွ ပစ်သည်။ ဤနေရာတွင် weight များ ပေါင်းလဒ်က
+`1.0` မဖြစ်လျှင် **program ကို ရပ်တန့်** စေသည်။
 
 `good` အတွက် term များ — `1.0 * 0.5 = 0.5`၊ `1.0 * 0.5 = 0.5`၊ ပေါင်းလဒ် `1.0`။
-`bad` အတွက် ပေါင်းလဒ်က `0.9` ဖြစ်လို့ `abs(0.9 - 1.0) = 0.1 > 1e-9` အမှန် ဖြစ်ပြီး
-assert က ကျပါတယ်။
+`bad` အတွက် ပေါင်းလဒ်က `0.9` ဖြစ်သောကြောင့် `abs(0.9 - 1.0) = 0.1 > 1e-9` အမှန် ဖြစ်ပြီး
+assert က ကျသည်။
 
-> `assert` ကို၍ စစ်ဆေးချက်များ သည် **developer အတွက်** ဖြစ်သည်။ Production မှာ
-> user input အတွက် `assert` မသုံးရပါ — `python -O` flag ဖြင့် run ရင် `assert` များ
+> `assert` ဖြင့် ပြုလုပ်သော စစ်ဆေးချက်များသည် **developer အတွက်** ဖြစ်သည်။ Production တွင်
+> user input အတွက် `assert` မသုံးရပါ — `python -O` flag ဖြင့် run လျှင် `assert` များ
 > ကို Python က ကျော်လိုက်သည်။
 
 ---
@@ -298,8 +298,8 @@ build 3.450 3.350
 ### 5.1 Default parameter
 
 `def build_vs_buy(weights, build_scores=BUILD_SCORES, buy_scores=BUY_SCORES):`
-တွင် `build_scores` နဲ့ `buy_scores` က **default value** ရှိပါတယ်။ ဒါကြောင့်
-`build_vs_buy(weights)` လို့ ခေါ်ရင် default score များကို သုံးပါတယ်။
+တွင် `build_scores` နှင့် `buy_scores` က **default value** ရှိသည်။ ထို့ကြောင့်
+`build_vs_buy(weights)` ဟု ခေါ်လျှင် default score များကို သုံးသည်။
 
 ```python
 def greet(name, greeting="Hello"):
@@ -319,8 +319,8 @@ Hi Bob
 ### 5.2 Conditional expression
 
 `decision = "build" if score_build > score_buy else "buy"` က **conditional expression**
-(traditional term — ternary) ဖြစ်ပါတယ်။ `X if condition else Y` ပုံစံမို့
-`if/else` block ကို တစ်လိုင်းတည်း ရေးတာပါ။
+(traditional term — ternary) ဖြစ်သည်။ `X if condition else Y` ပုံစံဖြစ်သောကြောင့်
+`if/else` block ကို တစ်လိုင်းတည်း ရေးခြင်း ဖြစ်သည်။
 
 ```python
 print("build" if 3.45 > 3.35 else "buy")
@@ -336,13 +336,13 @@ buy
 buy
 ```
 
-တတိယလိုင်းက `3.5 > 3.5` က `False` ဖြစ်လို့ `"buy"` ရပါတယ်။ Code ထဲမှာ `>` သုံးသဖြင့်
-**score တူညီပါက `buy` ကို ရွေး**ပါတယ်။ ဒါက deterministic tie-breaking ဖြစ်ပါတယ် —
-ဒါမှ rerun တိုင်း output တူမှာပါ။
+တတိယလိုင်းက `3.5 > 3.5` က `False` ဖြစ်သောကြောင့် `"buy"` ရသည်။ Code ထဲတွင် `>` သုံးသဖြင့်
+**score တူညီပါက `buy` ကို ရွေး**သည်။ ၎င်းသည် deterministic tie-breaking ဖြစ်သည် —
+ထိုမှသာ rerun တိုင်း output တူညီမည် ဖြစ်သည်။
 
 ### 5.3 Tuple return နှင့် unpacking
 
-`return decision, score_build, score_buy` က tuple သုံးလုံး ပြန်ပါတယ်။
+`return decision, score_build, score_buy` က tuple သုံးလုံး ပြန်သည်။
 `decision, score_build, score_buy = build_vs_buy(...)` က unpacking ပါ။
 
 ```python
@@ -416,9 +416,9 @@ summary: build=3.450 buy=3.350 winner=build
 | engineering_capacity | 0.4000 | 1.0000 | buy |
 | **total** | **3.450** | **3.350** | **build** |
 
-`buy` က criteria ၂ ခုတွင် မြင့်ပေမဲ့ total က `3.350` ဖြစ်လို့ **ရှုံး**ပါတယ်။
-`build` က total `3.450` ဖြင့် အနိုင်ရပါတယ်။ ရှုံးတဲ့ option ၏ score ကို ပြထားတာက
-ဆုံးဖြတ်ချက်၏ **margin** (`0.100`) ကို မြင်စေပါတယ်။
+`buy` က criteria ၂ ခုတွင် မြင့်သော်လည်း total က `3.350` ဖြစ်သောကြောင့် **ရှုံး**သည်။
+`build` က total `3.450` ဖြင့် အနိုင်ရသည်။ ရှုံးသော option ၏ score ကို ပြထားခြင်းသည်
+ဆုံးဖြတ်ချက်၏ **margin** (`0.100`) ကို မြင်စေသည်။
 
 ---
 
@@ -459,24 +459,24 @@ summary: build=3.050 buy=3.800 winner=buy
 ```
 
 `time_to_first_value` weight ကို `0.25` မှ `0.40` သို့ တင်လိုက်ခြင်းဖြင့် —
-build `3.450 → 3.050` ကျပြီး buy `3.350 → 3.800` တက်ပါတယ်။ ဘာကြောင့်လဲ —
-`time_to_first_value` မှာ buy ၏ score (`5.0`) က build (`2.0`) ထက် အများကြီး မြင့်လို့
-အလေးချိန် တင်လိုက်ရင် buy က အကျိုးအမြတ် ပိုရပါတယ်။
+build `3.450 → 3.050` ကျပြီး buy `3.350 → 3.800` တက်သည်။ အဘယ်ကြောင့်နည်း —
+`time_to_first_value` တွင် buy ၏ score (`5.0`) က build (`2.0`) ထက် အများကြီး မြင့်သောကြောင့်
+အလေးချိန် တင်လိုက်လျှင် buy က အကျိုးအမြတ် ပိုရသည်။
 
 | Weight set | score_build | score_buy | winner |
 | --- | --- | --- | --- |
 | default (`time_to_first_value=0.25`) | `3.450` | `3.350` | build |
 | time-first (`time_to_first_value=0.40`) | `3.050` | `3.800` | buy |
 
-ဒီဇယားက Exercise ၏ အဓိက ရလဒ်ပါ — **weight sensitivity**။ Weight က
+ဤဇယားက Exercise ၏ အဓိက ရလဒ်ပါ — **weight sensitivity**။ Weight က
 အဖွဲ့အစည်း၏ ဦးစားပေးမှုကို ဖော်ပြသဖြင့်၊ weight ကို ရှင်းရှင်းလင်းလင်း
-ညှိနှိုင်းပြီးမှ ဆုံးဖြတ်ရပါတယ်။
+ညှိနှိုင်းပြီးမှ ဆုံးဖြတ်ရသည်။
 
 ---
 
 ## 8. `zip()` — Dict နှစ်ခု တွဲခြင်း
 
-`zip(a, b)` က iterable နှစ်ခုကို item တစ်လုံးချင်း တွဲပါတယ်။
+`zip(a, b)` က iterable နှစ်ခုကို item တစ်လုံးချင်း တွဲသည်။
 
 ```python
 from collections import OrderedDict
@@ -495,8 +495,8 @@ Output —
 [(2.0, 0.25), (5.0, 0.2), (4.0, 0.2)]
 ```
 
-Dict ကို `zip` ထဲ ထည့်ရင် **key** များကို တွဲပါတယ် (dict က key အပေါ် iterate လုပ်လို့)။
-`.values()` ဖြင့် တွဲရင် `(2.0, 0.25)` လို score-weight အတွဲ ရပါတယ်။
+Dict ကို `zip` ထဲ ထည့်လျှင် **key** များကို တွဲသည် (dict က key အပေါ် iterate လုပ်သောကြောင့်)။
+`.values()` ဖြင့် တွဲလျှင် `(2.0, 0.25)` လို score-weight အတွဲ ရသည်။
 
 ```python
 for score, weight in zip([2.0, 5.0, 4.0], [0.25, 0.20, 0.20]):
@@ -511,7 +511,7 @@ Output —
 4.0 x 0.20 = 0.8000
 ```
 
-`zip` ဖြင့် weight နဲ့ score ကို တွဲပြီး term များ ထုတ်နိုင်ပါတယ်။
+`zip` ဖြင့် weight နှင့် score ကို တွဲပြီး term များ ထုတ်နိုင်သည်။
 
 ---
 
@@ -600,9 +600,9 @@ Output —
 | Time-first score | `score_build2=3.05, score_buy2=3.80` | `assert` အောင်သည် |
 | Weight ပေါင်းလဒ် | `sum(weights.values()) == 1.0` | `True` |
 
-ဒီဇယားက ဆုံးဖြတ်ချက် နှစ်ခုလုံးကို စစ်ဆေးပြပါတယ်။ Weight က `1.0` ဖြစ်ရမည်ဆိုတဲ့
-စည်းမျဉ်းကို `assert` က ကာကွယ်ပါတယ် — weight များ မှားယွင်းပေါင်းမိရင် score က
-scale ပြောင်းသွားပြီး ဆုံးဖြတ်ချက် မှားနိုင်ပါတယ်။
+ဤဇယားက ဆုံးဖြတ်ချက် နှစ်ခုလုံးကို စစ်ဆေးပြသည်။ Weight က `1.0` ဖြစ်ရမည်ဆိုသည့်
+စည်းမျဉ်းကို `assert` က ကာကွယ်သည် — weight များ မှားယွင်းပေါင်းမိလျှင် score က
+scale ပြောင်းသွားပြီး ဆုံးဖြတ်ချက် မှားနိုင်သည်။
 
 ---
 
@@ -626,8 +626,8 @@ score_buy = weighted_score(buy, weights)
 print("%.3f %.3f %s" % (score_build, score_buy, "build" if score_build > score_buy else "buy"))
 ```
 
-1. `3.000 3.000 build` — weight များတူလို့
-2. `3.000 3.000 buy` — tie ဖြစ်လို့ `else` branch
+1. `3.000 3.000 build` — weight များ တူညီသောကြောင့်
+2. `3.000 3.000 buy` — tie ဖြစ်သောကြောင့် `else` branch
 3. `1.000 5.000 build` — score တိုက်ရိုက်
 4. `6.000 6.000 buy` — sum မှား
 

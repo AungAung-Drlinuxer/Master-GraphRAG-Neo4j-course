@@ -7,9 +7,9 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-GraphRAG pipeline တစ်ခုကို production မှာ run မလုပ်မီ \"ဘယ်လောက် ကုန်မလဲ\" နဲ့
-\"ဘယ်လောက် ကြာမလဲ\" ကို **ကြိုတင် ခန့်မှန်း** နိုင်ရပါတယ်။ Corpus အရွယ်အစားနဲ့
-LLM unit price ကို သိရင် Cost ကို linear formula ဖြင့် တွက်နိုင်ပါတယ်။
+GraphRAG pipeline တစ်ခုကို production တွင် run မလုပ်မီ \"မည်မျှ ကုန်ကျမည်နည်း\" နှင့်
+\"မည်မျှ ကြာမည်နည်း\" ကို **ကြိုတင် ခန့်မှန်း** နိုင်ရသည်။ Corpus အရွယ်အစားနှင့်
+LLM unit price ကို သိလျှင် Cost ကို linear formula ဖြင့် တွက်နိုင်သည်။
 
 ```text
 corpus (chars)
@@ -20,12 +20,12 @@ chunks  ---> x (prompt_overhead + chunk_tokens) ---> input_tokens ---> x price_i
    +--------> x triples_per_chunk x tokens_per_triple --> output_tokens --> x price_out -+
 ```
 
-Latency ကို နှစ်ပိုင်း ခွဲပါတယ် —
+Latency ကို နှစ်ပိုင်း ခွဲသည် —
 
 - **ingestion latency** — chunk တိုင်း LLM ကို ခေါ်ခြင်း၊ worker အရေအတွက်ဖြင့် ချုံ့နိုင်သည်
 - **query latency** — graph traversal (ms scale) + generation (token အရေအတွက်ဖြင့် လွှမ်းမိုး)
 
-ဒီ Exercise မှာ လေ့လာရမယ့် Python concepts —
+ဤ Exercise တွင် လေ့လာရမည့် Python concepts —
 
 - `import math` နှင့် `math.ceil()`
 - `max(a, b)` ဖြင့် အနိမ့်ဆုံးတန်ဖိုး သတ်မှတ်ခြင်း
@@ -39,7 +39,7 @@ Latency ကို နှစ်ပိုင်း ခွဲပါတယ် —
 
 ## 1. `math.ceil()` — အပေါ်သို့ ကိန်းပြည့်ဖြစ်စေခြင်း
 
-`math.ceil(x)` က `x` ကို **အပေါ်သို့** အနီးဆုံး ကိန်းပြည့်ဖြစ်စေပါတယ်။
+`math.ceil(x)` က `x` ကို **အပေါ်သို့** အနီးဆုံး ကိန်းပြည့်ဖြစ်စေသည်။
 
 ```python
 import math
@@ -66,10 +66,10 @@ Output —
 | `4.0` | `4` | ပြောင်းလဲမှု မရှိ |
 | `0.1` | `1` | `0` မဟုတ်ဘဲ `1` |
 
-Chunk အရေအတွက်တွက်တဲ့အခါ `ceil` က မရှိမဖြစ် လိုပါတယ်။ စာသား ၄၅၀၀ လုံးကို
-chunk ၂၀၀၀ လုံးစီ ခွဲရင် `2.25` ရပါတယ် — ဒါပေမဲ့ chunk အရေအတွက်က
-**ကိန်းပြည့်** ဖြစ်ရမှာမို့ `3` လို့ တွက်ရပါတယ်။ `round()` က အနီးဆုံးကို ယူလို့
-ဒီနေရာမှာ **မသုံးရ** ပါ။
+Chunk အရေအတွက်တွက်သည့်အခါ `ceil` က မရှိမဖြစ် လိုအပ်သည်။ စာသား ၄၅၀၀ လုံးကို
+chunk ၂၀၀၀ လုံးစီ ခွဲလျှင် `2.25` ရသည် — သို့သော် chunk အရေအတွက်က
+**ကိန်းပြည့်** ဖြစ်ရန် လိုအပ်သောကြောင့် `3` ဟု တွက်ရသည်။ `round()` က အနီးဆုံးကို ယူသောကြောင့်
+ဤနေရာတွင် **မသုံးရ** ပါ။
 
 ---
 
@@ -91,10 +91,10 @@ Output —
 1
 ```
 
-`max(1, ...)` က ရလဒ်ကို **အနည်းဆုံး ၁** ဖြစ်စေပါတယ်။ Corpus အလွတ်ဖြစ်ရင်
-`ceil(0 / 2000)` က `0` ရပြီး chunk သုည ဖြစ်လို့ နောက်ပိုင်း `chunks / workers`
-တွက်တဲ့အခါ သုညနှင့် စားခြင်းကို ရှောင်လို့ ရပါတယ်။ `max(a, b)` က တန်ဖိုးနှစ်ခုထဲက
-**ကြီးတာ** ကို ပြန်ပါတယ်။
+`max(1, ...)` က ရလဒ်ကို **အနည်းဆုံး ၁** ဖြစ်စေသည်။ Corpus အလွတ်ဖြစ်လျှင်
+`ceil(0 / 2000)` က `0` ရပြီး chunk သုည ဖြစ်သောကြောင့် နောက်ပိုင်း `chunks / workers`
+တွက်သည့်အခါ သုညနှင့် စားခြင်းကို ရှောင်၍ ရသည်။ `max(a, b)` က တန်ဖိုးနှစ်ခုထဲက
+**ကြီးသောတန်ဖိုး**ကို ပြန်သည်။
 
 ```python
 print(max(3, 8))
@@ -114,9 +114,9 @@ Output —
 
 ## 3. `chunk_tokens` — chunk တစ်ခု၏ token ခန့်မှန်း
 
-`CHARS_PER_TOKEN = 4.0` က **character ၄ လုံးလျှင် token ၁ လုံး** လို့ ယူဆတဲ့
-rule of thumb ပါ။ ဒါက course example ဖြစ်ပါတယ် — tokenizer တစ်ခုချင်းစီ အလိုက်
-အချိုးပြောင်းနိုင်ပါတယ်။
+`CHARS_PER_TOKEN = 4.0` က **character ၄ လုံးလျှင် token ၁ လုံး** ဟု ယူဆသော
+rule of thumb ပါ။ ၎င်းသည် course example ဖြစ်သည် — tokenizer တစ်ခုချင်းစီ အလိုက်
+အချိုးပြောင်းနိုင်သည်။
 
 ```python
 import math
@@ -133,8 +133,8 @@ Output —
 488
 ```
 
-chunk ၂၀၀၀ လုံး၏ token ခန့်မှန်းက `500` ဖြစ်ပါတယ်။ `1950 / 4.0 = 487.5` ကို
-`ceil` လိုက်လို့ `488` ရပါတယ်။
+chunk ၂၀၀၀ လုံး၏ token ခန့်မှန်းက `500` ဖြစ်သည်။ `1950 / 4.0 = 487.5` ကို
+`ceil` လိုက်သဖြင့် `488` ရသည်။
 
 ---
 
@@ -160,27 +160,27 @@ Output —
 5760
 ```
 
-**Input tokens** — chunk တိုင်းအတွက် prompt အညွှန်း (`300`) နဲ့ chunk ကိုယ်တိုင်
-(`500`) ကို ပေါင်းပြီး chunk အရေအတွက်နဲ့ မြှောက်ပါတယ် —
+**Input tokens** — chunk တိုင်းအတွက် prompt အညွှန်း (`300`) နှင့် chunk ကိုယ်တိုင်
+(`500`) ကို ပေါင်းပြီး chunk အရေအတွက်နှင့် မြှောက်သည် —
 
 - `300 + 500 = 800`
 - `800 * 24 = 19200`
 
 **Output tokens** — chunk တိုင်းမှ triple `8` ခု ထုတ်ပြီး၊ triple တိုင်းက token `30`
-ကုန်ပါတယ် —
+ကုန်သည် —
 
 - `8 * 30 = 240` (chunk တစ်ခုလျှင် output token)
 - `240 * 24 = 5760`
 
-`chunks * triples_per_chunk * tokens_per_triple` တွင် `*` က **ဘယ်မှ ညာ** အလုပ်လုပ်လို့
-`(chunks * triples_per_chunk) * tokens_per_triple` ဖြစ်ပါတယ်။ `240 * 24` လို ရလဒ်တူပါတယ်။
+`chunks * triples_per_chunk * tokens_per_triple` တွင် `*` က **ဘယ်မှ ညာ** အလုပ်လုပ်သဖြင့်
+`(chunks * triples_per_chunk) * tokens_per_triple` ဖြစ်သည်။ `240 * 24` လို ရလဒ်တူသည်။
 
 ---
 
 ## 5. `cost_usd` — Term တိုင်းကို ခွဲပြခြင်း
 
-Cost က input term နဲ့ output term နှစ်ခု ပေါင်းခြင်းပါ။ Term တိုင်းကို
-**သီးခြား** တွက်ပြပါမယ်။
+Cost က input term နှင့် output term နှစ်ခု ပေါင်းခြင်းပါ။ Term တိုင်းကို
+**သီးခြား** တွက်ပြပါမည်။
 
 ```python
 input_tokens = 19200
@@ -211,12 +211,12 @@ Output —
 | output term | `(5760 / 1000) * 1.5` = `5.76 * 1.5` | `8.6400` |
 | **cost_usd** | `9.6 + 8.64` | `18.2400` |
 
-`/1000.0` က token ကို \"per 1k token\" unit ဖြစ်စေပါတယ် — price တွေက **1k token
-လျှင်** သတ်မှတ်ထားလို့ပါ။
+`/1000.0` က token ကို \"per 1k token\" unit ဖြစ်စေသည် — price များက **1k token
+လျှင်** သတ်မှတ်ထားသောကြောင့် ဖြစ်သည်။
 
 ### Float သည် အတိအကျ မဟုတ်ပါ
 
-`18.24` ကို `repr()` နဲ့ ကြည့်ရင် အတိအကျ မဟုတ်တာ တွေ့ပါတယ်။
+`18.24` ကို `repr()` နှင့် ကြည့်လျှင် အတိအကျ မဟုတ်ခြင်းကို တွေ့ရသည်။
 
 ```python
 print(repr((19200 / 1000.0) * 0.5 + (5760 / 1000.0) * 1.5))
@@ -230,9 +230,9 @@ Output —
 18.2400
 ```
 
-Float က binary ဖြင့် သိမ်းလို့ ဒသမ တန်ဖိုးတိုင်းကို အတိအကျ မဖော်နိုင်ပါ။
-ဒါကြောင့် output မှာ format specifier (`%.4f`) နဲ့ **ပြသသည်**။ နှိုင်းယှဉ်တဲ့အခါလည်း
-`==` မသုံးဘဲ tolerance နဲ့ စစ်ပါတယ် (အောက် Section 9 တွင် ကြည့်ပါ)။
+Float က binary ဖြင့် သိမ်းသဖြင့် ဒသမ တန်ဖိုးတိုင်းကို အတိအကျ မဖော်နိုင်ပါ။
+ထို့ကြောင့် output တွင် format specifier (`%.4f`) နှင့် **ပြသသည်**။ နှိုင်းယှဉ်သည့်အခါလည်း
+`==` မသုံးဘဲ tolerance နှင့် စစ်သည် (အောက် Section 9 တွင် ကြည့်ပါ)။
 
 ---
 
@@ -261,7 +261,7 @@ Chunk တစ်ခုအတွက် —
 - **ပေါင်း** — `0.15 + 8.666667 = 8.816667` → `%.3f` ဖြင့် `8.817`
 
 `base_latency_s` က connection setup၊ prompt processing ကဲ့သို့ token အရေအတွက်နှင့်
-မတိုက်ရိုက်ဆိုင်တဲ့ အချိန် ဖြစ်ပါတယ်။
+မတိုက်ရိုက်ဆိုင်သော အချိန် ဖြစ်သည်။
 
 ---
 
@@ -293,10 +293,10 @@ Output —
 | parallel (4 workers) | `ceil(24/4) * 8.8166` = `6 * 8.8166` | `52.900` s |
 | parallel (8 workers) | `ceil(24/8) * 8.8166` = `3 * 8.8166` | `26.450` s |
 
-Parallel တွက်တဲ့အခါ `math.ceil(chunks / workers)` က **လှိုင်း (wave) အရေအတွက်**ကို
-ပေးပါတယ်။ chunk ၂၄ ခုကို worker ၄ ဦး ခွဲရင် လှိုင်း ၆ ခု ရပါတယ်။ Worker နှစ်ဆ
-တိုးလိုက်ရင် latency က ထက်ဝက် ကျပါတယ် — ဒီအချက်ကို Exercise မှာ `assert`
-ဖြင့် စစ်ပါတယ်။
+Parallel တွက်သည့်အခါ `math.ceil(chunks / workers)` က **လှိုင်း (wave) အရေအတွက်**ကို
+ပေးသည်။ chunk ၂၄ ခုကို worker ၄ ဦး ခွဲလျှင် လှိုင်း ၆ ခု ရသည်။ Worker နှစ်ဆ
+တိုးလိုက်လျှင် latency က ထက်ဝက် ကျသည် — ဤအချက်ကို Exercise တွင် `assert`
+ဖြင့် စစ်သည်။
 
 ```python
 print(52.9 / 2)
@@ -345,8 +345,8 @@ def cost_latency_model(corpus_chars, chunk_chars, prompt_overhead_tokens,
     }
 ```
 
-Function က **parameter ၁၀ လုံး** လက်ခံပြီး dict တစ်ခု ပြန်ပါတယ်။ Dict ပြန်တာက
-field များကို key ဖြင့် ဖတ်လို့ ဖြစ်ပါတယ် — positional tuple ပြန်ရင် ဖတ်ရ ခက်ပါတယ်။
+Function က **parameter ၁၀ လုံး** လက်ခံပြီး dict တစ်ခု ပြန်သည်။ Dict ပြန်ခြင်းသည်
+field များကို key ဖြင့် ဖတ်နိုင်သောကြောင့် ဖြစ်သည် — positional tuple ပြန်လျှင် ဖတ်ရ ခက်သည်။
 
 Return dict ထဲက key တိုင်းကို —
 
@@ -411,9 +411,9 @@ Output —
 18.2400
 ```
 
-`cost_latency_model(**config)` မှာ `**config` က dict ထဲက key-value တိုင်းကို
-`key=value` keyword argument အဖြစ် ဖြန့်ပေးပါတယ်။ `config["corpus_chars"] = 48000`
-ဖြစ်လို့ `corpus_chars=48000` လို့ ခေါ်တာနဲ့ အတူတူပါ။
+`cost_latency_model(**config)` တွင် `**config` က dict ထဲက key-value တိုင်းကို
+`key=value` keyword argument အဖြစ် ဖြန့်ပေးသည်။ `config["corpus_chars"] = 48000`
+ဖြစ်သောကြောင့် `corpus_chars=48000` ဟု ခေါ်ခြင်းနှင့် အတူတူ ဖြစ်သည်။
 
 ```python
 def show(a, b):
@@ -446,7 +446,7 @@ Output —
 ```
 
 `{**config, "workers": 8}` က `config` ကို **copy** ပြီး `workers` ကို `8` ဖြင့်
-အစားထိုးပါတယ်။ `config` ကိုယ်တိုင် မပြောင်းပါ — ဒါက **immutability** ကို ထိန်းပါတယ်။
+အစားထိုးသည်။ `config` ကိုယ်တိုင် မပြောင်းပါ — ၎င်းသည် **immutability** ကို ထိန်းသည်။
 
 ---
 
@@ -475,7 +475,7 @@ Output —
 ```
 
 Return က **tuple သုံးလုံး** — `(traversal_ms, generation_ms, total_ms)`။ Caller က
-`traversal_ms, generation_ms, total_ms = ...` လို့ tuple unpacking နဲ့ ခွဲယူပါတယ်။
+`traversal_ms, generation_ms, total_ms = ...` ဟူ၍ tuple unpacking ဖြင့် ခွဲယူသည်။
 
 | အပိုင်း | တွက်ပုံ | ရလဒ် |
 | --- | --- | --- |
@@ -484,10 +484,10 @@ Return က **tuple သုံးလုံး** — `(traversal_ms, generation_ms,
 | total | `4.4 + 2000.0` | `2004.40` ms |
 
 `4.0` က fixed base၊ node တိုင်း `0.05` ms၊ edge တိုင်း `0.02` ms — ဤတန်ဖိုးများက
-course example ဖြစ်ပါတယ်။ **Traversal က millisecond အနည်းငယ်သာ ကုန်ပြီး
-generation က second နှစ်ခု ကုန်သည်** — ဒါက အဓိက ရလဒ်ပါ။ Query latency ကို
-လျှော့ချင်ရင် context ကို ချုံ့ခြင်း (generation token လျှော့ခြင်း) က အကျိုးအမြတ်
-အများဆုံး ဖြစ်ပါတယ်။
+course example ဖြစ်သည်။ **Traversal က millisecond အနည်းငယ်သာ ကုန်ပြီး
+generation က second နှစ်ခု ကုန်သည်** — ၎င်းသည် အဓိက ရလဒ်ပါ။ Query latency ကို
+လျှော့ချင်လျှင် context ကို ချုံ့ခြင်း (generation token လျှော့ခြင်း) က အကျိုးအမြတ်
+အများဆုံး ဖြစ်သည်။
 
 ---
 
@@ -507,14 +507,14 @@ True
 0.30000000000000004
 ```
 
-`0.1 + 0.2` က `0.3` နဲ့ **တိတိကျကျ မညီ** ပါ။ ဒါကြောင့် code ထဲမှာ —
+`0.1 + 0.2` က `0.3` နှင့် **တိတိကျကျ မညီ** ပါ။ ထို့ကြောင့် code ထဲတွင် —
 
 ```python
 assert abs(sum(weights.values()) - 1.0) < 1e-9
 ```
 
-လို့ ရေးတာက `==` မသုံးဘဲ **tolerance** (`1e-9` = `0.000000001`) နဲ့ စစ်တာပါ။ Exercise 2
-မှာလည်း —
+ဟု ရေးခြင်းသည် `==` မသုံးဘဲ **tolerance** (`1e-9` = `0.000000001`) ဖြင့် စစ်ဆေးခြင်း ဖြစ်သည်။ Exercise 2
+တွင်လည်း —
 
 ```python
 bigger = {"cost_usd": 36.480000000000004}
@@ -528,7 +528,7 @@ Output —
 True
 ```
 
-Cost နှစ်ဆ ဖြစ်ကြောင်း float noise ရှိပေမဲ့ tolerance ဖြင့် စစ်နိုင်ပါတယ်။
+Cost နှစ်ဆ ဖြစ်ကြောင်း float noise ရှိသော်လည်း tolerance ဖြင့် စစ်နိုင်သည်။
 
 ---
 
@@ -616,10 +616,10 @@ corpus=48000 chars -> chunks=24
 
 ## 12. Rerun တစ်ခုတွင် ရလဒ် ကွာနိုင်သည့် အချက် — မရှိပါ
 
-ဤ Exercise ၏ output အားလုံးသည် **deterministic** ဖြစ်ပါတယ် — `random` မသုံးဘဲ
-formula သာ သုံးသဖြင့် rerun တိုင်း ထပ်တူ ရပါတယ်။ သတိထားရမည့် အချက်က float
+ဤ Exercise ၏ output အားလုံးသည် **deterministic** ဖြစ်သည် — `random` မသုံးဘဲ
+formula သာ သုံးသဖြင့် rerun တိုင်း ထပ်တူ ရသည်။ သတိထားရမည့် အချက်က float
 noise ကို **format specifier ဖြင့် ဖုံးထား** ရခြင်းပါ။ `%.4f` မပါဘဲ `print(base["cost_usd"])`
-လို့ ရေးရင် `18.240000000000002` လို ရှည်လျားတဲ့ output ကို တွေ့ရပါမယ်။
+ဟု ရေးလျှင် `18.240000000000002` လို ရှည်လျားသော output ကို တွေ့ရပါမည်။
 
 ---
 
@@ -634,9 +634,9 @@ noise ကို **format specifier ဖြင့် ဖုံးထား** ရ�
 | Query total < ingestion | `2004.4 < 211600` | `True` |
 | Query ကို generation လွှမ်း | `2000.0 > 4.4` | `True` |
 
-ဒီဇယားက **ဘယ် optimization က တန်ဖိုးရှိသည်** ဆိုတာကို ပြပါတယ်။ Traversal ကို
-optimize လုပ်ရင် millisecond အနည်းငယ်သာ ရပြီး၊ generation token (context size) ကို
-ချုံ့ရင် second အများအပြား ရနိုင်ပါတယ်။ Cost ကတော့ corpus size နှင့် linear ဆက်စပ်သဖြင့်
+ဤဇယားက **ဘယ် optimization က တန်ဖိုးရှိသည်** ဆိုသည်ကို ပြသည်။ Traversal ကို
+optimize လုပ်လျှင် millisecond အနည်းငယ်သာ ရပြီး၊ generation token (context size) ကို
+ချုံ့လျှင် second အများအပြား ရနိုင်သည်။ Cost မှာ corpus size နှင့် linear ဆက်စပ်သဖြင့်
 **ကြိုတင် ခန့်မှန်းနိုင်သည်**။
 
 ---
@@ -667,8 +667,8 @@ print(math.ceil(chunks / workers) * per_chunk_seconds)
 အကြောင်းရင်း — `24 / 5 = 4.8` ဖြစ်သည်။ `math.ceil(4.8) = 5` ရသည် (အပေါ်သို့
 ကိန်းပြည့်)။ ထို့ကြောင့် `5 * 10.0 = 50.0` ဖြစ်သည်။
 
-ရွေးချယ်စရာ ၁ ၏ `ceil(24/5) = 5` ကတော့ မှန်သည်၊ သို့သော် ရလဒ်ကို `40.0`
-လို့ ရေးထားသည်မှာ မှားသည် — `5 * 10 = 50` ဖြစ်သည်။ ရွေးချယ်စရာ ၂ က
+ရွေးချယ်စရာ ၁ ၏ `ceil(24/5) = 5` မှာ မှန်သည်၊ သို့သော် ရလဒ်ကို `40.0`
+ဟု ရေးထားခြင်းမှာ မှားသည် — `5 * 10 = 50` ဖြစ်သည်။ ရွေးချယ်စရာ ၂ က
 `ceil` ကို လုံးလုံး မသုံးဘဲ float ဖြင့် စားသဖြင့် မှားသည် — latency ကို
 လှိုင်း (wave) အရေအတွက်ဖြင့် တွက်ရသည်၊ chunk တိုင်း တစ်ပြိုင်နက် ပြီးမည် မဟုတ်ပါ။
 
@@ -680,5 +680,5 @@ print(math.ceil(chunks / workers) * per_chunk_seconds)
 သို့သော် query latency ကို generation token အရေအတွက်ဖြင့် ထိန်းရမည်။ Traversal
 ကို optimize လုပ်ရန် ကြိုးစားခြင်းသည် millisecond အနည်းငယ် ရရှိပြီး၊ context ကို
 ချုံ့ခြင်းက second များစွာ ရရှိသည်။ Formula ထဲက price နှင့် latency coefficient များက
-course example ဖြစ်သည် — production မှာ သင့် provider ၏ တကယ့် rate ဖြင့်
+course example ဖြစ်သည် — production တွင် သင့် provider ၏ တကယ့် rate ဖြင့်
 အစားထိုးရမည်။

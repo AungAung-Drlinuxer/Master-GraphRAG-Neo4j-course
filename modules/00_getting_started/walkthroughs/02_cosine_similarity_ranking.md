@@ -5,36 +5,36 @@
 
 ---
 
-ဒီ exercise မှာ Python ကို အသုံးပြုပြီး Query တစ်ခုနဲ့ အနီးစပ်ဆုံးတူညီတဲ့ text chunks တွေကို
-similarity score အလိုက် စီစဉ်ခြင်း ကို လေ့လာပါမယ်။
+ဤ exercise တွင် Python ကို အသုံးပြုပြီး Query တစ်ခုနှင့် အနီးစပ်ဆုံးတူညီသော text chunks တွေကို
+similarity score အလိုက် စီစဉ်ခြင်းကို လေ့လာပါမည်။
 
-ဒီနည်းလမ်းကို RAG (Retrieval-Augmented Generation) chatbot တွေမှာ အသုံးပြုပါတယ်။ ဥပမာ
-IT Help Chatbot မှာ user က Kubernetes အကြောင်း မေးတဲ့အခါ knowledge base ထဲက သက်ဆိုင်တဲ့
-document chunks တွေကို ရှာဖွေဖို့ အသုံးဝင်ပါတယ်။
+ဤနည်းလမ်းကို RAG (Retrieval-Augmented Generation) chatbot တွေတွင် အသုံးပြုသည်။ ဥပမာ
+IT Help Chatbot တွင် user က Kubernetes အကြောင်း မေးသည့်အခါ knowledge base ထဲက သက်ဆိုင်သော
+document chunks တွေကို ရှာဖွေရန် အသုံးဝင်သည်။
 
-ဒီ code မှာ အဓိကလေ့လာရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် အဓိကလေ့လာရမည့် Python concepts များသည် —
 
-- `import` နဲ့ `math` module
-- `def` နဲ့ function
+- `import` နှင့် `math` module
+- `def` နှင့် function
 - `if`၊ `raise`၊ `return`
 - `sum()`၊ `zip()`၊ `len()`
 - List comprehension
-- `lambda` နဲ့ `sort()`
-- `enumerate()` နဲ့ tuple unpacking
-- Cosine Similarity နဲ့ vector ranking
+- `lambda` နှင့် `sort()`
+- `enumerate()` နှင့် tuple unpacking
+- Cosine Similarity နှင့် vector ranking
 
 ---
 
-## 1. Cosine Similarity ဆိုတာဘာလဲ။
+## 1. Cosine Similarity ဟူသည် ဘာလဲ။
 
-Cosine Similarity ဆိုတာ vector နှစ်ခု၏ ဦးတည်ရာ (direction) ဘယ်လောက်တူညီသလဲဆိုတာ
-တိုင်းတာတဲ့ နည်းလမ်းတစ်ခုဖြစ်ပါတယ်။
+Cosine Similarity သည် vector နှစ်ခု၏ ဦးတည်ရာ (direction) မည်မျှ တူညီသည်ကို
+တိုင်းတာသည့် နည်းလမ်းတစ်ခုဖြစ်သည်။
 
-RAG system မှာ text ကို embedding model နဲ့ vector အဖြစ်ပြောင်းပြီး query vector နဲ့
-document chunk vector တို့၏ similarity ကို တွက်ချက်နိုင်ပါတယ်။
+RAG system တွင် text ကို embedding model နှင့် vector အဖြစ်ပြောင်းပြီး query vector နှင့်
+document chunk vector တို့၏ similarity ကို တွက်ချက်နိုင်သည်။
 
-Embedding model က Query နဲ့ chunks တွေကို vector ပြောင်းပေးပြီး Cosine Similarity က
-ဘယ် chunk တွေက query နဲ့ ပိုတူညီသလဲဆိုတာ အမှတ်ပေးပါတယ်။
+Embedding model က Query နှင့် chunks တွေကို vector ပြောင်းပေးပြီး Cosine Similarity က
+ဘယ် chunk တွေက query နှင့် ပိုတူညီသည်ကို အမှတ်ပေးသည်။
 
 Cosine Similarity ၏ formula က —
 
@@ -42,15 +42,15 @@ Cosine Similarity ၏ formula က —
 cosine(A, B) = (A · B) / (||A|| · ||B||)
 ```
 
-ဒီမှာ —
+ဤတွင် —
 
 - `A`, `B` — Vector နှစ်ခု
 - `A · B` — Dot product
 - `||A||`, `||B||` — Vector တစ်ခုစီ၏ magnitude (norm)
 
-ပုံမှန်အားဖြင့် non-zero vector တွေအတွက် score က `-1` နဲ့ `1` ကြားမှာ ရှိပါတယ်။ Score က `1` နဲ့
-နီးလေလေ direction ပိုတူလေလေ ဖြစ်ပါတယ်။ ဒီ exercise ထဲက vector တွေမှာ component အားလုံး
-non-negative ဖြစ်တဲ့အတွက် score တွေက `0` နဲ့ `1` ကြားမှာ ရှိပါမယ်။
+ပုံမှန်အားဖြင့် non-zero vector တွေအတွက် score က `-1` နှင့် `1` ကြားတွင် ရှိသည်။ Score က `1` နှင့်
+နီးလေလေ direction ပိုတူလေလေ ဖြစ်သည်။ ဤ exercise ထဲက vector တွေတွင် component အားလုံး
+non-negative ဖြစ်သည့်အတွက် score တွေက `0` နှင့် `1` ကြားတွင် ရှိပါမည်။
 
 ---
 
@@ -60,16 +60,16 @@ non-negative ဖြစ်တဲ့အတွက် score တွေက `0` နဲ�
 import math
 ```
 
-`import` က အခြား module တစ်ခုထဲက functions တွေကို အသုံးပြုနိုင်ဖို့ ထည့်သွင်းပေးတာပါ။
+`import` က အခြား module တစ်ခုထဲက functions တွေကို အသုံးပြုနိုင်ရန် ထည့်သွင်းပေးခြင်း ဖြစ်သည်။
 
-`math` ဟာ Python ၏ built-in standard library module ဖြစ်ပြီး သင်္ချာဆိုင်ရာ functions တွေ
-ပါဝင်ပါတယ်။ ဒီ exercise မှာ —
+`math` သည် Python ၏ built-in standard library module ဖြစ်ပြီး သင်္ချာဆိုင်ရာ functions တွေ
+ပါဝင်သည်။ ဤ exercise တွင် —
 
 ```python
 math.sqrt(...)
 ```
 
-ကို အသုံးပြုပါတယ်။ `math.sqrt()` က square root ကို တွက်ပေးပါတယ်။
+ကို အသုံးပြုသည်။ `math.sqrt()` က square root ကို တွက်ပေးသည်။
 
 ဥပမာ —
 
@@ -87,7 +87,7 @@ Output —
 3.0
 ```
 
-Vector norm တွက်တဲ့အခါ square root လိုအပ်တာကြောင့် `math.sqrt()` ကို အသုံးပြုထားပါတယ်။
+Vector norm တွက်သည့်အခါ square root လိုအပ်ခြင်းကြောင့် `math.sqrt()` ကို အသုံးပြုထားသည်။
 
 ---
 
@@ -97,7 +97,7 @@ Vector norm တွက်တဲ့အခါ square root လိုအပ်တာ�
 def cosine_similarity(left, right):
 ```
 
-ဒီမှာ `cosine_similarity` ဆိုတဲ့ function ကို သတ်မှတ်ထားပါတယ်။
+ဤတွင် `cosine_similarity` ဆိုသည့် function ကို သတ်မှတ်ထားသည်။
 
 - `left` — ပထမ vector
 - `right` — ဒုတိယ vector
@@ -109,7 +109,7 @@ left = [1, 2, 3]
 right = [4, 5, 6]
 ```
 
-ဒီ function က vector နှစ်ခုကို လက်ခံပြီး similarity score တစ်ခု ပြန်ပေးမှာ ဖြစ်ပါတယ်။
+ဤ function က vector နှစ်ခုကို လက်ခံပြီး similarity score တစ်ခု ပြန်ပေးမည်။
 
 ### Step 3.1 — Vector dimensions စစ်ဆေးခြင်း
 
@@ -118,7 +118,7 @@ if len(left) != len(right):
     raise ValueError("dimension mismatch")
 ```
 
-`len()` က list ထဲက elements အရေအတွက်ကို ပြန်ပေးပါတယ်။
+`len()` က list ထဲက elements အရေအတွက်ကို ပြန်ပေးသည်။
 
 ```python
 left = [1, 2, 3, 4]
@@ -135,21 +135,21 @@ Output —
 4
 ```
 
-Vector နှစ်ခုစလုံးမှာ dimensions ၄ ခုစီ ရှိပါတယ်။
+Vector နှစ်ခုစလုံးတွင် dimensions ၄ ခုစီ ရှိသည်။
 
-`!=` က မတူညီဘူးလို့ ဆိုလိုပါတယ်။ ဒါကြောင့် —
+`!=` က မတူညီပါဟု ဆိုလိုသည်။ ထို့ကြောင့် —
 
 ```python
 if len(left) != len(right):
 ```
 
-ဆိုတာ vector နှစ်ခု၏ dimensions မတူညီဘူးလားလို့ စစ်တာပါ။ မတူညီရင် —
+သည် vector နှစ်ခု၏ dimensions မတူညီပါသလားဟု စစ်ခြင်း ဖြစ်သည်။ မတူညီလျှင် —
 
 ```python
 raise ValueError("dimension mismatch")
 ```
 
-က `ValueError` exception ကို ဖြစ်စေပြီး function ကို ရပ်တန့်စေပါတယ်။
+က `ValueError` exception ကို ဖြစ်စေပြီး function ကို ရပ်တန့်စေသည်။
 
 ဥပမာ —
 
@@ -157,10 +157,10 @@ raise ValueError("dimension mismatch")
 cosine_similarity([1, 2, 3], [4, 5])
 ```
 
-ဒီ vector တွေမှာ dimensions မတူညီတဲ့အတွက် `ValueError: dimension mismatch` ဖြစ်ပါမယ်။
+ဤ vector တွေတွင် dimensions မတူညီသောအတွက် `ValueError: dimension mismatch` ဖြစ်ပါမည်။
 
-ဘာကြောင့် စစ်ရသလဲ။ Vector နှစ်ခုကို component တစ်ခုစီအလိုက် နှိုင်းယှဉ်ပြီး dot product
-တွက်ဖို့ dimension တူညီဖို့ လိုအပ်ပါတယ်။
+ဘာကြောင့် စစ်ရသလား။ Vector နှစ်ခုကို component တစ်ခုစီအလိုက် နှိုင်းယှဉ်ပြီး dot product
+တွက်ရန် dimension တူညီရန် လိုအပ်သည်။
 
 ---
 
@@ -170,11 +170,11 @@ cosine_similarity([1, 2, 3], [4, 5])
 dot = sum(a * b for a, b in zip(left, right))
 ```
 
-ဒီတစ်ကြောင်းမှာ `zip()`၊ multiplication `*`၊ generator expression နဲ့ `sum()` တို့ ပါဝင်ပါတယ်။
+ဤတစ်ကြောင်းတွင် `zip()`၊ multiplication `*`၊ generator expression နှင့် `sum()` တို့ ပါဝင်သည်။
 
 ### Step 4.1 — `zip(left, right)`
 
-`zip()` က list နှစ်ခုထဲက တူညီတဲ့ position မှာရှိတဲ့ elements တွေကို တွဲပေးပါတယ်။
+`zip()` က list နှစ်ခုထဲက တူညီသော position တွင်ရှိသည့် elements တွေကို တွဲပေးသည်။
 
 ```python
 left = [1, 2, 3]
@@ -189,8 +189,8 @@ Output —
 [(1, 4), (2, 5), (3, 6)]
 ```
 
-ပထမ list ၏ `1` ကို ဒုတိယ list ၏ `4` နဲ့ တွဲပေးပြီး၊ `2` ကို `5` နဲ့၊ `3` ကို `6` နဲ့
-တွဲပေးပါတယ်။
+ပထမ list ၏ `1` ကို ဒုတိယ list ၏ `4` နှင့် တွဲပေးပြီး၊ `2` ကို `5` နှင့်၊ `3` ကို `6` နှင့်
+တွဲပေးသည်။
 
 ### Step 4.2 — `a * b`
 
@@ -198,7 +198,7 @@ Output —
 a * b
 ```
 
-တွဲထားတဲ့ values နှစ်ခုကို မြှောက်တာပါ။ အထက်က ဥပမာမှာ —
+တွဲထားသော values နှစ်ခုကို မြှောက်ခြင်း ဖြစ်သည်။ အထက်က ဥပမာတွင် —
 
 ```text
 1 * 4 = 4
@@ -212,16 +212,16 @@ a * b
 dot = sum(a * b for a, b in zip(left, right))
 ```
 
-`sum()` က မြှောက်လဒ်တွေကို ပေါင်းပေးပါတယ်။
+`sum()` က မြှောက်လဒ်တွေကို ပေါင်းပေးသည်။
 
 ```text
 4 + 10 + 18 = 32
 ```
 
-ဒါကြောင့် `dot = 32` ဖြစ်ပါတယ်။
+ထို့ကြောင့် `dot = 32` ဖြစ်သည်။
 
-ဒီလို vector တစ်ခု၏ component တွေကို နောက် vector ၏ component တွေနဲ့ တစ်ခုချင်းမြှောက်ပြီး
-ပေါင်းထားတာကို **Dot Product** လို့ခေါ်ပါတယ်။
+ဤသို့ vector တစ်ခု၏ component တွေကို နောက် vector ၏ component တွေနှင့် တစ်ခုချင်းမြှောက်ပြီး
+ပေါင်းထားခြင်းကို **Dot Product** ဟုခေါ်သည်။
 
 ---
 
@@ -232,8 +232,8 @@ norm_left = math.sqrt(sum(a * a for a in left))
 norm_right = math.sqrt(sum(b * b for b in right))
 ```
 
-ဒီနေရာမှာ vector တစ်ခုစီ၏ norm ကို တွက်ပါတယ်။ Norm ဆိုတာ vector ၏ magnitude သို့မဟုတ်
-အလျားကို ဆိုလိုပါတယ်။ Formula က —
+ဤနေရာတွင် vector တစ်ခုစီ၏ norm ကို တွက်သည်။ Norm သည် vector ၏ magnitude သို့မဟုတ်
+အလျားကို ဆိုလိုသည်။ Formula က —
 
 ```text
 ||A|| = sqrt(a₁² + a₂² + ⋯ + aₙ²)
@@ -241,26 +241,26 @@ norm_right = math.sqrt(sum(b * b for b in right))
 
 ဥပမာ — `left = [3, 4]`
 
-ပထမဆုံး component တစ်ခုချင်းစီကို သူ့ကိုယ်သူ မြှောက်ပါမယ်။
+ပထမဆုံး component တစ်ခုချင်းစီကို သူ့ကိုယ်သူ မြှောက်ပါမည်။
 
 ```text
 3 * 3 = 9
 4 * 4 = 16
 ```
 
-ပြီးရင် ပေါင်းပါမယ်။
+ပြီးလျှင် ပေါင်းပါမည်။
 
 ```text
 9 + 16 = 25
 ```
 
-နောက်ဆုံး square root ယူပါမယ်။
+နောက်ဆုံး square root ယူပါမည်။
 
 ```text
 sqrt(25) = 5
 ```
 
-Python နဲ့ဆိုရင် —
+Python နှင့်ဆိုလျှင် —
 
 ```python
 left = [3, 4]
@@ -275,7 +275,7 @@ Output —
 5.0
 ```
 
-`norm_right` ကလည်း `right` vector အတွက် အလားတူ တွက်ချက်တာပါ။
+`norm_right` ကလည်း `right` vector အတွက် အလားတူ တွက်ချက်ခြင်း ဖြစ်သည်။
 
 ---
 
@@ -286,26 +286,26 @@ if norm_left == 0.0 or norm_right == 0.0:
     return 0.0
 ```
 
-ဒီမှာ operator နှစ်ခုကို သတိပြုပါ။
+ဤတွင် operator နှစ်ခုကို သတိပြုပါ။
 
 - `==` — တူညီသလား စစ်ဆေးခြင်း။
-- `or` — အခြေအနေနှစ်ခုထဲက တစ်ခုခု မှန်ရင် condition တစ်ခုလုံး မှန်ခြင်း။
+- `or` — အခြေအနေနှစ်ခုထဲက တစ်ခုခု မှန်လျှင် condition တစ်ခုလုံး မှန်ခြင်း။
 
-Vector တစ်ခု၏ norm က `0.0` ဖြစ်တယ်ဆိုရင် အဲဒီ vector ဟာ zero vector ဖြစ်ပါတယ်။
-Zero vector နဲ့ cosine similarity တွက်တဲ့အခါ denominator က သုညဖြစ်သွားနိုင်ပါတယ်။
+Vector တစ်ခု၏ norm က `0.0` ဖြစ်သည်ဆိုလျှင် ထို vector သည် zero vector ဖြစ်သည်။
+Zero vector နှင့် cosine similarity တွက်သည့်အခါ denominator က သုညဖြစ်သွားနိုင်သည်။
 
 ```text
 dot product / 0
 ```
 
-ဒီလို division by zero မဖြစ်အောင် —
+ဤသို့ division by zero မဖြစ်အောင် —
 
 ```python
 return 0.0
 ```
 
-နဲ့ score `0.0` ကို ပြန်ပေးထားတာပါ။ ဒီဟာက application အတွက် ရွေးချယ်ထားတဲ့ **fallback**
-ဖြစ်ပါတယ်။ သင်္ချာအရ zero vector ၏ cosine similarity ကို ပုံမှန်အားဖြင့် သတ်မှတ်လို့ မရပါဘူး။
+နှင့် score `0.0` ကို ပြန်ပေးထားခြင်း ဖြစ်သည်။ ၎င်းသည် application အတွက် ရွေးချယ်ထားသော **fallback**
+ဖြစ်သည်။ သင်္ချာအရ zero vector ၏ cosine similarity ကို ပုံမှန်အားဖြင့် သတ်မှတ်နိုင်ခြင်း မရှိပါ။
 
 ---
 
@@ -315,13 +315,13 @@ return 0.0
 return dot / (norm_left * norm_right)
 ```
 
-ဒါက function ၏ အဓိကတွက်ချက်မှု ဖြစ်ပါတယ်။
+၎င်းသည် function ၏ အဓိကတွက်ချက်မှု ဖြစ်သည်။
 
 ```text
 cosine(A, B) = (A · B) / (||A|| · ||B||)
 ```
 
-အပေါ်မှာ တွက်ထားတဲ့ dot product ကို vector နှစ်ခု၏ norm မြှောက်လဒ်နဲ့ စားပေးပါတယ်။
+အပေါ်တွင် တွက်ထားသော dot product ကို vector နှစ်ခု၏ norm မြှောက်လဒ်နှင့် စားပေးသည်။
 
 ဥပမာ —
 
@@ -337,8 +337,8 @@ Output —
 0.0
 ```
 
-ပထမ pair က direction တူလို့ score `1.0` ဖြစ်ပါတယ်။ ဒုတိယ pair က direction တွေ
-perpendicular ဖြစ်လို့ score `0.0` ဖြစ်ပါတယ်။
+ပထမ pair က direction တူသောကြောင့် score `1.0` ဖြစ်သည်။ ဒုတိယ pair က direction တွေ
+perpendicular ဖြစ်သောကြောင့် score `0.0` ဖြစ်သည်။
 
 ---
 
@@ -348,12 +348,12 @@ perpendicular ဖြစ်လို့ score `0.0` ဖြစ်ပါတယ်�
 QUERY_VECTOR = [0.90, 0.10, 0.00, 0.20]
 ```
 
-ဒီ list က user query ကို ကိုယ်စားပြုတဲ့ vector ဖြစ်ပါတယ်။ ဒီဥပမာမှာ vector dimensions
-၄ ခု ရှိပါတယ်။
+ဤ list က user query ကို ကိုယ်စားပြုသည့် vector ဖြစ်သည်။ ဤဥပမာတွင် vector dimensions
+၄ ခု ရှိသည်။
 
-တကယ့် RAG system မှာ embedding model က query text ကို vector အဖြစ် ပြောင်းပေးတာဖြစ်ပြီး
-ဒီနံပါတ်တွေကို ကိုယ်တိုင် ရွေးထည့်လေ့မရှိပါဘူး။ ဒီ exercise ကတော့ cosine similarity ကို
-လေ့လာနိုင်ဖို့ vector တွေကို ရိုးရှင်းစွာ သတ်မှတ်ထားတာပါ။
+တကယ့် RAG system တွင် embedding model က query text ကို vector အဖြစ် ပြောင်းပေးခြင်းဖြစ်ပြီး
+ဤနံပါတ်တွေကို ကိုယ်တိုင် ရွေးထည့်လေ့မရှိပါ။ ဤ exercise သည် cosine similarity ကို
+လေ့လာနိုင်ရန် vector တွေကို ရိုးရှင်းစွာ သတ်မှတ်ထားခြင်း ဖြစ်သည်။
 
 ---
 
@@ -368,12 +368,12 @@ CHUNK_VECTORS = {
 }
 ```
 
-ဒီ data structure က dictionary ဖြစ်ပါတယ်။
+ဤ data structure က dictionary ဖြစ်သည်။
 
 - Key — Chunk ID၊ ဥပမာ `"chunk-01"`
-- Value — အဲဒီ chunk ကို ကိုယ်စားပြုတဲ့ vector
+- Value — ထို chunk ကို ကိုယ်စားပြုသည့် vector
 
-Query vector နဲ့ chunk vector တစ်ခုချင်းစီကို နှိုင်းယှဉ်ပြီး score တွက်မှာပါ။
+Query vector နှင့် chunk vector တစ်ခုချင်းစီကို နှိုင်းယှဉ်ပြီး score တွက်မည်။
 
 ဥပမာ —
 
@@ -381,9 +381,9 @@ Query vector နဲ့ chunk vector တစ်ခုချင်းစီကိ�
 CHUNK_VECTORS["chunk-01"]
 ```
 
-ဒီလိုရေးရင် `chunk-01` ၏ vector ကို ပြန်ရပါတယ်။ Chunk ID တွေကို key အဖြစ်
-အသုံးပြုထားတဲ့အတွက် similarity score တစ်ခုချင်းစီဟာ ဘယ် chunk နဲ့ သက်ဆိုင်တယ်ဆိုတာ
-သိနိုင်ပါတယ်။
+ဤသို့ရေးလျှင် `chunk-01` ၏ vector ကို ပြန်ရသည်။ Chunk ID တွေကို key အဖြစ်
+အသုံးပြုထားသောအတွက် similarity score တစ်ခုချင်းစီသည် ဘယ် chunk နှင့် သက်ဆိုင်သည်ကို
+သိနိုင်သည်။
 
 ---
 
@@ -399,8 +399,8 @@ def rank_chunks(query, chunks):
     return scored
 ```
 
-ဒီ function ၏ ရည်ရွယ်ချက်က chunk တစ်ခုချင်းစီ၏ similarity score ကို တွက်ချက်ပြီး
-score အမြင့်ဆုံးကနေ အနိမ့်ဆုံးအထိ စီပေးဖို့ ဖြစ်ပါတယ်။
+ဤ function ၏ ရည်ရွယ်ချက်က chunk တစ်ခုချင်းစီ၏ similarity score ကို တွက်ချက်ပြီး
+score အမြင့်ဆုံးကနေ အနိမ့်ဆုံးအထိ စီပေးရန် ဖြစ်သည်။
 
 ### Step 10.1 — `chunks.items()`
 
@@ -408,7 +408,7 @@ score အမြင့်ဆုံးကနေ အနိမ့်ဆုံးအ�
 for chunk_id, vector in chunks.items()
 ```
 
-Dictionary ၏ `.items()` က key နဲ့ value ကို တွဲပြီး ထုတ်ပေးပါတယ်။
+Dictionary ၏ `.items()` က key နှင့် value ကို တွဲပြီး ထုတ်ပေးသည်။
 
 ဥပမာ —
 
@@ -429,10 +429,10 @@ chunk-01 [0.85, 0.15]
 chunk-02 [0.1, 0.8]
 ```
 
-ဒီမှာ `chunk_id` ထဲကို key ဝင်ပြီး `vector` ထဲကို value ဝင်ပါတယ်။ ဒီလို variable နှစ်ခုထဲကို
-တန်ဖိုးခွဲထည့်တာကို **unpacking** လို့ခေါ်ပါတယ်။
+ဤတွင် `chunk_id` ထဲကို key ဝင်ပြီး `vector` ထဲကို value ဝင်သည်။ ဤသို့ variable နှစ်ခုထဲကို
+တန်ဖိုးခွဲထည့်ခြင်းကို **unpacking** ဟုခေါ်သည်။
 
-### Step 10.2 — List comprehension နဲ့ score တွက်ခြင်း
+### Step 10.2 — List comprehension နှင့် score တွက်ခြင်း
 
 ```python
 scored = [
@@ -441,18 +441,18 @@ scored = [
 ]
 ```
 
-ဒီ code က chunk တစ်ခုချင်းစီအတွက် tuple တစ်ခု ဖန်တီးပါတယ်။
+ဤ code က chunk တစ်ခုချင်းစီအတွက် tuple တစ်ခု ဖန်တီးသည်။
 
 ```python
 (chunk_id, cosine_similarity(query, vector))
 ```
 
-Tuple ထဲမှာ —
+Tuple ထဲတွင် —
 
 - Chunk ID
-- အဲဒီ chunk ၏ cosine similarity score
+- ထို chunk ၏ cosine similarity score
 
-တို့ ပါဝင်ပါတယ်။ ဥပမာ result က ဒီလိုပုံစံ ဖြစ်ပါမယ်။
+တို့ ပါဝင်သည်။ ဥပမာ result က ဤသို့ပုံစံ ဖြစ်ပါမည်။
 
 ### ဥပမာ result ပုံစံ
 
@@ -465,8 +465,8 @@ Tuple ထဲမှာ —
 ]
 ```
 
-အခုအချိန်မှာ ဒီ list က မူလ dictionary အစီအစဉ်အတိုင်း ဖြစ်နေသေးပါတယ်။ Ranking
-မလုပ်ရသေးပါဘူး။
+အခုအချိန်တွင် ဤ list က မူလ dictionary အစီအစဉ်အတိုင်း ဖြစ်နေသေးသည်။ Ranking
+မလုပ်ရသေးပါ။
 
 ### Step 10.3 — `scored.sort(...)`
 
@@ -474,7 +474,7 @@ Tuple ထဲမှာ —
 scored.sort(key=lambda item: (-item[1], item[0]))
 ```
 
-ဒီတစ်ကြောင်းက ranking လုပ်ပေးတဲ့ အဓိက code ဖြစ်ပါတယ်။ အရင်ဆုံး `sort()` ကို
+ဤတစ်ကြောင်းက ranking လုပ်ပေးသည့် အဓိက code ဖြစ်သည်။ အရင်ဆုံး `sort()` ကို
 နားလည်ရအောင်။
 
 ```python
@@ -490,8 +490,8 @@ Output —
 [10, 20, 30]
 ```
 
-`sort()` က list ကို မူလ list အတွင်းမှာပဲ ပြင်ဆင်စီစဉ်ပေးပါတယ်။ ဒီ exercise မှာတော့ `key`
-parameter နဲ့ sorting လုပ်မယ့်စည်းမျဉ်းကို သတ်မှတ်ထားပါတယ်။
+`sort()` က list ကို မူလ list အတွင်းတွင်သာ ပြင်ဆင်စီစဉ်ပေးသည်။ ဤ exercise တွင် `key`
+parameter နှင့် sorting လုပ်မည့်စည်းမျဉ်းကို သတ်မှတ်ထားသည်။
 
 ### `lambda item`
 
@@ -499,15 +499,15 @@ parameter နဲ့ sorting လုပ်မယ့်စည်းမျဉ်း�
 lambda item: (-item[1], item[0])
 ```
 
-`lambda` ဆိုတာ နာမည်မပေးထားတဲ့ function အသေးစားတစ်ခု ဖန်တီးတဲ့နည်းလမ်း ဖြစ်ပါတယ်။
-ဒီ expression ကို ပုံမှန် function နဲ့ ရေးမယ်ဆိုရင် —
+`lambda` သည် နာမည်မပေးထားသော function အသေးစားတစ်ခု ဖန်တီးသည့်နည်းလမ်း ဖြစ်သည်။
+ဤ expression ကို ပုံမှန် function နှင့် ရေးမည်ဆိုလျှင် —
 
 ```python
 def sort_key(item):
     return (-item[1], item[0])
 ```
 
-နဲ့ အဓိပ္ပာယ်တူပါတယ်။
+နှင့် အဓိပ္ပာယ်တူသည်။
 
 ဥပမာ —
 
@@ -515,16 +515,16 @@ def sort_key(item):
 item = ("chunk-01", 0.991173)
 ```
 
-ဒီ tuple မှာ —
+ဤ tuple တွင် —
 
 - `item[0]` က `"chunk-01"`
 - `item[1]` က `0.991173`
 
-ဖြစ်ပါတယ်။
+ဖြစ်သည်။
 
-### ဘာကြောင့် `-item[1]` သုံးတာလဲ။
+### ဘာကြောင့် `-item[1]` သုံးခြင်းလဲ။
 
-Python ၏ `sort()` က ပုံမှန်အားဖြင့် ascending order နဲ့ စီပါတယ်။
+Python ၏ `sort()` က ပုံမှန်အားဖြင့် ascending order နှင့် စီသည်။
 
 ```python
 scores = [0.20, 0.99, 0.76]
@@ -539,7 +539,7 @@ Output —
 [0.2, 0.76, 0.99]
 ```
 
-ဒါပေမဲ့ ကျွန်တော်တို့က similarity score အမြင့်ဆုံးကို အရင်ပြချင်ပါတယ်။
+သို့သော် ကျွန်တော်တို့က similarity score အမြင့်ဆုံးကို အရင်ပြချင်သည်။
 
 ```python
 scores = [0.20, 0.99, 0.76]
@@ -554,16 +554,16 @@ Output —
 [0.99, 0.76, 0.2]
 ```
 
-Score ကို အနုတ်လက္ခဏာ ပြောင်းပြီး sorting လုပ်တာကြောင့် score အမြင့်ဆုံးက
-အရင်ရောက်လာပါတယ်။
+Score ကို အနုတ်လက္ခဏာ ပြောင်းပြီး sorting လုပ်ခြင်းကြောင့် score အမြင့်ဆုံးက
+အရင်ရောက်လာသည်။
 
-### ဘာကြောင့် `item[0]` ကိုလည်း ထည့်ထားတာလဲ။
+### ဘာကြောင့် `item[0]` ကိုလည်း ထည့်ထားခြင်းလဲ။
 
 ```python
 (-item[1], item[0])
 ```
 
-ဒီမှာ sorting key နှစ်ခုရှိပါတယ်။
+ဤတွင် sorting key နှစ်ခုရှိသည်။
 
 - `-item[1]` — Similarity score အမြင့်ဆုံးကို အရင်စီခြင်း။
 - `item[0]` — Score တူညီနေပါက chunk ID ကို alphabetical order အတိုင်း စီခြင်း။
@@ -588,8 +588,8 @@ Output —
 [('chunk-01', 0.9), ('chunk-02', 0.9), ('chunk-03', 0.7)]
 ```
 
-Score တူညီနေတဲ့ `chunk-01` နဲ့ `chunk-02` ကို chunk ID အရ စီပေးထားပါတယ်။ ဒါကြောင့်
-output က **deterministic** ဖြစ်ပါတယ်။
+Score တူညီနေသော `chunk-01` နှင့် `chunk-02` ကို chunk ID အရ စီပေးထားသည်။ ထို့ကြောင့်
+output က **deterministic** ဖြစ်သည်။
 
 ### Step 10.4 — `return scored`
 
@@ -597,11 +597,11 @@ output က **deterministic** ဖြစ်ပါတယ်။
 return scored
 ```
 
-Sorting ပြီးသွားတဲ့ list ကို function က ပြန်ပေးပါတယ်။
+Sorting ပြီးသွားသည့် list ကို function က ပြန်ပေးသည်။
 
 ---
 
-## 11. `enumerate()` နဲ့ Result ကို ပြသခြင်း
+## 11. `enumerate()` နှင့် Result ကို ပြသခြင်း
 
 ```python
 for rank, (chunk_id, score) in enumerate(
@@ -611,16 +611,16 @@ for rank, (chunk_id, score) in enumerate(
     print("%d. %s similarity=%.6f" % (rank, chunk_id, score))
 ```
 
-ဒီအပိုင်းမှာ ranking လုပ်ပြီးသား result တွေကို နံပါတ်တပ်ပြီး ပြသပါတယ်။
+ဤအပိုင်းတွင် ranking လုပ်ပြီးသား result တွေကို နံပါတ်တပ်ပြီး ပြသသည်။
 
 ### `rank_chunks(QUERY_VECTOR, CHUNK_VECTORS)`
 
-ဒီ function call က query vector နဲ့ chunk vectors တွေကို အသုံးပြုပြီး ranking result ကို
-ပြန်ပေးပါတယ်။
+ဤ function call က query vector နှင့် chunk vectors တွေကို အသုံးပြုပြီး ranking result ကို
+ပြန်ပေးသည်။
 
 ### `enumerate(..., start=1)`
 
-`enumerate()` က item တစ်ခုချင်းစီအတွက် counter တစ်ခု ထည့်ပေးပါတယ်။
+`enumerate()` က item တစ်ခုချင်းစီအတွက် counter တစ်ခု ထည့်ပေးသည်။
 
 ```python
 fruits = ["apple", "banana", "orange"]
@@ -637,23 +637,23 @@ Output —
 3 orange
 ```
 
-`start=1` ကို မထည့်ရင် default အနေနဲ့ `0` က စပါမယ်။
+`start=1` ကို မထည့်လျှင် default အနေနှင့် `0` က စပါမည်။
 
 ### `rank, (chunk_id, score)`
 
-ဒါက unpacking ဖြစ်ပါတယ်။ Ranking function က tuple တွေကို ပြန်ပေးထားပါတယ်။
+၎င်းသည် unpacking ဖြစ်သည်။ Ranking function က tuple တွေကို ပြန်ပေးထားသည်။
 
 ```python
 ("chunk-01", 0.991173)
 ```
 
-`enumerate()` က အဲဒီ tuple နဲ့ rank ကို တွဲပေးတဲ့အတွက် loop တစ်ပတ်စီမှာ —
+`enumerate()` က ထို tuple နှင့် rank ကို တွဲပေးသည့်အတွက် loop တစ်ပတ်စီတွင် —
 
 - `rank` — အဆင့်နံပါတ်
 - `chunk_id` — Chunk အမည်
 - `score` — Similarity score
 
-တို့ ရရှိပါတယ်။
+တို့ ရရှိသည်။
 
 ### `print()` ထဲက `%d`, `%s`, `%.6f`
 
@@ -661,13 +661,13 @@ Output —
 print("%d. %s similarity=%.6f" % (rank, chunk_id, score))
 ```
 
-ဒီဟာက Python ၏ old-style string formatting ဖြစ်ပါတယ်။
+၎င်းသည် Python ၏ old-style string formatting ဖြစ်သည်။
 
 | Format | အဓိပ္ပာယ် |
 | --- | --- |
 | `%d` | Integer အတွက် |
 | `%s` | String အတွက် |
-| `%.6f` | Decimal point နောက်မှာ ဂဏန်း ၆ လုံးပြရန် |
+| `%.6f` | Decimal point နောက်တွင် ဂဏန်း ၆ လုံးပြရန် |
 
 ဥပမာ —
 
@@ -690,7 +690,7 @@ Output —
 ## 12. Code တစ်ခုလုံး၏ Output — အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းခြင်း
 
 အပိုင်း ၂ မှ ၁၁ အထိ ရှင်းပြခဲ့သည့် အစိတ်အပိုင်းအားလုံးကို ပေါင်းစည်းလိုက်ပါက runnable
-script တစ်ခု အပြည့်အစုံ ရရှိပါတယ် —
+script တစ်ခု အပြည့်အစုံ ရရှိသည် —
 
 ```python
 import math
@@ -725,7 +725,7 @@ for rank, (chunk_id, score) in enumerate(rank_chunks(QUERY_VECTOR, CHUNK_VECTORS
     print("%d. %s similarity=%.6f" % (rank, chunk_id, score))
 ```
 
-Terminal မှာ ဒီလို ပြပါမယ် —
+Terminal တွင် ဤသို့ ပြပါမည် —
 
 ```text
 1. chunk-01 similarity=0.991173
@@ -736,51 +736,51 @@ Terminal မှာ ဒီလို ပြပါမယ် —
 
 အဓိပ္ပာယ်က —
 
-- `chunk-01` — Query vector နဲ့ အနီးစပ်ဆုံး တူညီပါတယ်။
-- `chunk-04` — ဒုတိယအနီးစပ်ဆုံး ဖြစ်ပါတယ်။
-- `chunk-02` — Similarity ပိုနည်းပါတယ်။
-- `chunk-03` — ဒီ query နဲ့ similarity အနည်းဆုံး ဖြစ်ပါတယ်။
+- `chunk-01` — Query vector နှင့် အနီးစပ်ဆုံး တူညီသည်။
+- `chunk-04` — ဒုတိယအနီးစပ်ဆုံး ဖြစ်သည်။
+- `chunk-02` — Similarity ပိုနည်းသည်။
+- `chunk-03` — ဤ query နှင့် similarity အနည်းဆုံး ဖြစ်သည်။
 
-ဒီ score တွေက vector တွေ၏ ဦးတည်ရာတူညီမှုကို ဖော်ပြတာဖြစ်ပြီး၊ စာသားအဓိပ္ပာယ်ကို
-လူတစ်ယောက်က နားလည်သလို တိုက်ရိုက်တိုင်းတာတာ မဟုတ်ပါဘူး။ ရလဒ်၏ အရည်အသွေးက
-အသုံးပြုထားတဲ့ embedding model နဲ့ data ပေါ်လည်း မူတည်ပါတယ်။
+ဤ score တွေက vector တွေ၏ ဦးတည်ရာတူညီမှုကို ဖော်ပြခြင်းဖြစ်ပြီး၊ စာသားအဓိပ္ပာယ်ကို
+လူတစ်ယောက်က နားလည်သလို တိုက်ရိုက်တိုင်းတာခြင်း မဟုတ်ပါ။ ရလဒ်၏ အရည်အသွေးက
+အသုံးပြုထားသော embedding model နှင့် data ပေါ်လည်း မူတည်သည်။
 
 ---
 
-## 13. RAG Pipeline နဲ့ ဘယ်လိုဆက်စပ်သလဲ။
+## 13. RAG Pipeline နှင့် ဘယ်လိုဆက်စပ်သလား။
 
-ဒီ exercise ကို အရင်လေ့လာခဲ့တဲ့ pipeline stages တွေနဲ့ ချိတ်ဆက်ကြည့်ရအောင်။
+ဤ exercise ကို အရင်လေ့လာခဲ့သည့် pipeline stages တွေနှင့် ချိတ်ဆက်ကြည့်ကြပါမည်။
 
 - **Ingest** — Documents လက်ခံခြင်း
 - **Chunk** — Documents ခွဲခြင်း
-- **Embed** — Query နဲ့ chunks ကို vectors ပြောင်းခြင်း
+- **Embed** — Query နှင့် chunks ကို vectors ပြောင်းခြင်း
 - **Index** — Vectors တွေကို index လုပ်ခြင်း
 - **Retrieve** — Cosine Similarity သို့မဟုတ် အခြား retrieval နည်းဖြင့် ranking လုပ်ခြင်း
-- **Generate** — ရွေးချယ်ထားတဲ့ context ကို LLM ထံပေးပြီး အဖြေထုတ်ခြင်း
+- **Generate** — ရွေးချယ်ထားသော context ကို LLM ထံပေးပြီး အဖြေထုတ်ခြင်း
 
-ဒီ exercise က အဓိကအားဖြင့် **retrieve** အဆင့်မှာ similarity score တွက်ပြီး chunks တွေကို
-ranking လုပ်တဲ့ logic ကို လေ့ကျင့်ပေးတာ ဖြစ်ပါတယ်။
+ဤ exercise က အဓိကအားဖြင့် **retrieve** အဆင့်တွင် similarity score တွက်ပြီး chunks တွေကို
+ranking လုပ်သည့် logic ကို လေ့ကျင့်ပေးခြင်း ဖြစ်သည်။
 
-တကယ့် production RAG system တွေမှာတော့ vector database ၏ similarity search,
-approximate nearest neighbor (ANN), metadata filtering နဲ့ reranking model တွေကိုလည်း
-အသုံးပြုနိုင်ပါတယ်။
+တကယ့် production RAG system တွေတွင် vector database ၏ similarity search,
+approximate nearest neighbor (ANN), metadata filtering နှင့် reranking model တွေကိုလည်း
+အသုံးပြုနိုင်သည်။
 
 ---
 
 ## 14. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — `scored.sort(key=lambda item: (-item[1], item[0]))` မှာ `-item[1]` ကို `item[1]`
-လို့ ပြောင်းလိုက်ရင် ဘာဖြစ်မလဲ။
+**မေးခွန်း** — `scored.sort(key=lambda item: (-item[1], item[0]))` တွင် `-item[1]` ကို `item[1]`
+ဟု ပြောင်းလိုက်လျှင် ဘာဖြစ်မလဲ။
 
-1. Similarity score အမြင့်ဆုံးက အရင်ပေါ်မယ်။
-2. Similarity score အနိမ့်ဆုံးက အရင်ပေါ်မယ်။
-3. Score တွေကို မတွက်တော့ဘူး။
-4. Chunk ID တွေ ပျောက်သွားမယ်။
+1. Similarity score အမြင့်ဆုံးက အရင်ပေါ်မည်။
+2. Similarity score အနိမ့်ဆုံးက အရင်ပေါ်မည်။
+3. Score တွေကို မတွက်တော့ပါ။
+4. Chunk ID တွေ ပျောက်သွားမည်။
 
 <details>
 <summary>အဖြေ ကြည့်ရန်</summary>
 
-**အဖြေ — 2. Similarity score အနိမ့်ဆုံးက အရင်ပေါ်မယ်**
+**အဖြေ — 2. Similarity score အနိမ့်ဆုံးက အရင်ပေါ်မည်**
 
 အကြောင်းရင်း — `sort()` သည် ascending order ဖြင့် စီသည်။ `-item[1]` သည် score ကို
 အနုတ်လက္ခဏာ ပြောင်းထားသဖြင့် score အမြင့်ဆုံး၏ အနုတ်တန်ဖိုး သည် အငယ်ဆုံး ဖြစ်လာပြီး
@@ -792,9 +792,9 @@ approximate nearest neighbor (ANN), metadata filtering နဲ့ reranking model
 ['chunk-03', 'chunk-02', 'chunk-04', 'chunk-01']
 ```
 
-ဖြစ်သွားမည် — ဆိုလိုသည်မှာ `chunk-01` သည် နောက်ဆုံးတွင် ရှိမည် ဖြစ်သည်။
+ဖြစ်သွားမည် — ဆိုလိုသည်တွင် `chunk-01` သည် နောက်ဆုံးတွင် ရှိမည် ဖြစ်သည်။
 
 </details>
 
-**အဓိက မှတ်ထားရန်** — ဒီ code က query တစ်ခုနဲ့ chunk တစ်ခုချင်းစီ၏ cosine similarity ကို
-တွက်တယ်၊ score အလိုက် စီတယ်၊ နောက်ဆုံးမှာ အနီးစပ်ဆုံး chunk ကို rank 1 အဖြစ် ပြပေးပါတယ်။
+**အဓိက မှတ်ထားရန်** — ဤ code က query တစ်ခုနှင့် chunk တစ်ခုချင်းစီ၏ cosine similarity ကို
+တွက်သည်၊ score အလိုက် စီသည်၊ နောက်ဆုံးတွင် အနီးစပ်ဆုံး chunk ကို rank 1 အဖြစ် ပြပေးသည်။

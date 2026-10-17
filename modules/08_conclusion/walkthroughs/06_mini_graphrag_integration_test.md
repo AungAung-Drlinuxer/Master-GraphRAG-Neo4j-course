@@ -8,9 +8,9 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Stage တိုင်း သီးခြား အလုပ်လုပ်ကြောင်း သိရုံနဲ့ မလုံလောက်ပါ။ **ချိတ်ဆက်လိုက်တဲ့အခါ**
-pipeline တစ်ခုလုံး correctness ရှိကြောင်း စစ်ရပါတယ်။ ဤ Exercise က LLM မလိုဘဲ
-rule-based/deterministic အစားထိုးမှုများဖြင့် pipeline တစ်ခုလုံးကို **test** လုပ်ပါတယ်။
+Stage တိုင်း သီးခြား အလုပ်လုပ်ကြောင်း သိရုံနှင့် မလုံလောက်ပါ။ **ချိတ်ဆက်လိုက်သည့်အခါ**
+pipeline တစ်ခုလုံး correctness ရှိကြောင်း စစ်ရသည်။ ဤ Exercise က LLM မလိုဘဲ
+rule-based/deterministic အစားထိုးမှုများဖြင့် pipeline တစ်ခုလုံးကို **test** လုပ်သည်။
 
 ```text
 CORPUS_SENTENCES
@@ -29,7 +29,7 @@ chunks ---> extract_chunk_triples (RELATION_PATTERNS) ---> raw triples
                                           serialize_context ---> generate_answer ---> answer
 ```
 
-ဒီ Exercise မှာ လေ့လာရမယ့် Python concepts —
+ဤ Exercise တွင် လေ့လာရမည့် Python concepts —
 
 - `re.compile`, `\b`, `re.sub`, `re.IGNORECASE`
 - Nested `while` loop နှင့် char budget (running size)
@@ -81,12 +81,12 @@ LEADS -> None
 STORES_DATA_IN -> None
 ```
 
-`CORPUS_SENTENCES` က sentence ၅ ခုပါတဲ့ list ဖြစ်ပါတယ် — ဒါက LLM ကို ခေါ်စရာ
-မလိုဘဲ deterministic test corpus အဖြစ် သုံးပါတယ်။
+`CORPUS_SENTENCES` က sentence ၅ ခုပါသော list ဖြစ်သည် — ၎င်းသည် LLM ကို ခေါ်စရာ
+မလိုဘဲ deterministic test corpus အဖြစ် သုံးသည်။
 
-`RELATION_PATTERNS` ထဲက item တိုင်းက `(relation, compiled_pattern)` tuple ဖြစ်ပါတယ်။
-`\b` က word boundary — `manages` ကို စကားလုံးအလိုက် ကိုက်ညီပါတယ်။ `pattern.search()`
-သည် ပထမဆုံး ကိုက်ညီမှုကို ပြန်ပါတယ်၊ မတွေ့ရင် `None`။
+`RELATION_PATTERNS` ထဲက item တိုင်းက `(relation, compiled_pattern)` tuple ဖြစ်သည်။
+`\b` က word boundary — `manages` ကို စကားလုံးအလိုက် ကိုက်ညီသည်။ `pattern.search()`
+သည် ပထမဆုံး ကိုက်ညီမှုကို ပြန်သည်၊ မတွေ့လျှင် `None`။
 
 ```python
 import re
@@ -106,8 +106,8 @@ manages
 manages
 ```
 
-`match.start()` က `6`၊ `match.end()` က `13` — `[6:13]` slice က `manages` ကို ပြန်ပါတယ်။
-ဒီ slice နည်းက subject နဲ့ object ကို ခွဲထုတ်ဖို့ သုံးပါတယ်။
+`match.start()` က `6`၊ `match.end()` က `13` — `[6:13]` slice က `manages` ကို ပြန်သည်။
+ဤ slice နည်းက subject နှင့် object ကို ခွဲထုတ်ရန် သုံးသည်။
 
 ---
 
@@ -155,8 +155,8 @@ Output —
 'Ledger:'
 ```
 
-`re.IGNORECASE` က `THE` (uppercase) ကို လည်း ကိုက်ညီစေပါတယ်။ `str.strip(chars)` မှာ
-`chars` က **character set** ဖြစ်ပါတယ် — string တစ်ခုလုံး မဟုတ်ပါ။
+`re.IGNORECASE` က `THE` (uppercase) ကို လည်း ကိုက်ညီစေသည်။ `str.strip(chars)` တွင်
+`chars` က **character set** ဖြစ်သည် — string တစ်ခုလုံး မဟုတ်ပါ။
 
 ```python
 print(repr("...abc...".strip(".")))
@@ -226,8 +226,8 @@ chunk 3: ['Ledger service stores data in the Audit Store.', 'Carol leads the Pay
 - **အတွင်း `while cursor < len(sentences)`** — `max_chars` budget အတွင်း sentence များ
   ထည့်။
 
-`addition = len(sentence) + (1 if current else 0)` က sentence အရှည်နဲ့ သူ့အရှေ့က
-space ကို (chunk အလွတ်မဟုတ်ရင်) ထည့်တွက်ပါတယ်။
+`addition = len(sentence) + (1 if current else 0)` က sentence အရှည်နှင့် သူ့အရှေ့က
+space ကို (chunk အလွတ်မဟုတ်လျှင်) ထည့်တွက်သည်။
 
 ```python
 current = []
@@ -245,13 +245,13 @@ addition = 4
 addition = 3
 ```
 
-ပထမဆုံး sentence အတွက် `current` က အလွတ်မို့ `+0`၊ ဒုတိယအတွက် ရှိပြီးမို့ `+1`။
+ပထမဆုံး sentence အတွက် `current` က အလွတ်ဖြစ်သဖြင့် `+0`၊ ဒုတိယအတွက် ရှိပြီးဖြစ်သဖြင့် `+1`။
 `len("cde") + 1 = 4`။
 
 ### 3.2 Overlap — `index = max(index + 1, cursor - overlap)`
 
-`overlap=1` ဖြစ်လို့ နောက် chunk က sentence တစ်ခု **ပြန်စ** ပါတယ်။ ဒါက chunk boundary
-၏ အခြေအနေကို ထိန်းပါတယ် — ဒါပေမဲ့ triple များ **ထပ်ထွက်** စေပါတယ် (Section 6 တွင်
+`overlap=1` ဖြစ်သောကြောင့် နောက် chunk က sentence တစ်ခု **ပြန်စ** သည်။ ၎င်းသည် chunk boundary
+၏ အခြေအနေကို ထိန်းသည် — သို့သော် triple များ **ထပ်ထွက်** စေသည် (Section 6 တွင်
 dedupe ဖြင့် ပြန်ပေါင်း)။
 
 ```python
@@ -267,7 +267,7 @@ Output —
 ```
 
 `max(index + 1, cursor - overlap)` က `cursor - overlap` က `index + 1` ထက် မငယ်စေရပါ —
-မဟုတ်ရင် infinite loop ဖြစ်နိုင်ပါတယ်။
+မဟုတ်လျှင် infinite loop ဖြစ်နိုင်သည်။
 
 ---
 
@@ -322,9 +322,9 @@ Entity resolution သုံးအဆင့် —
 2. **alias ဖြေ** — `ENTITY_ALIASES.get(key, key)` က `"payments team"` ကို
    `"payments squad"` သို့ အစားထိုး။
 3. **canonical ရှာ** — `ENTITY_CANONICAL.get(key, clean_surface(surface))` က
-   canonical အမည် ပြန်၊ မရှိရင် မူရင်း surface ပြန်။
+   canonical အမည် ပြန်၊ မရှိလျှင် မူရင်း surface ပြန်။
 
-`dict.get(key, default)` က key မရှိရင် `default` ပြန်ပါတယ် — `KeyError` မဖြစ်ပါ။
+`dict.get(key, default)` က key မရှိလျှင် `default` ပြန်သည် — `KeyError` မဖြစ်ပါ။
 
 ```python
 mapping = {"a": 1}
@@ -339,9 +339,9 @@ Output —
 0
 ```
 
-`resolve_entity("Blob")` က canonical မရှိလို့ `"Blob"` ကို ပြန်ပါတယ် — entity
-resolution က fallback ကို ထိန်းထားပါတယ်။ ဒါက **graph ထဲ node မဖြစ်သင့်သော** surface
-ဆိုရင် downstream တွင် filter ရမည့် အပိုင်းပါ။
+`resolve_entity("Blob")` က canonical မရှိသောကြောင့် `"Blob"` ကို ပြန်သည် — entity
+resolution က fallback ကို ထိန်းထားသည်။ ၎င်းသည် **graph ထဲ node မဖြစ်သင့်သော** surface
+ဆိုလျှင် downstream တွင် filter ရမည့် အပိုင်းပါ။
 
 ---
 
@@ -388,12 +388,12 @@ Output —
 ```
 
 `sentence[:match.start()]` က verb အရှေ့က စာသား (subject)၊ `sentence[match.end():]`
-ကနောက်က စာသား (object)။ `if not subject or not obj:` က အလွတ်ဖြစ်ရင် ကျော်ပါတယ် —
-ဒါက `or` ၏ **short-circuit** ဖြစ်ပါတယ်။
+ကနောက်က စာသား (object)။ `if not subject or not obj:` က အလွတ်ဖြစ်လျှင် ကျော်သည် —
+၎င်းသည် `or` ၏ **short-circuit** ဖြစ်သည်။
 
-> ဤနေရာမှာ `resolve_entity` မပါသေး — ဤ walkthrough ၏ assembed script မှာ
+> ဤနေရာတွင် `resolve_entity` မပါသေး — ဤ walkthrough ၏ assembed script တွင်
 > `records.append((chunk_id, resolve_entity(subject), relation, resolve_entity(obj)))`
-> လို့ resolve ကို ခေါ်ပါသည်။ ဤ section က slicing logic ကိုသာ ပြသည်။
+> ဟူသော ပုံစံဖြင့် resolve ကို ခေါ်ပါသည်။ ဤ section က slicing logic ကိုသာ ပြသည်။
 
 ---
 
@@ -430,13 +430,13 @@ Output —
 {'subject': 'Alice', 'relation': 'MANAGES', 'object': 'Payments Squad', 'chunks': [0]}
 ```
 
-`key = (subject, relation, obj)` က dedupe ၏ အခြေခံဖြစ်ပါတယ်။ Triple တူညီပါက
-`chunks` list ထဲ chunk id ကို **ထပ်မထည့်** ဘဲ (provenance list ထဲ ရှိပြီးလား စစ်ပြီး)
-ပေါင်းပါတယ်။ ဒီလိုနည်းဖြင့် — overlap ကြောင့် triple ထပ်ထွက်ပေမဲ့ — ရလဒ် triple က
-တစ်ခုတည်း ဖြစ်ပြီး၊ ဘယ် chunk တွေမှ လာတာလဲ ဆိုတာ သိမ်းထားပါတယ်။
+`key = (subject, relation, obj)` က dedupe ၏ အခြေခံဖြစ်သည်။ Triple တူညီပါက
+`chunks` list ထဲ chunk id ကို **ထပ်မထည့်** ဘဲ (provenance list ထဲ ရှိပြီး/မရှိ စစ်ဆေးပြီး)
+ပေါင်းသည်။ ဤနည်းဖြင့် — overlap ကြောင့် triple ထပ်ထွက်သော်လည်း — ရလဒ် triple က
+တစ်ခုတည်း ဖြစ်ပြီး၊ ဘယ် chunk များမှ လာသည်ကို သိမ်းထားသည်။
 
-`OrderedDict` က triple အစဉ်ကို ပထမ ပေါ်ပေါက်သည့် အစီအစဉ်အတိုင်း ထိန်းပါတယ် — ဒါမှ
-output က run တိုင်း တူပါမယ်။
+`OrderedDict` က triple အစဉ်ကို ပထမ ပေါ်ပေါက်သည့် အစီအစဉ်အတိုင်း ထိန်းသည် — ထိုမှသာ
+output က run တိုင်း တူပါမည်။
 
 ---
 
@@ -487,13 +487,13 @@ Output —
 
 ### 7.1 `__init__` နှင့် `defaultdict`
 
-`__init__(self)` က object ဖန်တီးချိန် run ပါတယ်။ Field သုံးခု —
+`__init__(self)` က object ဖန်တီးချိန် run သည်။ Field သုံးခု —
 
 - `self.nodes` — set (node အမည်များ)
 - `self.out` — subject → `(relation, object)` list (အထွက် edge များ)
 - `self.inn` — object → `(relation, subject)` list (အဝင် edge များ)
 
-`defaultdict(list)` က **မရှိသေးတဲ့ key** ကို ဖတ်တဲ့အခါ အလွတ် list `[]` ဖန်တီးပေးပါတယ် —
+`defaultdict(list)` က **မရှိသေးသော key** ကို ဖတ်သည့်အခါ အလွတ် list `[]` ဖန်တီးပေးသည် —
 `KeyError` မဖြစ်ပါ။
 
 ```python
@@ -519,13 +519,13 @@ KeyError: 'x'
 
 ### 7.2 `neighbors()` — Undirected Neighbor
 
-Directed edge ကို **undirected** အဖြစ် ဖြန့်ကြည့်ပါတယ်။
+Directed edge ကို **undirected** အဖြစ် ဖြန့်ကြည့်သည်။
 
-- `{obj for _, obj in self.out[node]}` — node က subject ဖြစ်တဲ့ edge များ၏ object
-- `found |= {subject for _, subject in self.inn[node]}` — node က object ဖြစ်တဲ့ edge များ၏ subject
+- `{obj for _, obj in self.out[node]}` — node က subject ဖြစ်သော edge များ၏ object
+- `found |= {subject for _, subject in self.inn[node]}` — node က object ဖြစ်သော edge များ၏ subject
 - `|=` က set union
 
-`Payments Squad` အတွက် — `Alice` (manages)၊ `Carol` (leads) နှစ်ခုလုံး ရပါတယ်။
+`Payments Squad` အတွက် — `Alice` (manages)၊ `Carol` (leads) နှစ်ခုလုံး ရသည်။
 
 ```python
 out = {"Payments Squad": [("BUILDS", "Ledger Service")]}
@@ -683,9 +683,9 @@ edges = 5
 [('Alice', 'MANAGES', 'Payments Squad'), ('Bob', 'SUPPORTS', 'Ledger Service'), ('Carol', 'LEADS', 'Payments Squad'), ('Ledger Service', 'STORES_DATA_IN', 'Audit Store'), ('Payments Squad', 'BUILDS', 'Ledger Service')]
 ```
 
-`build_knowledge_graph()` က stage ငါးခုကို တစ်လိုင်းစီ ချိတ်ပါတယ် — chunk → extract →
-dedupe → add_triple။ Graph တွင် **node ၆ ခု၊ edge ၅ ခု** ရပါတယ်။ `raw.extend(...)`
-က list ထဲ list ကို ဖြန့်ထည့်ပါတယ်။
+`build_knowledge_graph()` က stage ငါးခုကို တစ်လိုင်းစီ ချိတ်သည် — chunk → extract →
+dedupe → add_triple။ Graph တွင် **node ၆ ခု၊ edge ၅ ခု** ရသည်။ `raw.extend(...)`
+က list ထဲ list ကို ဖြန့်ထည့်သည်။
 
 ```python
 raw = []
@@ -738,13 +738,13 @@ Output —
 ['Payments Squad']
 ```
 
-`sorted(graph.nodes)` က node များကို အစီအစဉ်တကျ စစ်ပါတယ် — ဒါမှ anchor အစီအစဉ်
-deterministic ဖြစ်ပါတယ်။ Surface တိုင်းအတွက် `node.lower()` နဲ့ alias များကို စုပြီး
-`any(surface in lowered for surface in surfaces)` ဖြင့် question ထဲ ရှိ/မရှိ စစ်ပါတယ်။
+`sorted(graph.nodes)` က node များကို အစီအစဉ်တကျ စစ်သည် — ထိုမှသာ anchor အစီအစဉ်
+deterministic ဖြစ်သည်။ Surface တိုင်းအတွက် `node.lower()` နှင့် alias များကို စုပြီး
+`any(surface in lowered for surface in surfaces)` ဖြင့် question ထဲ ရှိ/မရှိ စစ်သည်။
 
-`any(...)` က item တစ်ခုခု `True` ဖြစ်ရင် `True` ပြန်ပါတယ် (မဟုတ်ရင် `False`)။
-Alias ရှိလို့ `"payments team"` ပါတဲ့ question ကလည်း `Payments Squad` ကို ရပါတယ် —
-ဒါက `Payments team` နဲ့ `Payments squad` ကို graph တွင် node တစ်ခုတည်း ဖြစ်စေပါတယ်။
+`any(...)` က item တစ်ခုခု `True` ဖြစ်လျှင် `True` ပြန်သည် (မဟုတ်လျှင် `False`)။
+Alias ရှိသောကြောင့် `"payments team"` ပါသော question ကလည်း `Payments Squad` ကို ရသည် —
+၎င်းသည် `Payments team` နှင့် `Payments squad` ကို graph တွင် node တစ်ခုတည်း ဖြစ်စေသည်။
 
 ---
 
@@ -811,12 +811,12 @@ Output —
 [('Alice', 'MANAGES', 'Payments Squad'), ('Carol', 'LEADS', 'Payments Squad'), ('Payments Squad', 'BUILDS', 'Ledger Service')]
 ```
 
-`hops=1` ဖြစ်လို့ anchor `Payments Squad` ၏ တိုက်ရိုက် neighbor များသာ ဝင်ပါတယ် —
-`Alice`၊ `Carol`၊ `Ledger Service`။ `Audit Store` က 2-hop မို့ **မပါ** ပါ။
+`hops=1` ဖြစ်သောကြောင့် anchor `Payments Squad` ၏ တိုက်ရိုက် neighbor များသာ ဝင်သည် —
+`Alice`၊ `Carol`၊ `Ledger Service`။ `Audit Store` က 2-hop ဖြစ်သောကြောင့် **မပါ** ပါ။
 
 - `visited` — သွားပြီးသား node စုစုပေါင်း
-- `frontier` — လက်ရှိ hop ၏ ဝင်ရောက်နေတဲ့ node များ
-- `nxt -= visited` က ပြန်လာတဲ့ node များကို ဖယ်ပါတယ် (ဒါက loop ကို တားဆီးပါတယ်)
+- `frontier` — လက်ရှိ hop ၏ ဝင်ရောက်နေသော node များ
+- `nxt -= visited` က ပြန်လာသော node များကို ဖယ်သည် (၎င်းသည် loop ကို တားဆီးသည်)
 
 ```python
 visited = {"A"}
@@ -834,11 +834,11 @@ Output —
 ['A', 'B', 'C']
 ```
 
-> set တစ်ခုကို `print(nxt)` လို့ တိုက်ရိုက် ပြရင် အစီအစဉ်က run တစ်ခုနှင့်တစ်ခု ကွဲနိုင်သည်
+> set တစ်ခုကို `print(nxt)` ဖြင့် တိုက်ရိုက် ပြလျှင် အစီအစဉ်က run တစ်ခုနှင့်တစ်ခု ကွဲနိုင်သည်
 > (ဥပမာ `{'B', 'C'}` သို့မဟုတ် `{'C', 'B'}`)။ ထို့ကြောင့် output ကို `sorted(...)` ဖြင့်
 > ပြသသည်။
 
-### `hops=2` ဖြစ်ရင်
+### `hops=2` ဖြစ်လျှင်
 
 ```python
 from collections import defaultdict
@@ -898,9 +898,9 @@ Output —
 3
 ```
 
-`hops=2` ဖြစ်ရင် `Audit Store` ပါ ဝင်လာပြီး edge သုံးခု ဖြစ်ပါတယ်။ `hops` တန်ဖိုး
-တိုးလိုက်ခြင်းက context ကို ကြီးထွားစေပါတယ် — ဒါကြောင့် hop bound ကို
-token budget အလိုက် သတ်မှတ်ရပါတယ်။
+`hops=2` ဖြစ်လျှင် `Audit Store` ပါ ဝင်လာပြီး edge သုံးခု ဖြစ်သည်။ `hops` တန်ဖိုး
+တိုးလိုက်ခြင်းက context ကို ကြီးထွားစေသည် — ထို့ကြောင့် hop bound ကို
+token budget အလိုက် သတ်မှတ်ရသည်။
 
 ---
 
@@ -933,11 +933,11 @@ Payments Squad --BUILDS--> Ledger Service
 ```
 
 List comprehension က edge တိုင်းကို `f"{s} --{r}--> {o}"` ဖြင့် string line အဖြစ်
-ပြောင်းပါတယ်။ `"\n".join(lines)` က line များကို newline ဖြင့် ဆက်ပါတယ်။ `\n` က
-string literal ထဲတွင် **newline character** ဖြစ်ပါတယ်။
+ပြောင်းသည်။ `"\n".join(lines)` က line များကို newline ဖြင့် ဆက်သည်။ `\n` က
+string literal ထဲတွင် **newline character** ဖြစ်သည်။
 
-`context.splitlines()` က string ကို newline အလိုက် ခွဲပြီး list ပြန်ပါတယ် (newline
-မပါ)။ ဒါက prompt context ကို retrieve မှုတိုင်း တိကျစွာ ပြန်စစ်ဖို့ သုံးပါတယ်။
+`context.splitlines()` က string ကို newline အလိုက် ခွဲပြီး list ပြန်သည် (newline
+မပါ)။ ၎င်းသည် prompt context ကို retrieve မှုတိုင်း တိကျစွာ ပြန်စစ်ရန် သုံးသည်။
 
 ---
 
@@ -987,15 +987,15 @@ Unknown
 ```
 
 `[re.sub(r"[^a-z]", "", token) for token in question.lower().split()]` က question ကို
-စကားလုံးများအဖြစ် ခွဲပြီး (split)၊ စာလုံးမဟုတ်သည့် character များ (`?`, space) ဖယ်ပါတယ်။
-`[^a-z]` က \"`a-z` မဟုတ်သော\" ဆိုလိုတယ်။
+စကားလုံးများအဖြစ် ခွဲပြီး (split)၊ စာလုံးမဟုတ်သည့် character များ (`?`, space) ဖယ်သည်။
+`[^a-z]` က \"`a-z` မဟုတ်သော\" ဆိုလိုသည်။
 
-`if keyword in words:` က `words` list ထဲ keyword ရှိ/မရှိ စစ်တာပါ။ ရှိရင် သက်ဆိုင်ရာ
-relation ကို `targets` ထဲ ထည့်ပါတယ်။ ပြီးရင် target relation တိုင်းအတွက် edge များကို
-စစ်ပြီး object က anchor ဖြစ်ရင် **subject** ကို အဖြေအဖြစ် ပြန်ပါတယ်။
+`if keyword in words:` က `words` list ထဲ keyword ရှိ/မရှိ စစ်ဆေးခြင်း ဖြစ်သည်။ ရှိလျှင် သက်ဆိုင်ရာ
+relation ကို `targets` ထဲ ထည့်သည်။ ပြီးလျှင် target relation တိုင်းအတွက် edge များကို
+စစ်ပြီး object က anchor ဖြစ်လျှင် **subject** ကို အဖြေအဖြစ် ပြန်သည်။
 
-တတိယလိုင်းက သက်ဆိုင်တဲ့ edge မတွေ့လို့ `"Unknown"` ပြန်ပါတယ် — unknown အခြေအနေကို
-generator က လုံခြုံစွာ ကိုင်တွယ်ပါတယ်။
+တတိယလိုင်းက သက်ဆိုင်သော edge မတွေ့သောကြောင့် `"Unknown"` ပြန်သည် — unknown အခြေအနေကို
+generator က လုံခြုံစွာ ကိုင်တွယ်သည်။
 
 ---
 
@@ -1253,8 +1253,8 @@ full pipeline ingest -> retrieve -> serialize -> generate: OK
 | Who leads the Payments Squad? | `['Payments Squad']` | `4` | `3` | `Carol` |
 | Who builds the Ledger service? | `['Ledger Service']` | — | — | `Payments Squad` |
 
-`Audit Store` သည် hop ကန့်သတ်ချက်ကြောင့် context မှ ထွက်သွားပါတယ် — ဤသို့ hop bound
-ကို တိတိကျကျ သတ်မှတ်ခြင်းဖြင့် context token၊ Cost နှင့် latency ကို ထိန်းနိုင်ပါတယ်။
+`Audit Store` သည် hop ကန့်သတ်ချက်ကြောင့် context မှ ထွက်သွားသည် — ဤသို့ hop bound
+ကို တိတိကျကျ သတ်မှတ်ခြင်းဖြင့် context token၊ Cost နှင့် latency ကို ထိန်းနိုင်သည်။
 Entity resolution မရှိပါက graph တွင် `Payments Squad` နှင့် `Payments team` node
 နှစ်ခု ကွဲနေပြီး \"ဘယ်သူက Payments squad ကို leads\" ဆိုသည့် question ကို ဖြေနိုင်တော့မည်
 မဟုတ်ပါ။
@@ -1292,11 +1292,11 @@ print(repr(resolve_entity("Unknown Corp.", canonical, aliases)))
 
 **အဖြေ — 1. `'Payments Squad'` နှင့် `'Unknown Corp'`**
 
-အကြောင်းရင်း — ပထမ — `"Payments team."` ကို `strip(" .,;:")` လိုက်ရင် `"Payments team"`။
-`.lower()` လိုက်ရင် `"payments team"`။ `aliases.get("payments team", ...)` က
+အကြောင်းရင်း — ပထမ — `"Payments team."` ကို `strip(" .,;:")` လိုက်လျှင် `"Payments team"`။
+`.lower()` လိုက်လျှင် `"payments team"`။ `aliases.get("payments team", ...)` က
 `"payments squad"` ပြန်သည်။ ထို key အတွက် `canonical.get(...)` က `"Payments Squad"` ပြန်သည်။
 
-ဒုတိယ — `"Unknown Corp."` ကို strip လိုက်ရင် `"Unknown Corp"`။ lower = `"unknown corp"`။
+ဒုတိယ — `"Unknown Corp."` ကို strip လိုက်လျှင် `"Unknown Corp"`။ lower = `"unknown corp"`။
 Alias တွင်မရှိ၊ canonical တွင်လည်းမရှိသဖြင့် fallback ဖြစ်သည့်
 `surface.strip(" .,;:")` = `"Unknown Corp"` ကို ပြန်သည်။ fallback တွင်
 **မူရင်း case ထိန်း** ထားပြီး trailing `.` ဖယ်ထားသည်ကို သတိထားပါ။
@@ -1306,8 +1306,8 @@ Alias တွင်မရှိ၊ canonical တွင်လည်းမရှိ
 ---
 
 **အဓိက မှတ်ထားရန်** — Pipeline တစ်ခုလုံး၏ correctness (chunk → graph → retrieval →
-answer) ကို LLM မလိုဘဲ test လုပ်နိုင်ပါတယ်။ Overlap က triple များကို ထပ်ထွက်စေပေမဲ့
-dedupe က provenance ပါ ထိန်းပြီး ပေါင်းပါတယ်။ Entity resolution မရှိရင် graph ကွဲပြီး
+answer) ကို LLM မလိုဘဲ test လုပ်နိုင်သည်။ Overlap က triple များကို ထပ်ထွက်စေသော်လည်း
+dedupe က provenance ပါ ထိန်းပြီး ပေါင်းသည်။ Entity resolution မရှိလျှင် graph ကွဲပြီး
 multi-hop question ဖြေနိုင်တော့မည် မဟုတ်ပါ။ hop bound ကို တိတိကျကျ သတ်မှတ်ခြင်းဖြင့်
-context token ကို ထိန်းပါတယ်။ Lab ဤခုသည် M08 ၏ exercise ခြောက်ခုလုံးကို
-`[PASS] All 6/6 exercises passed successfully.` ဖြင့် ပိတ်ပါတယ်။
+context token ကို ထိန်းသည်။ Lab ဤခုသည် M08 ၏ exercise ခြောက်ခုလုံးကို
+`[PASS] All 6/6 exercises passed successfully.` ဖြင့် ပိတ်သည်။

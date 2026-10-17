@@ -6,20 +6,20 @@
 
 ---
 
-ဒီ Python code ကို RAG (Retrieval-Augmented Generation) pipeline တစ်ခုမှာ stages တွေကို
-dependency အစီအစဉ်အတိုင်း အလိုအလျောက် စီပေးဖို့ အသုံးပြုထားပါတယ်။
+ဤ Python code ကို RAG (Retrieval-Augmented Generation) pipeline တစ်ခုတွင် stages တွေကို
+dependency အစီအစဉ်အတိုင်း အလိုအလျောက် စီပေးရန် အသုံးပြုထားသည်။
 
-ဒီ code မှာ အဓိကလေ့လာရမယ့် Python concepts တွေကတော့ dictionary, tuple, list, set, while loop,
-list comprehension, all(), assert နဲ့ function တို့ဖြစ်ပါတယ်။
+ဤ code တွင် အဓိကလေ့လာရမည့် Python concepts များသည် dictionary, tuple, list, set, while loop,
+list comprehension, all(), assert နှင့် function တို့ဖြစ်သည်။
 
 ---
 
-## 1. Pipeline ဆိုတာဘာလဲ။
+## 1. Pipeline ဟူသည် ဘာလဲ။
 
-Pipeline ဆိုတာ အလုပ်တစ်ခုကို အဆင့်ဆင့် ဆက်စပ်လုပ်ဆောင်စေတဲ့ workflow ဖြစ်ပါတယ်။
+Pipeline သည် အလုပ်တစ်ခုကို အဆင့်ဆင့် ဆက်စပ်လုပ်ဆောင်စေသည့် workflow ဖြစ်သည်။
 
-ဥပမာ IT Help Chatbot မှာ user ၏ မေးခွန်းကို ဖြေဖို့အတွက် knowledge documents တွေကို
-အရင်ပြင်ဆင်ပြီး၊ သက်ဆိုင်တဲ့ information တွေကို ရှာဖွေကာ နောက်ဆုံး LLM နဲ့ အဖြေထုတ်ရပါတယ်။
+ဥပမာ IT Help Chatbot တွင် user ၏ မေးခွန်းကို ဖြေရန်အတွက် knowledge documents တွေကို
+အရင်ပြင်ဆင်ပြီး၊ သက်ဆိုင်သော information တွေကို ရှာဖွေကာ နောက်ဆုံး LLM နှင့် အဖြေထုတ်ရသည်။
 
 - **1. ingest** — Documents များကို လက်ခံသိမ်းဆည်းခြင်း
 - **2. chunk** — Documents များကို အပိုင်းငယ်များ ခွဲခြင်း
@@ -28,10 +28,10 @@ Pipeline ဆိုတာ အလုပ်တစ်ခုကို အဆင့်
 - **5. retrieve** — သက်ဆိုင်ရာ content ကို ရှာဖွေခြင်း
 - **6. generate** — LLM ဖြင့် အဖြေထုတ်ပေးခြင်း
 
-ဥပမာ chunk stage ကို မလုပ်ရသေးဘဲ embed ကို အရင်လုပ်လို့ မရပါဘူး။ အကြောင်းက embed ဟာ
-chunk ပြီးမှ ရလာတဲ့ data ကို လိုအပ်လို့ပါ။
+ဥပမာ chunk stage ကို မလုပ်ရသေးဘဲ embed ကို အရင်လုပ်နိုင်ခြင်း မရှိပါ။ အကြောင်းက embed သည်
+chunk ပြီးမှ ရလာသည့် data ကို လိုအပ်သောကြောင့် ဖြစ်သည်။
 
-ဒီလို အဆင့်တစ်ခုနဲ့တစ်ခု မှီခိုနေမှုကို **dependency** လို့ခေါ်ပါတယ်။
+ဤသို့ အဆင့်တစ်ခုနှင့်တစ်ခု မှီခိုနေမှုကို **dependency** ဟုခေါ်သည်။
 
 ---
 
@@ -48,52 +48,52 @@ PIPELINE_DEPENDENCIES = {
 }
 ```
 
-ဒီနေရာမှာ `PIPELINE_DEPENDENCIES` ဟာ Python dictionary တစ်ခုဖြစ်ပါတယ်။ Dictionary မှာ
-`key: value` ပုံစံနဲ့ data တွေ သိမ်းထားပါတယ်။
+ဤနေရာတွင် `PIPELINE_DEPENDENCIES` သည် Python dictionary တစ်ခုဖြစ်သည်။ Dictionary တွင်
+`key: value` ပုံစံနှင့် data တွေ သိမ်းထားသည်။
 
-ဥပမာ — `"chunk": ("ingest",)` မှာ
+ဥပမာ — `"chunk": ("ingest",)` တွင်
 
-- `"chunk"` က key ဖြစ်ပါတယ်။
-- `("ingest",)` က value ဖြစ်ပြီး chunk အတွက် လိုအပ်တဲ့ dependency ကို ဖော်ပြပါတယ်။
+- `"chunk"` က key ဖြစ်သည်။
+- `("ingest",)` က value ဖြစ်ပြီး chunk အတွက် လိုအပ်သော dependency ကို ဖော်ပြသည်။
 
-ဒီ dictionary ထဲက key တစ်ခုချင်းစီဟာ pipeline stage တစ်ခုဖြစ်ပြီး value က အဲဒီ stage မစခင်
-ပြီးထားရမယ့် stages တွေကို ဖော်ပြပါတယ်။
+ဤ dictionary ထဲက key တစ်ခုချင်းစီသည် pipeline stage တစ်ခုဖြစ်ပြီး value က ထို stage မစခင်
+ပြီးထားရမည့် stages တွေကို ဖော်ပြသည်။
 
 | Stage | Dependency | အဓိပ္ပာယ် |
 | --- | --- | --- |
 | ingest | `()` | အရင်လုပ်စရာ stage မရှိ |
-| chunk | `("ingest",)` | ingest ပြီးရမယ် |
-| embed | `("chunk",)` | chunk ပြီးရမယ် |
-| index | `("embed",)` | embed ပြီးရမယ် |
-| retrieve | `("index",)` | index ပြီးရမယ် |
-| generate | `("retrieve",)` | retrieve ပြီးရမယ် |
+| chunk | `("ingest",)` | ingest ပြီးရမည် |
+| embed | `("chunk",)` | chunk ပြီးရမည် |
+| index | `("embed",)` | embed ပြီးရမည် |
+| retrieve | `("index",)` | index ပြီးရမည် |
+| generate | `("retrieve",)` | retrieve ပြီးရမည် |
 
-### `()` နဲ့ `("ingest",)` ဘာကွာသလဲ။
+### `()` နှင့် `("ingest",)` ဘာကွာသလား။
 
 ```python
 "ingest": ()
 ```
 
-`()` ဟာ empty tuple ဖြစ်ပါတယ်။ `ingest` stage မှာ dependency မရှိဘူးလို့ ဆိုလိုပါတယ်။
+`()` သည် empty tuple ဖြစ်သည်။ `ingest` stage တွင် dependency မရှိပါဟု ဆိုလိုသည်။
 
 ```python
 "chunk": ("ingest",)
 ```
 
-ဒီမှာ `("ingest",)` ဟာ item တစ်ခုပါတဲ့ tuple ဖြစ်ပါတယ်။ Python မှာ item တစ်ခုပါတဲ့ tuple ကို
-သတ်မှတ်တဲ့အခါ comma `,` ထည့်ဖို့ လိုပါတယ်။
+ဤတွင် `("ingest",)` သည် item တစ်ခုပါပါသော tuple ဖြစ်သည်။ Python တွင် item တစ်ခုပါပါသော tuple ကို
+သတ်မှတ်သည့်အခါ comma `,` ထည့်ရန် လိုသည်။
 
 ```python
 print(type(("ingest",)))   # <class 'tuple'>
 print(type(("ingest")))    # <class 'str'>
 ```
 
-ဒီကွာခြားချက်က အရေးကြီးပါတယ်။ Function က dependency တွေကို စစ်ဆေးတဲ့အခါ tuple ဖြစ်နေဖို့
-လိုပါတယ်။
+ဤကွာခြားချက်က အရေးကြီးသည်။ Function က dependency တွေကို စစ်ဆေးသည့်အခါ tuple ဖြစ်နေရန်
+လိုသည်။
 
 ---
 
-## 3. `UNORDERED_STAGES` — မူလအစီအစဉ်မကျတဲ့ stages များ
+## 3. `UNORDERED_STAGES` — မူလအစီအစဉ်မကျသည့် stages များ
 
 ```python
 UNORDERED_STAGES = [
@@ -106,15 +106,15 @@ UNORDERED_STAGES = [
 ]
 ```
 
-ဒီ list ထဲမှာ stages ၆ ခုကို ရည်ရွယ်ချက်ရှိရှိ အစီအစဉ်မကျအောင် ထည့်ထားပါတယ်။
+ဤ list ထဲတွင် stages ၆ ခုကို ရည်ရွယ်ချက်ရှိရှိ အစီအစဉ်မကျအောင် ထည့်ထားသည်။
 
-Python က ဒီ list အတိုင်းပဲ လုပ်ဆောင်မယ်ဆိုရင် `generate` က အရင်ရောက်နေမှာပါ။ ဒါပေမဲ့
-dependency အရ `generate` ကို နောက်ဆုံးမှ လုပ်ရမှာ ဖြစ်ပါတယ်။
+Python က ဤ list အတိုင်းသာ လုပ်ဆောင်မည်ဆိုလျှင် `generate` က အရင်ရောက်နေမည်။ သို့သော်
+dependency အရ `generate` ကို နောက်ဆုံးမှ လုပ်ရမည်။
 
-ဒါကြောင့် `topological_order()` function ကို အသုံးပြုပြီး မှန်ကန်တဲ့အစီအစဉ်ကို ပြန်စီမှာ ဖြစ်ပါတယ်။
+ထို့ကြောင့် `topological_order()` function ကို အသုံးပြုပြီး မှန်ကန်သောအစီအစဉ်ကို ပြန်စီမည်။
 
-မှတ်ချက် — `UNORDERED_STAGES` ဆိုတဲ့ variable name က list ထဲမှာ မူလအစီအစဉ်ကို
-မယုံကြည်ဘဲ dependency အပေါ်မူတည်ပြီး စီမယ်ဆိုတာကို ဖော်ပြပါတယ်။
+မှတ်ချက် — `UNORDERED_STAGES` ဆိုသည့် variable name က list ထဲတွင် မူလအစီအစဉ်ကို
+မယုံကြည်ဘဲ dependency အပေါ်မူတည်ပြီး စီမည်ကို ဖော်ပြသည်။
 
 ---
 
@@ -125,13 +125,13 @@ def topological_order(stages, dependencies):
     """Return a deterministic order in which every stage follows its dependencies."""
 ```
 
-ဒီ code က `topological_order` ဆိုတဲ့ function ကို ဖန်တီးထားတာပါ။ Function မှာ parameters
-နှစ်ခု ပါပါတယ်။
+ဤ code က `topological_order` ဆိုသည့် function ကို ဖန်တီးထားခြင်း ဖြစ်သည်။ Function တွင် parameters
+နှစ်ခု ပါသည်။
 
-- `stages` — စီစဉ်ပေးရမယ့် stage တွေ။
+- `stages` — စီစဉ်ပေးရမည့် stage တွေ။
 - `dependencies` — Stage တစ်ခုစီ၏ dependency တွေ။
 
-Function ကို ခေါ်တဲ့အခါ —
+Function ကို ခေါ်သည့်အခါ —
 
 ```python
 order = topological_order(
@@ -140,16 +140,16 @@ order = topological_order(
 )
 ```
 
-ဆိုပြီး arguments တွေ ပေးလိုက်တဲ့အတွက် —
+ဆိုပြီး arguments တွေ ပေးလိုက်သည့်အတွက် —
 
-- `stages` ထဲကို `UNORDERED_STAGES` ၏တန်ဖိုး ဝင်လာမယ်။
-- `dependencies` ထဲကို `PIPELINE_DEPENDENCIES` ၏တန်ဖိုး ဝင်လာမယ်။
+- `stages` ထဲကို `UNORDERED_STAGES` ၏တန်ဖိုး ဝင်လာမည်။
+- `dependencies` ထဲကို `PIPELINE_DEPENDENCIES` ၏တန်ဖိုး ဝင်လာမည်။
 
-Function အတွင်းမှာ ဒီ data တွေကို အသုံးပြုပြီး အစီအစဉ်ကို တွက်ချက်မှာပါ။
+Function အတွင်းတွင် ဤ data တွေကို အသုံးပြုပြီး အစီအစဉ်ကို တွက်ချက်မည်။
 
-`"""..."""` က docstring ဖြစ်ပြီး function ၏ ရည်ရွယ်ချက်ကို ရှင်းပြထားတာ ဖြစ်ပါတယ်။
+`"""..."""` က docstring ဖြစ်ပြီး function ၏ ရည်ရွယ်ချက်ကို ရှင်းပြထားခြင်း ဖြစ်သည်။
 
-> **မှတ်ချက်** — ဒီနေရာမှာ function ၏ **ခေါင်းစီး (signature) နှင့် docstring ကိုသာ** ပြထားသည်။
+> **မှတ်ချက်** — ဤနေရာတွင် function ၏ **ခေါင်းစီး (signature) နှင့် docstring ကိုသာ** ပြထားသည်။
 > Body ကို အောက်ပိုင်း အပိုင်း ၅ မှ ၁၂ အထိ တစ်ကြောင်းချင်း ရှင်းပြထားသည်။ Function အပြည့်အစုံကို
 > `solution.md` တွင်လည်း ကြည့်နိုင်ပြီး၊ အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းထားသော runnable version ကို
 > အပိုင်း ၁၃ တွင် ဖော်ပြထားသည်။
@@ -162,8 +162,8 @@ Function အတွင်းမှာ ဒီ data တွေကို အသုံ
 ordered = []
 ```
 
-ဒီမှာ empty list တစ်ခု ဖန်တီးထားပါတယ်။ `ordered` ထဲမှာ dependency အရ မှန်ကန်တဲ့အစီအစဉ်နဲ့
-ရွေးချယ်ပြီးသား stages တွေကို ထည့်သွားမှာပါ။
+ဤတွင် empty list တစ်ခု ဖန်တီးထားသည်။ `ordered` ထဲတွင် dependency အရ မှန်ကန်သောအစီအစဉ်နှင့်
+ရွေးချယ်ပြီးသား stages တွေကို ထည့်သွားမည်။
 
 ဥပမာ —
 
@@ -178,7 +178,7 @@ ordered.append("ingest")
 ["ingest"]
 ```
 
-ဖြစ်သွားပါပြီ။ နောက်ထပ် stage တွေကို dependency ပြည့်မီတဲ့အခါ ထပ်ထည့်သွားမှာပါ။
+ဖြစ်သွားပါပြီ။ နောက်ထပ် stage တွေကို dependency ပြည့်မီသောအခါ ထပ်ထည့်သွားမည်။
 
 ---
 
@@ -188,11 +188,11 @@ ordered.append("ingest")
 remaining = sorted(set(stages))
 ```
 
-ဒီတစ်ကြောင်းမှာ Python operations သုံးခုကို တွေ့ရပါတယ်။
+ဤတစ်ကြောင်းတွင် Python operations သုံးခုကို တွေ့ရသည်။
 
 ### `set(stages)`
 
-`set()` က ထပ်နေတဲ့ items တွေကို ဖယ်ရှားပြီး unique values တွေကို ရရှိစေပါတယ်။
+`set()` က ထပ်နေသော items တွေကို ဖယ်ရှားပြီး unique values တွေကို ရရှိစေသည်။
 
 ဥပမာ —
 
@@ -202,17 +202,17 @@ stages = ["embed", "ingest", "embed", "chunk"]
 print(set(stages))
 ```
 
-Output က set အမျိုးအစား ဖြစ်ပါတယ်။ ပြသတဲ့အစီအစဉ်က တစ်သမတ်တည်း ဖြစ်မယ်လို့ မယူဆသင့်ပါဘူး။
+Output က set အမျိုးအစား ဖြစ်သည်။ ပြသသည့်အစီအစဉ်က တစ်သမတ်တည်း ဖြစ်မည်ဟု မယူဆသင့်ပါ။
 
 ```text
 {'embed', 'ingest', 'chunk'}
 ```
 
-ဒီနေရာမှာ `embed` က နှစ်ခါပါနေပေမဲ့ `set()` က တစ်ခုတည်းသာ ထားပေးပါတယ်။
+ဤနေရာတွင် `embed` က နှစ်ခါပါနေပေမဲ့ `set()` က တစ်ခုတည်းသာ ထားပေးသည်။
 
 ### `sorted(...)`
 
-`sorted()` က items တွေကို sorting လုပ်ပြီး list အသစ်တစ်ခု ပြန်ပေးပါတယ်။
+`sorted()` က items တွေကို sorting လုပ်ပြီး list အသစ်တစ်ခု ပြန်ပေးသည်။
 
 ```python
 print(sorted(["generate", "embed", "ingest"]))
@@ -224,20 +224,20 @@ Output —
 ['embed', 'generate', 'ingest']
 ```
 
-ဒီ code မှာ `set()` ကို အရင်သုံးပြီး `sorted()` ကို နောက်မှ သုံးထားတာကြောင့် duplicate မရှိဘဲ
-အစီအစဉ်တကျ ဖြစ်သွားပါတယ်။
+ဤ code တွင် `set()` ကို အရင်သုံးပြီး `sorted()` ကို နောက်မှ သုံးထားခြင်းကြောင့် duplicate မရှိဘဲ
+အစီအစဉ်တကျ ဖြစ်သွားသည်။
 
-အဲဒါကြောင့် —
+၎င်းကြောင့် —
 
 ```python
 remaining = sorted(set(stages))
 ```
 
-ဟာ stages တွေကို unique ဖြစ်အောင်လုပ်ပြီး alphabetical order နဲ့ စီထားတဲ့ list ကို `remaining`
-ထဲ သိမ်းတာဖြစ်ပါတယ်။
+သည် stages တွေကို unique ဖြစ်အောင်လုပ်ပြီး alphabetical order နှင့် စီထားသော list ကို `remaining`
+ထဲ သိမ်းခြင်းဖြစ်သည်။
 
-သတိပြုရန် — Alphabetical order က dependency order မဟုတ်ပါဘူး။ Function က dependency
-ပြည့်မီတဲ့ stage ကိုသာ ရွေးချယ်မှာ ဖြစ်ပါတယ်။
+သတိပြုရန် — Alphabetical order က dependency order မဟုတ်ပါ။ Function က dependency
+ပြည့်မီသော stage ကိုသာ ရွေးချယ်မည်။
 
 ---
 
@@ -247,9 +247,9 @@ remaining = sorted(set(stages))
 while remaining:
 ```
 
-`while` loop ဆိုတာ condition မှန်နေသရွေ့ code တွေကို ထပ်ခါထပ်ခါ လုပ်ဆောင်ပေးတာပါ။
+`while` loop သည် condition မှန်နေသရွေ့ code တွေကို ထပ်ခါထပ်ခါ လုပ်ဆောင်ပေးခြင်း ဖြစ်သည်။
 
-Python မှာ —
+Python တွင် —
 
 ```python
 remaining = ["chunk", "embed"]
@@ -259,17 +259,17 @@ while remaining:
     remaining.pop()
 ```
 
-ဆိုရင် `remaining` list ထဲမှာ items ရှိနေသေးသရွေ့ loop ဆက်လုပ်ပါမယ်။ List အလွတ်ဖြစ်သွားရင်
-`while remaining` က `False` ဖြစ်သွားပြီး loop ရပ်သွားပါတယ်။
+ဆိုလျှင် `remaining` list ထဲတွင် items ရှိနေသေးသရွေ့ loop ဆက်လုပ်ပါမည်။ List အလွတ်ဖြစ်သွားလျှင်
+`while remaining` က `False` ဖြစ်သွားပြီး loop ရပ်သွားသည်။
 
-ဒီ pipeline code မှာ stage တစ်ခုကို ရွေးချယ်ပြီးတိုင်း `remaining` ထဲကနေ ဖယ်ရှားပါတယ်။
-Stage အားလုံး ရွေးချယ်ပြီးတဲ့အခါ loop ရပ်သွားမှာပါ။
+ဤ pipeline code တွင် stage တစ်ခုကို ရွေးချယ်ပြီးတိုင်း `remaining` ထဲကနေ ဖယ်ရှားသည်။
+Stage အားလုံး ရွေးချယ်ပြီးသည့်အခါ loop ရပ်သွားမည်။
 
 ---
 
-## 8. `ready = [...]` — Dependency ပြည့်မီတဲ့ stage ကို ရှာခြင်း
+## 8. `ready = [...]` — Dependency ပြည့်မီသော stage ကို ရှာခြင်း
 
-ဒီအပိုင်းက code ၏ အဓိက logic ဖြစ်ပါတယ်။
+ဤအပိုင်းက code ၏ အဓိက logic ဖြစ်သည်။
 
 ```python
 ready = [
@@ -278,7 +278,7 @@ ready = [
 ]
 ```
 
-ဒါကို **list comprehension** လို့ခေါ်ပါတယ်။ အဓိပ္ပာယ်ကို အပိုင်းလိုက် ကြည့်ရအောင်။
+၎င်းကို **list comprehension** ဟုခေါ်သည်။ အဓိပ္ပာယ်ကို အပိုင်းလိုက် ကြည့်ကြပါမည်။
 
 ### `for s in remaining`
 
@@ -286,7 +286,7 @@ ready = [
 for s in remaining
 ```
 
-`remaining` ထဲက stage တစ်ခုချင်းစီကို `s` ဆိုတဲ့ variable ထဲ ယူပါတယ်။
+`remaining` ထဲက stage တစ်ခုချင်းစီကို `s` ဆိုသည့် variable ထဲ ယူသည်။
 
 ဥပမာ —
 
@@ -294,7 +294,7 @@ for s in remaining
 remaining = ["chunk", "embed", "generate", "index", "ingest", "retrieve"]
 ```
 
-ဒီ loop က stage တစ်ခုချင်းစီကို စစ်ဆေးသွားမှာပါ။
+ဤ loop က stage တစ်ခုချင်းစီကို စစ်ဆေးသွားမည်။
 
 ### `dependencies[s]`
 
@@ -302,7 +302,7 @@ remaining = ["chunk", "embed", "generate", "index", "ingest", "retrieve"]
 dependencies[s]
 ```
 
-ဒါက dictionary ထဲက `s` နဲ့ သက်ဆိုင်တဲ့ dependency ကို ယူတာပါ။
+၎င်းသည် dictionary ထဲက `s` နှင့် သက်ဆိုင်သော dependency ကို ယူခြင်း ဖြစ်သည်။
 
 ဥပမာ —
 
@@ -344,8 +344,8 @@ Output —
 d in ordered
 ```
 
-ဒါက `d` ဆိုတဲ့ dependency ဟာ `ordered` list ထဲမှာ ရှိပြီးသားလားဆိုတာ စစ်ဆေးပါတယ်။
-ရှိရင် `True`၊ မရှိရင် `False` ပြန်ပေးပါတယ်။
+၎င်းသည် `d` ဆိုသည့် dependency သည် `ordered` list ထဲတွင် ရှိပြီးသားဖြစ်ခြင်းကို စစ်ဆေးသည်။
+ရှိလျှင် `True`၊ မရှိလျှင် `False` ပြန်ပေးသည်။
 
 ```python
 ordered = ["ingest"]
@@ -360,7 +360,7 @@ print("chunk" in ordered)    # False
 all(d in ordered for d in dependencies[s])
 ```
 
-`all()` က condition အားလုံး `True` ဖြစ်မှ `True` ပြန်ပေးပါတယ်။
+`all()` က condition အားလုံး `True` ဖြစ်မှ `True` ပြန်ပေးသည်။
 
 ဥပမာ —
 
@@ -376,7 +376,7 @@ Output —
 True
 ```
 
-ဒါပေမဲ့ —
+သို့သော် —
 
 ```python
 ordered = ["ingest", "chunk"]
@@ -390,14 +390,14 @@ Output —
 False
 ```
 
-အကြောင်းက `embed` က `ordered` ထဲမှာ မရှိသေးလို့ပါ။
+အကြောင်းက `embed` က `ordered` ထဲတွင် မရှိသေးသောကြောင့် ဖြစ်သည်။
 
-အထူးသတိထားရန် — `dependencies[s]` က empty tuple `()` ဖြစ်နေတဲ့အခါ `all()` က `True`
-ပြန်ပေးပါတယ်။ ဒါကြောင့် dependency မရှိတဲ့ `ingest` လို stage တွေကို အစမှာ ရွေးချယ်နိုင်တာပါ။
+အထူးသတိထားရန် — `dependencies[s]` က empty tuple `()` ဖြစ်နေသောအခါ `all()` က `True`
+ပြန်ပေးသည်။ ထို့ကြောင့် dependency မရှိသည့် `ingest` လို stage တွေကို အစတွင် ရွေးချယ်နိုင်ခြင်း ဖြစ်သည်။
 
-### ဒီ logic ကို ရိုးရိုး Python နဲ့ ရေးကြည့်မယ်
+### ဤ logic ကို ရိုးရိုး Python နှင့် ရေးကြည့်မည်
 
-အောက်ပါ code က list comprehension နဲ့ အဓိပ္ပာယ်တူပါတယ်။
+အောက်ပါ code က list comprehension နှင့် အဓိပ္ပာယ်တူသည်။
 
 ```python
 ready = []
@@ -407,7 +407,7 @@ for s in remaining:
         ready.append(s)
 ```
 
-ဒီပုံစံနဲ့ ရေးကြည့်ရင် အလုပ်လုပ်ပုံကို ပိုနားလည်နိုင်ပါတယ်။
+ဤပုံစံနှင့် ရေးကြည့်လျှင် အလုပ်လုပ်ပုံကို ပိုနားလည်နိုင်သည်။
 
 ---
 
@@ -417,13 +417,13 @@ for s in remaining:
 assert ready, "dependency cycle detected"
 ```
 
-`assert` က condition တစ်ခု မှန်မမှန် စစ်ဆေးဖို့ အသုံးပြုပါတယ်။
+`assert` က condition တစ်ခု မှန်မမှန် စစ်ဆေးရန် အသုံးပြုသည်။
 
-- `ready` ထဲမှာ stage တစ်ခုခုရှိရင် condition က `True` ဖြစ်ပြီး ဆက်လုပ်ပါမယ်။
-- `ready` က empty list ဖြစ်နေရင် `AssertionError` ဖြစ်ပြီး `"dependency cycle detected"`
-  ဆိုတဲ့ message ကို ပြပါမယ်။
+- `ready` ထဲတွင် stage တစ်ခုခုရှိလျှင် condition က `True` ဖြစ်ပြီး ဆက်လုပ်ပါမည်။
+- `ready` က empty list ဖြစ်နေလျှင် `AssertionError` ဖြစ်ပြီး `"dependency cycle detected"`
+  ဆိုသည့် message ကို ပြပါမည်။
 
-ဘာကြောင့် empty ဖြစ်နိုင်တာလဲ။ ဥပမာ —
+ဘာကြောင့် empty ဖြစ်နိုင်ခြင်းလဲ။ ဥပမာ —
 
 ```python
 dependencies = {
@@ -432,12 +432,12 @@ dependencies = {
 }
 ```
 
-ဒီမှာ `ingest` က `chunk` ကို စောင့်နေပြီး `chunk` ကလည်း `ingest` ကို စောင့်နေပါတယ်။
-ဘယ် stage ကိုမှ အရင်စလုပ်လို့ မရတော့ပါဘူး။ ဒါကို **dependency cycle** လို့ခေါ်ပါတယ်။
+ဤတွင် `ingest` က `chunk` ကို စောင့်နေပြီး `chunk` ကလည်း `ingest` ကို စောင့်နေသည်။
+ဘယ် stage ကိုမှ အရင်စလုပ်နိုင်ခြင်း မရှိတော့ပါ။ ၎င်းကို **dependency cycle** ဟုခေါ်သည်။
 
-သတိပြုရန် — ဒီ `assert` က cycle ရှိတာတစ်ခုတည်းကို သက်သေမပြနိုင်ပါဘူး။ `ready` မရှိရခြင်းဟာ
-stage တစ်ခု၏ dependency ကို dictionary ထဲမှာ မထည့်ထားတာကြောင့်လည်း ဖြစ်နိုင်ပါတယ်။
-ဒီဥပမာမှာတော့ dependency dictionary ပြည့်စုံပြီး မှန်ကန်တယ်လို့ ယူဆထားပါတယ်။
+သတိပြုရန် — ဤ `assert` က cycle ရှိခြင်းတစ်ခုတည်းကို သက်သေမပြနိုင်ပါ။ `ready` မရှိရခြင်းသည်
+stage တစ်ခု၏ dependency ကို dictionary ထဲတွင် မထည့်ထားခြင်းကြောင့်လည်း ဖြစ်နိုင်သည်။
+ဤဥပမာတွင် dependency dictionary ပြည့်စုံပြီး မှန်ကန်သည်ဟု ယူဆထားသည်။
 
 ---
 
@@ -447,8 +447,8 @@ stage တစ်ခု၏ dependency ကို dictionary ထဲမှာ မထ�
 chosen = ready[0]
 ```
 
-`ready` ထဲမှာ dependency ပြည့်မီတဲ့ stage တွေ ရှိနေပါတယ်။ `ready[0]` က list ၏ ပထမဆုံး
-item ကို ရွေးယူတာဖြစ်ပါတယ်။ Python list indexing က `0` ကနေ စပါတယ်။
+`ready` ထဲတွင် dependency ပြည့်မီသော stage တွေ ရှိနေသည်။ `ready[0]` က list ၏ ပထမဆုံး
+item ကို ရွေးယူခြင်းဖြစ်သည်။ Python list indexing က `0` ကနေ စသည်။
 
 ဥပမာ —
 
@@ -466,9 +466,9 @@ Output —
 ingest
 ```
 
-ဒီ code မှာ `remaining` ကို အရင် `sorted()` လုပ်ထားတဲ့အတွက် တစ်ချိန်တည်းမှာ ရွေးချယ်နိုင်တဲ့
-stage အများအပြားရှိရင် alphabetical order အရ ပထမဆုံး stage ကို ရွေးချယ်ပါတယ်။ ဒါကြောင့်
-result က **deterministic** ဖြစ်ပါတယ်။
+ဤ code တွင် `remaining` ကို အရင် `sorted()` လုပ်ထားသောအတွက် တစ်ချိန်တည်းတွင် ရွေးချယ်နိုင်သည့်
+stage အများအပြားရှိလျှင် alphabetical order အရ ပထမဆုံး stage ကို ရွေးချယ်သည်။ ထို့ကြောင့်
+result က **deterministic** ဖြစ်သည်။
 
 ---
 
@@ -479,7 +479,7 @@ ordered.append(chosen)
 remaining.remove(chosen)
 ```
 
-ဒီနှစ်ကြောင်းက stage တစ်ခု ရွေးချယ်ပြီးနောက် လုပ်ဆောင်ရမယ့် အဆင့်တွေပါ။
+ဤနှစ်ကြောင်းက stage တစ်ခု ရွေးချယ်ပြီးနောက် လုပ်ဆောင်ရမည့် အဆင့်များ ဖြစ်သည်။
 
 ပထမကြောင်း —
 
@@ -487,7 +487,7 @@ remaining.remove(chosen)
 ordered.append(chosen)
 ```
 
-ရွေးချယ်ပြီးသား stage ကို `ordered` list ၏ အဆုံးမှာ ထည့်ပါတယ်။
+ရွေးချယ်ပြီးသား stage ကို `ordered` list ၏ အဆုံးတွင် ထည့်သည်။
 
 ဒုတိယကြောင်း —
 
@@ -495,7 +495,7 @@ ordered.append(chosen)
 remaining.remove(chosen)
 ```
 
-အဲဒီ stage ကို `remaining` list ထဲက ဖယ်ရှားပါတယ်။
+ထို stage ကို `remaining` list ထဲက ဖယ်ရှားသည်။
 
 ဥပမာ —
 
@@ -519,8 +519,8 @@ Output —
 ['chunk']
 ```
 
-အခု `ingest` က ပြီးသွားပြီလို့ သတ်မှတ်ထားတဲ့အတွက် `chunk` ကို နောက်တစ်ကြိမ် dependency
-စစ်တဲ့အခါ ရွေးချယ်နိုင်ပါပြီ။
+အခု `ingest` က ပြီးသွားပြီဟု သတ်မှတ်ထားသောအတွက် `chunk` ကို နောက်တစ်ကြိမ် dependency
+စစ်သည့်အခါ ရွေးချယ်နိုင်ပါပြီ။
 
 ---
 
@@ -530,8 +530,8 @@ Output —
 return ordered
 ```
 
-Function အလုပ်လုပ်ပြီးဆုံးတဲ့အခါ ရရှိလာတဲ့ list ကို ပြန်ပေးပါတယ်။ `return` က function ၏
-result ကို function ကို ခေါ်ထားတဲ့နေရာဆီ ပြန်ပို့ပေးတာပါ။
+Function အလုပ်လုပ်ပြီးဆုံးသည့်အခါ ရရှိလာသည့် list ကို ပြန်ပေးသည်။ `return` က function ၏
+result ကို function ကို ခေါ်ထားသောနေရာဆီ ပြန်ပို့ပေးခြင်း ဖြစ်သည်။
 
 ### Function ကို ခေါ်သုံးခြင်း
 
@@ -539,14 +539,14 @@ result ကို function ကို ခေါ်ထားတဲ့နေရာ�
 order = topological_order(UNORDERED_STAGES, PIPELINE_DEPENDENCIES)
 ```
 
-ဒီမှာ function က ပြန်ပေးတဲ့ list ကို `order` variable ထဲ သိမ်းထားပါတယ်။
+ဤတွင် function က ပြန်ပေးသည့် list ကို `order` variable ထဲ သိမ်းထားသည်။
 
 ---
 
 ## 13. နောက်ဆုံး `print(order)` — အစိတ်အပိုင်းအားလုံး ပေါင်းစည်းခြင်း
 
 အပိုင်း ၄ မှ ၁၂ အထိ ရှင်းပြခဲ့သည့် အစိတ်အပိုင်းအားလုံးကို ပေါင်းစည်းလိုက်ပါက runnable script
-တစ်ခု အပြည့်အစုံ ရရှိပါတယ်။ အောက်ပါ code ကို ကူးပြီး run ကြည့်နိုင်ပါတယ် —
+တစ်ခု အပြည့်အစုံ ရရှိသည်။ အောက်ပါ code ကို ကူးပြီး run ကြည့်နိုင်သည် —
 
 ```python
 PIPELINE_DEPENDENCIES = {
@@ -581,15 +581,15 @@ Output —
 ['ingest', 'chunk', 'embed', 'index', 'retrieve', 'generate']
 ```
 
-`print(order)` က result ကို screen ပေါ်မှာ ပြပေးတာပါ။
+`print(order)` က result ကို screen ပေါ်တွင် ပြပေးခြင်း ဖြစ်သည်။
 
 ---
 
-## 14. Loop တစ်ပတ်ချင်းစီ ဘယ်လိုပြောင်းလဲသလဲ
+## 14. Loop တစ်ပတ်ချင်းစီ ဘယ်လိုပြောင်းလဲသလား
 
-အောက်က table မှာ function အလုပ်လုပ်ပုံကို အဆင့်လိုက် ကြည့်နိုင်ပါတယ်။
+အောက်က table တွင် function အလုပ်လုပ်ပုံကို အဆင့်လိုက် ကြည့်နိုင်သည်။
 
-| Loop | ရွေးချယ်နိုင်တဲ့ stage (`ready`) | ရွေးချယ်သည့် stage | `ordered` |
+| Loop | ရွေးချယ်နိုင်သည့် stage (`ready`) | ရွေးချယ်သည့် stage | `ordered` |
 | --- | --- | --- | --- |
 | 1 | ingest | ingest | ingest |
 | 2 | chunk | chunk | ingest, chunk |
@@ -598,17 +598,17 @@ Output —
 | 5 | retrieve | retrieve | ... index, retrieve |
 | 6 | generate | generate | ... retrieve, generate |
 
-ဒီဥပမာမှာ stage တစ်ခုချင်းစီဟာ stage တစ်ခုတည်းအပေါ် မှီခိုနေတာကြောင့် အစီအစဉ်က တစ်ဆင့်ချင်း
-ဖြစ်ပါတယ်။ အခြား pipeline တွေမှာ stage တစ်ခုက dependency အများအပြားအပေါ် မှီခိုနေနိုင်ပြီး၊
-dependency ပြည့်မီတဲ့ stage အများအပြားကိုလည်း ရွေးချယ်နိုင်ပါတယ်။
+ဤဥပမာတွင် stage တစ်ခုချင်းစီသည် stage တစ်ခုတည်းအပေါ် မှီခိုနေခြင်းကြောင့် အစီအစဉ်က တစ်ဆင့်ချင်း
+ဖြစ်သည်။ အခြား pipeline တွေတွင် stage တစ်ခုက dependency အများအပြားအပေါ် မှီခိုနေနိုင်ပြီး၊
+dependency ပြည့်မီသော stage အများအပြားကိုလည်း ရွေးချယ်နိုင်သည်။
 
 ---
 
 ## 15. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-ဒီ code ၏ အဓိကအယူအဆကို နားလည်ဖို့ မေးခွန်းတစ်ခုပါ။
+ဤ code ၏ အဓိကအယူအဆကို နားလည်ရန် မေးခွန်းတစ်ခု ဖြစ်သည်။
 
-**မေးခွန်း** — အောက်ပါ dependency ရှိတယ်ဆိုပါစို့။
+**မေးခွန်း** — အောက်ပါ dependency ရှိသည်ဆိုပါစို့။
 
 ```python
 dependencies = {
@@ -618,11 +618,11 @@ dependencies = {
 }
 ```
 
-`ordered = ["ingest"]` ဖြစ်နေတဲ့အချိန်မှာ ဘယ် stage ကို `ready` ထဲ ထည့်နိုင်မလဲ။
+`ordered = ["ingest"]` ဖြစ်နေသောအချိန်တွင် ဘယ် stage ကို `ready` ထဲ ထည့်နိုင်မလဲ။
 
 1. `ingest` တစ်ခုတည်း
 2. `chunk` တစ်ခုတည်း
-3. `chunk` နဲ့ `embed` နှစ်ခုလုံး
+3. `chunk` နှင့် `embed` နှစ်ခုလုံး
 4. Stage အားလုံး
 
 <details>
@@ -630,16 +630,16 @@ dependencies = {
 
 **အဖြေ — 2. `chunk` တစ်ခုတည်း**
 
-အကြောင်းရင်း — `ready` ထဲ ဝင်ဖို့ `dependencies[s]` က `ordered` ထဲ အားလုံး ရှိပြီးသား
-ဖြစ်ရပါတယ်။
+အကြောင်းရင်း — `ready` ထဲ ဝင်ရန် `dependencies[s]` က `ordered` ထဲ အားလုံး ရှိပြီးသား
+ဖြစ်ရသည်။
 
-- `ingest` — `ordered` ထဲ ရှိပြီးသား၊ ဒါပေမဲ့ `remaining` ထဲ မရှိတော့သဖြင့် ထပ်ရွေးစရာ မလို
+- `ingest` — `ordered` ထဲ ရှိပြီးသား၊ သို့သော် `remaining` ထဲ မရှိတော့သဖြင့် ထပ်ရွေးစရာ မလို
 - `chunk` — dependency `("ingest",)` ဖြစ်ပြီး `ingest` က `ordered` ထဲ ရှိပြီး → **ready**
 - `embed` — dependency `("chunk",)` ဖြစ်ပြီး `chunk` က `ordered` ထဲ မရှိသေး → ready မဖြစ်
 
 </details>
 
-ဒီ code ၏ အဓိကသဘောတရားက stage တစ်ခုကို dependency အားလုံး ပြည့်မီမှ ရွေးချယ်ပြီး၊
-ရွေးချယ်ပြီးတဲ့ stage ကို မှတ်တမ်းတင်ကာ နောက် stage တွေအတွက် ထပ်စစ်ဆေးခြင်း ဖြစ်ပါတယ်။
-ဒီနည်းလမ်းကို **Topological Sorting** လို့ခေါ်ပြီး workflow orchestration, build systems နဲ့
-data pipelines တွေမှာ အသုံးပြုနိုင်ပါတယ်။
+ဤ code ၏ အဓိကသဘောတရားက stage တစ်ခုကို dependency အားလုံး ပြည့်မီမှ ရွေးချယ်ပြီး၊
+ရွေးချယ်ပြီးသည့် stage ကို မှတ်တမ်းတင်ကာ နောက် stage တွေအတွက် ထပ်စစ်ဆေးခြင်း ဖြစ်သည်။
+ဤနည်းလမ်းကို **Topological Sorting** ဟုခေါ်ပြီး workflow orchestration, build systems နှင့်
+data pipelines တွေတွင် အသုံးပြုနိုင်သည်။

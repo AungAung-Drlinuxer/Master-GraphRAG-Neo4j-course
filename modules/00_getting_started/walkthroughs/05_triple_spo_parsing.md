@@ -6,35 +6,35 @@
 
 ---
 
-ဒီ Exercise မှာ Python ကို အသုံးပြုပြီး text lines တွေထဲက Subject, Predicate, Object (SPO)
-triples တွေကို parse လုပ်ခြင်း၊ သန့်စင်ခြင်း၊ validation လုပ်ခြင်းနဲ့ duplicate records တွေကို
-ဖယ်ရှားခြင်း ကို လေ့လာပါမယ်။
+ဤ Exercise တွင် Python ကို အသုံးပြုပြီး text lines တွေထဲက Subject, Predicate, Object (SPO)
+triples တွေကို parse လုပ်ခြင်း၊ သန့်စင်ခြင်း၊ validation လုပ်ခြင်းနှင့် duplicate records တွေကို
+ဖယ်ရှားခြင်းကို လေ့လာပါမည်။
 
-ဒီ concept က RAG နဲ့ GraphRAG system တွေအတွက် အရေးကြီးပါတယ်။ သာမန် Vector Search က text
-chunks တွေကို ရှာဖွေဖို့ အဓိကအသုံးပြုပေမဲ့၊ GraphRAG မှာတော့ entities နဲ့ သူတို့အကြား
-relationships တွေကို structured triples အနေနဲ့ သိမ်းဆည်းနိုင်ပါတယ်။
+ဤ concept က RAG နှင့် GraphRAG system တွေအတွက် အရေးကြီးသည်။ သာမန် Vector Search က text
+chunks တွေကို ရှာဖွေရန် အဓိကအသုံးပြုပေမဲ့၊ GraphRAG တွင် entities နှင့် သူတို့အကြား
+relationships တွေကို structured triples အနေနှင့် သိမ်းဆည်းနိုင်သည်။
 
-ဥပမာ IT knowledge base ထဲမှာ —
+ဥပမာ IT knowledge base ထဲတွင် —
 
-- Application A က Kubernetes Cluster B ပေါ်မှာ run နေတယ်။
-- Kubernetes Cluster B က Database C ကို ချိတ်ဆက်ထားတယ်။
-- Alice Chen က Acme Corp မှာ အလုပ်လုပ်တယ်။
+- Application A က Kubernetes Cluster B ပေါ်တွင် run နေသည်။
+- Kubernetes Cluster B က Database C ကို ချိတ်ဆက်ထားသည်။
+- Alice Chen က Acme Corp တွင် အလုပ်လုပ်သည်။
 
-လို relationship တွေကို triples အနေနဲ့ ကိုယ်စားပြုနိုင်ပါတယ်။
+လို relationship တွေကို triples အနေနှင့် ကိုယ်စားပြုနိုင်သည်။
 
-ဒီ Exercise မှာ လေ့လာမယ့် Python concepts တွေကတော့ `re` module၊ Regular Expressions၊
+ဤ Exercise တွင် လေ့လာမည့် Python concepts များသည် `re` module၊ Regular Expressions၊
 dataclass၊ `frozen=True`၊ function၊ `enumerate()`၊ tuple unpacking၊ `match.group()`၊
-`continue`၊ `set()` နဲ့ `sorted()` တို့ ဖြစ်ပါတယ်။
+`continue`၊ `set()` နှင့် `sorted()` တို့ ဖြစ်သည်။
 
 ---
 
-## 1. SPO Triple ဆိုတာဘာလဲ။
+## 1. SPO Triple ဟူသည် ဘာလဲ။
 
-SPO ဆိုတာ —
+SPO သည် —
 
 - **S** — Subject: ဘယ်သူ သို့မဟုတ် ဘယ်အရာအကြောင်း ပြောနေလဲ။
-- **P** — Predicate: Subject နဲ့ Object ကြားက relationship သို့မဟုတ် ဆက်စပ်မှု။
-- **O** — Object: Relationship နဲ့ ဆက်စပ်နေတဲ့ အရာ သို့မဟုတ် entity။
+- **P** — Predicate: Subject နှင့် Object ကြားက relationship သို့မဟုတ် ဆက်စပ်မှု။
+- **O** — Object: Relationship နှင့် ဆက်စပ်နေသော အရာ သို့မဟုတ် entity။
 
 ဥပမာ —
 
@@ -42,25 +42,25 @@ SPO ဆိုတာ —
 Alice Chen | works_at | Acme Corp | chunk-02
 ```
 
-ဒီ line ကို အောက်ပါအတိုင်း အဓိပ္ပာယ်ဖော်နိုင်ပါတယ်။
+ဤ line ကို အောက်ပါအတိုင်း အဓိပ္ပာယ်ဖော်နိုင်သည်။
 
 | အစိတ်အပိုင်း | တန်ဖိုး | အဓိပ္ပာယ် |
 | --- | --- | --- |
 | Subject | `Alice Chen` | ဘယ်သူ/ဘယ်အရာအကြောင်း |
 | Predicate | `works_at` | Relationship အမျိုးအစား |
-| Object | `Acme Corp` | ဆက်စပ်နေတဲ့ entity |
-| Source | `chunk-02` | ဤ triple ကို ထုတ်ယူခဲ့တဲ့ document chunk |
+| Object | `Acme Corp` | ဆက်စပ်နေသော entity |
+| Source | `chunk-02` | ဤ triple ကို ထုတ်ယူခဲ့သည့် document chunk |
 
-ဒီနေရာမှာ `chunk-02` က SPO triple ၏ အစိတ်အပိုင်းသုံးခုထဲက တစ်ခု မဟုတ်ပါဘူး။ Triple ကို
-ဘယ် source chunk ကနေ ထုတ်ယူထားသလဲဆိုတာ မှတ်သားပေးတဲ့ **provenance information**
-ဖြစ်ပါတယ်။
+ဤနေရာတွင် `chunk-02` က SPO triple ၏ အစိတ်အပိုင်းသုံးခုထဲက တစ်ခု မဟုတ်ပါ။ Triple ကို
+မည်သည့် source chunk မှ ထုတ်ယူထားသည်ကို မှတ်သားပေးသည့် **provenance information**
+ဖြစ်သည်။
 
-GraphRAG မှာ ဒီလို triples တွေကို graph nodes နဲ့ relationships တွေ ဖန်တီးဖို့
-အသုံးပြုနိုင်ပါတယ်။
+GraphRAG တွင် ဤသို့ triples တွေကို graph nodes နှင့် relationships တွေ ဖန်တီးရန်
+အသုံးပြုနိုင်သည်။
 
 ---
 
-## 2. `import re` နဲ့ `from dataclasses import dataclass`
+## 2. `import re` နှင့် `from dataclasses import dataclass`
 
 Code ၏ ပထမအပိုင်းက —
 
@@ -71,28 +71,28 @@ from dataclasses import dataclass
 
 ### `import re`
 
-`re` က Python ၏ Regular Expression module ဖြစ်ပါတယ်။ Regular Expression (Regex) ဆိုတာ
-စာသားတွေမှာ သတ်မှတ်ထားတဲ့ pattern နဲ့ ကိုက်ညီမှုရှိမရှိ ရှာဖွေ၊ စစ်ဆေး၊ ခွဲခြမ်းစိတ်ဖြာဖို့
-အသုံးပြုတဲ့ နည်းလမ်းဖြစ်ပါတယ်။
+`re` က Python ၏ Regular Expression module ဖြစ်သည်။ Regular Expression (Regex) သည်
+စာသားတွေတွင် သတ်မှတ်ထားသော pattern နှင့် ကိုက်ညီမှုရှိမရှိ ရှာဖွေ၊ စစ်ဆေး၊ ခွဲခြမ်းစိတ်ဖြာရန်
+အသုံးပြုသည့် နည်းလမ်းဖြစ်သည်။
 
-ဒီ Exercise မှာ Regex ကို အသုံးပြုပြီး line တစ်ကြောင်းမှာ fields ၄ ခုကို `|` နဲ့
-မှန်ကန်စွာ ခွဲထားသလားဆိုတာ စစ်ဆေးပါမယ်။
+ဤ Exercise တွင် Regex ကို အသုံးပြုပြီး line တစ်ကြောင်းတွင် fields ၄ ခုကို `|` နှင့်
+မှန်ကန်စွာ ခွဲထားခြင်း ရှိ/မရှိကို စစ်ဆေးပါမည်။
 
 ### `dataclass`
 
-`dataclass` က data တွေကို သိမ်းဆည်းဖို့ ရည်ရွယ်ထားတဲ့ class တွေကို ပိုမိုလွယ်ကူစွာ
-သတ်မှတ်နိုင်စေပါတယ်။
+`dataclass` က data တွေကို သိမ်းဆည်းရန် ရည်ရွယ်ထားသော class တွေကို ပိုမိုလွယ်ကူစွာ
+သတ်မှတ်နိုင်စေသည်။
 
-ဥပမာ SPO triple တစ်ခုစီမှာ Subject၊ Predicate၊ Object နဲ့ Source Chunk ဆိုတဲ့ fields
-၄ ခု ပါဝင်ပါတယ်။ အဲဒီ fields တွေကို Python object အဖြစ် ကိုယ်စားပြုဖို့ dataclass ကို
-အသုံးပြုမှာပါ။
+ဥပမာ SPO triple တစ်ခုစီတွင် Subject၊ Predicate၊ Object နှင့် Source Chunk ဆိုသည့် fields
+၄ ခု ပါဝင်သည်။ ထို fields တွေကို Python object အဖြစ် ကိုယ်စားပြုရန် dataclass ကို
+အသုံးပြုမည်။
 
 ---
 
 ## 3. `TRIPLE_PATTERN` — Regex Pattern သတ်မှတ်ခြင်း
 
-သင့်ပေးထားတဲ့ code ထဲမှာ Regex အပိုင်းကို Markdown formatting ကြောင့် အနည်းငယ်
-ပျက်နေပါတယ်။ Python မှာ အလုပ်လုပ်မယ့် ပုံစံက ဒီလိုဖြစ်ပါတယ်။
+သင့်ပေးထားသော code ထဲတွင် Regex အပိုင်းကို Markdown formatting ကြောင့် အနည်းငယ်
+ပျက်နေသည်။ Python တွင် အလုပ်လုပ်မည့် ပုံစံက ဤသို့ဖြစ်သည်။
 
 ```python
 TRIPLE_PATTERN = re.compile(
@@ -100,17 +100,17 @@ TRIPLE_PATTERN = re.compile(
 )
 ```
 
-ဒီ code က Regex pattern ကို compile လုပ်ပြီး `TRIPLE_PATTERN` variable ထဲမှာ သိမ်းထားတာပါ။
-အခု Regex ကို အပိုင်းလိုက် ရှင်းပြပါမယ်။
+ဤ code က Regex pattern ကို compile လုပ်ပြီး `TRIPLE_PATTERN` variable ထဲတွင် သိမ်းထားခြင်း ဖြစ်သည်။
+အခု Regex ကို အပိုင်းလိုက် ရှင်းပြပါမည်။
 
-### 3.1 `r"..."` ဆိုတာဘာလဲ။
+### 3.1 `r"..."` ဟူသည် ဘာလဲ။
 
 ```python
 r"^(?P<s>[^|]+)..."
 ```
 
-ရှေ့က `r` က **raw string** ဖြစ်ပါတယ်။ Regex ထဲမှာ `\` လို backslash ပါဝင်တဲ့ pattern တွေကို
-ရေးတဲ့အခါ အသုံးဝင်ပါတယ်။
+ရှေ့က `r` က **raw string** ဖြစ်သည်။ Regex ထဲတွင် `\` လို backslash ပါဝင်သည့် pattern တွေကို
+ရေးသည့်အခါ အသုံးဝင်သည်။
 
 ဥပမာ —
 
@@ -118,20 +118,20 @@ r"^(?P<s>[^|]+)..."
 r"\s+"
 ```
 
-ဆိုတာ Regex အတွက် `\s+` ကို မူရင်းပုံစံအတိုင်း ထိန်းထားပေးတာဖြစ်ပါတယ်။
+သည် Regex အတွက် `\s+` ကို မူရင်းပုံစံအတိုင်း ထိန်းထားပေးခြင်းဖြစ်သည်။
 
-### 3.2 `^` နဲ့ `$`
+### 3.2 `^` နှင့် `$`
 
 ```text
 ^ ... $
 ```
 
-ဒီနှစ်ခုက စာသား၏ အစနဲ့ အဆုံးကို ကိုယ်စားပြုပါတယ်။
+ဤနှစ်ခုက စာသား၏ အစနှင့် အဆုံးကို ကိုယ်စားပြုသည်။
 
 - `^` — စာသားအစ။
 - `$` — စာသားအဆုံး။
 
-ဒါကြောင့် Regex တစ်ခုလုံးက line တစ်ကြောင်းလုံးကို သတ်မှတ်ထားတဲ့ pattern နဲ့ ကိုက်ညီရပါမယ်။
+ထို့ကြောင့် Regex တစ်ခုလုံးက line တစ်ကြောင်းလုံးကို သတ်မှတ်ထားသော pattern နှင့် ကိုက်ညီရပါမည်။
 
 ### 3.3 `(?P<s>...)` — Named Group
 
@@ -139,42 +139,42 @@ r"\s+"
 (?P<s>[^|]+)
 ```
 
-ဒီအပိုင်းက စာသားထဲက field တစ်ခုကို match လုပ်ပြီး `s` ဆိုတဲ့အမည်နဲ့ သိမ်းပေးပါတယ်။
+ဤအပိုင်းက စာသားထဲက field တစ်ခုကို match လုပ်ပြီး `s` ဆိုသည့်အမည်နှင့် သိမ်းပေးသည်။
 Regex ၏ named group syntax က —
 
 ```text
 (?P<name>...)
 ```
 
-ဖြစ်ပါတယ်။ ဒီ Exercise မှာ —
+ဖြစ်သည်။ ဤ Exercise တွင် —
 
-| Regex group | သိမ်းဆည်းမယ့် field |
+| Regex group | သိမ်းဆည်းမည့် field |
 | --- | --- |
 | `(?P<s>...)` | Subject |
 | `(?P<p>...)` | Predicate |
 | `(?P<o>...)` | Object |
 | `(?P<c>...)` | Source chunk |
 
-နောက်ပိုင်းမှာ `match.group("s")` လို့ ရေးပြီး Subject field ကို ပြန်ရယူနိုင်ပါတယ်။
+နောက်ပိုင်းတွင် `match.group("s")` ဟု ရေးပြီး Subject field ကို ပြန်ရယူနိုင်သည်။
 
-### 3.4 `[^|]+` ဆိုတာဘာလဲ။
+### 3.4 `[^|]+` ဟူသည် ဘာလဲ။
 
 ```python
 [^|]+
 ```
 
-ဒီမှာ Regex syntax နှစ်ခု ပါဝင်ပါတယ်။
+ဤတွင် Regex syntax နှစ်ခု ပါဝင်သည်။
 
-- `[^|]` — `|` မဟုတ်တဲ့ character တစ်ခုကို match လုပ်ခြင်း။
-- `+` — အဲဒီ character တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုပြီး ပါရမယ်လို့ ဆိုလိုခြင်း။
+- `[^|]` — `|` မဟုတ်သည့် character တစ်ခုကို match လုပ်ခြင်း။
+- `+` — ထို character တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုပြီး ပါရမည်ဟု ဆိုလိုခြင်း။
 
-ဒါကြောင့် `[^|]+` က `|` မပါဝင်တဲ့ စာသားတစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုတဲ့ စာသားကို
-match လုပ်ပါတယ်။
+ထို့ကြောင့် `[^|]+` က `|` မပါဝင်သည့် စာသားတစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုသည့် စာသားကို
+match လုပ်သည်။
 
-ဥပမာ — `Alice Chen`၊ `works_at`၊ `Acme Corp`၊ `chunk-02` ဒီလို fields တွေကို
-match လုပ်နိုင်ပါတယ်။
+ဥပမာ — `Alice Chen`၊ `works_at`၊ `Acme Corp`၊ `chunk-02` ဤသို့ fields တွေကို
+match လုပ်နိုင်သည်။
 
-ဒါပေမဲ့ empty field ဖြစ်နေတဲ့အခါတော့ မကိုက်ညီပါဘူး။
+သို့သော် empty field ဖြစ်နေသောအခါတော့ မကိုက်ညီပါ။
 
 ဥပမာ —
 
@@ -182,7 +182,7 @@ match လုပ်နိုင်ပါတယ်။
 |empty_subject|Acme Corp|chunk-03
 ```
 
-အစမှာ `|` မတိုင်ခင် subject field အလွတ်ဖြစ်နေတဲ့အတွက် `[^|]+` က match မဖြစ်ပါဘူး။
+အစတွင် `|` မတိုင်ခင် subject field အလွတ်ဖြစ်နေသောအတွက် `[^|]+` က match မဖြစ်ပါ။
 
 ### 3.5 `\|` — Pipe character ကို match လုပ်ခြင်း
 
@@ -190,11 +190,11 @@ match လုပ်နိုင်ပါတယ်။
 \|
 ```
 
-Regex မှာ `|` က အခြေအနေတစ်ခု သို့မဟုတ် အခြားတစ်ခု (alternation) ကို ကိုယ်စားပြုနိုင်တဲ့
-special character ဖြစ်ပါတယ်။ တကယ့် pipe symbol `|` ကိုပဲ match လုပ်ချင်တဲ့အတွက် `\|` လို့
-ရေးထားတာပါ။
+Regex တွင် `|` က အခြေအနေတစ်ခု သို့မဟုတ် အခြားတစ်ခု (alternation) ကို ကိုယ်စားပြုနိုင်သည့်
+special character ဖြစ်သည်။ တကယ့် pipe symbol `|` ကိုသာ match လုပ်ချင်သည့်အတွက် `\|` ဟု
+ရေးထားခြင်း ဖြစ်သည်။
 
-Regex pattern တစ်ခုလုံးက အောက်ပါ field ပုံစံနဲ့ ကိုက်ညီဖို့ စစ်ဆေးပါတယ်။
+Regex pattern တစ်ခုလုံးက အောက်ပါ field ပုံစံနှင့် ကိုက်ညီရန် စစ်ဆေးသည်။
 
 ```text
 Subject|Predicate|Object|SourceChunk
@@ -220,12 +220,12 @@ class Triple:
         )
 ```
 
-ဒီ class က SPO triple တစ်ခုကို Python object တစ်ခုအနေနဲ့ သိမ်းဆည်းပေးပါတယ်။
+ဤ class က SPO triple တစ်ခုကို Python object တစ်ခုအနေနှင့် သိမ်းဆည်းပေးသည်။
 
 ### 4.1 `class Triple`
 
-`Triple` ဆိုတဲ့ class အသစ်တစ်ခုကို သတ်မှတ်တာပါ။ Class ဆိုတာ data နဲ့ အဲဒီ data တွေအပေါ်
-လုပ်ဆောင်နိုင်တဲ့ methods တွေကို တစ်နေရာတည်းမှာ စုစည်းထားနိုင်တဲ့ ပုံစံတစ်ခု ဖြစ်ပါတယ်။
+`Triple` ဆိုသည့် class အသစ်တစ်ခုကို သတ်မှတ်ခြင်း ဖြစ်သည်။ Class သည် data နှင့် ထို data တွေအပေါ်
+လုပ်ဆောင်နိုင်သည့် methods တွေကို တစ်နေရာတည်းတွင် စုစည်းထားနိုင်သည့် ပုံစံတစ်ခု ဖြစ်သည်။
 
 ### 4.2 `subject: str`
 
@@ -236,8 +236,8 @@ object: str
 source_chunk: str
 ```
 
-ဒီလို `: str` နဲ့ ရေးထားတာကို **type annotation** လို့ ခေါ်ပါတယ်။ ဒီ fields တွေမှာ
-string values တွေ သိမ်းဖို့ ရည်ရွယ်ထားကြောင်း ဖော်ပြပါတယ်။
+ဤသို့ `: str` နှင့် ရေးထားခြင်းကို **type annotation** ဟု ခေါ်သည်။ ဤ fields တွေတွင်
+string values တွေ သိမ်းရန် ရည်ရွယ်ထားကြောင်း ဖော်ပြသည်။
 
 ဥပမာ —
 
@@ -250,8 +250,8 @@ triple = Triple(
 )
 ```
 
-အခု `triple` ထဲမှာ field ၄ ခု ပါဝင်တဲ့ object တစ်ခု ရရှိပါတယ်။ Field တစ်ခုချင်းစီကို
-ဒီလို ပြန်ဖတ်နိုင်ပါတယ်။
+အခု `triple` ထဲတွင် field ၄ ခု ပါဝင်သည့် object တစ်ခု ရရှိသည်။ Field တစ်ခုချင်းစီကို
+ဤသို့ ပြန်ဖတ်နိုင်သည်။
 
 ```python
 triple = Triple(
@@ -276,8 +276,8 @@ Acme Corp
 chunk-02
 ```
 
-`@dataclass` ကြောင့် ဒီ fields တွေကို constructor ထဲမှာ သီးခြား `__init__()` method
-ရေးစရာမလိုဘဲ သတ်မှတ်ထားတဲ့အစီအစဉ်အတိုင်း arguments တွေပေးပြီး object ဖန်တီးနိုင်ပါတယ်။
+`@dataclass` ကြောင့် ဤ fields တွေကို constructor ထဲတွင် သီးခြား `__init__()` method
+ရေးစရာမလိုဘဲ သတ်မှတ်ထားသောအစီအစဉ်အတိုင်း arguments တွေပေးပြီး object ဖန်တီးနိုင်သည်။
 
 ### 4.3 `frozen=True`
 
@@ -285,8 +285,8 @@ chunk-02
 @dataclass(frozen=True)
 ```
 
-ဒီ option က `Triple` object ကို **immutable** အဖြစ် သတ်မှတ်ပေးပါတယ်။ Object ဖန်တီးပြီးနောက်
-field တန်ဖိုးတွေကို ပြင်ဆင်လို့ မရတော့ပါဘူး။
+ဤ option က `Triple` object ကို **immutable** အဖြစ် သတ်မှတ်ပေးသည်။ Object ဖန်တီးပြီးနောက်
+field တန်ဖိုးတွေကို ပြင်ဆင်နိုင်ခြင်း မရှိတော့ပါ။
 
 ဥပမာ —
 
@@ -300,16 +300,16 @@ triple = Triple(
 triple.subject = "Bob Ray"
 ```
 
-ဒီလိုပြင်ဆင်လိုက်ရင် `FrozenInstanceError` ဖြစ်လာပါမယ်။
+ဤသို့ပြင်ဆင်လိုက်လျှင် `FrozenInstanceError` ဖြစ်လာပါမည်။
 
-ဘာကြောင့် ဒီလိုသတ်မှတ်ရတာလဲ။ ဒီ Exercise မှာ နောက်ပိုင်း `set(triples)` လုပ်ဖို့
-လိုအပ်ပါတယ်။ Default settings တွေနဲ့ `@dataclass(frozen=True)` သုံးတဲ့အခါ fields တွေက
-hashable ဖြစ်နေသရွေ့ `Triple` objects တွေကို `set` ထဲ ထည့်နိုင်ပါတယ်။ ဒါက duplicate
-`Triple` objects တွေကို ဖယ်ရှားဖို့ အသုံးဝင်ပါတယ်။
+ဘာကြောင့် ဤသို့သတ်မှတ်ရခြင်းလဲ။ ဤ Exercise တွင် နောက်ပိုင်း `set(triples)` လုပ်ရန်
+လိုအပ်သည်။ Default settings တွေနှင့် `@dataclass(frozen=True)` သုံးသည့်အခါ fields တွေက
+hashable ဖြစ်နေသရွေ့ `Triple` objects တွေကို `set` ထဲ ထည့်နိုင်သည်။ ၎င်းသည် duplicate
+`Triple` objects တွေကို ဖယ်ရှားရန် အသုံးဝင်သည်။
 
-သတိပြုရန် — `frozen=True` က object ကို ပြင်ဆင်လို့မရအောင် ကန့်သတ်ပေးတာဖြစ်ပြီး၊ fields
-တွေထဲမှာ mutable objects တွေ ထည့်ထားရင် အတွင်းပိုင်းပြင်ဆင်မှုအားလုံးကို အလိုအလျောက်
-ကာကွယ်ပေးတာ မဟုတ်ပါဘူး။ ဒီဥပမာမှာ fields အားလုံးက string တွေဖြစ်လို့ သင့်တော်ပါတယ်။
+သတိပြုရန် — `frozen=True` က object ကို ပြင်ဆင်နိုင်ခြင်းမရှိအောင် ကန့်သတ်ပေးခြင်းဖြစ်ပြီး၊ fields
+တွေထဲတွင် mutable objects တွေ ထည့်ထားလျှင် အတွင်းပိုင်းပြင်ဆင်မှုအားလုံးကို အလိုအလျောက်
+ကာကွယ်ပေးခြင်း မဟုတ်ပါ။ ဤဥပမာတွင် fields အားလုံးက string တွေဖြစ်သောကြောင့် သင့်တော်သည်။
 
 ### 4.4 `to_spo()` method
 
@@ -322,8 +322,8 @@ def to_spo(self):
     )
 ```
 
-ဒီ method က `Triple` object ကို ဖတ်ရလွယ်တဲ့ graph relationship format အဖြစ်
-ပြောင်းပေးပါတယ်။
+ဤ method က `Triple` object ကို ဖတ်ရလွယ်သည့် graph relationship format အဖြစ်
+ပြောင်းပေးသည်။
 
 ဥပမာ —
 
@@ -343,18 +343,18 @@ Output —
 (Alice Chen)-[works_at]->(Acme Corp)
 ```
 
-ဒီမှာ —
+ဤတွင် —
 
 - `(Alice Chen)` — Subject node။
 - `[works_at]` — Relationship။
 - `(Acme Corp)` — Object node။
 
-`source_chunk` ကို `to_spo()` ၏ output ထဲမှာ မထည့်ထားပါဘူး။ ဒီ method က graph
-relationship ကိုသာ ဖော်ပြပေးတာ ဖြစ်ပါတယ်။
+`source_chunk` ကို `to_spo()` ၏ output ထဲတွင် မထည့်ထားပါ။ ဤ method က graph
+relationship ကိုသာ ဖော်ပြပေးခြင်း ဖြစ်သည်။
 
-**အရေးကြီးချက်** — သင့်မူရင်း code မှာ `to_spo()` ကို သတ်မှတ်ထားပေမဲ့ နောက်ဆုံး `print()`
-ထဲမှာ အသုံးပြုမထားပါဘူး။ ဒါကြောင့် မူရင်း output က `Triple` objects တွေကို
-တိုက်ရိုက်ပြတာ မဟုတ်ဘဲ အရေအတွက်သုံးခုကိုသာ ပြပါတယ်။
+**အရေးကြီးချက်** — သင့်မူရင်း code တွင် `to_spo()` ကို သတ်မှတ်ထားပေမဲ့ နောက်ဆုံး `print()`
+ထဲတွင် အသုံးပြုမထားပါ။ ထို့ကြောင့် မူရင်း output က `Triple` objects တွေကို
+တိုက်ရိုက်ပြခြင်း မဟုတ်ဘဲ အရေအတွက်သုံးခုကိုသာ ပြသည်။
 
 ---
 
@@ -365,7 +365,7 @@ def _normalize(text):
     return re.sub(r"\s+", " ", text).strip()
 ```
 
-ဒီ function က field တစ်ခုချင်းစီ၏ whitespace တွေကို ပုံမှန်ဖြစ်အောင် ပြုပြင်ပေးပါတယ်။
+ဤ function က field တစ်ခုချင်းစီ၏ whitespace တွေကို ပုံမှန်ဖြစ်အောင် ပြုပြင်ပေးသည်။
 
 ### 5.1 `re.sub()`
 
@@ -373,17 +373,17 @@ def _normalize(text):
 re.sub(r"\s+", " ", text)
 ```
 
-`re.sub()` က Regex pattern နဲ့ ကိုက်ညီတဲ့ စာသားတွေကို သတ်မှတ်ထားတဲ့ replacement text နဲ့
-အစားထိုးပေးပါတယ်။
+`re.sub()` က Regex pattern နှင့် ကိုက်ညီသည့် စာသားတွေကို သတ်မှတ်ထားသော replacement text နှင့်
+အစားထိုးပေးသည်။
 
-ဒီမှာ —
+ဤတွင် —
 
-- `r"\s+"` — Whitespace တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုတာကို ရှာဖွေခြင်း။
-- `" "` — Single space တစ်လုံးနဲ့ အစားထိုးခြင်း။
-- `text` — ပြုပြင်ရမယ့် မူရင်းစာသား။
+- `r"\s+"` — Whitespace တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုခြင်းကို ရှာဖွေခြင်း။
+- `" "` — Single space တစ်လုံးနှင့် အစားထိုးခြင်း။
+- `text` — ပြုပြင်ရမည့် မူရင်းစာသား။
 
-Whitespace ဆိုတာ သာမန် space တင်မကဘဲ tab နဲ့ newline လို စာသားကြားလပ်မှုတွေကိုလည်း
-ဆိုလိုပါတယ်။
+Whitespace သည် သာမန် space တင်မကဘဲ tab နှင့် newline လို စာသားကြားလပ်မှုတွေကိုလည်း
+ဆိုလိုသည်။
 
 ဥပမာ —
 
@@ -401,7 +401,7 @@ Output —
 Alice Chen works_at
 ```
 
-Space အများအပြားနဲ့ tab ကို single spaces တွေအဖြစ် ပြောင်းထားပါတယ်။
+Space အများအပြားနှင့် tab ကို single spaces တွေအဖြစ် ပြောင်းထားသည်။
 
 ### 5.2 `.strip()`
 
@@ -409,7 +409,7 @@ Space အများအပြားနဲ့ tab ကို single spaces တွ
 .strip()
 ```
 
-`strip()` က စာသား၏ အစနဲ့ အဆုံးမှာရှိတဲ့ whitespace တွေကို ဖယ်ရှားပေးပါတယ်။
+`strip()` က စာသား၏ အစနှင့် အဆုံးတွင်ရှိသည့် whitespace တွေကို ဖယ်ရှားပေးသည်။
 
 ဥပမာ —
 
@@ -425,24 +425,24 @@ Output —
 Alice Chen
 ```
 
-ဒါကြောင့် —
+ထို့ကြောင့် —
 
 ```python
 def _normalize(text):
     return re.sub(r"\s+", " ", text).strip()
 ```
 
-ဟာ whitespace အများအပြားကို single space ပြောင်းပေးပြီး အစနဲ့အဆုံးက whitespace တွေကို
-ဖယ်ရှားပေးပါတယ်။
+သည် whitespace အများအပြားကို single space ပြောင်းပေးပြီး အစနှင့်အဆုံးက whitespace တွေကို
+ဖယ်ရှားပေးသည်။
 
-`_normalize` ၏ ရှေ့မှာ underscore `_` ထည့်ထားတာက ဒီ function ဟာ module အတွင်းသုံးတဲ့
-helper function ဖြစ်ကြောင်း ဖော်ပြတဲ့ Python naming convention ဖြစ်ပါတယ်။
+`_normalize` ၏ ရှေ့တွင် underscore `_` ထည့်ထားခြင်းက ဤ function သည် module အတွင်းသုံးသည့်
+helper function ဖြစ်ကြောင်း ဖော်ပြသည့် Python naming convention ဖြစ်သည်။
 
 ---
 
 ## 6. `parse_triples(lines)` — Main Parsing Function
 
-အခု Exercise ၏ အဓိက function ကို လေ့လာကြည့်ရအောင်။
+အခု Exercise ၏ အဓိက function ကို လေ့လာကြည့်ကြပါမည်။
 
 ```python
 def parse_triples(lines):
@@ -464,20 +464,20 @@ def parse_triples(lines):
     return triples, errors
 ```
 
-ဒီ function ၏ ရည်ရွယ်ချက်က input lines တွေကို စစ်ဆေးပြီး မှန်ကန်တဲ့ triples တွေကို
-တစ်စု၊ errors တွေကို တစ်စု ခွဲထုတ်ပေးဖို့ ဖြစ်ပါတယ်။
+ဤ function ၏ ရည်ရွယ်ချက်က input lines တွေကို စစ်ဆေးပြီး မှန်ကန်သော triples တွေကို
+တစ်စု၊ errors တွေကို တစ်စု ခွဲထုတ်ပေးရန် ဖြစ်သည်။
 
-### 6.1 `triples = []` နဲ့ `errors = []`
+### 6.1 `triples = []` နှင့် `errors = []`
 
 ```python
 triples = []
 errors = []
 ```
 
-ဒီနေရာမှာ empty lists နှစ်ခု ဖန်တီးထားပါတယ်။
+ဤနေရာတွင် empty lists နှစ်ခု ဖန်တီးထားသည်။
 
-- `triples` — မှန်ကန်တဲ့ `Triple` objects တွေကို သိမ်းဖို့။
-- `errors` — Parse မအောင်မြင်တဲ့ line တွေကို မှတ်တမ်းတင်ဖို့။
+- `triples` — မှန်ကန်သော `Triple` objects တွေကို သိမ်းရန်။
+- `errors` — Parse မအောင်မြင်သည့် line တွေကို မှတ်တမ်းတင်ရန်။
 
 ဥပမာ —
 
@@ -489,7 +489,7 @@ triples.append("valid data")
 errors.append((5, "malformed_field_count"))
 ```
 
-`append()` က list ၏ အဆုံးမှာ item အသစ်ထည့်ပေးပါတယ်။
+`append()` က list ၏ အဆုံးတွင် item အသစ်ထည့်ပေးသည်။
 
 ### 6.2 `enumerate(lines, start=1)`
 
@@ -497,7 +497,7 @@ errors.append((5, "malformed_field_count"))
 for line_number, raw in enumerate(lines, start=1):
 ```
 
-ဒီမှာ `enumerate()` ကို အသုံးပြုပြီး line တစ်ခုချင်းစီနဲ့ အတူ line number ကိုပါ ရယူပါတယ်။
+ဤတွင် `enumerate()` ကို အသုံးပြုပြီး line တစ်ခုချင်းစီနှင့် အတူ line number ကိုပါ ရယူသည်။
 
 ဥပမာ —
 
@@ -520,17 +520,17 @@ Output —
 3 Third line
 ```
 
-`start=1` ထည့်ထားတာကြောင့် numbering ကို `1` ကနေ စပါတယ်။ Default အနေနဲ့တော့ `0`
-ကနေ စမှာပါ။ ဒီ Exercise မှာ line number ကို အသုံးပြုပြီး ဘယ် line မှာ error ဖြစ်တယ်ဆိုတာ
-မှတ်တမ်းတင်နိုင်ပါတယ်။
+`start=1` ထည့်ထားခြင်းကြောင့် numbering ကို `1` ကနေ စသည်။ Default အနေနှင့်တော့ `0`
+ကနေ စမည်။ ဤ Exercise တွင် line number ကို အသုံးပြုပြီး ဘယ် line တွင် error ဖြစ်ခြင်း
+မှတ်တမ်းတင်နိုင်သည်။
 
-### 6.3 `raw.strip()` နဲ့ Regex match
+### 6.3 `raw.strip()` နှင့် Regex match
 
 ```python
 match = TRIPLE_PATTERN.match(raw.strip())
 ```
 
-ပထမဆုံး `raw.strip()` က line ၏ အစနဲ့ အဆုံးက whitespace တွေကို ဖယ်ရှားပါတယ်။
+ပထမဆုံး `raw.strip()` က line ၏ အစနှင့် အဆုံးက whitespace တွေကို ဖယ်ရှားသည်။
 
 ဥပမာ —
 
@@ -546,14 +546,14 @@ Output —
 Acme Corp | founded_in | Cupertino | chunk-01
 ```
 
-ပြီးရင် —
+ပြီးလျှင် —
 
 ```python
 TRIPLE_PATTERN.match(...)
 ```
 
-က Regex pattern နဲ့ ကိုက်ညီမှုရှိမရှိ စစ်ဆေးပါတယ်။ Pattern ကိုက်ညီရင် match object တစ်ခု
-ပြန်ရပါတယ်။ မကိုက်ညီရင် `None` ပြန်ရပါတယ်။
+က Regex pattern နှင့် ကိုက်ညီမှုရှိမရှိ စစ်ဆေးသည်။ Pattern ကိုက်ညီလျှင် match object တစ်ခု
+ပြန်ရသည်။ မကိုက်ညီလျှင် `None` ပြန်ရသည်။
 
 ### 6.4 `if match is None`
 
@@ -563,7 +563,7 @@ if match is None:
     continue
 ```
 
-Regex pattern နဲ့ line တစ်ကြောင်းလုံး ကိုက်ညီမှုမရှိရင် error အဖြစ် မှတ်တမ်းတင်ပါတယ်။
+Regex pattern နှင့် line တစ်ကြောင်းလုံး ကိုက်ညီမှုမရှိလျှင် error အဖြစ် မှတ်တမ်းတင်သည်။
 
 ဥပမာ —
 
@@ -571,27 +571,27 @@ Regex pattern နဲ့ line တစ်ကြောင်းလုံး ကိ�
 Broken|line
 ```
 
-ဒီ line မှာ fields နှစ်ခုသာ ရှိပါတယ်။ ဒါပေမဲ့ Regex က field ၄ ခုကို မျှော်လင့်ထားတဲ့အတွက်
-match မဖြစ်ပါဘူး။ ဒါကြောင့် —
+ဤ line တွင် fields နှစ်ခုသာ ရှိသည်။ သို့သော် Regex က field ၄ ခုကို မျှော်လင့်ထားသောအတွက်
+match မဖြစ်ပါ။ ထို့ကြောင့် —
 
 ```python
 errors.append((5, "malformed_field_count"))
 ```
 
-လို မှတ်တမ်းဝင်ပါတယ်။ ဒီ tuple မှာ —
+လို မှတ်တမ်းဝင်သည်။ ဤ tuple တွင် —
 
-- `5` — Error ဖြစ်တဲ့ line number။
+- `5` — Error ဖြစ်သည့် line number။
 - `"malformed_field_count"` — Error အမျိုးအစား။
 
-`continue` က လက်ရှိ iteration ၏ ကျန်ရှိတဲ့ code တွေကို ကျော်ပြီး နောက် line ကို
-ဆက်စစ်စေပါတယ်။ ဒါကြောင့် match မဖြစ်တဲ့ line တွေကို `Triple` အဖြစ် ဖန်တီးဖို့
-မကြိုးစားတော့ပါဘူး။
+`continue` က လက်ရှိ iteration ၏ ကျန်ရှိသည့် code တွေကို ကျော်ပြီး နောက် line ကို
+ဆက်စစ်စေသည်။ ထို့ကြောင့် match မဖြစ်သော line တွေကို `Triple` အဖြစ် ဖန်တီးရန်
+မကြိုးစားတော့ပါ။
 
 ---
 
-## 7. `match.group()` နဲ့ Fields တွေကို ထုတ်ယူခြင်း
+## 7. `match.group()` နှင့် Fields တွေကို ထုတ်ယူခြင်း
 
-Regex match အောင်မြင်သွားရင် fields တွေကို ထုတ်ယူပါတယ်။
+Regex match အောင်မြင်သွားလျှင် fields တွေကို ထုတ်ယူသည်။
 
 ```python
 subject = _normalize(match.group("s"))
@@ -600,7 +600,7 @@ obj = _normalize(match.group("o"))
 chunk = _normalize(match.group("c"))
 ```
 
-`match.group("s")` က Regex ထဲက `s` named group နဲ့ match ဖြစ်တဲ့ စာသားကို ပြန်ပေးပါတယ်။
+`match.group("s")` က Regex ထဲက `s` named group နှင့် match ဖြစ်သည့် စာသားကို ပြန်ပေးသည်။
 အလားတူ —
 
 - `match.group("p")` — Predicate။
@@ -613,7 +613,7 @@ chunk = _normalize(match.group("c"))
 subject = _normalize(match.group("s"))
 ```
 
-ဥပမာ input ထဲမှာ `"  Acme Corp "` ဆိုရင် normalize လုပ်ပြီး `Acme Corp` ဖြစ်လာပါတယ်။
+ဥပမာ input ထဲတွင် `"  Acme Corp "` ဆိုလျှင် normalize လုပ်ပြီး `Acme Corp` ဖြစ်လာသည်။
 
 ### 7.2 Predicate ကို Normalize လုပ်ခြင်း
 
@@ -621,7 +621,7 @@ subject = _normalize(match.group("s"))
 predicate = _normalize(match.group("p")).lower().replace(" ", "_")
 ```
 
-ဒီတစ်ကြောင်းမှာ operations သုံးခုကို အစဉ်လိုက် လုပ်ပါတယ်။
+ဤတစ်ကြောင်းတွင် operations သုံးခုကို အစဉ်လိုက် လုပ်သည်။
 
 ပထမ —
 
@@ -629,7 +629,7 @@ predicate = _normalize(match.group("p")).lower().replace(" ", "_")
 _normalize(match.group("p"))
 ```
 
-Whitespace တွေကို သန့်စင်ပါတယ်။
+Whitespace တွေကို သန့်စင်သည်။
 
 ဒုတိယ —
 
@@ -637,7 +637,7 @@ Whitespace တွေကို သန့်စင်ပါတယ်။
 .lower()
 ```
 
-စာလုံးတွေကို lowercase ပြောင်းပါတယ်။
+စာလုံးတွေကို lowercase ပြောင်းသည်။
 
 ```python
 print("WORKS_AT".lower())
@@ -655,7 +655,7 @@ works_at
 .replace(" ", "_")
 ```
 
-Space တွေကို underscore `_` နဲ့ အစားထိုးပါတယ်။
+Space တွေကို underscore `_` နှင့် အစားထိုးသည်။
 
 ```python
 print("reports to".replace(" ", "_"))
@@ -667,23 +667,23 @@ Output —
 reports_to
 ```
 
-ဒါကြောင့် Predicate ကို lowercase ဖြစ်အောင်နဲ့ spaces တွေကို underscores ပြောင်းပြီး
-တစ်သမတ်တည်း ဖြစ်အောင် သန့်စင်ထားတာပါ။
+ထို့ကြောင့် Predicate ကို lowercase ဖြစ်အောင်နှင့် spaces တွေကို underscores ပြောင်းပြီး
+တစ်သမတ်တည်း ဖြစ်အောင် သန့်စင်ထားခြင်း ဖြစ်သည်။
 
-သတိပြုရန် — `.replace(" ", "_")` က single space character တွေကို အစားထိုးတာဖြစ်လို့
-ပထမဆုံး `_normalize()` လုပ်ထားတာ အရေးကြီးပါတယ်။
+သတိပြုရန် — `.replace(" ", "_")` က single space character တွေကို အစားထိုးခြင်းဖြစ်သောကြောင့်
+ပထမဆုံး `_normalize()` လုပ်ထားခြင်း အရေးကြီးသည်။
 
-### 7.3 Object နဲ့ Source Chunk
+### 7.3 Object နှင့် Source Chunk
 
 ```python
 obj = _normalize(match.group("o"))
 chunk = _normalize(match.group("c"))
 ```
 
-ဒီနှစ်ခုလည်း အလားတူ normalization ကို လုပ်ပေးပါတယ်။
+ဤနှစ်ခုလည်း အလားတူ normalization ကို လုပ်ပေးသည်။
 
-ဒီ Exercise မှာ Predicate ကို lowercase ပြောင်းပေမဲ့ Subject နဲ့ Object ကို lowercase
-ပြောင်းမထားပါဘူး။ ဒါကြောင့် `Acme Corp` က `Acme Corp` အတိုင်းပဲ ကျန်နေပါမယ်။
+ဤ Exercise တွင် Predicate ကို lowercase ပြောင်းပေမဲ့ Subject နှင့် Object ကို lowercase
+ပြောင်းမထားပါ။ ထို့ကြောင့် `Acme Corp` က `Acme Corp` အတိုင်းသာ ကျန်နေပါမည်။
 
 ---
 
@@ -695,8 +695,8 @@ if not subject or not predicate or not obj or not chunk:
     continue
 ```
 
-ဒီ condition က normalize လုပ်ပြီးနောက် fields တစ်ခုခု empty ဖြစ်နေသလား စစ်ဆေးပါတယ်။
-Python မှာ empty string `""` က falsy ဖြစ်ပါတယ်။
+ဤ condition က normalize လုပ်ပြီးနောက် fields တစ်ခုခု empty ဖြစ်နေသလား စစ်ဆေးသည်။
+Python တွင် empty string `""` က falsy ဖြစ်သည်။
 
 ```python
 print(bool(""))
@@ -710,41 +710,41 @@ False
 True
 ```
 
-ဒါကြောင့် —
+ထို့ကြောင့် —
 
 ```python
 if not subject:
 ```
 
-ဆိုတာ `subject` က empty string ဖြစ်နေသလား စစ်တာပါ။
+သည် `subject` က empty string ဖြစ်နေသလား စစ်ခြင်း ဖြစ်သည်။
 
-ဒီနေရာမှာ `or` ကို သုံးထားတဲ့အတွက် fields ၄ ခုထဲက တစ်ခုခု empty ဖြစ်ရင် condition
-တစ်ခုလုံး `True` ဖြစ်ပါတယ်။ အဲဒီအခါ —
+ဤနေရာတွင် `or` ကို သုံးထားသောအတွက် fields ၄ ခုထဲက တစ်ခုခု empty ဖြစ်လျှင် condition
+တစ်ခုလုံး `True` ဖြစ်သည်။ ထိုအခါ —
 
 ```python
 errors.append((line_number, "empty_field"))
 continue
 ```
 
-နဲ့ error ကို မှတ်တမ်းတင်ပြီး နောက် line ကို ဆက်စစ်ပါတယ်။
+နှင့် error ကို မှတ်တမ်းတင်ပြီး နောက် line ကို ဆက်စစ်သည်။
 
-### အရေးကြီးတဲ့ Regex အချက်တစ်ခု
+### အရေးကြီးသော Regex အချက်တစ်ခု
 
-သင့်မူရင်း Regex မှာ `[^|]+` ကို သုံးထားပါတယ်။ `+` က field ထဲမှာ အနည်းဆုံး character
-တစ်ခု ပါရမယ်လို့ သတ်မှတ်ထားတဲ့အတွက် တကယ့် empty field ကို Regex က အစောပိုင်းမှာပဲ
-ပယ်ချလိုက်ပါတယ်။
+သင့်မူရင်း Regex တွင် `[^|]+` ကို သုံးထားသည်။ `+` က field ထဲတွင် အနည်းဆုံး character
+တစ်ခု ပါရမည်ဟု သတ်မှတ်ထားသောအတွက် တကယ့် empty field ကို Regex က အစောပိုင်းတွင်သာ
+ပယ်ချလိုက်သည်။
 
-ဒါကြောင့် —
+ထို့ကြောင့် —
 
 ```text
 |empty_subject|Acme Corp|chunk-03
 ```
 
-ဒီလို line ဟာ `empty_field` အဆင့်ကို မရောက်ဘဲ `match is None` အပိုင်းမှာ
-`malformed_field_count` အဖြစ် မှတ်တမ်းဝင်ပါတယ်။
+ဤသို့ line သည် `empty_field` အဆင့်ကို မရောက်ဘဲ `match is None` အပိုင်းတွင်
+`malformed_field_count` အဖြစ် မှတ်တမ်းဝင်သည်။
 
-တကယ့် empty fields တွေကို သီးခြား `empty_field` error အဖြစ် ခွဲခြားချင်ရင် Regex ထဲက
-`+` ကို `*` နဲ့ ပြောင်းနိုင်ပါတယ်။
+တကယ့် empty fields တွေကို သီးခြား `empty_field` error အဖြစ် ခွဲခြားချင်လျှင် Regex ထဲက
+`+` ကို `*` နှင့် ပြောင်းနိုင်သည်။
 
 ```python
 TRIPLE_PATTERN = re.compile(
@@ -752,12 +752,12 @@ TRIPLE_PATTERN = re.compile(
 )
 ```
 
-`*` က character သုညခု သို့မဟုတ် အများကြီးကို ခွင့်ပြုတာကြောင့် empty field ကိုလည်း
-match လုပ်နိုင်ပါတယ်။ ထို့နောက် `if not subject ...` validation က `empty_field` ကို
-ရှာဖွေပေးနိုင်ပါတယ်။
+`*` က character သုညခု သို့မဟုတ် အများကြီးကို ခွင့်ပြုခြင်းကြောင့် empty field ကိုလည်း
+match လုပ်နိုင်သည်။ ထို့နောက် `if not subject ...` validation က `empty_field` ကို
+ရှာဖွေပေးနိုင်သည်။
 
-ဒီပြောင်းလဲမှုက မူရင်း code ၏ စုစုပေါင်း valid records နဲ့ error counts ကို
-မပြောင်းလဲစေပေမဲ့၊ error အမျိုးအစားအလိုက် မှတ်တမ်းတင်ပုံကို ပြောင်းလဲစေပါတယ်။
+ဤပြောင်းလဲမှုက မူရင်း code ၏ စုစုပေါင်း valid records နှင့် error counts ကို
+မပြောင်းလဲစေပေမဲ့၊ error အမျိုးအစားအလိုက် မှတ်တမ်းတင်ပုံကို ပြောင်းလဲစေသည်။
 
 ---
 
@@ -767,8 +767,8 @@ match လုပ်နိုင်ပါတယ်။ ထို့နောက် 
 triples.append(Triple(subject, predicate, obj, chunk))
 ```
 
-Fields တွေ အားလုံး valid ဖြစ်ပြီဆိုရင် `Triple` object တစ်ခု ဖန်တီးပြီး `triples` list ထဲ
-ထည့်ပါတယ်။
+Fields တွေ အားလုံး valid ဖြစ်ပြီဆိုလျှင် `Triple` object တစ်ခု ဖန်တီးပြီး `triples` list ထဲ
+ထည့်သည်။
 
 ဥပမာ —
 
@@ -781,7 +781,7 @@ Triple(
 )
 ```
 
-ဒီ object က အောက်ပါ information တွေကို သိမ်းထားပါတယ်။
+ဤ object က အောက်ပါ information တွေကို သိမ်းထားသည်။
 
 | Field | Value |
 | --- | --- |
@@ -790,8 +790,8 @@ Triple(
 | `object` | `Cupertino` |
 | `source_chunk` | `chunk-01` |
 
-`triples.append(...)` က ဒီ object ကို list ထဲ ထည့်ပါတယ်။ ဒါကြောင့် valid line တစ်ကြောင်းကို
-အောင်မြင်စွာ parse လုပ်တိုင်း `triples` list ၏ အရွယ်အစား တစ်ခုတိုးလာပါတယ်။
+`triples.append(...)` က ဤ object ကို list ထဲ ထည့်သည်။ ထို့ကြောင့် valid line တစ်ကြောင်းကို
+အောင်မြင်စွာ parse လုပ်တိုင်း `triples` list ၏ အရွယ်အစား တစ်ခုတိုးလာသည်။
 
 ---
 
@@ -801,13 +801,13 @@ Triple(
 return triples, errors
 ```
 
-Function က result နှစ်ခုကို တစ်ပြိုင်နက် ပြန်ပေးပါတယ်။
+Function က result နှစ်ခုကို တစ်ပြိုင်နက် ပြန်ပေးသည်။
 
-- `triples` — Parse လုပ်ထားတဲ့ valid `Triple` objects။
-- `errors` — Parse မအောင်မြင်တဲ့ lines တွေ၏ error records။
+- `triples` — Parse လုပ်ထားသော valid `Triple` objects။
+- `errors` — Parse မအောင်မြင်သည့် lines တွေ၏ error records။
 
-Python မှာ comma ခွဲပြီး values အများအပြားကို `return` လုပ်တဲ့အခါ tuple တစ်ခုအဖြစ်
-ပြန်ရရှိပါတယ်။ ဒါကြောင့် —
+Python တွင် comma ခွဲပြီး values အများအပြားကို `return` လုပ်သည့်အခါ tuple တစ်ခုအဖြစ်
+ပြန်ရရှိသည်။ ထို့ကြောင့် —
 
 ### Unpacking ဖြင့် လက်ခံခြင်း
 
@@ -815,13 +815,13 @@ Python မှာ comma ခွဲပြီး values အများအပြာ�
 triples, errors = parse_triples(TRIPLE_LINES)
 ```
 
-မှာ function က ပြန်ပေးတဲ့ tuple ကို variable နှစ်ခုထဲ unpack လုပ်ထားတာ ဖြစ်ပါတယ်။
+တွင် function က ပြန်ပေးသည့် tuple ကို variable နှစ်ခုထဲ unpack လုပ်ထားခြင်း ဖြစ်သည်။
 
-- ပထမ value ကို `triples` ထဲ သိမ်းပါတယ်။
-- ဒုတိယ value ကို `errors` ထဲ သိမ်းပါတယ်။
+- ပထမ value ကို `triples` ထဲ သိမ်းသည်။
+- ဒုတိယ value ကို `errors` ထဲ သိမ်းသည်။
 
-ဒီလိုပုံစံကို အရင် Exercises တွေမှာလည်း တွေ့ခဲ့ပါတယ်။ ဥပမာ Exercise 4 မှာ tuple
-unpacking ကို အသုံးပြုပြီး `query_id` နဲ့ `features` ကို ခွဲယူခဲ့ပါတယ်။
+ဤသို့ပုံစံကို အရင် Exercises တွေတွင်လည်း တွေ့ခဲ့သည်။ ဥပမာ Exercise 4 တွင် tuple
+unpacking ကို အသုံးပြုပြီး `query_id` နှင့် `features` ကို ခွဲယူခဲ့သည်။
 
 ---
 
@@ -838,21 +838,21 @@ TRIPLE_LINES = [
 ]
 ```
 
-ဒီ list ထဲမှာ input lines ခြောက်ကြောင်း ပါဝင်ပါတယ်။ တစ်ကြောင်းချင်းစီကို
-စစ်ဆေးကြည့်ရအောင်။
+ဤ list ထဲတွင် input lines ခြောက်ကြောင်း ပါဝင်သည်။ တစ်ကြောင်းချင်းစီကို
+စစ်ဆေးကြည့်ကြပါမည်။
 
 | Line | စစ်ဆေးချက် | ရလဒ် |
 | --- | --- | --- |
-| 1 | Field ၄ ခုရှိပြီး normalize လုပ်လို့ရတယ် | Valid Triple |
-| 2 | Line 1 နဲ့ normalize ပြီးနောက် တူညီတယ် | Valid Triple၊ နောက်ပိုင်း duplicate ဖြစ်မယ် |
-| 3 | SPO နဲ့ chunk fields မှန်ကန်တယ် | Valid Triple |
-| 4 | Fields မှန်ကန်ပြီး Predicate ကို normalize လုပ်မယ် | Valid Triple |
-| 5 | Fields နှစ်ခုပဲရှိတယ် | Error |
-| 6 | Subject field အလွတ်ဖြစ်နေတယ် | Regex match မဖြစ်လို့ Error |
+| 1 | Field ၄ ခုရှိပြီး normalize လုပ်နိုင်သည် | Valid Triple |
+| 2 | Line 1 နှင့် normalize ပြီးနောက် တူညီသည် | Valid Triple၊ နောက်ပိုင်း duplicate ဖြစ်မည် |
+| 3 | SPO နှင့် chunk fields မှန်ကန်သည် | Valid Triple |
+| 4 | Fields မှန်ကန်ပြီး Predicate ကို normalize လုပ်မည် | Valid Triple |
+| 5 | Fields နှစ်ခုသာရှိသည် | Error |
+| 6 | Subject field အလွတ်ဖြစ်နေသည် | Regex match မဖြစ်သောကြောင့် Error |
 
-ဒီ input မှာ ပထမ line က ရှေ့နောက် spaces အချို့ ပါဝင်ပေမဲ့ normalization လုပ်ပြီးနောက်
-ဒုတိယ line နဲ့ တူညီသွားပါတယ်။ ဒါကြောင့် valid `Triple` objects ၄ ခုကို
-ဖန်တီးထားပေမဲ့ unique triples အရေအတွက်က သုံးခုပဲ ရှိပါမယ်။
+ဤ input တွင် ပထမ line က ရှေ့နောက် spaces အချို့ ပါဝင်ပေမဲ့ normalization လုပ်ပြီးနောက်
+ဒုတိယ line နှင့် တူညီသွားသည်။ ထို့ကြောင့် valid `Triple` objects ၄ ခုကို
+ဖန်တီးထားပေမဲ့ unique triples အရေအတွက်က သုံးခုသာ ရှိပါမည်။
 
 ---
 
@@ -870,11 +870,11 @@ unique = sorted(
 )
 ```
 
-ဒီတစ်ကြောင်းက duplicate `Triple` objects တွေကို ဖယ်ရှားပြီး အစီအစဉ်တကျ ပြန်စီပေးပါတယ်။
+ဤတစ်ကြောင်းက duplicate `Triple` objects တွေကို ဖယ်ရှားပြီး အစီအစဉ်တကျ ပြန်စီပေးသည်။
 
 ### 12.1 `set(triples)`
 
-`set()` က unique values တွေကို သိမ်းဆည်းပေးတဲ့ data structure ဖြစ်ပါတယ်။
+`set()` က unique values တွေကို သိမ်းဆည်းပေးသည့် data structure ဖြစ်သည်။
 
 ဥပမာ —
 
@@ -884,19 +884,19 @@ items = ["apple", "banana", "apple", "orange"]
 print(set(items))
 ```
 
-Output မှာ `"apple"` ကို တစ်ခုပဲ ထားပါမယ်။
+Output တွင် `"apple"` ကို တစ်ခုသာ ထားပါမည်။
 
 ```text
 {'apple', 'orange', 'banana'}
 ```
 
-Set က insertion order ကို အခြေခံထားတဲ့ display order ကို အာမမခံပါဘူး — အပေါ်က
-အစီအစဉ်သည် run တစ်ခုနှင့်တစ်ခု ကွဲနိုင်ပါတယ်။
+Set က insertion order ကို အခြေခံထားသော display order ကို အာမမခံပါ — အပေါ်က
+အစီအစဉ်သည် run တစ်ခုနှင့်တစ်ခု ကွဲနိုင်သည်။
 
-ဒီ Exercise မှာ `Triple` ကို `@dataclass(frozen=True)` နဲ့ ဖန်တီးထားတဲ့အတွက် fields
-တန်ဖိုးအားလုံး တူညီတဲ့ objects တွေကို `set` က duplicate အဖြစ် သတ်မှတ်နိုင်ပါတယ်။
+ဤ Exercise တွင် `Triple` ကို `@dataclass(frozen=True)` နှင့် ဖန်တီးထားသောအတွက် fields
+တန်ဖိုးအားလုံး တူညီသော objects တွေကို `set` က duplicate အဖြစ် သတ်မှတ်နိုင်သည်။
 
-ပထမနဲ့ ဒုတိယ line တွေကို normalization လုပ်ပြီးတဲ့အခါ object နှစ်ခုစလုံး၏ fields တွေက —
+ပထမနှင့် ဒုတိယ line တွေကို normalization လုပ်ပြီးသည့်အခါ object နှစ်ခုစလုံး၏ fields တွေက —
 
 ```python
 Triple(
@@ -907,16 +907,16 @@ Triple(
 )
 ```
 
-အတိုင်း တူညီနေပါတယ်။ ဒါကြောင့် `set(triples)` လုပ်တဲ့အခါ အဲဒီ duplicate နှစ်ခုထဲက
-တစ်ခုသာ ကျန်ပါတယ်။
+အတိုင်း တူညီနေသည်။ ထို့ကြောင့် `set(triples)` လုပ်သည့်အခါ ထို duplicate နှစ်ခုထဲက
+တစ်ခုသာ ကျန်သည်။
 
-သတိပြုရန် — ဒီ code က Subject၊ Predicate၊ Object နဲ့ `source_chunk` ၄ ခုစလုံး
-တူညီတဲ့ `Triple` objects တွေကိုပဲ duplicate အဖြစ် သတ်မှတ်ပါတယ်။ SPO သုံးခုတူပေမဲ့
-source chunk မတူရင် objects တွေက မတူညီသေးတဲ့အတွက် နှစ်ခုစလုံးကို ထိန်းထားပါမယ်။
+သတိပြုရန် — ဤ code က Subject၊ Predicate၊ Object နှင့် `source_chunk` ၄ ခုစလုံး
+တူညီသော `Triple` objects တွေကိုသာ duplicate အဖြစ် သတ်မှတ်သည်။ SPO သုံးခုတူပေမဲ့
+source chunk မတူလျှင် objects တွေက မတူညီသေးသည့်အတွက် နှစ်ခုစလုံးကို ထိန်းထားပါမည်။
 
 ### 12.2 `sorted(...)`
 
-Set ထဲမှာ unique `Triple` objects တွေ ကျန်ပြီဆိုရင် `sorted()` နဲ့ စီစဉ်ပါတယ်။
+Set ထဲတွင် unique `Triple` objects တွေ ကျန်ပြီဆိုလျှင် `sorted()` နှင့် စီစဉ်သည်။
 
 ```python
 key=lambda t: (
@@ -927,19 +927,19 @@ key=lambda t: (
 )
 ```
 
-ဒီ lambda function က `Triple` object တစ်ခုချင်းစီအတွက် sorting key ကို ပြန်ပေးပါတယ်။
-Sorting အတွက် အစဉ်လိုက် ကြည့်မယ့် fields တွေက —
+ဤ lambda function က `Triple` object တစ်ခုချင်းစီအတွက် sorting key ကို ပြန်ပေးသည်။
+Sorting အတွက် အစဉ်လိုက် ကြည့်မည့် fields တွေက —
 
 - `t.subject`
 - `t.predicate`
 - `t.object`
 - `t.source_chunk`
 
-ဥပမာ Subject တူညီတဲ့ triples နှစ်ခုရှိရင် Predicate ကို ထပ်စစ်မယ်။ Predicate လည်း
-တူရင် Object ကို ထပ်စစ်မယ်။ အဲဒီနောက် Source chunk ကို စစ်ပါတယ်။
+ဥပမာ Subject တူညီသော triples နှစ်ခုရှိလျှင် Predicate ကို ထပ်စစ်မည်။ Predicate လည်း
+တူလျှင် Object ကို ထပ်စစ်မည်။ ထိုနောက် Source chunk ကို စစ်သည်။
 
-ဒီလိုလုပ်ထားတာကြောင့် input lines တွေကို အစဉ်မတူအောင် ပေးထားလည်း sorting key တူညီတဲ့
-data တွေအတွက် ရလဒ်ကို တစ်သမတ်တည်း ထိန်းသိမ်းနိုင်ပါတယ်။
+ဤသို့လုပ်ထားခြင်းကြောင့် input lines တွေကို အစဉ်မတူအောင် ပေးထားလည်း sorting key တူညီသော
+data တွေအတွက် ရလဒ်ကို တစ်သမတ်တည်း ထိန်းသိမ်းနိုင်သည်။
 
 ဤ Exercise အတွက် ရရှိလာသည့် အစီအစဉ်က —
 
@@ -959,33 +959,33 @@ data တွေအတွက် ရလဒ်ကို တစ်သမတ်တည�
 print(len(triples), len(errors), len(triples) - len(unique))
 ```
 
-ဒီတစ်ကြောင်းက ကိန်းဂဏန်းသုံးခုကို ပြသပါတယ်။
+ဤတစ်ကြောင်းက ကိန်းဂဏန်းသုံးခုကို ပြသသည်။
 
 ### ပထမတန်ဖိုး — `len(triples)`
 
-`triples` list ထဲမှာ valid `Triple` objects ဘယ်နှခုရှိသလဲဆိုတာ ပြန်ပေးပါတယ်။ Line 1၊ 2၊
-3၊ 4 တို့က valid ဖြစ်တဲ့အတွက် `4` ဖြစ်ပါတယ်။
+`triples` list ထဲတွင် valid `Triple` objects မည်မျှ ရှိသည်ကို ပြန်ပေးသည်။ Line 1၊ 2၊
+3၊ 4 တို့က valid ဖြစ်သည့်အတွက် `4` ဖြစ်သည်။
 
 ### ဒုတိယတန်ဖိုး — `len(errors)`
 
-`errors` list ထဲမှာ invalid lines ဘယ်နှခုရှိသလဲဆိုတာ ပြန်ပေးပါတယ်။ Line 5 နဲ့ 6 တို့မှာ
-Regex match မဖြစ်တဲ့အတွက် `2` ဖြစ်ပါတယ်။
+`errors` list ထဲတွင် invalid lines မည်မျှ ရှိသည်ကို ပြန်ပေးသည်။ Line 5 နှင့် 6 တို့တွင်
+Regex match မဖြစ်သောအတွက် `2` ဖြစ်သည်။
 
 ### တတိယတန်ဖိုး — `len(triples) - len(unique)`
 
-Valid `Triple` objects အရေအတွက်ထဲက unique objects အရေအတွက်ကို နုတ်ထားပါတယ်။
+Valid `Triple` objects အရေအတွက်ထဲက unique objects အရေအတွက်ကို နုတ်ထားသည်။
 
 ```text
 Valid triples  = 4
 Unique triples = 3
 ```
 
-ဒါကြောင့် `4 - 3 = 1` ဆိုပြီး duplicate အဖြစ် ဖယ်ရှားလိုက်တဲ့ extra record အရေအတွက်ကို
-ပြပါတယ်။
+ထို့ကြောင့် `4 - 3 = 1` ဆိုပြီး duplicate အဖြစ် ဖယ်ရှားလိုက်သည့် extra record အရေအတွက်ကို
+ပြသည်။
 
-ဒီတန်ဖိုးက duplicate records အားလုံးကို စုစုပေါင်းဖယ်ရှားလိုက်တဲ့ အရေအတွက်ပါ။ ဥပမာ
-record တစ်ခုက သုံးကြိမ်ပါနေရင် အဲဒီ record အတွက် duplicate အပိုနှစ်ခုကို ဖယ်ရှားမှာ
-ဖြစ်ပါတယ်။
+ဤတန်ဖိုးက duplicate records အားလုံးကို စုစုပေါင်းဖယ်ရှားလိုက်သည့် အရေအတွက် ဖြစ်သည်။ ဥပမာ
+record တစ်ခုက သုံးကြိမ်ပါနေလျှင် ထို record အတွက် duplicate အပိုနှစ်ခုကို ဖယ်ရှားတွင်
+ဖြစ်သည်။
 
 ### Expected Output
 
@@ -995,16 +995,16 @@ record တစ်ခုက သုံးကြိမ်ပါနေရင် အ�
 
 အဓိပ္ပာယ်က —
 
-- `4` — Valid records ၄ ခုကို parse လုပ်နိုင်ခဲ့တယ်။
-- `2` — Invalid lines နှစ်ကြောင်းကို error အဖြစ် မှတ်တမ်းတင်ခဲ့တယ်။
-- `1` — Duplicate record တစ်ခုကို ဖယ်ရှားနိုင်ခဲ့တယ်။
+- `4` — Valid records ၄ ခုကို parse လုပ်နိုင်ခဲ့သည်။
+- `2` — Invalid lines နှစ်ကြောင်းကို error အဖြစ် မှတ်တမ်းတင်ခဲ့သည်။
+- `1` — Duplicate record တစ်ခုကို ဖယ်ရှားနိုင်ခဲ့သည်။
 
 ---
 
 ## 14. Code တစ်ခုလုံး — သန့်စင်ပြီး Run လုပ်နိုင်သော Version
 
-အောက်မှာ ဒီ Exercise ၏ runnable version ကို စုစည်းပေးထားပါတယ်။ မူရင်း logic ကို
-ထိန်းထားပြီး code formatting ကို ပြင်ဆင်ထားပါတယ်။
+အောက်တွင် ဤ Exercise ၏ runnable version ကို စုစည်းပေးထားသည်။ မူရင်း logic ကို
+ထိန်းထားပြီး code formatting ကို ပြင်ဆင်ထားသည်။
 
 ```python
 import re
@@ -1072,25 +1072,25 @@ Output —
 
 ---
 
-## 15. ဒီ Exercise က RAG / GraphRAG မှာ ဘယ်လိုအသုံးဝင်သလဲ။
+## 15. ဤ Exercise က RAG / GraphRAG တွင် ဘယ်လိုအသုံးဝင်သလား။
 
-ဒီ Exercise က text chunks တွေထဲက relationship information ကို structured data အဖြစ်
-ပြောင်းဖို့ အခြေခံပုံစံတစ်ခုကို ပြသထားပါတယ်။
+ဤ Exercise က text chunks တွေထဲက relationship information ကို structured data အဖြစ်
+ပြောင်းရန် အခြေခံပုံစံတစ်ခုကို ပြသထားသည်။
 
 1. **Raw documents** — Knowledge base ထဲက မူရင်းစာသားများ
-2. **Triple extraction** — Subject၊ Predicate၊ Object နဲ့ source chunk ကို ခွဲထုတ်ခြင်း
+2. **Triple extraction** — Subject၊ Predicate၊ Object နှင့် source chunk ကို ခွဲထုတ်ခြင်း
 3. **Normalization + Validation** — Whitespace သန့်စင်ခြင်း၊ fields စစ်ဆေးခြင်း
 4. **Deduplication** — တူညီသော `Triple` objects များကို ဖယ်ရှားခြင်း
-5. **Knowledge Graph** — Validated triples များဖြင့် entities နဲ့ relationships ကို တည်ဆောက်ခြင်း
+5. **Knowledge Graph** — Validated triples များဖြင့် entities နှင့် relationships ကို တည်ဆောက်ခြင်း
 
-ဒီ code က triple parsing နဲ့ validation ကိုသာ လုပ်ဆောင်ထားတာဖြစ်ပြီး Graph database
-ထဲကို တကယ်သိမ်းဆည်းခြင်း မလုပ်သေးပါဘူး။ Production GraphRAG pipeline မှာ entity
-resolution၊ relation validation၊ source tracking နဲ့ database writes တွေကို ထပ်မံ
-တည်ဆောက်ဖို့ လိုအပ်ပါတယ်။
+ဤ code က triple parsing နှင့် validation ကိုသာ လုပ်ဆောင်ထားခြင်းဖြစ်ပြီး Graph database
+ထဲကို တကယ်သိမ်းဆည်းခြင်း မလုပ်သေးပါ။ Production GraphRAG pipeline တွင် entity
+resolution၊ relation validation၊ source tracking နှင့် database writes တွေကို ထပ်မံ
+တည်ဆောက်ရန် လိုအပ်သည်။
 
 ### ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ line ကို `parse_triples()` ထဲ ထည့်လိုက်ရင် ဘယ် list ထဲ
+**မေးခွန်း** — အောက်ပါ line ကို `parse_triples()` ထဲ ထည့်လိုက်လျှင် ဘယ် list ထဲ
 ရောက်မလဲ။
 
 ```text
@@ -1100,7 +1100,7 @@ Network Team|manages|Core Switch 01
 1. `triples` — Valid Triple အဖြစ်
 2. `errors` — `malformed_field_count` အဖြစ်
 3. `errors` — `empty_field` အဖြစ်
-4. Field ၄ ခုရှိလို့ နှစ်ခုလုံးထဲ ရောက်မယ်
+4. Field ၄ ခုရှိသောကြောင့် နှစ်ခုလုံးထဲ ရောက်မည်
 
 <details>
 <summary>အဖြေ ကြည့်ရန်</summary>
@@ -1121,9 +1121,9 @@ Network Team|manages|Core Switch 01|chunk-04
 
 </details>
 
-**အဓိက မှတ်ထားရန်** — ဒီ Exercise မှာ Regex က line format ကို စစ်ဆေးပါတယ်။
-`Triple` dataclass က SPO data ကို object အဖြစ် သိမ်းဆည်းပါတယ်။ `_normalize()` က
-whitespace နဲ့ predicate စာလုံးပုံစံကို တစ်သမတ်တည်း ပြုပြင်ပေးပါတယ်။
-`parse_triples()` က valid records နဲ့ errors တွေကို ခွဲထုတ်ပါတယ်။ နောက်ဆုံး `set()` နဲ့
+**အဓိက မှတ်ထားရန်** — ဤ Exercise တွင် Regex က line format ကို စစ်ဆေးသည်။
+`Triple` dataclass က SPO data ကို object အဖြစ် သိမ်းဆည်းသည်။ `_normalize()` က
+whitespace နှင့် predicate စာလုံးပုံစံကို တစ်သမတ်တည်း ပြုပြင်ပေးသည်။
+`parse_triples()` က valid records နှင့် errors တွေကို ခွဲထုတ်သည်။ နောက်ဆုံး `set()` နှင့်
 `sorted()` ကို သုံးပြီး duplicate records တွေကို ဖယ်ရှားကာ unique triples တွေကို
-အစီအစဉ်တကျ ပြင်ဆင်ပေးပါတယ်။
+အစီအစဉ်တကျ ပြင်ဆင်ပေးသည်။

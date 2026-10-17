@@ -9,9 +9,9 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Pipeline ၏ ပထမဆုံး အလုပ်က raw text ကို **နောက်အဆင့်အားလုံး မှီခိုနိုင်တဲ့
-ပုံစံတူ text** အဖြစ် ပြောင်းခြင်း ဖြစ်ပါတယ်။ မူရင်း corpus ထဲမှာ အောက်ပါ ပြဿနာတွေ
-ရှိနိုင်ပါတယ်။
+Pipeline ၏ ပထမဆုံး အလုပ်သည် raw text ကို **နောက်အဆင့်အားလုံး မှီခိုနိုင်သည့်
+ပုံစံတူ text** အဖြစ် ပြောင်းခြင်း ဖြစ်သည်။ မူရင်း corpus တွင် အောက်ပါ ပြဿနာများ
+ရှိနိုင်သည်။
 
 ```text
 raw text
@@ -29,11 +29,11 @@ normalize
   * sentence splitter ၊ entity matcher ၊ chunker အားလုံး မတူညီသော input ကို ရသည်
 ```
 
-ဒီ Exercise က normalization ကို **အဆင့်လိုက် function တစ်ခုတည်း** (`normalize_text`)
-ထဲ စုစည်းပြီး၊ အဆင့်တိုင်း၏ အစီအစဉ်ကို ဘာကြောင့် ထိုအစီအစဉ်အတိုင်း ထားရသလဲ
-ဆိုတာကို ပြပါတယ်။
+ဤ Exercise သည် normalization ကို **အဆင့်လိုက် function တစ်ခုတည်း** (`normalize_text`)
+ထဲ စုစည်းပြီး၊ အဆင့်တိုင်း၏ အစီအစဉ်ကို မည်သည့်အတွက်ကြောင့် ထိုအစီအစဉ်အတိုင်း
+ထားရသည်ကို ပြသသည်။
 
-ဒီ code မှာ လေ့လာရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် လေ့လာရမည့် Python concepts များမှာ —
 
 - `import` နှင့် standard library module (`re`၊ `unicodedata`)
 - `@dataclass` decorator နှင့် field များ
@@ -61,9 +61,9 @@ from dataclasses import dataclass
 | `import unicodedata` | Unicode normalization နှင့် character category စစ်ရန် |
 | `from dataclasses import dataclass` | `@dataclass` decorator ကို တိုက်ရိုက် import |
 
-`from X import Y` ပုံစံက module တစ်ခုလုံး မယူဘဲ **အမည်တစ်ခုတည်း**ကို ယူပါတယ်။
-ဒါကြောင့် နောက်ပိုင်းမှာ `dataclass` လို့ တိုက်ရိုက် ရေးနိုင်ပါတယ် — `dataclasses.dataclass`
-လို့ အရှည်ကြီး ရေးရန် မလိုပါ။
+`from X import Y` ပုံစံသည် module တစ်ခုလုံး မယူဘဲ **အမည်တစ်ခုတည်း**ကို ယူသည်။
+ထို့ကြောင့် နောက်ပိုင်းတွင် `dataclass` ဟု တိုက်ရိုက် ရေးနိုင်သည် — `dataclasses.dataclass`
+ဟု အရှည်ကြီး ရေးရန် မလိုပါ။
 
 ---
 
@@ -94,7 +94,7 @@ doc-001 27
 
 ### `@dataclass` က ဘာလုပ်ပေးသလဲ။
 
-ပုံမှန် class ဆိုရင် `__init__` ကို ကိုယ်တိုင် ရေးရပါတယ်။
+ပုံမှန် class ဖြစ်လျှင် `__init__` ကို ကိုယ်တိုင် ရေးရသည်။
 
 ```python
 class Document:
@@ -104,15 +104,15 @@ class Document:
         self.char_count = char_count
 ```
 
-`@dataclass` ထည့်လိုက်ရင် **field အမည်နှင့် type ကို ဖတ်ပြီး `__init__` ကို အလိုအလျောက်
-ဖန်တီး** ပေးပါတယ်။ `Document("doc-001", ...)` လို့ ခေါ်နိုင်ပြီး `doc.doc_id` လို့
-attribute နဲ့ ဖတ်နိုင်ပါတယ်။
+`@dataclass` ထည့်လိုက်လျှင် **field အမည်နှင့် type ကို ဖတ်ပြီး `__init__` ကို အလိုအလျောက်
+ဖန်တီး** ပေးသည်။ `Document("doc-001", ...)` ဟု ခေါ်နိုင်ပြီး `doc.doc_id` ဟု
+attribute ဖြင့် ဖတ်နိုင်သည်။
 
-`repr()` ပြသပုံကလည်း အလိုအလျောက် ဖြစ်လာပါတယ် — `print(doc)` က
-`Document(doc_id='doc-001', ...)` လို့ ပြပါတယ်။ Debugging အတွက် အလွန် အသုံးဝင်ပါတယ်။
+`repr()` ပြသပုံသည်လည်း အလိုအလျောက် ဖြစ်လာသည် — `print(doc)` သည်
+`Document(doc_id='doc-001', ...)` ဟု ပြသည်။ Debugging အတွက် အလွန် အသုံးဝင်သည်။
 
-Pipeline တစ်ခုလုံးမှာ `Document`၊ `Chunk`၊ `Entity`၊ `Triple` စတဲ့ data structure များကို
-`@dataclass` နဲ့ သတ်မှတ်ထားတာကြောင့် stage တိုင်း လက်ခံတဲ့ object ပုံစံ တိကျပါတယ်။
+Pipeline တစ်ခုလုံးတွင် `Document`၊ `Chunk`၊ `Entity`၊ `Triple` စသည့် data structure များကို
+`@dataclass` ဖြင့် သတ်မှတ်ထားသောကြောင့် stage တိုင်း လက်ခံသည့် object ပုံစံ တိကျသည်။
 
 ---
 
@@ -161,11 +161,11 @@ doc-003 150
 [Document(d["doc_id"], d["raw_text"], len(d["raw_text"])) for d in corpus]
 ```
 
-ဒါက **list comprehension** ဖြစ်ပါတယ်။ `corpus` ထဲက dict တစ်ခုချင်းစီကို `d` ဆိုပြီး
-ယူပြီး၊ ထို dict မှ `doc_id` နှင့် `raw_text` ကို ဖတ်ကာ `Document` အသစ် ဖန်တီးပါတယ်။
-ရလဒ်တွေကို list အဖြစ် ပြန်ပေးပါတယ်။
+၎င်းသည် **list comprehension** ဖြစ်သည်။ `corpus` ထဲက dict တစ်ခုချင်းစီကို `d` ဟု
+ယူပြီး၊ ထို dict မှ `doc_id` နှင့် `raw_text` ကို ဖတ်ကာ `Document` အသစ် ဖန်တီးသည်။
+ရလဒ်များကို list အဖြစ် ပြန်ပေးသည်။
 
-ပုံမှန် `for` loop နဲ့ ရေးရင် —
+ပုံမှန် `for` loop ဖြင့် ရေးလျှင် —
 
 ```python
 def ingest_corpus(corpus):
@@ -175,12 +175,12 @@ def ingest_corpus(corpus):
     return documents
 ```
 
-ရည်ရွယ်ချက် တူညီပါတယ်။ Comprehension က ပိုတိုပြီး "data တစ်ခုစီကို
-ပြောင်းလဲပစ်တယ်" ဆိုတဲ့ ရည်ရွယ်ချက်ကို တိုက်ရိုက်ဖော်ပြပါတယ်။
+ရည်ရွယ်ချက် တူညီသည်။ Comprehension က ပိုတိုပြီး "data တစ်ခုစီကို
+ပြောင်းလဲပစ်သည်" ဆိုသည့် ရည်ရွယ်ချက်ကို တိုက်ရိုက် ဖော်ပြသည်။
 
-`char_count` ကို `len(d["raw_text"])` နဲ့ **raw** text အပေါ် တွက်ထားတာကို
-သတိထားပါ — ဒါက normalization မတိုင်မီ အရေအတွက် ဖြစ်ပါတယ်။ ဒါကြောင့်
-`raw_chars` နှင့် `normalized_chars` ကို နှိုင်းယှဉ်နိုင်ပါတယ်။
+`char_count` ကို `len(d["raw_text"])` ဖြင့် **raw** text အပေါ် တွက်ထားသည်ကို
+သတိထားရမည် — ၎င်းသည် normalization မတိုင်မီ အရေအတွက် ဖြစ်သည်။ ထို့ကြောင့်
+`raw_chars` နှင့် `normalized_chars` ကို နှိုင်းယှဉ်နိုင်သည်။
 
 ---
 
@@ -203,8 +203,8 @@ Output —
 ' '
 ```
 
-Word processor များက စာရိုက်တဲ့အခါ quote ကို **smart quote** (curly quote) အဖြစ်
-အလိုအလျောက် ပြောင်းပါတယ်။ ဒါတွေက ASCII `"` နှင့် **မတူညီတဲ့ character** ဖြစ်ပါတယ်။
+Word processor များသည် စာရိုက်သည့်အခါ quote ကို **smart quote** (curly quote) အဖြစ်
+အလိုအလျောက် ပြောင်းသည်။ ၎င်းတို့သည် ASCII `"` နှင့် **မတူညီသည့် character** ဖြစ်သည်။
 
 | Source (code point) | မူရင်း | ပြောင်းလိုက်သည့် တန်ဖိုး |
 | --- | --- | --- |
@@ -217,10 +217,10 @@ Word processor များက စာရိုက်တဲ့အခါ quote က
 | `\u2026` | ellipsis `…` | `...` |
 | `\u00a0` | non-breaking space | ` ` |
 
-Dictionary ၏ key က **မူရင်း character** ဖြစ်ပြီး value က ပြောင်းလိုက်တဲ့ တန်ဖိုး ဖြစ်ပါတယ်။
-`\u00a0` (non-breaking space) ကို regular space သို့ ပြောင်းတာက အထူးအရေးကြီးပါတယ် —
-မပြောင်းရင် နောက်ပိုင်း `\s+` collapse က `\u00a0` ကို space အဖြစ် အလိုအလျောက်
-မမှတ်ဘဲ စာလုံးတွေ ကပ်နေမှာပါ။
+Dictionary ၏ key သည် **မူရင်း character** ဖြစ်ပြီး value သည် ပြောင်းလိုက်သည့် တန်ဖိုး ဖြစ်သည်။
+`\u00a0` (non-breaking space) ကို regular space သို့ ပြောင်းခြင်းသည် အထူးအရေးကြီးသည် —
+မပြောင်းလျှင် နောက်ပိုင်း `\s+` collapse က `\u00a0` ကို space အဖြစ် အလိုအလျောက်
+မမှတ်ဘဲ စာလုံးများ ကပ်နေမည်။
 
 ---
 
@@ -244,19 +244,19 @@ False
 True
 ```
 
-မျက်စိဖြင့် တူညီစွာ မြင်ရတဲ့ `café` ဆိုတဲ့ စာသားကို Unicode မှာ ပုံစံ **နှစ်မျိုး**
-ရေးနိုင်ပါတယ်။
+မျက်စိဖြင့် တူညီစွာ မြင်ရသည့် `café` စာသားကို Unicode တွင် ပုံစံ **နှစ်မျိုး**
+ရေးနိုင်သည်။
 
 - `"cafe\u0301"` — `e` နောက်တွင် combining acute accent (`\u0301`) ကပ် (အရှည် ၅)
 - `"caf\u00e9"` — `é` character တစ်လုံးတည်း (အရှည် ၄)
 
-နှစ်ခုက **မတူညီသော string** ဖြစ်ပါတယ် (`False`)။ `normalize("NFC", ...)` က
-decomposed ပုံစံကို composed ပုံစံသို့ **စုစည်း** (compose) ပေးပါတယ်။ ဒါကြောင့်
-normalize လုပ်ပြီးရင် နှစ်ခု တူညီသွားပါတယ် (`True`)။
+နှစ်ခုသည် **မတူညီသော string** ဖြစ်သည် (`False`)။ `normalize("NFC", ...)` သည်
+decomposed ပုံစံကို composed ပုံစံသို့ **စုစည်း** (compose) ပေးသည်။ ထို့ကြောင့်
+normalize လုပ်ပြီးလျှင် နှစ်ခု တူညီသွားသည် (`True`)။
 
-ဒီအဆင့် မလုပ်ရင် — တူညီတဲ့ entity အမည်ကို စာသားရင်းမြစ်နှစ်ခုမှာ ပုံစံနှစ်မျိုးနဲ့
-ရေးထားရင် byte level မှာ မတူညီဘဲ **duplicate node** နှစ်ခု ဖြစ်လာပါတယ်။ ဒါကြောင့် NFC
-ကို **အပိုင်းလိုက် လုပ်ငန်းစဉ်၏ အစပိုင်းဆုံး** တွင် ထားရပါတယ်။
+ဤအဆင့် မလုပ်လျှင် — တူညီသည့် entity အမည်ကို စာသားရင်းမြစ်နှစ်ခုတွင် ပုံစံနှစ်မျိုးဖြင့်
+ရေးထားလျှင် byte level တွင် မတူညီဘဲ **duplicate node** နှစ်ခု ဖြစ်လာသည်။ ထို့ကြောင့် NFC
+ကို **အပိုင်းလိုက် လုပ်ငန်းစဉ်၏ အစပိုင်းဆုံး** တွင် ထားရသည်။
 
 ---
 
@@ -284,15 +284,15 @@ Output —
 for src, dst in UNICODE_FOLD.items():
 ```
 
-`UNICODE_FOLD.items()` က `(character, replacement)` tuple များကို list အဖြစ် ပြန်ပါတယ်။
-`src, dst` ကို **tuple unpacking** ဖြင့် နှစ်ခု ခွဲရယူပါတယ်။
+`UNICODE_FOLD.items()` သည် `(character, replacement)` tuple များကို list အဖြစ် ပြန်သည်။
+`src, dst` ကို **tuple unpacking** ဖြင့် နှစ်ခု ခွဲရယူသည်။
 
 ### `text = text.replace(src, dst)` — ထပ်တိုးပြင်ဆင်ခြင်း
 
-`replace()` က string အသစ်တစ်ခု ပြန်ပေးပါတယ် — **မူရင်း string ကို မပြောင်းပါ**
-(string က immutable ဖြစ်ပါတယ်)။ ဒါကြောင့် `text` ကို ပြန်သတ်မှတ်ရပါတယ်။
+`replace()` သည် string အသစ်တစ်ခု ပြန်ပေးသည် — **မူရင်း string ကို မပြောင်းပါ**
+(string သည် immutable ဖြစ်သည်)။ ထို့ကြောင့် `text` ကို ပြန်သတ်မှတ်ရသည်။
 
-Loop တစ်ကြိမ်ချင်းစီမှာ `text` က အစဉ်လိုက် ပြောင်းလဲသွားပါတယ်။
+Loop တစ်ကြိမ်ချင်းစီတွင် `text` သည် အစဉ်လိုက် ပြောင်းလဲသွားသည်။
 
 | ကြိမ် | လုပ်ဆောင်ချက် | `text` |
 | --- | --- | --- |
@@ -302,9 +302,9 @@ Loop တစ်ကြိမ်ချင်းစီမှာ `text` က အစဉ
 | 5 (en dash) | `–` → `-` | `"GraphRAG" - Neo4j…` |
 | 7 (ellipsis) | `…` → `...` | `"GraphRAG" - Neo4j...` |
 
-`repr()` က string ကို quote နဲ့ တွဲပြပြီး space နှင့် escape character များကို
-မြင်သာအောင် ပြပါတယ်။ Debugging မှာ `print(text)` ထက် `print(repr(text))` က
-နောက်ဆုံး space ရှိမရှိ စတာကို ရှင်းရှင်းလင်းလင်း ပြပါတယ်။
+`repr()` သည် string ကို quote နှင့် တွဲပြပြီး space နှင့် escape character များကို
+မြင်သာအောင် ပြသည်။ Debugging တွင် `print(text)` ထက် `print(repr(text))` က
+နောက်ဆုံး space ရှိမရှိ စသည်ကို ရှင်းရှင်းလင်းလင်း ပြသည်။
 
 ---
 
@@ -325,28 +325,28 @@ Output —
 'Neo4j is a graph database.Neo4j uses Cypher as its query language.'
 ```
 
-ဤနေရာတွင် လွယ်လွယ်ကူကူ ကျူးလွန်နိုင်တဲ့ အမှားကို နှိုင်းယှဉ်ပြထားပါတယ်။
+ဤနေရာတွင် လွယ်ကူစွာ ကျူးလွန်နိုင်သည့် အမှားကို နှိုင်းယှဉ်ပြထားသည်။
 
 | နည်းလမ်း | ရလဒ် |
 | --- | --- |
 | `re.sub(r"[\r\n\t\f\v]+", " ", raw)` | `database. Neo4j` (space ရှိ) |
 | `raw.replace("\n", "")` | `database.Neo4j` (စာလုံးကပ်) |
 
-Newline ကို **ဖျက်ပစ်** လိုက်ရင် စာလုံးနှစ်လုံး (`database.` နှင့် `Neo4j`) ကပ်သွားပြီး
-နောက်အဆင့်၏ sentence splitter က ဤနေရာမှာ sentence boundary ကို မှားဖတ်ပါတယ်။
+Newline ကို **ဖျက်ပစ်** လိုက်လျှင် စာလုံးနှစ်လုံး (`database.` နှင့် `Neo4j`) ကပ်သွားပြီး
+နောက်အဆင့်၏ sentence splitter သည် ဤနေရာတွင် sentence boundary ကို မှားဖတ်သည်။
 စာသားတစ်ကြောင်းနှင့်တစ်ကြောင်း **ကြားကွက်လပ်** ဖြစ်ရမည့် newline ကို space အဖြစ်
-ပြောင်းရပါတယ်။
+ပြောင်းရသည်။
 
 Pattern ၏ အပိုင်းလိုက် အဓိပ္ပာယ် —
 
 | အပိုင်း | အဓိပ္ပာယ် |
 | --- | --- |
 | `[\r\n\t\f\v]` | CR၊ LF၊ tab၊ form feed၊ vertical tab |
-| `+` | ကပ်နေတဲ့ တစ်ခု သို့မဟုတ် ထို့ထက် ပို |
+| `+` | ကပ်နေသည့် တစ်ခု သို့မဟုတ် ထို့ထက် ပို |
 | `" "` | အစားထိုးသည့် space တစ်လုံး |
 
-`+` ပါတာကြောင့် `"\n\n"` (လိုင်းခွဲ နှစ်ခု ကပ်) ကို space **တစ်လုံး** အဖြစ်သာ
-ပြောင်းပါတယ်။ ဒါကြောင့် နောက်ဆုံး whitespace collapse က အလွန်အကျွံ space များကို
+`+` ပါသောကြောင့် `"\n\n"` (လိုင်းခွဲ နှစ်ခု ကပ်) ကို space **တစ်လုံး** အဖြစ်သာ
+ပြောင်းသည်။ ထို့ကြောင့် နောက်ဆုံး whitespace collapse သည် အလွန်အကျွံ space များကို
 ထပ်ပြီး ဖယ်ရန် မလိုအပ်ပါ။
 
 ---
@@ -368,10 +368,10 @@ Output —
 'abcd'
 ```
 
-### Unicode category ဆိုတာ ဘာလဲ။
+### Unicode category သည် အဘယ်နည်း။
 
-`unicodedata.category(ch)` က character တစ်လုံး၏ **အမျိုးအစား** ကို string
-နှစ်လုံးနဲ့ ပြန်ပါတယ်။ ပထမစာလုံးက အဓိကအုပ်စု ဖြစ်ပါတယ် —
+`unicodedata.category(ch)` သည် character တစ်လုံး၏ **အမျိုးအစား** ကို string
+နှစ်လုံးဖြင့် ပြန်သည်။ ပထမစာလုံးသည် အဓိကအုပ်စု ဖြစ်သည် —
 
 | Category | အစအုပ်စု | အဓိပ္ပာယ် |
 | --- | --- | --- |
@@ -382,8 +382,8 @@ Output —
 | `Zs` | `Z` | Space |
 
 `sample` ၏ character ခုနစ်လုံးအတွက် `['Ll', 'Cc', 'Ll', 'Cc', 'Ll', 'Cf', 'Ll']`
-ရပါတယ်။ `\u200b` (zero-width space) က `Cf` ဖြစ်တာကို သတိထားပါ — မျက်စိဖြင့်
-မမြင်ရဘဲ text ကို ခွဲစိတ်နိုင်တဲ့ အန္တရာယ်ရှိတဲ့ character ဖြစ်ပါတယ်။
+ရသည်။ `\u200b` (zero-width space) သည် `Cf` ဖြစ်သည်ကို သတိထားရမည် — မျက်စိဖြင့်
+မမြင်ရဘဲ text ကို ခွဲစိတ်နိုင်သည့် အန္တရာယ်ရှိသည့် character ဖြစ်သည်။
 
 ### `[0]` ဖြင့် အစအုပ်စုသာ ယူခြင်း
 
@@ -391,8 +391,8 @@ Output —
 unicodedata.category(ch)[0] != "C"
 ```
 
-`"Cc"`, `"Cf"`, `"Cn"`, `"Co"`, `"Cs"` — အားလုံးက `C` အုပ်စုထဲ ပါပါတယ်။ ဒါကြောင့်
-`C` အုပ်စုတစ်ခုလုံးကို ဖယ်ရန် `[0]` (ပထမစာလုံး) ကို စစ်ရုံပါပဲ။ Category တစ်ခုချင်း
+`"Cc"`, `"Cf"`, `"Cn"`, `"Co"`, `"Cs"` — အားလုံးသည် `C` အုပ်စုထဲ ပါသည်။ ထို့ကြောင့်
+`C` အုပ်စုတစ်ခုလုံးကို ဖယ်ရန် `[0]` (ပထမစာလုံး) ကို စစ်ရုံသာဖြစ်သည်။ Category တစ်ခုချင်း
 စာရင်းလုပ်ရန် မလိုပါ။
 
 ### Generator expression နှင့် `"".join(...)`
@@ -401,14 +401,14 @@ unicodedata.category(ch)[0] != "C"
 "".join(ch for ch in sample if unicodedata.category(ch)[0] != "C")
 ```
 
-`ch for ch in sample if ...` က **generator expression** ဖြစ်ပါတယ်။ ကွင်းမပါတဲ့
-comprehension ပုံစံဖြစ်ပြီး၊ `join()` က ဒါကို ဖတ်ပြီး ကျန်တဲ့ character များကို
-string တစ်ခုတည်း အဖြစ် ပြန်ဆက်ပါတယ်။ `"".join(...)` ၏ `""` က
-**ကြားထည့်ရမည့် separator** ဖြစ်ပါတယ် — ဒီနေရာမှာ separator မလိုတဲ့အတွက်
-empty string ဖြစ်ပါတယ်။
+`ch for ch in sample if ...` သည် **generator expression** ဖြစ်သည်။ ကွင်းမပါသည့်
+comprehension ပုံစံဖြစ်ပြီး၊ `join()` သည် ၎င်းကို ဖတ်ပြီး ကျန်သည့် character များကို
+string တစ်ခုတည်း အဖြစ် ပြန်ဆက်သည်။ `"".join(...)` ၏ `""` သည်
+**ကြားထည့်ရမည့် separator** ဖြစ်သည် — ဤနေရာတွင် separator မလိုသောကြောင့်
+empty string ဖြစ်သည်။
 
 `['Ll', 'Cc', 'Ll', 'Cc', 'Ll', 'Cf', 'Ll']` ထဲက `Cc` နှင့် `Cf` ၄ လုံး
-ဖယ်သွားပြီး `'abcd'` ကျန်ပါတယ်။
+ဖယ်သွားပြီး `'abcd'` ကျန်သည်။
 
 ---
 
@@ -426,13 +426,13 @@ Output —
 'Neo4j is a graph database.'
 ```
 
-- `\s+` က space၊ tab၊ newline စတဲ့ whitespace တစ်ခု သို့မဟုတ် ထို့ထက် ပို။
-- `" "` ဖြင့် **space တစ်လုံး** အဖြစ် ပြောင်းပါတယ်။
-- `.strip()` က အစနှင့် အဆုံး ကွက်လပ်များကို ဖယ်ပါတယ်။
+- `\s+` သည် space၊ tab၊ newline စသည့် whitespace တစ်ခု သို့မဟုတ် ထို့ထက် ပို။
+- `" "` ဖြင့် **space တစ်လုံး** အဖြစ် ပြောင်းသည်။
+- `.strip()` သည် အစနှင့် အဆုံး ကွက်လပ်များကို ဖယ်သည်။
 
-ဒီအဆင့်က normalization ၏ **အဆုံးဆုံး** တွင် ရှိပါတယ်။ အရှေ့အဆင့်များက space
-အသစ်များ ထည့်လာနိုင်တဲ့အတွက် (ဥပမာ newline → space) collapse ကို နောက်ဆုံးမှာ
-လုပ်ရပါတယ်။
+ဤအဆင့်သည် normalization ၏ **အဆုံးဆုံး** တွင် ရှိသည်။ အရှေ့အဆင့်များက space
+အသစ်များ ထည့်လာနိုင်သောကြောင့် (ဥပမာ newline → space) collapse ကို နောက်ဆုံးတွင်
+လုပ်ရသည်။
 
 ---
 
@@ -476,7 +476,7 @@ decomposed  'café data'
 ctrl        'Neo4jingestdone'
 ```
 
-ဤစာရင်းက အဆင့်တိုင်း၏ အလုပ်ကို ရှင်းရှင်းလင်းလင်း ပြပါတယ်။
+ဤစာရင်းသည် အဆင့်တိုင်း၏ အလုပ်ကို ရှင်းရှင်းလင်းလင်း ပြသည်။
 
 | Input | ဖြေရှင်းသည့် အဆင့် | ရလဒ် |
 | --- | --- | --- |
@@ -485,18 +485,18 @@ ctrl        'Neo4jingestdone'
 | `decomposed` | NFC (compose) | `'café data'` |
 | `ctrl` | control char ဖယ်ခြင်း | `'Neo4jingestdone'` |
 
-`ctrl` ၏ ရလဒ်ကို သတိထားပါ — `\x00` နှင့် `\x07` ကို ဖယ်လိုက်တဲ့အတွက် `Neo4j`
-နှင့် `ingest` စာလုံးနှစ်လုံး **ကပ်သွား** ပါတယ်။ Control ဖယ်ခြင်းကို newline→space
-အဆင့် **နောက်** မှာ ထားထားတာကြောင့် `\n` ကတော့ space အဖြစ် ပြောင်းပြီးသား ဖြစ်ပါတယ်။
-`\x00` ကဲ့သို့ formatting မဟုတ်တဲ့ control character များအတွက် ကပ်သွားခြင်းက
-လက်ခံနိုင်ပါတယ် — ၄င်းတို့က whitespace မဟုတ်ပါ။
+`ctrl` ၏ ရလဒ်ကို သတိထားရမည် — `\x00` နှင့် `\x07` ကို ဖယ်လိုက်သောကြောင့် `Neo4j`
+နှင့် `ingest` စာလုံးနှစ်လုံး **ကပ်သွား** သည်။ Control ဖယ်ခြင်းကို newline→space
+အဆင့် **နောက်** တွင် ထားထားသောကြောင့် `\n` သည် space အဖြစ် ပြောင်းပြီးသား ဖြစ်သည်။
+`\x00` ကဲ့သို့ formatting မဟုတ်သည့် control character များအတွက် ကပ်သွားခြင်းကို
+လက်ခံနိုင်သည် — ၎င်းတို့သည် whitespace မဟုတ်ပါ။
 
 အစီအစဉ်၏ rationale —
 
-1. **NFC အရင်** — မတူညီတဲ့ byte များကို စုစည်းရန်၊ နောက်အဆင့်များ တူညီတဲ့ form ကို ရရန်။
-2. **Fold ဒုတိယ** — character အစားထိုးခြင်းက NFC နှင့် မသက်ဆိုင်လို့ နောက်တွင် ထား။
-3. **newline → space တတိယ** — control ဖယ်ခြင်းအရင် လုပ်ရမည်၊ မဟုတ်ရင် စာလုံးများ ကပ်သွားမည်။
-4. **Control ဖယ်ခြင်း စတုတ္ထ** — newline များ space ဖြစ်သွားပြီးမှ ကျန်တာကို ဖယ်သည်။
+1. **NFC အရင်** — မတူညီသည့် byte များကို စုစည်းရန်၊ နောက်အဆင့်များ တူညီသည့် form ကို ရရန်။
+2. **Fold ဒုတိယ** — character အစားထိုးခြင်းသည် NFC နှင့် မသက်ဆိုင်သောကြောင့် နောက်တွင် ထား။
+3. **newline → space တတိယ** — control ဖယ်ခြင်းအရင် လုပ်ရမည်၊ မဟုတ်လျှင် စာလုံးများ ကပ်သွားမည်။
+4. **Control ဖယ်ခြင်း စတုတ္ထ** — newline များ space ဖြစ်သွားပြီးမှ ကျန်သည်ကို ဖယ်သည်။
 5. **Whitespace collapse နောက်ဆုံး** — အရှေ့အဆင့်များက ထည့်သည့် space များကို တစ်ပြေးညီစေရန်။
 
 ---
@@ -544,13 +544,13 @@ Output —
 Document(doc_id='doc-001', text='Neo4j is a graph-database.', char_count=26)
 ```
 
-`normalize_document()` က **Document အသစ်** ကို ပြန်ပေးပါတယ် — မူရင်း `doc` ကို
+`normalize_document()` သည် **Document အသစ်** ကို ပြန်ပေးသည် — မူရင်း `doc` ကို
 မပြောင်းပါ။ `doc_id` ကို ရှိရင်းစွဲအတိုင်း ထိန်းထားပြီး `text` နှင့် `char_count` ကို
-normalized တန်ဖိုးများဖြင့် အစားထိုးပါတယ်။
+normalized တန်ဖိုးများဖြင့် အစားထိုးသည်။
 
-မူရင်း `doc.text` အရှည် ၄၀ မှ normalized အရှည် ၂၆ သို့ လျော့သွားတာကို
-`char_count=26` က ပြပါတယ်။ Pipeline ထဲမှာ ဒီလို **immutable-style** အလုပ်လုပ်ခြင်းက
-မူရင်း raw text ကို ပြန်ကြည့်နိုင်စေပါတယ် — audit အတွက် အရေးကြီးပါတယ်။
+မူရင်း `doc.text` အရှည် ၄၀ မှ normalized အရှည် ၂၆ သို့ လျော့သွားသည်ကို
+`char_count=26` က ပြသည်။ Pipeline ထဲတွင် ဤသို့ **immutable-style** အလုပ်လုပ်ခြင်းသည်
+မူရင်း raw text ကို ပြန်ကြည့်နိုင်စေသည် — audit အတွက် အရေးကြီးသည်။
 
 ---
 
@@ -628,10 +628,10 @@ cleaned : 'Neo4j is a graph-database. "GraphRAG" ...'
 | `doc-002` | 157 | 156 | `Neo4j,  GraphRAG` ထဲက ထပ်နေသော space တစ်လုံး ဖယ် |
 | `doc-003` | 150 | 150 | ဖယ်စရာ `\n`၊ smart char သို့မဟုတ် ထပ်နေသော space မရှိ |
 
-`doc-003` က မပြောင်းလဲတာက အရေးကြီးပါတယ် — normalization က ပြင်စရာ မရှိရင်
-text ကို **ချုပ်တည်း** ထားပါတယ် (idempotent)။
+`doc-003` မပြောင်းလဲခြင်းသည် အရေးကြီးသည် — normalization တွင် ပြင်စရာ မရှိလျှင်
+text ကို **ချုပ်တည်း** ထားသည် (idempotent)။
 
-Function ကို run ကြည့်ရင် မှားယွင်းမှု ရှိမရှိ စစ်ဖို့ `assert` ထည့်ပါတယ်။
+Function ကို run ကြည့်လျှင် မှားယွင်းမှု ရှိမရှိ စစ်ရန် `assert` ထည့်သည်။
 
 ```python
 import re
@@ -663,15 +663,15 @@ Output —
 assertion passed
 ```
 
-`assert` သည် condition `False` ဖြစ်ရင် `AssertionError` ဖြင့် ကျရှုံးပါတယ်။
-မှန်ရင် ဘာမှ မလုပ်ဘဲ ဆက်သွားပါတယ်။ ဒါကြောင့် pipeline ၏ normalization ရလဒ်ကို
-run တိုင်း စစ်နိုင်ပါတယ်။
+`assert` သည် condition `False` ဖြစ်လျှင် `AssertionError` ဖြင့် ကျရှုံးသည်။
+မှန်လျှင် ဘာမှ မလုပ်ဘဲ ဆက်သွားသည်။ ထို့ကြောင့် pipeline ၏ normalization ရလဒ်ကို
+run တိုင်း စစ်နိုင်သည်။
 
 ---
 
 ## 13. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ code က ဘယ်ရလဒ် ပြန်ပေးမလဲ။
+**မေးခွန်း** — အောက်ပါ code သည် မည်သည့်ရလဒ် ပြန်ပေးမည်နည်း။
 
 ```python
 import re
@@ -695,12 +695,12 @@ print(repr(strip_markup("Neo4j uses\nCypher")))
 
 **အဖြေ — 4. `'Neo4j usesCypher'`**
 
-အကြောင်းရင်း — ဤ variant တွင် replacement string က `""` (empty) ဖြစ်ပါတယ်။
-`re.sub(r"[\r\n\t]+", "", raw)` က newline ကို **ဖျက်ပစ်** လိုက်သဖြင့်
-`"Neo4j uses"` နှင့် `"Cypher"` ကပ်သွားပါတယ် — `'Neo4j usesCypher'`။ ပြီးရင်
-`\s+` collapse က ကျန်နေတဲ့ space ကို ပြင်ပေမဲ့ **ဖျက်ပြီးသား space ကို ပြန်မဖန်တီး**
-နိုင်ပါ။ ဒါကြောင့် Exercise 1 ၏ `normalize_text` က `" "` (space) ဖြင့် အစားထိုးတဲ့
-အဆင့်ကို control char ဖယ်ခြင်းအရင် ထားထားပါတယ်။
+အကြောင်းရင်း — ဤ variant တွင် replacement string သည် `""` (empty) ဖြစ်သည်။
+`re.sub(r"[\r\n\t]+", "", raw)` သည် newline ကို **ဖျက်ပစ်** လိုက်သဖြင့်
+`"Neo4j uses"` နှင့် `"Cypher"` ကပ်သွားသည် — `'Neo4j usesCypher'`။ ထို့နောက်
+`\s+` collapse သည် ကျန်နေသည့် space ကို ပြင်သော်လည်း **ဖျက်ပြီးသား space ကို ပြန်မဖန်တီး**
+နိုင်ပါ။ ထို့ကြောင့် Exercise 1 ၏ `normalize_text` သည် `" "` (space) ဖြင့် အစားထိုးသည့်
+အဆင့်ကို control char ဖယ်ခြင်းအရင် ထားထားသည်။
 
 </details>
 

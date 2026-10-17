@@ -7,7 +7,7 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Validated graph ကို Neo4j သို့ ရောက်စေရန် **format သုံးမျိုး** ထုတ်ပါတယ်။
+Validated graph ကို Neo4j သို့ ရောက်စေရန် **format သုံးမျိုး** ထုတ်သည်။
 format တိုင်းတွင် ရည်ရွယ်ချက် မတူညီပါ။
 
 ```text
@@ -30,7 +30,7 @@ format တိုင်း၏ အခြေခံစည်းမျဉ်း —
   * CSV သည် comma ပါသော value များကို မှန်ကန်စွာ quote လုပ်ရမည်
 ```
 
-ဒီ code မှာ လေ့လာရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် လေ့လာရမည့် Python concepts များမှာ —
 
 - Module-level constant (`NODE_MERGE`) နှင့် multi-line string
 - List comprehension ဖြင့် statement စာရင်း ဖန်တီးခြင်း
@@ -136,18 +136,18 @@ SET n.name = $name, n.type = $type
 
 | အပိုင်း | အဓိပ္ပာယ် |
 | --- | --- |
-| `MERGE (n:Entity {id: $id})` | id တူရင် ရှိသည့် node ကို ယူ၊ မရှိရင် ဖန်တီး |
+| `MERGE (n:Entity {id: $id})` | id တူလျှင် ရှိသည့် node ကို ယူ၊ မရှိလျှင် ဖန်တီး |
 | `\n` | Cypher statement ခွဲခြားသည့် newline (လူဖတ်ရန်) |
 | `$id`၊ `$name`၊ `$type` | **parameter** — တန်ဖိုးကို query string ထဲ မထည့် |
 
-`repr()` က `\n` ကို **escape** ဖြင့် ပြပါတယ် — string ထဲ တကယ် ပါတဲ့ character
-သည် newline ဖြစ်ပြီး `\n` နှစ်လုံး မဟုတ်ပါ။ Debugging တွင် ဤအချက်က
-အရေးကြီးပါတယ် — `print` က newline ကို ဖျက်ပြပြီး `repr` က ထိန်းပြပါတယ်။
+`repr()` သည် `\n` ကို **escape** ဖြင့် ပြသည် — string ထဲ တကယ် ပါသည့် character
+သည် newline ဖြစ်ပြီး `\n` နှစ်လုံး မဟုတ်ပါ။ Debugging တွင် ဤအချက်သည်
+အရေးကြီးသည် — `print` သည် newline ကို ဖျက်ပြပြီး `repr` သည် ထိန်းပြသည်။
 
-`SET n.name = $name` က `MERGE` ပြီးနောက် property များကို **update** ပါတယ်။
-`MERGE` ထဲ property ထည့်ရင် ထို property များကို identity အဖြစ် ယူပြီး
-`id` ပြောင်းသွားတဲ့ အခါ node အသစ် ဖန်တီးပါမယ်။ ဒါကြောင့် identity ကို
-`id` တစ်ခုတည်း ထားပြီး ကျန်တာကို `SET` ဖြင့် ရေးတာပါ။
+`SET n.name = $name` သည် `MERGE` ပြီးနောက် property များကို **update** သည်။
+`MERGE` ထဲ property ထည့်လျှင် ထို property များကို identity အဖြစ် ယူပြီး
+`id` ပြောင်းသွားသည့် အခါ node အသစ် ဖန်တီးမည်။ ထို့ကြောင့် identity ကို
+`id` တစ်ခုတည်း ထားပြီး ကျန်သည်ကို `SET` ဖြင့် ရေးခြင်း ဖြစ်သည်။
 
 ---
 
@@ -246,13 +246,13 @@ ent-graphrag-built-on-ent-knowledge-graph
 | `slug()` | `"ent-graphrag-built-on-ent-knowledge-graph"` |
 | prefix | `"rel:ent-graphrag-built-on-ent-knowledge-graph"` |
 
-`rel:` prefix က ဤ id space ကို entity (`ent:`) နှင့် ခွဲပါတယ်။ Slug က `:`၊ `_`
+`rel:` prefix သည် ဤ id space ကို entity (`ent:`) နှင့် ခွဲသည်။ Slug သည် `:`၊ `_`
 နှင့် uppercase များကို `-`/lowercase သို့ ပြောင်းသဖြင့် id သည် Cypher property
-အဖြစ်၊ file name အဖြစ် လုံခြုံပါတယ်။
+အဖြစ်၊ file name အဖြစ် လုံခြုံသည်။
 
-**deterministic** ဖြစ်တာက အဓိကပါ — triple တူရင် `rel_id` တူပါတယ်။ ဒါကြောင့်
-`MERGE (a)-[r:... {id: $rel_id}]->(b)` က duplicate edge ကို မဖန်တီးဘဲ
-property များကိုသာ update လုပ်ပါတယ်။
+**deterministic** ဖြစ်ခြင်းသည် အဓိက ဖြစ်သည် — triple တူလျှင် `rel_id` တူသည်။ ထို့ကြောင့်
+`MERGE (a)-[r:... {id: $rel_id}]->(b)` သည် duplicate edge ကို မဖန်တီးဘဲ
+property များကိုသာ update လုပ်သည်။
 
 ---
 
@@ -380,9 +380,9 @@ params: {"chunk_ids": ["doc-001:c00", "doc-002:c00"], "confidence": 0.95, "metho
 {"query": "<Cypher text>", "params": {<parameter dict>}}
 ```
 
-Statement တိုင်းတွင် `query` နှင့် `params` နှစ်ခု **ခွဲထား** ထားပါတယ်။ Driver က
-`session.run(query, **params)` ဖြင့် run ပါတယ် — query string သည် run တိုင်း
-တူညီပြီး parameter များသာ ပြောင်းသဖြင့် **query plan cache** ကို ပြန်သုံးနိုင်ပါတယ်။
+Statement တိုင်းတွင် `query` နှင့် `params` နှစ်ခု **ခွဲထား** ထားသည်။ Driver သည်
+`session.run(query, **params)` ဖြင့် run သည် — query string သည် run တိုင်း
+တူညီပြီး parameter များသာ ပြောင်းသဖြင့် **query plan cache** ကို ပြန်သုံးနိုင်သည်။
 
 ### List comprehension နှင့် loop ရောစပ်ခြင်း
 
@@ -394,8 +394,8 @@ for t in triples:                                       # relationship တစ်
 
 Node statement များသည် ပုံစံတူ (template တူ) ဖြစ်သဖြင့် comprehension ဖြင့်
 ရေးသည်။ Relationship statement များသည် template ထဲ type ထည့်ရသဖြင့်
-loop ဖြင့် ရေးသည်။ **နှစ်နည်းလုံးကို ရောစပ်ခြင်း** သည် ဖတ်ရလွယ်တဲ့
-အပိုင်းတိုင်းအတွက် သင့်တော်တဲ့ ပုံစံကို ရွေးနိုင်ပါတယ်။
+loop ဖြင့် ရေးသည်။ **နှစ်နည်းလုံးကို ရောစပ်ခြင်း** သည် ဖတ်ရလွယ်သည့်
+အပိုင်းတိုင်းအတွက် သင့်တော်သည့် ပုံစံကို ရွေးနိုင်သည်။
 
 ### `[p.chunk_id for p in t.provenance]` နှင့် `sorted({p.method for p in t.provenance})`
 
@@ -405,26 +405,26 @@ loop ဖြင့် ရေးသည်။ **နှစ်နည်းလုံ�
 | `{p.method for p in t.provenance}` | **set** | ထပ်နေမှု ဖယ်သည် |
 | `sorted({...})` | list | အက္ခရာအစဉ် — `["pattern:built_on"]` |
 
-`chunk_ids` ကို list အဖြစ် ထားတာက source အစဉ် (provenance အစဉ်) ကို
-ထိန်းသိမ်းရန်ပါ — `MERGE` ပြီးနောက် `r.chunk_ids` သည် array အဖြစ် ရှိပါမယ်။
+`chunk_ids` ကို list အဖြစ် ထားခြင်းသည် source အစဉ် (provenance အစဉ်) ကို
+ထိန်းသိမ်းရန် ဖြစ်သည် — `MERGE` ပြီးနောက် `r.chunk_ids` သည် array အဖြစ် ရှိမည်။
 `methods` ကို set ဖြင့် dedupe လုပ်ပြီး `sorted()` ဖြင့် အစီအစဉ်
-တည်ငြိမ်စေပါတယ်။
+တည်ငြိမ်စေသည်။
 
 ### `all("$" in ... and "'" not in ...)` — security assertion
 
 `lab.py` တွင် —
 `assert all("$" in s["query"] and "'" not in s["query"] for s in statements)`။
-Query string ထဲ quote (`'`) **မပါရ** ဆိုတာက တန်ဖိုးများ query ထဲ string literal
-အဖြစ် မထည့်ထားကြောင်း စစ်ပါတယ်။ တန်ဖိုးအားလုံးသည် `$param` ဖြင့်သာ
-ရောက်ပါတယ်။
+Query string ထဲ quote (`'`) **မပါရ** ခြင်းသည် တန်ဖိုးများ query ထဲ string literal
+အဖြစ် မထည့်ထားကြောင်း စစ်သည်။ တန်ဖိုးအားလုံးသည် `$param` ဖြင့်သာ
+ရောက်သည်။
 
 ---
 
-## 4. Trap — Relationship type ကို parameter လုပ်လို့ မရ
+## 4. Trap — Relationship type ကို parameter လုပ်၍ မရ
 
-Cypher တွင် label နှင့် relationship type ကို `$param` ဖြင့် ပေးလို့ **မရပါ** —
-ဒါကြောင့် `%` ဖြင့် query string ထဲ ထည့်ရပါတယ်။ ဤနေရာမှာ whitelist
-မစစ်ရင် **Cypher injection** ဖြစ်နိုင်ပါတယ်။
+Cypher တွင် label နှင့် relationship type ကို `$param` ဖြင့် ပေး၍ **မရပါ** —
+ထို့ကြောင့် `%` ဖြင့် query string ထဲ ထည့်ရသည်။ ဤနေရာတွင် whitelist
+မစစ်လျှင် **Cypher injection** ဖြစ်နိုင်သည်။
 
 ```python
 import csv
@@ -521,12 +521,12 @@ X]->() DETACH DELETE a //  MERGE (a)-[r:X]->() DETACH DELETE a // {id: $rel_id}]
                            allowed=False
 ```
 
-### Injection ဘယ်လိုဖြစ်သွားသလဲ။
+### Injection မည်သို့ ဖြစ်သွားသနည်း။
 
 တတိယ case တွင် predicate ကို `FRIENDS_WITH` အစား
-`X]->() DETACH DELETE a //` ဖြင့် ပေးလိုက်ပါတယ်။ `%` က ၎င်းကို query string ထဲ
+`X]->() DETACH DELETE a //` ဖြင့် ပေးလိုက်သည်။ `%` သည် ၎င်းကို query string ထဲ
 **တိုက်ရိုက်** ထည့်လိုက်သဖြင့် `r:X]->()` ဖြင့် relationship ပိတ်ပြီး
-`DETACH DELETE a` ကို ဆက်လုပ်ပါတယ် — `//` က ကျန်တာကို comment လုပ်ပါတယ်။
+`DETACH DELETE a` ကို ဆက်လုပ်သည် — `//` သည် ကျန်သည်ကို comment လုပ်သည်။
 
 | Predicate | `in ALLOWED_PREDICATES` |
 | --- | --- |
@@ -536,10 +536,10 @@ X]->() DETACH DELETE a //  MERGE (a)-[r:X]->() DETACH DELETE a // {id: $rel_id}]
 
 ### ကာကွယ်မှု — whitelist ကို query မဖန်တီးမီ apply လုပ်ပါ
 
-Exercise 5 ၏ `quality_gate` က `predicate not in ALLOWED_PREDICATES` ဖြစ်တဲ့
-triple ကို `unknown_predicate` အဖြစ် ဖယ်လိုက်ပါတယ်။ ဒါကြောင့်
-`export_cypher()` သို့ ရောက်တဲ့ triple တိုင်း၏ predicate သည် whitelist အတွင်း
-ဖြစ်ပြီးသား ဖြစ်ပါတယ်။
+Exercise 5 ၏ `quality_gate` သည် `predicate not in ALLOWED_PREDICATES` ဖြစ်သည့်
+triple ကို `unknown_predicate` အဖြစ် ဖယ်လိုက်သည်။ ထို့ကြောင့်
+`export_cypher()` သို့ ရောက်သည့် triple တိုင်း၏ predicate သည် whitelist အတွင်း
+ဖြစ်ပြီးသား ဖြစ်သည်။
 
 | အတားအဆီး | အလုပ် |
 | --- | --- |
@@ -549,10 +549,10 @@ triple ကို `unknown_predicate` အဖြစ် ဖယ်လိုက်ပ
 | `assert "'" not in query` | query ထဲ string literal မပါကြောင်း run အချိန်တွင် စစ် |
 
 **သတိပေးချက်** — Text-to-Cypher သို့မဟုတ် LLM-generated predicate ကို
-လက်ခံတဲ့စနစ်တွင် whitelist သည် **မဖြစ်မနေ** လိုပါတယ်။ `MATCH`၊ `DELETE`၊
+လက်ခံသည့် စနစ်တွင် whitelist သည် **မဖြစ်မနေ** လိုအပ်သည်။ `MATCH`၊ `DELETE`၊
 `DETACH DELETE`၊ `DROP` ကဲ့သို့ destructive clause များကို query မဖန်တီးမီ
-block လုပ်ရပါတယ်။ Read-only user နှင့် separate database သုံးခြင်းကလည်း
-အတားအဆီး တစ်ခု ဖြစ်ပါတယ်။
+block လုပ်ရသည်။ Read-only user နှင့် separate database သုံးခြင်းသည်လည်း
+အတားအဆီး တစ်ခု ဖြစ်သည်။
 
 ---
 
@@ -680,13 +680,13 @@ json export       : nodes=7 relationships=5
 | `ensure_ascii=False` | non-ASCII (ဥပမာ မြန်မာ) ကို escape မလုပ်ဘဲ မူရင်းအတိုင်း |
 
 `json.loads()` round-trip သည် **assertion အဖြစ် အသုံးဝင်သည်** — output ကို
-ပြန်ဖတ်လို့ မရရင် serialization ပျက်နေပါပြီ။ `lab.py` တွင်
+ပြန်ဖတ်၍ မရလျှင် serialization ပျက်နေပါပြီ။ `lab.py` တွင်
 `payload["relationships"] == [t.to_dict(names) for t in accepted]` ဖြင့်
-round-trip ကို တိုက်ရိုက် စစ်ပါတယ်။
+round-trip ကို တိုက်ရိုက် စစ်သည်။
 
-Relationship dict တွင် key ခုနစ်ခု ရှိပါတယ် — `subject`၊ `predicate`၊ `object`၊
-`subject_id`၊ `object_id`၊ `confidence`၊ `provenance`။ နောက်ဆုံး print က
-ထို key များကို အက္ခရာအစဉ်ဖြင့် ပြပါတယ်။
+Relationship dict တွင် key ခုနစ်ခု ရှိသည် — `subject`၊ `predicate`၊ `object`၊
+`subject_id`၊ `object_id`၊ `confidence`၊ `provenance`။ နောက်ဆုံး print သည်
+ထို key များကို အက္ခရာအစဉ်ဖြင့် ပြသည်။
 
 ---
 
@@ -806,23 +806,23 @@ relationships rows : 5
 
 ### `io.StringIO` — memory ထဲ file ကဲ့သို့
 
-`csv.writer()` သည် file-like object ကို လိုပါတယ်။ `io.StringIO()` က memory ထဲ
-file တစ်ခုကို တုပပေးပါတယ် — disk မထိဘဲ string အဖြစ် ထုတ်နိုင်ပါတယ်။
-`getvalue()` က စုစည်းထားတဲ့ string ကို ပြန်ပေးပါတယ်။
+`csv.writer()` သည် file-like object ကို လိုသည်။ `io.StringIO()` သည် memory ထဲ
+file တစ်ခုကို တုပပေးသည် — disk မထိဘဲ string အဖြစ် ထုတ်နိုင်သည်။
+`getvalue()` သည် စုစည်းထားသည့် string ကို ပြန်ပေးသည်။
 
 ### `lineterminator="\n"`
 
-`csv.writer` ၏ default line terminator သည် `"\r\n"` ဖြစ်ပါတယ်။ Linux တွင်
-`\r` မလိုသဖြင့် `\n` သတ်မှတ်ပါတယ် — ဒါကြောင့် output သည် byte-stable ဖြစ်ပြီး
-version control တွင် diff သန့်ရှင်းပါတယ်။
+`csv.writer` ၏ default line terminator သည် `"\r\n"` ဖြစ်သည်။ Linux တွင်
+`\r` မလိုသဖြင့် `\n` သတ်မှတ်သည် — ထို့ကြောင့် output သည် byte-stable ဖြစ်ပြီး
+version control တွင် diff သန့်ရှင်းသည်။
 
 ### `";".join(sorted({...}))` — array property ကို scalar အဖြစ်
 
 CSV တွင် array type မရှိပါ။ `chunk_ids` ကို `;` ဖြင့် ဆက်ပြီး scalar တစ်ခု
-ဖြစ်စေပါတယ်။ `set` ဖြင့် ထပ်နေမှု ဖယ်ပြီး `sorted()` ဖြင့် အစီအစဉ်
-တည်ငြိမ်စေပါတယ် — `doc-001:c00;doc-002:c00`။
+ဖြစ်စေသည်။ `set` ဖြင့် ထပ်နေမှု ဖယ်ပြီး `sorted()` ဖြင့် အစီအစဉ်
+တည်ငြိမ်စေသည် — `doc-001:c00;doc-002:c00`။
 
-Neo4j Admin Import တွင် header များ၏ prefix က အဓိပ္ပာယ် သတ်မှတ်ပါတယ် —
+Neo4j Admin Import တွင် header များ၏ prefix သည် အဓိပ္ပာယ် သတ်မှတ်သည် —
 
 | Header | အဓိပ္ပာယ် |
 | --- | --- |
@@ -856,16 +856,16 @@ Output —
 3
 ```
 
-| နည်းလမ်း | တန်ဖိုး | ပြန်ဖတ်ရင် field အရေအတွက် |
+| နည်းလမ်း | တန်ဖိုး | ပြန်ဖတ်လျှင် field အရေအတွက် |
 | --- | --- | --- |
 | `csv.writer` | `'"Neo4j, Inc",GraphRAG\n'` | **2** (မှန်) |
 | `",".join(...)` | `'Neo4j, Inc,GraphRAG'` | **3** (မှား) |
 
-`csv.writer` သည် comma ပါတဲ့ value ကို quote (`"..."`) ဖြင့် ခြုံပေးပါတယ်။
+`csv.writer` သည် comma ပါသည့် value ကို quote (`"..."`) ဖြင့် ခြုံပေးသည်။
 `",".join()` ဖြင့် ကိုယ်တိုင်စီရင် `Neo4j, Inc` သည် field **နှစ်ခု** အဖြစ်
-ကွဲသွားပြီး column အားလုံး တစ်ခုစီ ရွှေ့သွားပါတယ် — import လုပ်တဲ့အခါ
-error ဖြစ်စေ၊ တိတ်တဆိတ် မှားယွင်းစွာ load ဖြစ်စေ ဖြစ်နိုင်ပါတယ်။
-ဒါကြောင့် CSV ကို **`csv` module ဖြင့်သာ** ရေးရပါတယ်။
+ကွဲသွားပြီး column အားလုံး တစ်ခုစီ ရွှေ့သွားသည် — import လုပ်သည့်အခါ
+error ဖြစ်စေ၊ တိတ်တဆိတ် မှားယွင်းစွာ load ဖြစ်စေ ဖြစ်နိုင်သည်။
+ထို့ကြောင့် CSV ကို **`csv` module ဖြင့်သာ** ရေးရသည်။
 
 ---
 
@@ -1026,7 +1026,7 @@ csv nodes.csv     : header=['entity_id:ID', 'name', 'type', ':LABEL'] rows=7
 csv relationships : header=[':START_ID', ':END_ID', ':TYPE', 'rel_id', 'confidence', 'chunk_ids'] rows=5
 ```
 
-ဤ output သည် `lab.py` ၏ Exercise 6 နှင့် တူညီပါတယ်။
+ဤ output သည် `lab.py` ၏ Exercise 6 နှင့် တူညီသည်။
 
 ### Export format ဇယား
 
@@ -1040,7 +1040,7 @@ csv relationships : header=[':START_ID', ':END_ID', ':TYPE', 'rel_id', 'confiden
 
 ## 8. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ code က ဘယ်ရလဒ် ပြန်ပေးမလဲ။
+**မေးခွန်း** — အောက်ပါ code သည် မည်သည့်ရလဒ် ပြန်ပေးမည်နည်း။
 
 ```python
 import csv
@@ -1062,12 +1062,12 @@ print(repr(buf.getvalue()))
 
 **အဖြေ — 2. `'doc-001:c00,"Neo4j uses Cypher, a query language",0.95\n'`**
 
-အကြောင်းရင်း — `csv.writer` သည် **comma (သို့) quote (သို့) newline** ပါသော
+အကြောင်းရင်း — `csv.writer` သည် **comma (သို့) quote (သို့) newline** ပါသည့်
 field များကိုသာ quote လုပ်သည်။ `doc-001:c00` တွင် ထို character များ မပါသဖြင့်
-quote မလုပ်ပါ။ `0.95` ကလည်း ထို့အတူပါ။ ဒုတိယ field တစ်ခုတည်းသာ quote
-ဖြစ်သည်။ ဤအပြုအမူက `csv.reader` ဖြင့် ပြန်ဖတ်ရင် field သုံးခု
-ရရှိစေပါတယ် — `["doc-001:c00", "Neo4j uses Cypher, a query language", "0.95"]`။
-Option 3 က ဖြစ်ခဲ့ရင် field ၄ ခု ဖြစ်သွားပြီး column များ ရွှေ့သွားမည်။
+quote မလုပ်ပါ။ `0.95` သည်လည်း ထို့အတူ ဖြစ်သည်။ ဒုတိယ field တစ်ခုတည်းသာ quote
+ဖြစ်သည်။ ဤအပြုအမူသည် `csv.reader` ဖြင့် ပြန်ဖတ်လျှင် field သုံးခု
+ရရှိစေသည် — `["doc-001:c00", "Neo4j uses Cypher, a query language", "0.95"]`။
+Option 3 က ဖြစ်ခဲ့လျှင် field ၄ ခု ဖြစ်သွားပြီး column များ ရွှေ့သွားမည်။
 
 </details>
 
@@ -1076,8 +1076,8 @@ Option 3 က ဖြစ်ခဲ့ရင် field ၄ ခု ဖြစ်သွ�
 **အဓိက မှတ်ထားရန်** — Export အဆင့်သည် pipeline ၏ **အထွက် အာမခံချက်** ဖြစ်သည်။
 Cypher တွင် တန်ဖိုးအားလုံးကို `$param` ဖြင့်သာ ပို့ပြီး relationship type ကို
 parameter မလုပ်နိုင်သဖြင့် whitelist ဖြင့် စစ်ပြီးမှ query ထဲ ထည့်သည် —
-ဒါက Cypher injection ကာကွယ်မှု၏ အရေးကြီးဆုံး အစိတ်အပိုင်းပါ။ JSON ကို
-`sort_keys=True` ဖြင့်၊ CSV ကို `csv.writer` ဖြင့်သာ ထုတ်ခြင်းက run တိုင်း
-တူညီပြီး ပြန်ဖတ်နိုင်တဲ့ artifact ဖြစ်စေပါတယ်။ `MERGE` ကို deterministic
-id (`entity_id`၊ `rel_id`) နှင့် တွဲသုံးခြင်းကြောင့် pipeline ကို ဘယ်နှစ်ခါ
-run လုပ်လုပ် node/relationship အသစ် မဖြစ်ဘဲ property များသာ update ဖြစ်ပါတယ်။
+၎င်းသည် Cypher injection ကာကွယ်မှု၏ အရေးကြီးဆုံး အစိတ်အပိုင်း ဖြစ်သည်။ JSON ကို
+`sort_keys=True` ဖြင့်၊ CSV ကို `csv.writer` ဖြင့်သာ ထုတ်ခြင်းသည် run တိုင်း
+တူညီပြီး ပြန်ဖတ်နိုင်သည့် artifact ဖြစ်စေသည်။ `MERGE` ကို deterministic
+id (`entity_id`၊ `rel_id`) နှင့် တွဲသုံးခြင်းကြောင့် pipeline ကို မည်မျှ
+run လုပ်လုပ် node/relationship အသစ် မဖြစ်ဘဲ property များသာ update ဖြစ်သည်။

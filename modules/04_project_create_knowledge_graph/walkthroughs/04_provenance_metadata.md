@@ -7,15 +7,15 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Triple တစ်ခုသည် corpus ၏ ဘယ်နေရာမှ လာသလဲ ဆိုတာ မမှတ်ထားရင် —
-ရလဒ်ကို **စစ်ဆေး (audit) လုပ်လို့ မရ**၊ confidence ကို ခန့်မှန်းလို့ မရပါ။
+Triple တစ်ခုသည် corpus ၏ မည်သည့်နေရာမှ လာသည်ကို မမှတ်ထားလျှင် —
+ရလဒ်ကို **စစ်ဆေး (audit) လုပ်၍ မရ**၊ confidence ကို ခန့်မှန်း၍ မရပါ။
 
 ```text
 extract stage က triple များ ထုတ်သည် —
   GraphRAG -[BUILT_ON]-> Knowledge Graph   (doc-001:c00 မှ)
   GraphRAG -[BUILT_ON]-> Knowledge Graph   (doc-002:c00 မှ)   <- same key
 
-merge stage မှာ ရွေးချယ်စရာ နှစ်မျိုး —
+merge stage တွင် ရွေးချယ်စရာ နှစ်မျိုး —
   (က) duplicate ကို ဖျက်ပစ်    -> source တစ်ခု ဆုံးရှုံး
   (ခ) provenance list ကို union -> source နှစ်ခုလုံး ကျန်၊ support count 2
 
@@ -26,10 +26,10 @@ audit လုပ်ရန် —
   triple -> chunk_id -> မူရင်း sentence အထိ ပြန်လိုက်နိုင်သည်
 ```
 
-ဒီ Exercise က `Provenance` dataclass ဖြင့် **source chunk id၊ confidence၊ method**
-သုံးခုကို triple တိုင်းတွင် မှတ်ပြီး၊ duplicate များကို **ဖျက်မပစ်ဘဲ ပေါင်း** ပါတယ်။
+ဤ Exercise သည် `Provenance` dataclass ဖြင့် **source chunk id၊ confidence၊ method**
+သုံးခုကို triple တိုင်းတွင် မှတ်ပြီး၊ duplicate များကို **ဖျက်မပစ်ဘဲ ပေါင်း** သည်။
 
-ဒီ code မှာ လေ့လာရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် လေ့လာရမည့် Python concepts များမှာ —
 
 - `@dataclass` နှင့် nested dataclass (`list` field ထဲ `Provenance`)
 - `field(default_factory=list)` — mutable default ၏ အန္တရာယ်
@@ -69,7 +69,7 @@ Provenance(chunk_id='doc-001:c00', confidence=0.95, method='pattern:uses')
 doc-001:c00 0.95 pattern:uses
 ```
 
-Field သုံးခုက တာဝန် သုံးမျိုးကို ကိုယ်စားပြုပါတယ်။
+Field သုံးခုသည် တာဝန် သုံးမျိုးကို ကိုယ်စားပြုသည်။
 
 | Field | အဓိပ္ပာယ် | ဥပမာ |
 | --- | --- | --- |
@@ -77,11 +77,11 @@ Field သုံးခုက တာဝန် သုံးမျိုးကို
 | `confidence` | ထို chunk တွင် ဤ triple မှန်ကြောင်း ယုံကြည်မှု | `0.95` |
 | `method` | extraction နည်းလမ်း | `pattern:uses`၊ `cooccurrence` |
 
-`method` သည် **နည်းလမ်းအလိုက် စစ်ထုတ်ရန်** အရေးကြီးပါတယ် — ဥပမာ
+`method` သည် **နည်းလမ်းအလိုက် စစ်ထုတ်ရန်** အရေးကြီးသည် — ဥပမာ
 `cooccurrence` method ၏ triple များကို သီးခြား စစ်လိုပါက `method` ဖြင့်
-ခွဲနိုင်ပါတယ်။ ဒါကြောင့် `pattern:uses` လို prefix ကို ထည့်ထားတာပါ — predicate
+ခွဲနိုင်သည်။ ထို့ကြောင့် `pattern:uses` ကဲ့သို့ prefix ကို ထည့်ထားခြင်း ဖြစ်သည် — predicate
 အမည်ကို နောက်တွင် ကပ်ထားသဖြင့် `startswith("pattern:")` ဖြင့် pattern-based
-triple အားလုံးကို တစ်ချက် ဆွဲထုတ်နိုင်ပါတယ်။
+triple အားလုံးကို တစ်ချက် ဆွဲထုတ်နိုင်သည်။
 
 ---
 
@@ -124,13 +124,13 @@ Output —
 Triple(subject_id='ent:neo4j', predicate='USES', object_id='ent:cypher', provenance=[Provenance(chunk_id='doc-001:c00', confidence=0.95, method='pattern:uses')])
 ```
 
-### ဘာကြောင့် `provenance` က **list** ဖြစ်သလဲ။
+### အဘယ်ကြောင့် `provenance` သည် **list** ဖြစ်သနည်း။
 
-Triple တစ်ခုကို source များစွာမှ တွေ့နိုင်ပါတယ်။ List ဖြစ်တဲ့အတွက်
-`append`/`extend` ဖြင့် source အသစ် ထည့်နိုင်ပါတယ်။ `confidence` ကို **မသိမ်း**
-ထားတာကို သတိထားပါ — `@property` ဖြင့် `provenance` မှ တွက်ပါတယ် (အပိုင်း ၄)။
+Triple တစ်ခုကို source များစွာမှ တွေ့နိုင်သည်။ List ဖြစ်သောကြောင့်
+`append`/`extend` ဖြင့် source အသစ် ထည့်နိုင်သည်။ `confidence` ကို **မသိမ်း**
+ထားသည်ကို သတိထားပါ — `@property` ဖြင့် `provenance` မှ တွက်သည် (အပိုင်း ၄)။
 Derived value ကို သိမ်းမထားခြင်းဖြင့် "source အသစ် ထည့်ပြီး confidence မပြင်မိ"
-ဆိုတဲ့ bug ကို လုံးဝ ရှောင်နိုင်ပါတယ်။
+ဆိုသည့် bug ကို လုံးဝ ရှောင်နိုင်သည်။
 
 ### `field(default_factory=list)`
 
@@ -138,9 +138,9 @@ Derived value ကို သိမ်းမထားခြင်းဖြင့�
 provenance: list = field(default_factory=list)
 ```
 
-`provenance: list = []` လို့ ရေးရင် Python က `ValueError` ဖြင့် ပယ်ပါတယ်။
-အကြောင်းရင်းက `[]` ကို **တစ်ခါတည်း** ဖန်တီးပြီး instance အားလုံး မျှဝေမှာဖြစ်လို့ပါ။
-`default_factory=list` က instance တစ်ခုစီအတွက် list အသစ် ဖန်တီးပေးပါတယ်။
+`provenance: list = []` ဟု ရေးလျှင် Python သည် `ValueError` ဖြင့် ပယ်သည်။
+အကြောင်းရင်းသည် `[]` ကို **တစ်ခါတည်း** ဖန်တီးပြီး instance အားလုံး မျှဝေစေမည် ဖြစ်သောကြောင့် ဖြစ်သည်။
+`default_factory=list` သည် instance တစ်ခုစီအတွက် list အသစ် ဖန်တီးပေးသည်။
 
 ```python
 from dataclasses import dataclass, field
@@ -154,7 +154,7 @@ class Bad:
 print("class defined")
 ```
 
-Hmm — ဤ snippet ကို **run လုပ်ရင် error ဖြစ်ပါတယ်**။ တိကျတဲ့ error ကို ကြည့်ပါ။
+ဤ snippet ကို **run လုပ်လျှင် error ဖြစ်သည်**။ တိကျသည့် error ကို ကြည့်ပါ။
 
 ```python
 from dataclasses import dataclass
@@ -180,7 +180,7 @@ Output —
 ValueError: mutable default <class 'list'> for field items is not allowed: use default_factory
 ```
 
-Python က class definition အချိန်မှာပင် ဖမ်းပြီး ဖြေရှင်းနည်းကို ပြောပြပါတယ်။
+Python သည် class definition အချိန်တွင်ပင် ဖမ်းပြီး ဖြေရှင်းနည်းကို ပြောပြသည်။
 
 ### `@property key` — tuple ဖြင့် identity
 
@@ -190,16 +190,16 @@ def key(self):
     return (self.subject_id, self.predicate, self.object_id)
 ```
 
-`@property` က method တစ်ခုကို **attribute လို** ဖတ်နိုင်စေပါတယ် — `triple.key`
-လို့ ကွင်းမပါဘဲ ရေးပါတယ်။
+`@property` သည် method တစ်ခုကို **attribute ကဲ့သို့** ဖတ်နိုင်စေသည် — `triple.key`
+ဟု ကွင်းမပါဘဲ ရေးသည်။
 
 `provenance` ကို key ထဲ **မထည့်** ပါ — key သည် identity သာဖြစ်ပြီး
-provenance သည် support ဖြစ်ပါတယ်။ ဒါကြောင့် source နှစ်ခုမှ တွေ့တဲ့ triple
-နှစ်ခုက key တူညီပြီး merge လုပ်နိုင်ပါတယ်။
+provenance သည် support ဖြစ်သည်။ ထို့ကြောင့် source နှစ်ခုမှ တွေ့သည့် triple
+နှစ်ခုသည် key တူညီပြီး merge လုပ်နိုင်သည်။
 
-`key` ကို tuple ဖြစ်တာက dict key အဖြစ် သုံးနိုင်ရန်ပါ — Python tuple သည်
-immutable ဖြစ်လို့ hashable ဖြစ်ပါတယ်။ List ဖြစ်ရင်
-`TypeError: unhashable type` ဖြစ်ပါမယ်။
+`key` ကို tuple ဖြစ်စေခြင်းသည် dict key အဖြစ် သုံးနိုင်ရန် ဖြစ်သည် — Python tuple သည်
+immutable ဖြစ်သောကြောင့် hashable ဖြစ်သည်။ List ဖြစ်လျှင်
+`TypeError: unhashable type` ဖြစ်မည်။
 
 ```python
 key = ("ent:neo4j", "USES", "ent:cypher")
@@ -267,8 +267,8 @@ ValueError: max() iterable argument is empty
 
 ### `max(generator)` — အကြီးဆုံးကို ယူသည်
 
-`max(p.confidence for p in self.provenance)` က generator expression မှ
-အကြီးဆုံး confidence ကို ပြန်ပါတယ်။ `[0.95, 0.80]` အတွက် `0.95` ရပါတယ်။
+`max(p.confidence for p in self.provenance)` သည် generator expression မှ
+အကြီးဆုံး confidence ကို ပြန်သည်။ `[0.95, 0.80]` အတွက် `0.95` ရသည်။
 
 | Provenance | confidence |
 | --- | --- |
@@ -276,13 +276,13 @@ ValueError: max() iterable argument is empty
 | `doc-002:c00` | 0.80 |
 | **`max`** | **0.95** |
 
-### ဘာကြောင့် `max` လဲ၊ `min` မဟုတ်လဲ။
+### အဘယ်ကြောင့် `max` ဖြစ်ပြီး `min` မဟုတ်သနည်း။
 
-Extraction တစ်ခုချင်းစီမှ confidence သည် အဆိုပါ chunk အတွက်သာ ဖြစ်ပါတယ်။
-`min` ယူရင် source အသစ် ထည့်တိုင်း confidence **ကျ** ပါမယ် — ဒါက
-"အထောက်အထား များလာတာနဲ့ ယုံကြည်မှု ကျသည်" ဆိုတဲ့ ဆန့်ကျင်ဘက်
-အပြုအမူပါ။ `max` ယူတာကြောင့် source အများအပြား ထောက်ခံတဲ့ triple သည်
-quality gate (Exercise 5) ကို ဖြတ်နိုင်ပါတယ်။
+Extraction တစ်ခုချင်းစီမှ confidence သည် အဆိုပါ chunk အတွက်သာ ဖြစ်သည်။
+`min` ယူလျှင် source အသစ် ထည့်တိုင်း confidence **ကျ** မည် — ၎င်းသည်
+"အထောက်အထား များလာသည်နှင့် ယုံကြည်မှု ကျသည်" ဆိုသည့် ဆန့်ကျင်ဘက်
+အပြုအမူ ဖြစ်သည်။ `max` ယူခြင်းကြောင့် source အများအပြား ထောက်ခံသည့် triple သည်
+quality gate (Exercise 5) ကို ဖြတ်နိုင်သည်။
 
 ### Trap — provenance မရှိသော triple
 
@@ -322,10 +322,10 @@ Output —
 ValueError: max() iterable argument is empty
 ```
 
-Provenance list ဗလာဖြစ်ရင် `max()` က `ValueError` ဖြင့် ကျရှုံးပါတယ်။ ဒါကြောင့်
+Provenance list ဗလာဖြစ်လျှင် `max()` သည် `ValueError` ဖြင့် ကျရှုံးသည်။ ထို့ကြောင့်
 `merge_triples` နှင့် `quality_gate` များတွင်
-`assert triple.provenance` ဖြင့် စစ်ရပါတယ် — provenance မရှိတဲ့ triple
-တစ်ခုက ရှိရင် **pipeline တစ်ခုလုံး ရပ်သွား** နိုင်ပါတယ်။
+`assert triple.provenance` ဖြင့် စစ်ရသည် — provenance မရှိသည့် triple
+တစ်ခု ရှိလျှင် **pipeline တစ်ခုလုံး ရပ်သွား** နိုင်သည်။
 
 ---
 
@@ -395,17 +395,17 @@ overwrite (trap)   triples=1 provenance=[('doc-002:c00', 0.95)]
 
 ### Trap — "နောက်ဆုံးက အနိုင်" (last wins)
 
-`merge_last_wins` က `merged[triple.key] = ...` ဖြင့် **အစားထိုး** လိုက်ပါတယ်။
-`triples=1` ဆိုတာက triple အရေအတွက် မှန်ပေမဲ့ `provenance` တွင်
-`doc-001:c00` **ပျောက်သွား** ပါတယ်။
+`merge_last_wins` သည် `merged[triple.key] = ...` ဖြင့် **အစားထိုး** လိုက်သည်။
+`triples=1` ဖြစ်ခြင်းသည် triple အရေအတွက် မှန်သော်လည်း `provenance` တွင်
+`doc-001:c00` **ပျောက်သွား** သည်။
 
 | နည်းလမ်း | Triple အရေအတွက် | Provenance အရေအတွက် | Source ဆုံးရှုံးမှု |
 | --- | --- | --- | --- |
 | `extend` (မှန်) | 1 | 2 | မရှိ |
 | overwrite (trap) | 1 | 1 | `doc-001:c00` ဆုံးရှုံး |
 
-`extend` က list နှစ်ခုကို **ပေါင်း** ပါတယ် (append နှင့် ခြားနားချက် —
-`extend` က item တစ်ခုချင်း ဖြန့်ထည့်သည်၊ `append` က list တစ်ခုလုံး ထည့်သည်)။
+`extend` သည် list နှစ်ခုကို **ပေါင်း** သည် (append နှင့် ခြားနားချက် —
+`extend` သည် item တစ်ခုချင်း ဖြန့်ထည့်သည်၊ `append` သည် list တစ်ခုလုံး ထည့်သည်)။
 
 ```python
 first, second = ["a"], ["b", "c"]
@@ -430,17 +430,17 @@ Output —
 merged[triple.key] = Triple(..., list(triple.provenance))
 ```
 
-`list()` မလုပ်ဘဲ `triple.provenance` ကို တိုက်ရိုက် ထည့်ရင် merged triple နှင့်
-မူရင်း triple သည် **list တစ်ခုတည်း** ကို မျှဝေသွားပါတယ်။ နောက်တွင်
-`extend` လုပ်လိုက်ရင် မူရင်း raw triple ပါ ပြောင်းသွားပါမယ် — ဒါက
-"raw_triples နှင့် merged ကွာခြားမှု" ကို ပျက်စေပါတယ်။
+`list()` မလုပ်ဘဲ `triple.provenance` ကို တိုက်ရိုက် ထည့်လျှင် merged triple နှင့်
+မူရင်း triple သည် **list တစ်ခုတည်း** ကို မျှဝေသွားသည်။ နောက်တွင်
+`extend` လုပ်လိုက်လျှင် မူရင်း raw triple ပါ ပြောင်းသွားမည် — ၎င်းသည်
+"raw_triples နှင့် merged ကွာခြားမှု" ကို ပျက်စေသည်။
 
 ### `OrderedDict` နှင့် `in`
 
-`if triple.key in merged:` က dict membership ဖြစ်ပါတယ် — O(1)။ List ဖြင့်
-`if triple.key in list_of_keys:` လုပ်ရင် O(n) ဖြစ်ပါတယ်။ `OrderedDict` က
+`if triple.key in merged:` သည် dict membership ဖြစ်သည် — O(1)။ List ဖြင့်
+`if triple.key in list_of_keys:` လုပ်လျှင် O(n) ဖြစ်သည်။ `OrderedDict` သည်
 key များကို **ပထမဆုံး တွေ့သည့် အစဉ်** အတိုင်း ထိန်းသိမ်းသဖြင့် output ၏
-အစီအစဉ် run တိုင်း တူညီပါတယ်။
+အစီအစဉ် run တိုင်း တူညီသည်။
 
 ---
 
@@ -511,24 +511,24 @@ Output —
 
 ### `names.get(id, id)` — fallback
 
-`names` က `{entity_id: name}` mapping ဖြစ်ပါတယ်။ `names.get(self.subject_id, self.subject_id)`
-သည် id ကို ရှာပြီး **မရှိရင် id ကိုယ်တိုင်** ပြန်ပါတယ် (`.get()` ၏ ဒုတိယ argument
-သည် default)။ ဒါကြောင့် `KeyError` မဖြစ်ဘဲ output သည် အမြဲ ပြည့်စုံပါတယ်။
+`names` သည် `{entity_id: name}` mapping ဖြစ်သည်။ `names.get(self.subject_id, self.subject_id)`
+သည် id ကို ရှာပြီး **မရှိလျှင် id ကိုယ်တိုင်** ပြန်သည် (`.get()` ၏ ဒုတိယ argument
+သည် default)။ ထို့ကြောင့် `KeyError` မဖြစ်ဘဲ output သည် အမြဲ ပြည့်စုံသည်။
 
-### ဘာကြောင့် id နှင့် name နှစ်ခုလုံး ထည့်သလဲ။
+### အဘယ်ကြောင့် id နှင့် name နှစ်ခုလုံး ထည့်သနည်း။
 
 | Field | အသုံးပြုသည့် နေရာ |
 | --- | --- |
 | `subject_id` / `object_id` | Neo4j `MERGE` (တိကျပြီး deterministic) |
 | `subject` / `object` | လူဖတ်ရန်၊ report/UI |
 
-Id သာ ပါရင် လူဖတ်ရ ခက်သည်။ Name သာ ပါရင် id collision ကို မဖော်နိုင်ပါ။
-နှစ်ခုလုံး ထည့်ခြင်းက နှစ်ဖက်စလုံး အကျိုးရှိပါတယ်။
+Id သာ ပါလျှင် လူဖတ်ရ ခက်သည်။ Name သာ ပါလျှင် id collision ကို မဖော်နိုင်ပါ။
+နှစ်ခုလုံး ထည့်ခြင်းသည် နှစ်ဖက်စလုံး အကျိုးရှိသည်။
 
-`round(self.confidence, 2)` က float ၏ binary representation အမှားများ
-(ဥပမာ `0.9499999`) ကို output တွင် ဖုံးကွယ်ပေးပါတယ်။ JSON တွင်
-`sort_keys=True` ထည့်ခြင်းက key အစီအစဉ်ကို တည်ငြိမ်စေပါတယ် — ဒါကြောင့်
-output ကို run တိုင်း diff လုပ်နိုင်ပါတယ်။
+`round(self.confidence, 2)` သည် float ၏ binary representation အမှားများ
+(ဥပမာ `0.9499999`) ကို output တွင် ဖုံးကွယ်ပေးသည်။ JSON တွင်
+`sort_keys=True` ထည့်ခြင်းသည် key အစီအစဉ်ကို တည်ငြိမ်စေသည် — ထို့ကြောင့်
+output ကို run တိုင်း diff လုပ်နိုင်သည်။
 
 ---
 
@@ -629,7 +629,7 @@ merged triple 'GraphRAG -[BUILT_ON]-> Knowledge Graph' provenance: [('doc-001:c0
 ['cooccurrence', 'pattern:built_on', 'pattern:developed_by', 'pattern:is_a', 'pattern:uses']
 ```
 
-ဤ output သည် `lab.py` ၏ Exercise 4 နှင့် တူညီပါတယ်။
+ဤ output သည် `lab.py` ၏ Exercise 4 နှင့် တူညီသည်။
 
 ### Merged triple ဇယား
 
@@ -647,20 +647,20 @@ merged triple 'GraphRAG -[BUILT_ON]-> Knowledge Graph' provenance: [('doc-001:c0
 ရလဒ် —
 
 - raw triple **၉** ခုမှ merged **၈** ခု ဖြစ်သည် — `GraphRAG -[BUILT_ON]-> Knowledge Graph`
-  က source နှစ်ခုမှ လာသဖြင့် ပေါင်းသွားသည်။
-- ပေါင်းသွားတဲ့ triple ၏ `provenance` တွင် record **၂** ခု ရှိပြီး
-  chunk_id နှစ်ခု **ကွဲပြား** သည် — ဒါကို assertion က စစ်ပါတယ်။
+  သည် source နှစ်ခုမှ လာသဖြင့် ပေါင်းသွားသည်။
+- ပေါင်းသွားသည့် triple ၏ `provenance` တွင် record **၂** ခု ရှိပြီး
+  chunk_id နှစ်ခု **ကွဲပြား** သည် — ၎င်းကို assertion က စစ်သည်။
 - `methods` စုစုပေါင်း ငါးမျိုး — pattern ၄ မျိုးနှင့် `cooccurrence` တစ်မျိုး။
 
-Output မှာ `%-16s` format ကြောင့် column အလျားမညီတာ တွေ့နိုင်ပါတယ်
-(`Knowledge Graph` သည် ၁၅ လုံးထက် ရှည်သဖြင့် padding မထည့်နိုင်)။ ဒါက
+Output တွင် `%-16s` format ကြောင့် column အလျားမညီသည်ကို တွေ့နိုင်သည်
+(`Knowledge Graph` သည် ၁၅ လုံးထက် ရှည်သဖြင့် padding မထည့်နိုင်)။ ၎င်းသည်
 formatting အပိုင်းသာ ဖြစ်ပြီး အချက်အလက် မှန်ကန်မှုကို မထိပါ။
 
 ---
 
 ## 7. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ code က ဘယ်ရလဒ် ပြန်ပေးမလဲ။
+**မေးခွန်း** — အောက်ပါ code သည် မည်သည့်ရလဒ် ပြန်ပေးမည်နည်း။
 
 ```python
 from dataclasses import dataclass, field
@@ -702,12 +702,12 @@ print(triple.confidence)
 
 အကြောင်းရင်း — `confidence` သည် `max(p.confidence for p in self.provenance)`
 ဖြစ်သဖြင့် `[0.55, 0.30]` ထဲမှ `0.55` ရသည်။ Float ပြတ်သားမှုအတွက်
-`0.55` သည် `0.5500000000000000444` ဖြစ်နိုင်ပေမဲ့ `print()` က `0.55` ဖြင့်
+`0.55` သည် `0.5500000000000000444` ဖြစ်နိုင်သော်လည်း `print()` သည် `0.55` ဖြင့်
 ပြသည်။
 
-`max` ဖြစ်ရသည့် အကြောင်းရင်း — source အသစ် ထည့်တိုင်း confidence ကျသွားရင်
-(=`min` ဖြစ်ရင်) support များတဲ့ triple များသည် gate ကို ပို၍ ခက်ခဲစွာ ဖြတ်ရမည်။
-`max` ဖြင့် source အသစ်က confidence ကို မညံ့စေပါ။
+`max` ဖြစ်ရသည့် အကြောင်းရင်း — source အသစ် ထည့်တိုင်း confidence ကျသွားလျှင်
+(=`min` ဖြစ်လျှင်) support များသည့် triple များသည် gate ကို ပို၍ ခက်ခဲစွာ ဖြတ်ရမည်။
+`max` ဖြင့် source အသစ်သည် confidence ကို မညံ့စေပါ။
 
 </details>
 
@@ -719,4 +719,4 @@ print(triple.confidence)
 Duplicate triple များကို ဖျက်မပစ်ဘဲ `extend()` ဖြင့် **union** လုပ်ခြင်းကြောင့်
 support count ကျန်ပြီး၊ `Triple.confidence` ကို provenance မှ **တွက်ချက်** ခြင်းကြောင့်
 source အသစ် ထည့်ပြီး confidence ပြင်ရန် မေ့ခြင်း မဖြစ်နိုင်ပါ။ `list()` copy နှင့်
-`field(default_factory=list)` နှစ်ခုသည် "list တစ်ခုတည်း မျှဝေ" bug ကို တားပါတယ်။
+`field(default_factory=list)` နှစ်ခုသည် "list တစ်ခုတည်း မျှဝေ" bug ကို တားသည်။

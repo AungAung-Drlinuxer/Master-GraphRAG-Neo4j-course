@@ -7,7 +7,7 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Exercise 1 က text ကို သန့်ရှင်းစေသည်။ Exercise 2 က ထို text ကို **Knowledge Graph
+Exercise 1 သည် text ကို သန့်ရှင်းစေသည်။ Exercise 2 သည် ထို text ကို **Knowledge Graph
 အထိ** ခေါ်သွားသည့် အဆင့်ရှစ်ခုကို ချိတ်ဆက်သည်။
 
 ```text
@@ -26,10 +26,10 @@ run_pipeline(corpus) -> dict { documents, chunks, raw_triples, entities,
 ```
 
 ဤ Exercise ၏ အဓိကအချက်မှာ အဆင့်တိုင်းသည် **list comprehension နှင့် function
-တစ်ခုတည်း** အဖြစ် အလွှာလိုက် စုစည်းထားတာပါ။ ဒါကြောင့် stage အသစ်တစ်ခု
-ထည့်တဲ့အခါ ကျန်အဆင့်များကို မထိဘဲ ပြင်နိုင်ပါတယ်။
+တစ်ခုတည်း** အဖြစ် အလွှာလိုက် စုစည်းထားခြင်း ဖြစ်သည်။ ထို့ကြောင့် stage အသစ်တစ်ခု
+ထည့်သည့်အခါ ကျန်အဆင့်များကို မထိဘဲ ပြင်နိုင်သည်။
 
-ဒီ code မှာ လေ့ရှာရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် လေ့လာရမည့် Python concepts များမှာ —
 
 - Regex **lookbehind** `(?<=...)` နှင့် lookahead `(?!...)`
 - Named group `(?P<name>...)`
@@ -96,15 +96,15 @@ Output —
 
 ### `re.split()` က delimiter ကို ဖျက်ပစ်သည်
 
-`re.split(pattern, text)` က pattern ကို **delimiter** အဖြစ် ယူပြီး text ကို
-အပိုင်းများ ခွဲပါတယ်။ delimiter ကိုယ်တိုင် ရလဒ်ထဲ မပါဝင်တော့ပါ။ ဒါကြောင့် `.`
-ကို delimiter လုပ်ရင် sentence ၏ အဆုံးက `.` ပျောက်သွားပါတယ်။
+`re.split(pattern, text)` သည် pattern ကို **delimiter** အဖြစ် ယူပြီး text ကို
+အပိုင်းများ ခွဲသည်။ delimiter ကိုယ်တိုင် ရလဒ်ထဲ မပါဝင်တော့ပါ။ ထို့ကြောင့် `.`
+ကို delimiter လုပ်လျှင် sentence ၏ အဆုံးက `.` ပျောက်သွားသည်။
 
 ### `(?<=...)` သည် zero-width ဖြစ်သည်
 
-`(?<=[.!?])` က **lookbehind** ဖြစ်ပါတယ်။ "ရှေ့မှာ `.`/`!`/`?` ရှိရမည်" လို့
-စစ်ပေမဲ့ **character ကို မစားပါ** (zero-width)။ ဒါကြောင့် delimiter က
-ကွက်လပ် `\s+` သာ ဖြစ်ပြီး `.` က match မဖြစ်ဘဲ sentence ထဲ ကျန်နေပါတယ်။
+`(?<=[.!?])` သည် **lookbehind** ဖြစ်သည်။ "ရှေ့တွင် `.`/`!`/`?` ရှိရမည်" ဟု
+စစ်သော်လည်း **character ကို မစားပါ** (zero-width)။ ထို့ကြောင့် delimiter သည်
+ကွက်လပ် `\s+` သာ ဖြစ်ပြီး `.` က match မဖြစ်ဘဲ sentence ထဲ ကျန်နေသည်။
 
 ### Trap — lookbehind မပါသော split
 
@@ -123,10 +123,10 @@ lookbehind : ['Neo4j uses Cypher.', 'GraphRAG is built on a Knowledge Graph.']
 plain      : ['Neo4j uses Cypher', 'GraphRAG is built on a Knowledge Graph.']
 ```
 
-`plain` ဗားရှင်းတွင် ပထမ sentence က `'Neo4j uses Cypher'` ဖြစ်ပြီး `.` ပျောက်နေပါတယ်။
-ဒါပေမဲ့ ဒုတိယ sentence က `.` နဲ့ ဆုံးတဲ့အတွက် **မပျောက်ပါ** — delimiter က
-`". "` ဖြစ်ပြီး နောက်ဆုံး `.` က delimiter မဟုတ်လို့ပါ။ ဒါကြောင့် ဤအမှားက
-**တသမတ်တည်း မဖြစ်** ဘဲ ရံဖန်ရံခါသာ ဖြစ်တဲ့ bug အဖြစ် ကျန်နိုင်ပါတယ်။
+`plain` ဗားရှင်းတွင် ပထမ sentence သည် `'Neo4j uses Cypher'` ဖြစ်ပြီး `.` ပျောက်နေသည်။
+သို့သော် ဒုတိယ sentence သည် `.` ဖြင့် ဆုံးသောကြောင့် **မပျောက်ပါ** — delimiter သည်
+`". "` ဖြစ်ပြီး နောက်ဆုံး `.` က delimiter မဟုတ်သောကြောင့် ဖြစ်သည်။ ထို့ကြောင့် ဤအမှားသည်
+**တသမတ်တည်း မဖြစ်** ဘဲ ရံဖန်ရံခါသာ ဖြစ်သည့် bug အဖြစ် ကျန်နိုင်သည်။
 
 ### `(?<=...)` နှင့် `(...)` နှိုင်းယှဉ်ခြင်း
 
@@ -144,7 +144,7 @@ Output —
 [': neo4j']
 ```
 
-ပထမတစ်ခုက `:` ကို မဖမ်းဘဲ နောက်က စာလုံးကိုသာ ပြန်ပေးတာကို တွေ့နိုင်ပါတယ်။
+ပထမတစ်ခုသည် `:` ကို မဖမ်းဘဲ နောက်က စာလုံးကိုသာ ပြန်ပေးသည်ကို တွေ့နိုင်သည်။
 
 ---
 
@@ -222,12 +222,12 @@ doc-001:c01 ( 35) Nous Research develops open models.
 | --- | --- |
 | `buf` | လက်ရှိ စုစည်းနေသော sentence များ |
 | `ordinal` | chunk နံပါတ် (0 မှ စ) |
-| `candidate` | `buf` + sentence အသစ် (ထည့်လိုက်ရင် ဘယ်လောက်ဖြစ်မလဲ) |
+| `candidate` | `buf` + sentence အသစ် (ထည့်လိုက်လျှင် မည်မျှ) |
 
-အဓိက logic မှာ — sentence အသစ်ကို **ထည့်လိုက်ရင် `CHUNK_SIZE` ကျော်မလား** ကို
-အရင် တွက်ပြီး (`candidate`)၊ ကျော်ရင် လက်ရှိ `buf` ကို chunk အဖြစ် **flush**
-လုပ်ပါတယ်။ ဒါကြောင့် sentence တစ်ခုတည်းက size ကျော်လျှင်ပင် တစ်ခုတည်း chunk
-ဖြစ်နိုင်ပါတယ် — sentence အလယ်တွင် ဖြတ်ခြင်း **မရှိ** ပါ။
+အဓိက logic မှာ — sentence အသစ်ကို **ထည့်လိုက်လျှင် `CHUNK_SIZE` ကျော်မည်လား** ကို
+အရင် တွက်ပြီး (`candidate`)၊ ကျော်လျှင် လက်ရှိ `buf` ကို chunk အဖြစ် **flush**
+လုပ်သည်။ ထို့ကြောင့် sentence တစ်ခုတည်းက size ကျော်လျှင်ပင် တစ်ခုတည်း chunk
+ဖြစ်နိုင်သည် — sentence အလယ်တွင် ဖြတ်ခြင်း **မရှိ** ပါ။
 
 ### အကွက်တစ်ခုချင်း trace
 
@@ -302,9 +302,9 @@ i   sentence    buf  cand  action
 | 2 | `GraphRAG is built on a Knowledge Graph.` | 108 | 108 | buffer |
 | 3 | `Nous Research develops open models.` | 35 | **144** | flush (`144 > 140`) → `doc-001:c00` |
 
-ကြိမ် ၃ တွင် `candidate = 144` ဖြစ်လို့ `CHUNK_SIZE = 140` ကို ကျော်ပါတယ်။
-ဒါကြောင့် ယခင် `buf` (108) ကို flush လုပ်ပြီး sentence အသစ်ကို buffer အသစ်
-အဖြစ် စပါတယ်။
+ကြိမ် ၃ တွင် `candidate = 144` ဖြစ်သောကြောင့် `CHUNK_SIZE = 140` ကို ကျော်သည်။
+ထို့ကြောင့် ယခင် `buf` (108) ကို flush လုပ်ပြီး sentence အသစ်ကို buffer အသစ်
+အဖြစ် စသည်။
 
 ---
 
@@ -378,7 +378,7 @@ Banana           -> <none>           0.00 unresolved
 
 ### သုံးဆင့် ကြည့်ခြင်း
 
-Function က `(entry, confidence, kind)` သုံးခု ပြန်ပါတယ်။ အစဉ်လိုက် ကြည့်ပါတယ် —
+Function သည် `(entry, confidence, kind)` သုံးခု ပြန်သည်။ အစဉ်လိုက် ကြည့်သည် —
 
 | အဆင့် | စစ်ဆေးချက် | `kind` | `confidence` |
 | --- | --- | --- | --- |
@@ -387,10 +387,10 @@ Function က `(entry, confidence, kind)` သုံးခု ပြန်ပါ�
 | 3 | fuzzy ratio ≥ `FUZZY_THRESHOLD` | `fuzzy` | 0.55 |
 | — | မကိုက်ညီ | `unresolved` | 0.00 |
 
-`Neo4j` နှင့် `neo4j` နှစ်ခုလုံး `0.95 canonical` ရတာကို ကြည့်ပါ။ `surface.lower()`
-ကြောင့် case မခွဲဘဲ စစ်တာဖြစ်ပါတယ်။ `Graph Rag` က alias စာရင်းထဲ (`"graph rag"`)
-တိုက်ရိုက် ပါလို့ `alias` ရတာဖြစ်ပြီး၊ `Knowledg Graph` က တိုက်ရိုက် မပါလို့
-fuzzy အဆင့်သို့ ကျပါတယ်။
+`Neo4j` နှင့် `neo4j` နှစ်ခုလုံး `0.95 canonical` ရသည်ကို ကြည့်ပါ။ `surface.lower()`
+ကြောင့် case မခွဲဘဲ စစ်ခြင်း ဖြစ်သည်။ `Graph Rag` သည် alias စာရင်းထဲ (`"graph rag"`)
+တိုက်ရိုက် ပါသောကြောင့် `alias` ရခြင်း ဖြစ်ပြီး၊ `Knowledg Graph` သည် တိုက်ရိုက် မပါသောကြောင့်
+fuzzy အဆင့်သို့ ကျသည်။
 
 ### Fuzzy fallback သည် linear search ဖြစ်သည်
 
@@ -402,11 +402,11 @@ for alias, entry in ALIAS_INDEX.items():
 ```
 
 Alias အားလုံးကို တစ်ခုချင်း နှိုင်းယှဉ်ပြီး **အမြင့်ဆုံး ratio** ရှိသူကို
-ရွေးပါတယ်။ Alias `N` ခုရှိရင် တစ်ကြိမ် resolve လုပ်တိုင်း `N` ကြိမ်
-`SequenceMatcher` run ပါတယ်။ Corpus ကြီးလာရင် ဤအဆင့်က **hot path** ဖြစ်လာနိုင်ပါတယ် —
-production တွင် block/trigram index ဖြင့် candidate ကို အရင်ကျဉ်းစေပါတယ်။
+ရွေးသည်။ Alias `N` ခုရှိလျှင် တစ်ကြိမ် resolve လုပ်တိုင်း `N` ကြိမ်
+`SequenceMatcher` run သည်။ Corpus ကြီးလာလျှင် ဤအဆင့်သည် **hot path** ဖြစ်လာနိုင်သည် —
+production တွင် block/trigram index ဖြင့် candidate ကို အရင်ကျဉ်းစေသည်။
 
-### `SequenceMatcher.ratio()` က ဘာပြန်သလဲ။
+### `SequenceMatcher.ratio()` သည် ဘာပြန်သနည်း။
 
 ```python
 from difflib import SequenceMatcher
@@ -425,9 +425,9 @@ Output —
 ```
 
 `ratio()` သည် `2 * matching / total_length` ဖြစ်ပြီး ၀.၀ မှ ၁.၀ အထိ
-ပြန်ပါတယ်။ `knowledg graph` သည် `knowledge graph` နှင့် 0.97 ရသဖြင့်
-`FUZZY_THRESHOLD = 0.85` ကို ကျော်ပါတယ်။ `banana` က 0.29 သာ ရသဖြင့်
-unresolved ဖြစ်ပါတယ်။
+ပြန်သည်။ `knowledg graph` သည် `knowledge graph` နှင့် 0.97 ရသဖြင့်
+`FUZZY_THRESHOLD = 0.85` ကို ကျော်သည်။ `banana` သည် 0.29 သာ ရသဖြင့်
+unresolved ဖြစ်သည်။
 
 ---
 
@@ -496,11 +496,11 @@ _BOUNDED = r"(?<![\w-])(?:%s)(?![\w-])" % "|".join(
 | `(?:%s)` | alias များကို အုပ်စုအဖြစ် |
 | `(?![\w-])` | နောက်တွင် စာလုံး/ဂဏန်း/underscore/hyphen မရှိရ — **negative lookahead** |
 
-`sorted(..., key=len, reverse=True)` ကြောင့် **ရှည်ဆုံး alias အရင်** ရှာပါတယ်။
-မဟုတ်ရင် `neo4j inc` ထဲက `neo4j` ကိုသာ ဖမ်းမိပြီး `inc` ကျန်ခဲ့ပါမယ်။
+`sorted(..., key=len, reverse=True)` ကြောင့် **ရှည်ဆုံး alias အရင်** ရှာသည်။
+မဟုတ်လျှင် `neo4j inc` ထဲက `neo4j` ကိုသာ ဖမ်းမိပြီး `inc` ကျန်ခဲ့မည်။
 
-`re.finditer(_BOUNDED, sentence, re.I)` က `re.I` **ဖြင့်** run ပါတယ်။
-`re.I` မထည့်ရင် `neo4j` (စာလုံးအသေး) ကို လုံးဝ မတွေ့ပါ။
+`re.finditer(_BOUNDED, sentence, re.I)` သည် `re.I` **ဖြင့်** run သည်။
+`re.I` မထည့်လျှင် `neo4j` (စာလုံးအသေး) ကို လုံးဝ မတွေ့ပါ။
 
 ### `finditer` က match object များ၊ `m.start()` က position
 
@@ -509,10 +509,10 @@ hits = sorted(((m.start(), m.group(0)) for m in re.finditer(_BOUNDED, sentence, 
               key=lambda i: i[0])
 ```
 
-`re.finditer()` က match object များကို iterator အဖြစ် ပြန်ပါတယ်။ `m.start()` က
-တွေ့သည့် နေရာ၊ `m.group(0)` က တွေ့သည့် စာသား။ `(start, text)` tuple များကို
-position အလိုက် `sorted()` လုပ်ပါတယ် — ဤအစီအစဉ်က co-occurrence pair ဖော်ရန်
-အရေးကြီးပါတယ် (စာသားထဲ ဘယ်စာလုံးက ရှေးရှေးပေါ်လာလဲ ဆိုတာ ရေတွက်ရန်)။
+`re.finditer()` သည် match object များကို iterator အဖြစ် ပြန်သည်။ `m.start()` သည်
+တွေ့သည့် နေရာ၊ `m.group(0)` သည် တွေ့သည့် စာသား ဖြစ်သည်။ `(start, text)` tuple များကို
+position အလိုက် `sorted()` လုပ်သည် — ဤအစီအစဉ်သည် co-occurrence pair ဖော်ရန်
+အရေးကြီးသည် (စာသားထဲ မည်သည့်စာလုံးက ရှေးရှေးပေါ်လာသည်ကို ရေတွက်ရန်)။
 
 ---
 
@@ -546,11 +546,11 @@ b = Knowledge Graph
 
 ### Named group `(?P<a>...)`
 
-`(?P<a>...)` က group ကို **အမည်ပေး** ပါတယ်။ ဒါကြောင့် `match.group(1)` လို့
-နံပါတ်နဲ့ မမှတ်ဘဲ `match.group("a")` လို့ ဖတ်နိုင်ပါတယ်။ Pattern ရှည်လာတဲ့အခါ
-အလွန်အသုံးဝင်ပါတယ် — နံပါတ်ရေတွက်စရာ မလိုပါ။
+`(?P<a>...)` သည် group ကို **အမည်ပေး** သည်။ ထို့ကြောင့် `match.group(1)` ဟု
+နံပါတ်ဖြင့် မမှတ်ဘဲ `match.group("a")` ဟု ဖတ်နိုင်သည်။ Pattern ရှည်လာသည့်အခါ
+အလွန်အသုံးဝင်သည် — နံပါတ်ရေတွက်စရာ မလိုပါ။
 
-### Trap — `_DETERMINER` မထည့်ရင် triple လုံးဝ လျော့ကျသည်
+### Trap — `_DETERMINER` မထည့်လျှင် triple လုံးဝ လျော့ကျသည်
 
 ```python
 import re
@@ -601,11 +601,11 @@ with _DETERMINER    : ['GraphRAG is built on a Knowledge Graph']
 without _DETERMINER : []
 ```
 
-`is built on a Knowledge Graph` ထဲတွင် article `a` ပါနေတာကြောင့် `_DETERMINER`
-မထည့်ရင် entity `b` ၏ အစကို `a` က ပိတ်ဆို့ပါတယ်။ `_DETERMINER` က
-`(?:(?:a|an|the)\s+)?` ဖြစ်ပြီး **optional** (`?` ပါ) ဖြစ်တာကြောင့် article ရှိသည်ဖြစ်စေ၊
-မရှိသည်ဖြစ်စေ match ရပါတယ်။ ဒါကြောင့် `USES` rule (`Neo4j uses Cypher`) ကဲ့သို့
-article မပါတဲ့ sentence များလည်း မပျက်ပါ။
+`is built on a Knowledge Graph` ထဲတွင် article `a` ပါနေသောကြောင့် `_DETERMINER`
+မထည့်လျှင် entity `b` ၏ အစကို `a` က ပိတ်ဆို့သည်။ `_DETERMINER` သည်
+`(?:(?:a|an|the)\s+)?` ဖြစ်ပြီး **optional** (`?` ပါ) ဖြစ်သောကြောင့် article ရှိသည်ဖြစ်စေ၊
+မရှိသည်ဖြစ်စေ match ရသည်။ ထို့ကြောင့် `USES` rule (`Neo4j uses Cypher`) ကဲ့သို့
+article မပါသည့် sentence များလည်း မပျက်ပါ။
 
 ---
 
@@ -690,13 +690,13 @@ with matched flag : [('GraphRAG', 'BUILT_ON', 'Knowledge Graph')]
 without flag      : [('GraphRAG', 'BUILT_ON', 'Knowledge Graph'), ('GraphRAG', 'RELATED_TO', 'Knowledge Graph')]
 ```
 
-`matched` flag က "ဤ sentence တွင် pattern rule တစ်ခုခု ကိုက်ညီခဲ့ပြီးလား" ကို
-မှတ်ထားပါတယ်။ Pattern ကိုက်ညီပြီးသားဆိုရင် co-occurrence fallback ကို
-**မလုပ်တော့ပါ**။ flag မထည့်ရင် တူညီတဲ့ entity နှစ်ခုအတွက် triple နှစ်ခု
-(တိကျတဲ့ `BUILT_ON` နှင့် မှန်းဆရတဲ့ `RELATED_TO`) ရလာပြီး graph ထဲ
-အချက်အလက် **ပွားသွား** ပါတယ်။
+`matched` flag သည် "ဤ sentence တွင် pattern rule တစ်ခုခု ကိုက်ညီခဲ့ပါသလား" ကို
+မှတ်ထားသည်။ Pattern ကိုက်ညီပြီးသားဖြစ်လျှင် co-occurrence fallback ကို
+**မလုပ်တော့ပါ**။ flag မထည့်လျှင် တူညီသည့် entity နှစ်ခုအတွက် triple နှစ်ခု
+(တိကျသည့် `BUILT_ON` နှင့် မှန်းဆရသည့် `RELATED_TO`) ရလာပြီး graph ထဲ
+အချက်အလက် **ပွားသွား** သည်။
 
-### `zip(resolved, resolved[1:])` — ကပ်နေတဲ့ အတွဲများ
+### `zip(resolved, resolved[1:])` — ကပ်နေသည့် အတွဲများ
 
 ```python
 import re
@@ -710,11 +710,11 @@ Output —
 [('Neo4j', 'GraphRAG'), ('GraphRAG', 'Cypher')]
 ```
 
-`resolved[1:]` က ပထမ element ကို ဖြုတ်လိုက်တဲ့ list ဖြစ်ပါတယ်။ `zip()` က
-နှစ် list ကို ဒေါင်လိုက် တွဲပါတယ်။ ဒါကြောင့် **ကပ်နေတဲ့ အတွဲများ**
-`(0,1)`, `(1,2)`, `(2,3)` … ရပါတယ်။ ဒါက **bigram window** pattern ဖြစ်ပါတယ်။
-`if left["canonical"] != right["canonical"]` က စာလုံးတူတဲ့ အတွဲ (`Neo4j and Neo4j`)
-ကို ဖယ်ပါတယ် — ဒါမှ self-loop မဖြစ်ပါ။
+`resolved[1:]` သည် ပထမ element ကို ဖြုတ်လိုက်သည့် list ဖြစ်သည်။ `zip()` သည်
+နှစ် list ကို ဒေါင်လိုက် တွဲသည်။ ထို့ကြောင့် **ကပ်နေသည့် အတွဲများ**
+`(0,1)`, `(1,2)`, `(2,3)` … ရသည်။ ၎င်းသည် **bigram window** pattern ဖြစ်သည်။
+`if left["canonical"] != right["canonical"]` သည် စာလုံးတူသည့် အတွဲ (`Neo4j and Neo4j`)
+ကို ဖယ်သည် — ထိုသို့မှသာ self-loop မဖြစ်ပါ။
 
 ---
 
@@ -911,8 +911,8 @@ raw_triples = [t for chunk in chunks for t in extract_from_chunk(chunk)]
 | `quality_gate(merged, entities)` | စစ်ထုတ် | 5 / 3 |
 | `export_*` | format သုံးမျိုး | Cypher 12 / JSON 7+5 / CSV 7+5 |
 
-Nested comprehension `[t for chunk in chunks for t in extract_from_chunk(chunk)]` က
-**အဆင့်နှစ်ခု** ကို တစ်လိုင်းတည်း flat လုပ်ပါတယ်။
+Nested comprehension `[t for chunk in chunks for t in extract_from_chunk(chunk)]` သည်
+**အဆင့်နှစ်ခု** ကို တစ်လိုင်းတည်း flat လုပ်သည်။
 
 ```python
 flat = [c for doc in [[1, 2], [3]] for c in doc]
@@ -925,15 +925,15 @@ Output —
 [1, 2, 3]
 ```
 
-ပထမ `for` က အဆင့်ပြင်ပ (outer)၊ ဒုတိယ `for` က အဆင့်အတွင်း (inner) ဖြစ်ပါတယ်။
-`extract` ရလဒ် ၉ ခုသည် `resolve` ရလဒ် ၇ ခု ဖြစ်တာကို ကြည့်ပါ — triple များသည်
-entity **၇ ခု** သာ ညွှန်တာကြောင့်ပါ။
+ပထမ `for` သည် အဆင့်ပြင်ပ (outer)၊ ဒုတိယ `for` သည် အဆင့်အတွင်း (inner) ဖြစ်သည်။
+`extract` ရလဒ် ၉ ခုသည် `resolve` ရလဒ် ၇ ခု ဖြစ်သည်ကို ကြည့်ပါ — triple များသည်
+entity **၇ ခု** သာ ညွှန်သောကြောင့် ဖြစ်သည်။
 
 ---
 
 ## 8. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ code က ဘယ်ရလဒ် ပြန်ပေးမလဲ။
+**မေးခွန်း** — အောက်ပါ code သည် မည်သည့်ရလဒ် ပြန်ပေးမည်နည်း။
 
 ```python
 import re
@@ -957,19 +957,19 @@ print(split_sentences("  Neo4j uses Cypher.  "))
 
 အကြောင်းရင်း — `re.split(r"(?<=[.!?])\s+", "  Neo4j uses Cypher.  ")` သည်
 delimiter `.` နောက်က space များသာ ခွဲသည် (အဆုံး `.` က delimiter မဟုတ်၊ ဘေး
-space များ ရှိလည်း lookbehind အတွက် `.` က တစ်ခုတည်း)။ ဒါကြောင့်
+space များ ရှိလည်း lookbehind အတွက် `.` က တစ်ခုတည်း)။ ထို့ကြောင့်
 `['  Neo4j uses Cypher.  ']` ရပြီး၊ list comprehension ထဲက `s.strip()` က
-`'Neo4j uses Cypher.'` ဖြစ်စေသည်။ `if s.strip()` က empty string များကို
-ဖယ်သည် — ဤဥပမာတွင် `''` မဖြစ်လာလို့ ထပ်ဆင့် အလုပ်မလိုပါ။
+`'Neo4j uses Cypher.'` ဖြစ်စေသည်။ `if s.strip()` သည် empty string များကို
+ဖယ်သည် — ဤဥပမာတွင် `''` မဖြစ်လာသောကြောင့် ထပ်ဆင့် အလုပ်မလိုပါ။
 
 </details>
 
 ---
 
 **အဓိက မှတ်ထားရန်** — Pipeline ၏ အဆင့်တိုင်းသည် **input ပြောင်းလဲမှုတစ်ခု**
-ဖြစ်ပါတယ် — corpus → document → chunk → triple → entity → validated triple → export။
-အဆင့်တိုင်းကို function တစ်ခုတည်းဖြင့် ခွဲထားတာကြောင့် တစ်ခုချင်း test လုပ်နိုင်ပါတယ်။
-`split_sentences` ၏ lookbehind မပါရင် sentence ၏ အဆုံးသတ် အမှတ်အသား ပျောက်သည်။
-`_DETERMINER` မပါရင် article ပါသော sentence များမှ triple လုံးဝ လျော့ကျသည်။
-`matched` flag မပါရင် co-occurrence fallback က triple ပွားစေသည်။ ဤသုံးချက်သည်
+ဖြစ်သည် — corpus → document → chunk → triple → entity → validated triple → export။
+အဆင့်တိုင်းကို function တစ်ခုတည်းဖြင့် ခွဲထားသောကြောင့် တစ်ခုချင်း test လုပ်နိုင်သည်။
+`split_sentences` ၏ lookbehind မပါလျှင် sentence ၏ အဆုံးသတ် အမှတ်အသား ပျောက်သည်။
+`_DETERMINER` မပါလျှင် article ပါသော sentence များမှ triple လုံးဝ လျော့ကျသည်။
+`matched` flag မပါလျှင် co-occurrence fallback သည် triple ပွားစေသည်။ ဤသုံးချက်သည်
 pipeline တစ်ခုလုံး၏ **recall နှင့် precision** ကို တိုက်ရိုက် သက်ရောက်သည်။

@@ -8,8 +8,8 @@
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
 Extraction အဆင့်သည် **recall ကို ဦးစားပေး** သည် — pattern မကိုက်သော sentence
-တွင်ပင် entity နှစ်ခုတွဲလျှင် co-occurrence triple ထုတ်သည်။ ဒါကြောင့်
-triple များထဲ ချို့ယွင်းချက် ပါလာပါတယ်။
+တွင်ပင် entity နှစ်ခုတွဲလျှင် co-occurrence triple ထုတ်သည်။ ထို့ကြောင့်
+triple များထဲ ချို့ယွင်းချက် ပါလာသည်။
 
 ```text
 candidates (merged triples + injected defects)
@@ -28,11 +28,11 @@ quality gate (အစဉ်လိုက် ၆ ဆင့်)
 accepted များသာ Neo4j သို့ ရောက်သည်
 ```
 
-Gate သည် graph ၏ **အရည်အသွေး အာမခံချက်** ဖြစ်ပါတယ်။ Reason ကို log
-လုပ်ခြင်းကြောင့် ဘယ် defect အမျိုးအစား များနေလဲ ဆိုတာ တိုင်းတာနိုင်ပြီး
-upstream (extractor၊ resolver) ကို ပြန်ပြင်နိုင်ပါတယ်။
+Gate သည် graph ၏ **အရည်အသွေး အာမခံချက်** ဖြစ်သည်။ Reason ကို log
+လုပ်ခြင်းကြောင့် မည်သည့် defect အမျိုးအစား များနေသည်ကို တိုင်းတာနိုင်ပြီး
+upstream (extractor၊ resolver) ကို ပြန်ပြင်နိုင်သည်။
 
-ဒီ code မှာ လေ့လာရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် လေ့လာရမည့် Python concepts များမှာ —
 
 - `elif` chain နှင့် အစဉ်လိုက် ဆုံးဖြတ်ချက်
 - `set` ဖြင့် duplicate စစ်ခြင်း (membership O(1))
@@ -104,11 +104,11 @@ confidence  : 0.6
 | `confidence <= MIN_CONFIDENCE` | `True` | ဤ triple ကို **ပယ်** (message "> 0.60 မှ လက်ခံ") |
 
 Exercise ၏ requirement က **"confidence ≥ 0.60 ဖြစ်ရမည်"** ဖြစ်သဖြင့် `<`
-ကို သုံးရပါတယ်။ `<=` သုံးရင် **တိကျ 0.60** ဖြစ်တဲ့ valid triple များ ပယ်ခံရပါမယ် —
-threshold တစ်ခုတည်းမှာ မျဉ်းကြောင်း တစ်လုံးကို ရှေ့/နောက် ရွှေ့လိုက်တာနဲ့ တူပါတယ်။
+ကို သုံးရသည်။ `<=` သုံးလျှင် **တိကျ 0.60** ဖြစ်သည့် valid triple များ ပယ်ခံရမည် —
+threshold တစ်ခုတည်းတွင် မျဉ်းကြောင်း တစ်လုံးကို ရှေ့/နောက် ရွှေ့လိုက်ခြင်းနှင့် တူသည်။
 
-Threshold တစ်ခုတည်းမှာ တန်ဖိုးတူ triple များ ရှိလာရင် ဤကဲ့သို့ boundary ကို
-test တစ်ခုနဲ့ ပိတ်ထားရပါတယ်။
+Threshold တစ်ခုတည်းတွင် တန်ဖိုးတူ triple များ ရှိလာလျှင် ဤကဲ့သို့ boundary ကို
+test တစ်ခုဖြင့် ပိတ်ထားရသည်။
 
 ---
 
@@ -178,16 +178,16 @@ def quality_gate(triples, entities):
 | 6 | `key in seen` | `duplicate` | exact ထပ် — `MERGE` ကို မလိုအပ်ဘဲ ဖိစီးစေ |
 | — | အားလုံး ဖြတ် | (accept) | `seen.add(key)` + `accepted.append(triple)` |
 
-### ဘာကြောင့် `elif` လဲ၊ `if` မဟုတ်လဲ။
+### အဘယ်ကြောင့် `elif` ဖြစ်ပြီး `if` မဟုတ်သနည်း။
 
-Reason တစ်ခုတည်း **အတိအကျ** log လုပ်ရန် `elif` လိုပါတယ်။ ရှေးဆင့်တစ်ခုက
-မှန်သွားရင် ကျန်တာများကို မစစ်တော့ပါ — ဒါကြောင့် histogram က
-"triple အရေအတွက် = rejection အရေအတွက်" ဖြစ်ပါတယ်။
+Reason တစ်ခုတည်း **အတိအကျ** log လုပ်ရန် `elif` လိုသည်။ ရှေးဆင့်တစ်ခုက
+မှန်သွားလျှင် ကျန်သည်များကို မစစ်တော့ပါ — ထို့ကြောင့် histogram သည်
+"triple အရေအတွက် = rejection အရေအတွက်" ဖြစ်သည်။
 
-### "Empty string က falsy" — `not subject_id`
+### "Empty string သည် falsy ဖြစ်သည်" — `not subject_id`
 
 `not triple.subject_id` သည် `subject_id == ""` နှင့် **တူညီမှု မရှိ** ပါ —
-`not` သည် **truthiness** ကို စစ်ပါတယ်။ `""`၊ `0`၊ `[]`၊ `None` အားလုံး falsy ဖြစ်ပါတယ်။
+`not` သည် **truthiness** ကို စစ်သည်။ `""`၊ `0`၊ `[]`၊ `None` အားလုံး falsy ဖြစ်သည်။
 
 ```python
 for value in ["", "ent:neo4j", None, 0]:
@@ -203,9 +203,9 @@ None         truthy=False
 0            truthy=False
 ```
 
-ဒါကြောင့် `not triple.object_id` သည် `object_id` သည် `""` ဖြစ်စေ၊ `None`
-ဖြစ်စေ ဖမ်းမိပါတယ်။ Id တစ်ခုက `"0"` (string) ဖြစ်နေရင်တော့ non-empty string
-ဖြစ်သဖြင့် truthy ဖြစ်ပါတယ် — ဒါကြောင့် ဒီစစ်ဆေးချက်က လုံခြုံပါတယ်။
+ထို့ကြောင့် `not triple.object_id` သည် `object_id` သည် `""` ဖြစ်စေ၊ `None`
+ဖြစ်စေ ဖမ်းမိသည်။ Id တစ်ခုက `"0"` (string) ဖြစ်နေလျှင်တော့ non-empty string
+ဖြစ်သဖြင့် truthy ဖြစ်သည် — ထို့ကြောင့် ဤစစ်ဆေးချက်သည် လုံခြုံသည်။
 
 ### `seen` — `set` ဖြင့် duplicate စစ်ခြင်း
 
@@ -219,9 +219,9 @@ else:
     accepted.append(triple)
 ```
 
-`seen.add()` ကို **accept branch ထဲမှာသာ** ခေါ်ပါတယ်။ ဒါကြောင့် ဖယ်ခံရတဲ့
+`seen.add()` ကို **accept branch ထဲတွင်သာ** ခေါ်သည်။ ထို့ကြောင့် ဖယ်ခံရသည့်
 triple များသည် `seen` ကို မထိပါ။ `triple.key` သည် `tuple` ဖြစ်သဖြင့်
-hashable ဖြစ်ပြီး `in` က O(1) ဖြစ်ပါတယ်။ List ဖြင့် စစ်ရင် O(n²) ဖြစ်ပါမယ်။
+hashable ဖြစ်ပြီး `in` က O(1) ဖြစ်သည်။ List ဖြင့် စစ်လျှင် O(n²) ဖြစ်မည်။
 
 ---
 
@@ -334,8 +334,8 @@ rejected   : {'duplicate': 1, 'low_confidence': 3, 'missing_endpoint': 1, 'self_
 ### Log အစီအစဉ်သည် candidate အစီအစဉ်အတိုင်း ဖြစ်သည်
 
 Rejection များကို reason အလိုက် မစီပါ — `for triple in triples` ၏
-အစီအစဉ်အတိုင်း ထွက်ပါတယ်။ ဒါကြောင့် log သည် "ဘယ် defect က ဘယ်နေရာမှာ
-ပထမ တွေ့ခဲ့လဲ" ကို ပြပါတယ် — debugging အတွက် histogram ထက် အသုံးဝင်ပါတယ်။
+အစီအစဉ်အတိုင်း ထွက်သည်။ ထို့ကြောင့် log သည် "မည်သည့် defect က မည်သည့်နေရာတွင်
+ပထမ တွေ့ခဲ့သည်ကို" ပြသည် — debugging အတွက် histogram ထက် အသုံးဝင်သည်။
 
 | Reason | အရေအတွက် | မည်သည့် candidate |
 | --- | --- | --- |
@@ -346,10 +346,10 @@ Rejection များကို reason အလိုက် မစီပါ — `f
 | `duplicate` | 1 | `Neo4j -[USES]-> Cypher` (ဒုတိယမြောက်) |
 | **စုစုပေါင်း** | **8** | candidates 13 − accepted 5 |
 
-`dict(sorted(reasons.items()))` က output ကို reason အက္ခရာအစဉ် (`duplicate`၊
+`dict(sorted(reasons.items()))` သည် output ကို reason အက္ခရာအစဉ် (`duplicate`၊
 `low_confidence`၊ `missing_endpoint`၊ `self_loop`၊ `unknown_predicate`) ဖြင့်
-တည်ငြိမ်စေပါတယ်။ Defaultdict ကို တိုက်ရိုက် print ရင် insertion order ဖြစ်ပြီး
-reason တွေ့သည့် အစီအစဉ် ပြောင်းလဲနိုင်ပါတယ်။
+တည်ငြိမ်စေသည်။ Defaultdict ကို တိုက်ရိုက် print လျှင် insertion order ဖြစ်ပြီး
+reason တွေ့သည့် အစီအစဉ် ပြောင်းလဲနိုင်သည်။
 
 ---
 
@@ -462,18 +462,18 @@ rejection count : 9
 
 `dangling_endpoint` သည် မှားယွင်း ပေါ်လာသည် — empty endpoint triple ၏
 `object_id` က `""` ဖြစ်ပြီး `"" not in entities` က `True` ဖြစ်သဖြင့်
-ထို triple သည် reason **နှစ်ခု** ရသည်။ `elif` chain က ပထမ reason
-(`missing_endpoint`) တွေ့တာနဲ့ ရပ်လို့ ဤအမှား မဖြစ်ပါ။
+ထို triple သည် reason **နှစ်ခု** ရသည်။ `elif` chain သည် ပထမ reason
+(`missing_endpoint`) တွေ့သည်နှင့် ရပ်သောကြောင့် ဤအမှား မဖြစ်ပါ။
 
-Accepted အရေအတွက် မပြောင်းတာကို သတိထားပါ — အမှားက **reason histogram**
-တွင်သာ ပေါ်ပြီး accepted set ကို မထိပါ။ ဒါကြောင့် histogram ကို မကြည့်ဘဲ
-accepted count ကိုသာ စစ်ရင် bug ကို လွတ်သွားပါမယ်။
+Accepted အရေအတွက် မပြောင်းခြင်းကို သတိထားပါ — အမှားသည် **reason histogram**
+တွင်သာ ပေါ်ပြီး accepted set ကို မထိပါ။ ထို့ကြောင့် histogram ကို မကြည့်ဘဲ
+accepted count ကိုသာ စစ်လျှင် bug ကို လွတ်သွားမည်။
 
 ---
 
-## 5. Trap — စစ်ဆေးမှု အစဉ် (ပြောင်းလိုက်ရင် reason ပြောင်းသည်)
+## 5. Trap — စစ်ဆေးမှု အစဉ် (ပြောင်းလိုက်လျှင် reason ပြောင်းသည်)
 
-Structure ချို့ယွင်းမှုနှင့် confidence နိမ့်မှု **တစ်ခါတည်း** ဖြစ်နေတဲ့ triple
+Structure ချို့ယွင်းမှုနှင့် confidence နိမ့်မှု **တစ်ခါတည်း** ဖြစ်နေသည့် triple
 တစ်ခုကို စမ်းကြည့်ပါ။
 
 ```python
@@ -558,18 +558,18 @@ confidence first : low_confidence
 | structure အရင် (မှန်) | `self_loop` | coreference မှားယွင်းမှု — upstream extractor ပြင်ရမည် |
 | confidence အရင် (trap) | `low_confidence` | structure ချို့ယွင်းမှု **ဖုံးကွယ်** သွားသည် |
 
-`low_confidence` သည် ကျယ်ပြန့်တဲ့ blanket reason ဖြစ်ပါတယ် — ဒါကြောင့်
-confidence ကို အရင်စစ်ရင် self-loop ဖြစ်နေတာ မသိတော့ဘဲ pipeline ကို
-"threshold နိမ့်လို့ ဖယ်လိုက်တာ" လို့ မှားယူဆပါမယ်။ Structure ကို အရင်
-စစ်ခြင်းဖြင့် **တိကျတဲ့ signal** ကို ထိန်းသိမ်းပါတယ်။
+`low_confidence` သည် ကျယ်ပြန့်သည့် blanket reason ဖြစ်သည် — ထို့ကြောင့်
+confidence ကို အရင်စစ်လျှင် self-loop ဖြစ်နေသည်ကို မသိတော့ဘဲ pipeline ကို
+"threshold နိမ့်သောကြောင့် ဖယ်လိုက်ခြင်း" ဟု မှားယူဆမည်။ Structure ကို အရင်
+စစ်ခြင်းဖြင့် **တိကျသည့် signal** ကို ထိန်းသိမ်းသည်။
 
-### ဘာကြောင့် self-loop က အရေးကြီးတဲ့ signal လဲ။
+### အဘယ်ကြောင့် self-loop သည် အရေးကြီးသည့် signal ဖြစ်သနည်း။
 
-Coreference resolution မှားယွင်းတဲ့အခါ entity တစ်ခုက သူ့ကိုယ်ကို
-ဆက်သွားတဲ့ edge ဖြစ်လာပါတယ် (`Neo4j -[DEVELOPED_BY]-> Neo4j`)။
-ဤအချက်သည် upstream bug ၏ လက္ခဏာ ဖြစ်ပါတယ် — ဖယ်လိုက်ရုံနဲ့ မလုံလောက်ပါ။
+Coreference resolution မှားယွင်းသည့်အခါ entity တစ်ခုက မိမိကိုယ်ကို
+ဆက်သွားသည့် edge ဖြစ်လာသည် (`Neo4j -[DEVELOPED_BY]-> Neo4j`)။
+ဤအချက်သည် upstream bug ၏ လက္ခဏာ ဖြစ်သည် — ဖယ်လိုက်ရုံဖြင့် မလုံလောက်ပါ။
 Reason ကို log ထားခြင်းဖြင့် alias mapping သို့မဟုတ် coreference model ကို
-ပြန်ပြင်နိုင်ပါတယ်။
+ပြန်ပြင်နိုင်သည်။
 
 ---
 
@@ -683,13 +683,13 @@ accepted   : 5
 rejected   : {'duplicate': 1, 'low_confidence': 3, 'missing_endpoint': 1, 'self_loop': 2, 'unknown_predicate': 1}
 ```
 
-ဤ output သည် `lab.py` ၏ Exercise 5 နှင့် တူညီပါတယ်။
+ဤ output သည် `lab.py` ၏ Exercise 5 နှင့် တူညီသည်။
 
 ---
 
 ## 7. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ gate က `triple` ကို ဘယ် reason ဖြင့် ပယ်မလဲ။
+**မေးခွန်း** — အောက်ပါ gate သည် `triple` ကို မည်သည့် reason ဖြင့် ပယ်မည်နည်း။
 
 ```python
 ALLOWED_PREDICATES = ("IS_A", "USES", "BUILT_ON", "DEVELOPED_BY", "INCLUDES", "RELATED_TO")
@@ -726,21 +726,21 @@ print(reason)
 
 အကြောင်းရင်း — `ent:mysql` သည် `entities = {"ent:neo4j", "ent:cypher"}` ထဲ
 မပါပါ။ စစ်ဆေးမှု အစဉ်အရ ပထမသုံးခု မမှန်သဖြင့် စတုတ္ထစစ်ဆေးချက်
-(`... or triple["object_id"] not in entities`) သို့ ရောက်ပြီး `True` ဖြစ်ပါတယ်။
-ဒါကြောင့် `dangling_endpoint` ရပါတယ်။ Confidence 0.95 က threshold ကို
-ဖြတ်ပေမဲ့ **အရင် အဆင့်မှာ ပယ်ခံရသဖြင့်** ထို အဆင့်သို့ မရောက်ပါ။ ဤအချက်က
-"structure gate က confidence gate အရင်" ဆိုတဲ့ စည်းမျဉ်း၏ လက်တွေ့
-သက်ရောက်မှုကို ပြပါတယ်။
+(`... or triple["object_id"] not in entities`) သို့ ရောက်ပြီး `True` ဖြစ်သည်။
+ထို့ကြောင့် `dangling_endpoint` ရသည်။ Confidence 0.95 သည် threshold ကို
+ဖြတ်သော်လည်း **အရင် အဆင့်တွင် ပယ်ခံရသဖြင့်** ထို အဆင့်သို့ မရောက်ပါ။ ဤအချက်သည်
+"structure gate သည် confidence gate အရင်" ဆိုသည့် စည်းမျဉ်း၏ လက်တွေ့
+သက်ရောက်မှုကို ပြသည်။
 
 </details>
 
 ---
 
 **အဓိက မှတ်ထားရန်** — Quality gate သည် extraction ၏ open-ended output ကို
-Neo4j အတွက် လုံခြုံတဲ့ input ဖြစ်စေသည်။ `elif` chain သည် triple တစ်ခုစီအတွက်
+Neo4j အတွက် လုံခြုံသည့် input ဖြစ်စေသည်။ `elif` chain သည် triple တစ်ခုစီအတွက်
 reason **တစ်ခုတည်း** ပေးသဖြင့် histogram တိကျသည် — သီးခြား `if` များဖြင့်
-ရေးရင် reason များ ပွားလာပြီး ရေတွက်မှု မှားသည်။ အစဉ်လည်း အရေးကြီးသည် —
+ရေးလျှင် reason များ ပွားလာပြီး ရေတွက်မှု မှားသည်။ အစဉ်သည်လည်း အရေးကြီးသည် —
 structure ကို confidence အရင်စစ်ခြင်းဖြင့် self-loop၊ empty endpoint နှင့်
-whitelist ပြင်ပ predicate များကို `low_confidence` ဆိုတဲ့ blanket reason
-အောက်မှာ ဖုံးကွယ်မသွားစေပါ။ Threshold ကို `<` (≥ မှ accept) ဖြင့် သတ်မှတ်ခြင်းက
-boundary ဆုံးရှုံးမှုကို တားပါတယ်။
+whitelist ပြင်ပ predicate များကို `low_confidence` ဆိုသည့် blanket reason
+အောက်တွင် ဖုံးကွယ်မသွားစေပါ။ Threshold ကို `<` (≥ မှ accept) ဖြင့် သတ်မှတ်ခြင်းသည်
+boundary ဆုံးရှုံးမှုကို တားသည်။

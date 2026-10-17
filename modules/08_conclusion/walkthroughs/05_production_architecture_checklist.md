@@ -7,20 +7,20 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-GraphRAG architecture တစ်ခုကို production မှာ ချထားမလုပ်မီ **control များ** ရှိ/မရှိ
-စစ်ရပါတယ်။ Control တိုင်း တူညီတဲ့ အလေးချိန် မဟုတ်ပါ —
+GraphRAG architecture တစ်ခုကို production တွင် ချထားမလုပ်မီ **control များ** ရှိ/မရှိ
+စစ်ရသည်။ Control တိုင်း တူညီသော အလေးချိန် မဟုတ်ပါ —
 
 ```text
 critical control တစ်ခု လွဲ  ->  design သည် မအောင်မြင် (total score မည်မျှပင်မြင့်စေကာမူ)
 advisory control လွဲ        ->  score ကျပေမဲ့ design ကို ရပ်မထားပါ
 ```
 
-ဒီ Exercise က checklist ကို `(name, satisfied, critical)` tuple အဖြစ် ထားပြီး
-audit လုပ်ပါတယ်။ အဓိက ရလဒ်က — **total score မြင့်နေခြင်းသည် လုံခြုံမှုကို
-မဆိုလိုပါ**။ `read_only_cypher_guardrail` လို critical control တစ်ခု လွဲရင် score
-`6/7` ဖြစ်နေပေမဲ့ `passes=False` ဖြစ်ပါတယ်။
+ဤ Exercise က checklist ကို `(name, satisfied, critical)` tuple အဖြစ် ထားပြီး
+audit လုပ်သည်။ အဓိက ရလဒ်က — **total score မြင့်နေခြင်းသည် လုံခြုံမှုကို
+မဆိုလိုပါ**။ `read_only_cypher_guardrail` လို critical control တစ်ခု လွဲလျှင် score
+`6/7` ဖြစ်နေသော်လည်း `passes=False` ဖြစ်သည်။
 
-ဒီ Exercise မှာ လေ့လာရမယ့် Python concepts —
+ဤ Exercise တွင် လေ့လာရမည့် Python concepts —
 
 - List of tuples နှင့် 3-tuple unpacking
 - Comprehension ထဲတွင် `_` placeholder အသုံးပြုခြင်း
@@ -65,10 +65,10 @@ Item တိုင်းက **tuple သုံးလုံး** —
 | နေရာ | အမည် | အဓိပ္ပာယ် |
 | --- | --- | --- |
 | `[0]` | name | control အမည် |
-| `[1]` | satisfied | ဖြည့်ဆည်းပြီးပြီလား (`True`/`False`) |
-| `[2]` | critical | critical control လား၊ advisory လား |
+| `[1]` | satisfied | ဖြည့်ဆည်းပြီး/မပြီး (`True`/`False`) |
+| `[2]` | critical | critical control ဖြစ်သည်လား၊ advisory ဖြစ်သည်လား |
 
-`len(CHECKLIST)` က `7` ပြန်တာက control ခုနစ်ခု ရှိကြောင်း ဖော်ပြပါတယ်။
+`len(CHECKLIST)` က `7` ပြန်ခြင်းသည် control ခုနစ်ခု ရှိကြောင်း ဖော်ပြသည်။
 
 ---
 
@@ -92,8 +92,8 @@ latency_and_cost_monitoring | satisfied = True | critical = False
 ```
 
 `for name, satisfied, critical in CHECKLIST:` က tuple တိုင်းကို **variable သုံးခု**
-အဖြစ် ခွဲယူပါတယ်။ `name`, `satisfied`, `critical` များကို loop အတွင်းမှာ
-တိုက်ရိုက် သုံးနိုင်ပါတယ်။
+အဖြစ် ခွဲယူသည်။ `name`, `satisfied`, `critical` များကို loop အတွင်းတွင်
+တိုက်ရိုက် သုံးနိုင်သည်။
 
 ```python
 row = ("read_only_cypher_guardrail", True, True)
@@ -128,9 +128,9 @@ Output —
   [ ]
 ```
 
-`f"[{'x' if ok else ' '}]"` မှာ `ok` မှန်ရင် `'x'`၊ မှားရင် `' '` (space) ကို
-ထည့်ပါတယ်။ ဒါက terminal checklist ပုံစံ — မျက်စိဖြင့် လျင်မြန်စွာ ဖတ်နိုင်ပါတယ်။
-`'x'` နဲ့ `' '` နှစ်ခုလုံး တူညီ width ဖြစ်လို့ column က မှန်နေပါတယ်။
+`f"[{'x' if ok else ' '}]"` တွင် `ok` မှန်လျှင် `'x'`၊ မှားလျှင် `' '` (space) ကို
+ထည့်သည်။ ၎င်းသည် terminal checklist ပုံစံ — မျက်စိဖြင့် လျင်မြန်စွာ ဖတ်နိုင်သည်။
+`'x'` နှင့် `' '` နှစ်ခုလုံး တူညီ width ဖြစ်သောကြောင့် column က မှန်နေသည်။
 
 ```python
 for ok in (True, False):
@@ -168,15 +168,15 @@ Output —
 ```
 
 `sum(1 for _, ok, _ in CHECKLIST if ok)` က — tuple တိုင်းကို unpack လုပ်ပြီး `ok`
-က `True` ဖြစ်တဲ့ item တိုင်းအတွက် `1` ကို ပေါင်းပါတယ်။ ရလဒ် `2` က satisfied
-control နှစ်ခု ရှိကြောင်း ပြပါတယ်။
+က `True` ဖြစ်သော item တိုင်းအတွက် `1` ကို ပေါင်းသည်။ ရလဒ် `2` က satisfied
+control နှစ်ခု ရှိကြောင်း ပြသည်။
 
 ### `_` placeholder
 
-`for _, ok, _ in CHECKLIST` မှာ `_` ကို **name** နဲ့ **critical** နေရာမှာ သုံးပါတယ်။
-`_` က \"ဒီတန်ဖိုးကို မလိုချင်ပါ\" ဆိုတဲ့ convention ဖြစ်ပါတယ်။ ဒါပေမဲ့ tuple ၏
-**အရေအတွက်** ကို တိတိကျကျ ဖော်ပြဖို့ လိုပါတယ် — 3-tuple ဖြစ်လို့ `_` သုံးခု
-(သို့) variable သုံးခု လိုပါတယ်။
+`for _, ok, _ in CHECKLIST` တွင် `_` ကို **name** နှင့် **critical** နေရာတွင် သုံးသည်။
+`_` က \"ဤတန်ဖိုးကို မလိုချင်ပါ\" ဆိုသည့် convention ဖြစ်သည်။ သို့သော် tuple ၏
+**အရေအတွက်** ကို တိတိကျကျ ဖော်ပြရန် လိုအပ်သည် — 3-tuple ဖြစ်သောကြောင့် `_` သုံးခု
+(သို့) variable သုံးခု လိုအပ်သည်။
 
 ```python
 pair = ("Alice", 30)
@@ -212,13 +212,13 @@ Output —
 ```
 
 `[name for name, ok, critical in CHECKLIST if critical and not ok]` က **list
-comprehension** ဖြစ်ပါတယ်။ Condition နှစ်ခု —
+comprehension** ဖြစ်သည်။ Condition နှစ်ခု —
 
-- `critical` — ဒီ control က critical လား
-- `not ok` — ဖြည့်ဆည်းမထားလား (`ok` က `False` ဖြစ်လား)
+- `critical` — ဤ control သည် critical ဖြစ်သည်လား
+- `not ok` — ဖြည့်ဆည်းမထားသည်လား (`ok` က `False` ဖြစ်သည်လား)
 
-နှစ်ခုလုံး မှန်တဲ့ control များ၏ **name** ကို စုပါတယ်။ `latency_and_cost_monitoring`
-က `ok=True` ဖြစ်လို့ မပါပါ — `entity_uniqueness_constraint` ကလည်း `ok=True` မို့
+နှစ်ခုလုံး မှန်သော control များ၏ **name** ကို စုသည်။ `latency_and_cost_monitoring`
+က `ok=True` ဖြစ်သောကြောင့် မပါပါ — `entity_uniqueness_constraint` ကလည်း `ok=True` ဖြစ်သောကြောင့်
 မပါပါ။
 
 ```python
@@ -255,13 +255,13 @@ False
 0 1
 ```
 
-Python မှာ **အလွတ် list က `False`**၊ item ရှိတဲ့ list က `True` (truthiness)။
-ဒါကြောင့် `not critical_failures` က —
+Python တွင် **အလွတ် list က `False`**၊ item ရှိသော list က `True` (truthiness)။
+ထို့ကြောင့် `not critical_failures` က —
 
 - `critical_failures = []` → `not []` = `True` → `passes = True`
 - `critical_failures = ["read_only_cypher_guardrail"]` → `not [...]` = `False` → `passes = False`
 
-ဒါက `len(critical_failures) == 0` နှင့် အလုပ်တူပေမဲ့ ပိုတိုပါတယ်။
+၎င်းသည် `len(critical_failures) == 0` နှင့် အလုပ်တူသော်လည်း ပိုတိုသည်။
 
 ```python
 for failures in ([], ["read_only_cypher_guardrail"]):
@@ -299,7 +299,7 @@ def audit_architecture(checklist):
 | `satisfied = sum(...)` | ဖြည့်ဆည်းပြီး အရေအတွက် |
 | `critical_failures = [...]` | critical ဖြစ်ပြီး မဖြည့်ဆည်းသေးသော name များ |
 | `satisfied / total` | `float` အဖြစ် score |
-| `not critical_failures` | critical တစ်ခုမှ မလွဲရင် `True` |
+| `not critical_failures` | critical တစ်ခုမှ မလွဲလျှင် `True` |
 
 ---
 
@@ -352,12 +352,12 @@ Output —
   passes = True
 ```
 
-Control ငါးခုက **critical**၊ နှစ်ခုက **advisory** ဖြစ်ပါတယ်။ စုစုပေါင်း `score = 7/7 = 1.0`
-ဖြစ်ပြီး critical failure သုညမို့ `passes=True` ပါ။
+Control ငါးခုက **critical**၊ နှစ်ခုက **advisory** ဖြစ်သည်။ စုစုပေါင်း `score = 7/7 = 1.0`
+ဖြစ်ပြီး critical failure သုညဖြစ်သောကြောင့် `passes=True` ပါ။
 
-`{name:<36}` က control အမည်ကို ၃၆ character ကျယ်အောင် ဘယ်ဘက်ချိန်ပါတယ်။
-`report["score"]` ကို `%d/%d` ဖြင့် ပြဖို့ `satisfied` နဲ့ `total` ကို ခွဲထုတ်ထားပါတယ်
-(score က float ဖြစ်လို့ `%d` မသုံးနိုင်ပါ)။
+`{name:<36}` က control အမည်ကို ၃၆ character ကျယ်အောင် ဘယ်ဘက်ချိန်သည်။
+`report["score"]` ကို `%d/%d` ဖြင့် ပြရန် `satisfied` နှင့် `total` ကို ခွဲထုတ်ထားသည်
+(score က float ဖြစ်သောကြောင့် `%d` မသုံးနိုင်ပါ)။
 
 ---
 
@@ -413,15 +413,15 @@ List comprehension ထဲက expression `(name, ok and name != "read_only_cypher
   = `True and False` = `False`။
 - အခြား control များအတွက် — `True and True` = `True`။
 
-ဒါကြောင့် `read_only_cypher_guardrail` ၏ `ok` ကို **`False`** လုပ်ပြီး critical
-control တစ်ခု လွဲသည့် အခြေအနေကို **simulate** လုပ်ပါတယ်။
+ထို့ကြောင့် `read_only_cypher_guardrail` ၏ `ok` ကို **`False`** လုပ်ပြီး critical
+control တစ်ခု လွဲသည့် အခြေအနေကို **simulate** လုပ်သည်။
 
 | အခြေအနေ | satisfied | score | critical_failures | passes |
 | --- | --- | --- | --- | --- |
 | ပြည့်စုံသော design | `7` | `1.0` (`7/7`) | `[]` | `True` |
 | guardrail ဖယ်လိုက် | `6` | `0.8571` (`6/7`) | `['read_only_cypher_guardrail']` | `False` |
 
-Score က `0.8571` — **မြင့်နေဆဲ** ဖြစ်ပေမဲ့ `passes` က `False` ဖြစ်ပါတယ်။ ဒါက
+Score က `0.8571` — **မြင့်နေဆဲ** ဖြစ်သော်လည်း `passes` က `False` ဖြစ်သည်။ ၎င်းသည်
 Exercise ၏ အဓိက သင်ခန်းစာ — critical control ကို total score နှင့် မပေါင်းရပါ။
 
 ---
@@ -494,11 +494,11 @@ a single missing critical control blocks the design regardless of total score
 | ပြည့်စုံသော design အောင် | `report["passes"] is True` | `True` |
 | Score 1.0 | `report["score"] == 1.0` | `True` |
 | Critical failure မရှိ | `report["critical_failures"] == []` | `True` |
-| Guardrail ဖယ်ရင် မအောင် | `broken_report["passes"] is False` | `False` |
+| Guardrail ဖယ်လျှင် မအောင် | `broken_report["passes"] is False` | `False` |
 | Failure အမည် တိကျ | `broken_report["critical_failures"] == ["read_only_cypher_guardrail"]` | `True` |
 
-`retrieval_quality_eval_vs_baseline` နဲ့ `latency_and_cost_monitoring` က advisory
-ဖြစ်လို့ လွဲရင် score ကျပေမဲ့ `passes` က `True` ဆက်ဖြစ်ပါတယ်။
+`retrieval_quality_eval_vs_baseline` နှင့် `latency_and_cost_monitoring` က advisory
+ဖြစ်သောကြောင့် လွဲလျှင် score ကျသော်လည်း `passes` က `True` ဆက်ဖြစ်သည်။
 
 ---
 
@@ -535,7 +535,7 @@ print("satisfied=%d/%d critical_failures=%s passes=%s"
 `critical_failures` အတွက် condition က `critical and not ok` —
 
 - `("a", False, True)` — `critical=True`၊ `ok=False` → ပါသည်
-- `("b", False, False)` — `critical=False` → `not ok` ဖြစ်ပေမဲ့ `critical` မမှန်၊ မပါ
+- `("b", False, False)` — `critical=False` → `not ok` ဖြစ်သော်လည်း `critical` မမှန်၊ မပါ
 - `("c", True, False)` — `ok=True` → မပါ
 
 ထို့ကြောင့် `critical_failures=['a']`။ `not ['a']` က `False` ဖြစ်သဖြင့် `passes=False`
@@ -546,9 +546,9 @@ print("satisfied=%d/%d critical_failures=%s passes=%s"
 ---
 
 **အဓိက မှတ်ထားရန်** — Text-to-Cypher ကဲ့သို့ LLM က graph ကို တိုက်ရိုက်ရေးနိုင်သော
-pattern တွင် read-only guardrail သည် အဓိက control ဖြစ်ပါတယ်။ `DELETE`၊
+pattern တွင် read-only guardrail သည် အဓိက control ဖြစ်သည်။ `DELETE`၊
 `DETACH DELETE`၊ `DROP` clause များကို block မလုပ်ပါက prompt injection တစ်ခုတည်းဖြင့်
-graph တစ်ခုလုံး ပျက်စီးနိုင်ပါတယ်။ Critical control ကို total score နှင့် မ
+graph တစ်ခုလုံး ပျက်စီးနိုင်သည်။ Critical control ကို total score နှင့် မ
 ပေါင်းရ — score မြင့်နေခြင်းသည် လုံခြုံမှုကို မဆိုလိုပါ။ Checklist ထဲက control
 အမည်များနှင့် critical/advisory ခွဲခြားမှုသည် course example ဖြစ်သည် — သင့်
 threat model အလိုက် ပြန်သတ်မှတ်ရမည်။

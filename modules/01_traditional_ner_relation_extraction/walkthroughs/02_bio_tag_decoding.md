@@ -7,24 +7,24 @@
 
 ## 0. ဤ Exercise က ဘာကို ဖြေရှင်းပေးသလဲ။
 
-Exercise 1 မှာ regex နဲ့ anchor လုပ်ထားတဲ့ pattern ဖြင့် entity ရှာခဲ့ပါတယ်။ Model
-တွေကတော့ စာသားကို **token** များအဖြစ် ခွဲပြီး token တစ်ခုချင်းစီအတွက် **tag** တစ်ခုစီ
-ပြန်ပေးတဲ့ ပုံစံမျိုးနဲ့ အလုပ်လုပ်ပါတယ်။
+Exercise 1 တွင် regex နှင့် anchor လုပ်ထားသော pattern ဖြင့် entity ရှာခဲ့သည်။ Model
+များမှာ စာသားကို **token** များအဖြစ် ခွဲပြီး token တစ်ခုချင်းစီအတွက် **tag** တစ်ခုစီ
+ပြန်ပေးသော ပုံစံဖြင့် အလုပ်လုပ်သည်။
 
 ```text
 tokens : Sundar  Pichai  visited  London   on   12  March  2019   .
 tags   : B-PER   I-PER   O        B-LOC    O    B-DATE I-DATE I-DATE O
 ```
 
-ဒီ tag တွေကို ပြန်ဖတ်ပြီး —
+ဤ tag များကို ပြန်ဖတ်ပြီး —
 
 - `Sundar Pichai` → `PER` (လူအမည်)
 - `London` → `LOC` (နေရာ)
 - `12 March 2019` → `DATE` (ရက်စွဲ)
 
-ဆိုတဲ့ **span** များအဖြစ် ပြောင်းပေးတဲ့အလုပ်ကို **decoding** လို့ ခေါ်ပါတယ်။
+ဟူသော **span** များအဖြစ် ပြောင်းပေးသောအလုပ်ကို **decoding** ဟု ခေါ်သည်။
 
-ဒီ code မှာ လေ့ရမယ့် Python concepts တွေကတော့ —
+ဤ code တွင် လေ့လာရမည့် Python concepts များမှာ —
 
 - `zip()` ဖြင့် list နှစ်ခုကို တွဲခြင်း
 - `enumerate()` ဖြင့် index ရယူခြင်း
@@ -39,9 +39,9 @@ tags   : B-PER   I-PER   O        B-LOC    O    B-DATE I-DATE I-DATE O
 
 ---
 
-## 1. BIO Scheme ဆိုတာဘာလဲ။
+## 1. BIO Scheme ဆိုသည်မှာ အဘယ်နည်း။
 
-Tag တစ်ခုစီမှာ အပိုင်းနှစ်ခု ရှိပါတယ်။
+Tag တစ်ခုစီတွင် အပိုင်းနှစ်ခု ရှိသည်။
 
 | အပိုင်း | အဓိပ္ပာယ် |
 | --- | --- |
@@ -50,21 +50,21 @@ Tag တစ်ခုစီမှာ အပိုင်းနှစ်ခု ရ�
 
 - **`B-` (Begin)** — entity အသစ်တစ်ခု၏ **ပထမဆုံး** token။
 - **`I-` (Inside)** — entity အသစ်၏ **ဆက်လက်** token။
-- **`O` (Outside)** — entity မဟုတ်တဲ့ token။
+- **`O` (Outside)** — entity မဟုတ်သော token။
 
-ဒီ scheme ကြောင့် entity နှစ်ခု ကပ်နေတဲ့အခါ ဘယ်မှာ ခွဲရမလဲ သိနိုင်ပါတယ်။
+ဤ scheme ကြောင့် entity နှစ်ခု ကပ်နေသောအခါ မည်သည့်နေရာတွင် ခွဲရမည်ကို သိနိုင်သည်။
 
 ```text
 B-PER I-PER B-PER I-PER
 Sundar Pichai Tim  Cook
 ```
 
-`B-` က entity အသစ်၏ အစကို အမြဲပြပါတယ်။ `I-` ပဲ ရှိနေရင် entity တစ်ခုတည်း
-ဆက်နေတယ်လို့ ဖတ်ပါတယ်။
+`B-` က entity အသစ်၏ အစကို အမြဲပြသည်။ `I-` သာ ရှိနေလျှင် entity တစ်ခုတည်း
+ဆက်နေသည်ဟု ဖတ်သည်။
 
 ---
 
-## 2. `tokens` နဲ့ `tags` — Input နှစ်ခု
+## 2. `tokens` နှင့် `tags` — Input နှစ်ခု
 
 ```python
 tokens = ["Sundar", "Pichai", "visited", "London", "on",
@@ -73,8 +73,8 @@ tags = ["B-PER", "I-PER", "O", "B-LOC", "O",
         "B-DATE", "I-DATE", "I-DATE", "O"]
 ```
 
-List နှစ်ခု၏ အရှည် **တူညီရပါတယ်**။ Index တစ်ခုတည်းမှာ `tokens[i]` ၏ tag က
-`tags[i]` ဖြစ်ပါတယ်။
+List နှစ်ခု၏ အရှည် **တူညီရသည်**။ Index တစ်ခုတည်းတွင် `tokens[i]` ၏ tag က
+`tags[i]` ဖြစ်သည်။
 
 ```python
 print(len(tokens), len(tags))
@@ -104,9 +104,9 @@ Output —
 [('Sundar', 'B-PER'), ('Pichai', 'I-PER'), ('visited', 'O'), ('London', 'B-LOC'), ('on', 'O'), ('12', 'B-DATE'), ('March', 'I-DATE'), ('2019', 'I-DATE'), ('.', 'O')]
 ```
 
-`zip()` က list နှစ်ခုကို index အလိုက် တွဲပြီး **tuple** များ ထုတ်ပေးပါတယ်။
-`for token, tag in zip(tokens, tags):` လို့ ရေးတဲ့အခါ tuple တစ်ခုစီကို variable
-နှစ်ခုအဖြစ် အလိုအလျောက် ခွဲလိုက်တာကို **tuple unpacking** လို့ ခေါ်ပါတယ်။
+`zip()` သည် list နှစ်ခုကို index အလိုက် တွဲပြီး **tuple** များ ထုတ်ပေးသည်။
+`for token, tag in zip(tokens, tags):` ဟု ရေးသောအခါ tuple တစ်ခုစီကို variable
+နှစ်ခုအဖြစ် အလိုအလျောက် ခွဲလိုက်သည်ကို **tuple unpacking** ဟု ခေါ်သည်။
 
 ```python
 for token, tag in zip(tokens, tags):
@@ -131,8 +131,8 @@ March -> I-DATE
 
 ## 4. `enumerate()` — Index ပါ တွဲထုတ်ခြင်း
 
-`zip()` က tuple များသာ ပေးပါတယ်။ Index လည်း လိုချင်ရင် `enumerate()` ကို အတွင်းထပ်
-သုံးပါတယ်။
+`zip()` သည် tuple များသာ ပေးသည်။ Index လည်း လိုချင်လျှင် `enumerate()` ကို အတွင်းထပ်
+သုံးသည်။
 
 ```python
 print(list(enumerate(zip(tokens, tags)))[:2])
@@ -157,13 +157,13 @@ Output —
 8 . O
 ```
 
-`enumerate(zip(...))` က `(index, (token, tag))` ဆိုတဲ့ ခွေထားတဲ့ tuple ကို ပေးပါတယ်။
-`for index, (token, tag) in ...` လို့ ရေးပြီး အပြင်ခွေ နှစ်ခုကို `index`၊ အတွင်းခွေ
-နှစ်ခုကို `token` နဲ့ `tag` အဖြစ် ခွဲယူပါတယ်။
+`enumerate(zip(...))` သည် `(index, (token, tag))` ဟူသော ခွေထားသည့် tuple ကို ပေးသည်။
+`for index, (token, tag) in ...` ဟု ရေးပြီး အပြင်ခွေ နှစ်ခုကို `index`၊ အတွင်းခွေ
+နှစ်ခုကို `token` နှင့် `tag` အဖြစ် ခွဲယူသည်။
 
-Index က ဘာကြောင့် လိုသလဲဆိုတော့ span တစ်ခုစီ၏ **အစနဲ့ အဆုံး token index** ကို
-မှတ်ထားချင်လို့ပါ။ ဒီ index တွေကို နောက်ပိုင်း graph node တွေဆီ ပြန်ညွှန်းဖို့
-(provenance) အသုံးပြုနိုင်ပါတယ်။
+Index ကို အဘယ်ကြောင့် လိုအပ်သနည်းဆိုလျှင် span တစ်ခုစီ၏ **အစနှင့် အဆုံး token index** ကို
+မှတ်ထားလိုခြင်းကြောင့်ဖြစ်သည်။ ဤ index များကို နောက်ပိုင်း graph node များဆီ ပြန်ညွှန်းရန်
+(provenance) အသုံးပြုနိုင်သည်။
 
 ---
 
@@ -183,11 +183,11 @@ DATE
 True False False
 ```
 
-- `"B-PER"[2:]` — index 2 ကနေ အဆုံးထိ ဖြတ်ယူပါတယ်။ `B` နဲ့ `-` ကို ကျော်လိုက်တာကြောင့်
-  `PER` ကျန်ပါတယ်။ String indexing က **0 ကနေ စ** ပါတယ်။
-- `startswith("B-")` က tag က `B-` နဲ့ စမစ စစ်ပါတယ်။ `O` အတွက် `False` ရပါတယ်။
+- `"B-PER"[2:]` — index 2 မှ အဆုံးထိ ဖြတ်ယူသည်။ `B` နှင့် `-` ကို ကျော်လိုက်သောကြောင့်
+  `PER` ကျန်သည်။ String indexing သည် **0 မှ စ** သည်။
+- `startswith("B-")` သည် tag က `B-` နှင့် စမစ စစ်သည်။ `O` အတွက် `False` ရသည်။
 
-ဒီနှစ်ခုကို တွဲသုံးပြီး —
+ဤနှစ်ခုကို တွဲသုံးပြီး —
 
 ```python
 tag = "I-DATE"
@@ -201,7 +201,7 @@ Output —
 Inside tag, label = DATE
 ```
 
-လို့ label ကို ဆွဲထုတ်နိုင်ပါတယ်။
+ဟု label ကို ဆွဲထုတ်နိုင်သည်။
 
 ---
 
@@ -218,13 +218,13 @@ def decode_bio(tokens, tags):
              "start": s["start"], "end": s["end"]} for s in spans]
 ```
 
-Variable နှစ်ခုကို ဒီလို သတ်မှတ်ထားပါတယ်။
+Variable နှစ်ခုကို ဤသို့ သတ်မှတ်ထားသည်။
 
-- `spans` — ပြီးစီးသွားတဲ့ entity များ စုစည်းရာ list။
-- `current` — လက်ရှိ ဖတ်နေဆဲ entity။ မရှိသေးရင် `None`။
+- `spans` — ပြီးစီးသွားသော entity များ စုစည်းရာ list။
+- `current` — လက်ရှိ ဖတ်နေဆဲ entity။ မရှိသေးလျှင် `None`။
 
-Loop တစ်ခုချင်းစီမှာ `current` ကို အသစ်ဖန်တီးခြင်း၊ ဆက်တွဲခြင်း၊ သို့မဟုတ်
-`spans` ထဲ ရွှေ့ခြင်း သုံးမျိုးထဲ တစ်မျိုး လုပ်ပါတယ်။
+Loop တစ်ခုချင်းစီတွင် `current` ကို အသစ်ဖန်တီးခြင်း၊ ဆက်တွဲခြင်း၊ သို့မဟုတ်
+`spans` ထဲ ရွှေ့ခြင်း သုံးမျိုးထဲ တစ်မျိုး လုပ်သည်။
 
 ---
 
@@ -238,12 +238,12 @@ if tag.startswith("B-"):
                "start": index, "end": index + 1}
 ```
 
-အဆင့်နှစ်ဆင့် ရှိပါတယ်။
+အဆင့်နှစ်ဆင့် ရှိသည်။
 
-**ပထမအဆင့်** — `current` မှာ entity တစ်ခု ရှိနေရင် အဲဒါကို `spans` ထဲ ရွှေ့ပါတယ်။
-`B-` tag တစ်ခု လာတယ်ဆိုတာ entity အဟောင်း ပြီးသွားပြီလို့ ဆိုလိုလို့ပါ။
+**ပထမအဆင့်** — `current` တွင် entity တစ်ခု ရှိနေလျှင် ၎င်းကို `spans` ထဲ ရွှေ့သည်။
+`B-` tag တစ်ခု လာခြင်းသည် entity အဟောင်း ပြီးသွားပြီဟု ဆိုလိုခြင်းကြောင့်ဖြစ်သည်။
 
-**ဒုတိယအဆင့်** — entity အသစ်တစ်ခုကို dictionary အဖြစ် ဖန်တီးပါတယ်။
+**ဒုတိယအဆင့်** — entity အသစ်တစ်ခုကို dictionary အဖြစ် ဖန်တီးသည်။
 
 ```python
 {"type": tag[2:], "tokens": [token], "start": index, "end": index + 1}
@@ -252,11 +252,11 @@ if tag.startswith("B-"):
 | Key | တန်ဖိုး | အဓိပ္ပာယ် |
 | --- | --- | --- |
 | `type` | `tag[2:]` → `PER` | Entity label |
-| `tokens` | `[token]` | စုဆောင်းထားတဲ့ token စာရင်း (ပထမဆုံး တစ်လုံးသာ) |
+| `tokens` | `[token]` | စုဆောင်းထားသော token စာရင်း (ပထမဆုံး တစ်လုံးသာ) |
 | `start` | `index` | အစ token index |
 | `end` | `index + 1` | အဆုံး index — **exclusive** |
 
-`end` က `index + 1` ဖြစ်တာက Python ၏ slice အလေ့အကျင့်နဲ့ ကိုက်ညီအောင်ပါ။
+`end` သည် `index + 1` ဖြစ်ခြင်းမှာ Python ၏ slice အလေ့အကျင့်နှင့် ကိုက်ညီစေရန်ဖြစ်သည်။
 
 ```python
 tokens = ["Sundar", "Pichai", "visited", "London"]
@@ -271,7 +271,7 @@ tokens[0:2] = ['Sundar', 'Pichai']
 tokens[3:4] = ['London']
 ```
 
-Span တစ်ခုက `start=0`၊ `end=2` ဖြစ်ရင် `tokens[0:2]` နဲ့ တိုက်ရိုက် ဖြတ်ယူနိုင်ပါတယ်။
+Span တစ်ခုသည် `start=0`၊ `end=2` ဖြစ်လျှင် `tokens[0:2]` ဖြင့် တိုက်ရိုက် ဖြတ်ယူနိုင်သည်။
 
 ---
 
@@ -283,19 +283,19 @@ elif tag.startswith("I-") and current is not None and tag[2:] == current["type"]
     current["end"] = index + 1
 ```
 
-ဒီ `elif` က **condition သုံးခု** ကို `and` နဲ့ ဆက်ထားပါတယ်။ သုံးခုလုံး မှန်မှ
-ဒီ branch ထဲ ဝင်ပါတယ်။
+ဤ `elif` သည် **condition သုံးခု** ကို `and` ဖြင့် ဆက်ထားသည်။ သုံးခုလုံး မှန်မှ
+ဤ branch ထဲ ဝင်သည်။
 
-1. `tag.startswith("I-")` — tag က `I-` နဲ့ စတယ်။
-2. `current is not None` — လက်ရှိ entity တစ်ခု ရှိနေတယ်။
-3. `tag[2:] == current["type"]` — tag ၏ label က `current` ၏ label နဲ့ တူတူဖြစ်တယ်။
+1. `tag.startswith("I-")` — tag သည် `I-` နှင့် စသည်။
+2. `current is not None` — လက်ရှိ entity တစ်ခု ရှိနေသည်။
+3. `tag[2:] == current["type"]` — tag ၏ label သည် `current` ၏ label နှင့် တူညီသည်။
 
-ဒီအလုပ်ကို လုပ်တဲ့အခါ —
+ဤအလုပ်ကို လုပ်သောအခါ —
 
 - `current["tokens"].append(token)` — token အသစ်ကို စာရင်းထဲ ထည့်။
 - `current["end"] = index + 1` — အဆုံး index ကို အသစ်ပြန်။
 
-စုစည်းတဲ့အပိုင်းကို ကြည့်ပါ။
+စုစည်းသည့်အပိုင်းကို ကြည့်ပါ။
 
 ```python
 tokens = ["12", "March", "2019"]
@@ -316,11 +316,11 @@ Output —
 12 March 2019
 ```
 
-`" ".join(...)` က list ထဲက စာသားများကို space ခြားပြီး စာသားတစ်ခုတည်း ပြန်ပေးပါတယ်။
+`" ".join(...)` သည် list ထဲမှ စာသားများကို space ခြားပြီး စာသားတစ်ခုတည်း ပြန်ပေးသည်။
 
-### Condition နံပါတ် ၃ က ဘာကြောင့် လိုသလဲ။
+### Condition နံပါတ် ၃ သည် အဘယ်ကြောင့် လိုအပ်သနည်း။
 
-Label မစစ်ဘဲ ရေးကြည့်ရအောင် —
+Label မစစ်ဘဲ ရေးကြည့်ပါ —
 
 ```python
 def decode(tokens, tags, strict):
@@ -357,13 +357,13 @@ strict (with type check)  : [('PER', 'Sundar Pichai', 0, 2)]
 loose  (without type check): [('PER', 'Sundar Pichai London', 0, 3)]
 ```
 
-`I-LOC` က `PER` entity ထဲ ရောက်သွားတဲ့အခါ label မစစ်ရင် `London` က လူအမည်ထဲ
-ပါသွားပါတယ်။ Condition နံပါတ် ၃ က ဒီလို မှားယွင်းတဲ့ ရောစပ်ခြင်းကို တားပေးပါတယ်။
+`I-LOC` သည် `PER` entity ထဲ ရောက်သွားသောအခါ label မစစ်လျှင် `London` သည် လူအမည်ထဲ
+ပါသွားသည်။ Condition နံပါတ် ၃ သည် ဤသို့ မှားယွင်းသော ရောစပ်ခြင်းကို တားပေးသည်။
 
-Tag sequence မှားနေရင်လည်း `else` branch ထဲ ရောက်ပြီး `current` ကို ရှင်းလိုက်ပါတယ်။
-ဒီအခြေအနေမှာ `London` ၏ LOC span က ဆုံးရှုံးသွားပါတယ် — ဒါက data အရည်အသွေး
-ပြဿနာဖြစ်ကြောင်း **တိတ်တဆိတ် ဖျောက်ထားခြင်းမဟုတ်ဘဲ** ဒီ code ၏ ကန့်သတ်ချက်ပါ။
-Production pipeline တစ်ခုမှာ ဒီလို မကိုက်ညီမှုကို log ထုတ်ဖို့ လိုအပ်ပါတယ်။
+Tag sequence မှားနေလျှင်လည်း `else` branch ထဲ ရောက်ပြီး `current` ကို ရှင်းလိုက်သည်။
+ဤအခြေအနေတွင် `London` ၏ LOC span သည် ဆုံးရှုံးသွားသည် — ၎င်းသည် data အရည်အသွေး
+ပြဿနာဖြစ်ကြောင်း **တိတ်တဆိတ် ဖျောက်ထားခြင်းမဟုတ်ဘဲ** ဤ code ၏ ကန့်သတ်ချက်ဖြစ်သည်။
+Production pipeline တစ်ခုတွင် ဤသို့ မကိုက်ညီမှုကို log ထုတ်ရန် လိုအပ်သည်။
 
 ---
 
@@ -376,20 +376,20 @@ else:
     current = None
 ```
 
-`O` tag တွေနဲ့ အထက်က condition နှစ်ခုလုံး မကိုက်တဲ့ အခြေအနေတွေမှာ ဒီ branch ထဲ
-ဝင်ပါတယ်။ လုပ်ဆောင်ချက်က `B-` case ၏ ပထမအဆင့်နဲ့ တူပါတယ် — `current` ရှိရင်
-`spans` ထဲ ရွှေ့ပြီး `current` ကို `None` ပြန်ထားပါတယ်။
+`O` tag များနှင့် အထက်က condition နှစ်ခုလုံး မကိုက်သော အခြေအနေများတွင် ဤ branch ထဲ
+ဝင်သည်။ လုပ်ဆောင်ချက်သည် `B-` case ၏ ပထမအဆင့်နှင့် တူသည် — `current` ရှိလျှင်
+`spans` ထဲ ရွှေ့ပြီး `current` ကို `None` ပြန်ထားသည်။
 
-`current = None` ကို **မမေ့ရပါ**။ မထားရင် entity အဟောင်း ဆက်ရှိနေပြီး `O` token
-တွေက သူ့ထဲ ရောက်သွားနိုင်ပါတယ်။
+`current = None` ကို **မမေ့ရပါ**။ မထားလျှင် entity အဟောင်း ဆက်ရှိနေပြီး `O` token
+များက ၎င်းထဲ ရောက်သွားနိုင်သည်။
 
 ---
 
 ## 10. Loop ပြီးဆုံးချိန် `if current is not None:` — နောက်ဆုံး Span
 
-Loop ပြီးသွားတဲ့အခါ `current` မှာ entity တစ်ခု ကျန်နေနိုင်ပါတယ်။ အကြောင်းရင်းက
-`spans` ထဲ ရွှေ့တာက **tag အသစ် လာတဲ့အခါ** သို့မဟုတ် **`O` လာတဲ့အခါ** သာ
-ဖြစ်လို့ပါ။ စာသားက entity နဲ့ပဲ ဆုံးသွားရင် ရွှေ့ဖို့ အခွင့်အရေး မရတော့ပါဘူး။
+Loop ပြီးသွားသောအခါ `current` တွင် entity တစ်ခု ကျန်နေနိုင်သည်။ အကြောင်းရင်းမှာ
+`spans` ထဲ ရွှေ့ခြင်းသည် **tag အသစ် လာသောအခါ** သို့မဟုတ် **`O` လာသောအခါ** သာ
+ဖြစ်ခြင်းကြောင့်ဖြစ်သည်။ စာသားသည် entity နှင့်သာ ဆုံးသွားလျှင် ရွှေ့ရန် အခွင့်အရေး မရတော့ပါ။
 
 ```python
 def decode_no_flush(tokens, tags):
@@ -419,9 +419,9 @@ Output —
 [('PER', 'Sundar Pichai')]
 ```
 
-`B-LOC` အတွက် ဖန်တီးထားတဲ့ `current` က `spans` ထဲ မ၀င်လိုက်ရဘဲ ဆုံးရှုံးသွားပါတယ်။
-Function ၏ ထိပ်မှာရှိတဲ့ `if current is not None: spans.append(current)` က
-ဒီအခြေအနေအတွက် ဖြစ်ပါတယ်။
+`B-LOC` အတွက် ဖန်တီးထားသော `current` သည် `spans` ထဲ မ၀င်လိုက်ရဘဲ ဆုံးရှုံးသွားသည်။
+Function ၏ ထိပ်တွင်ရှိသော `if current is not None: spans.append(current)` သည်
+ဤအခြေအနေအတွက် ဖြစ်သည်။
 
 ---
 
@@ -432,9 +432,9 @@ return [{"type": s["type"], "text": " ".join(s["tokens"]),
          "start": s["start"], "end": s["end"]} for s in spans]
 ```
 
-Loop အတွင်း အလုပ်လုပ်တဲ့အခါ `tokens` key ထဲမှာ **token စာရင်း** (`list`) ကို သိမ်းထားပါတယ်။
-ပြန်ပေးတဲ့အခါမှာ ဒီ list ကို `" ".join(...)` နဲ့ **စာသားတစ်ခုတည်း** အဖြစ် ပြောင်းပြီး
-key အမည်ကိုလည်း `tokens` ကနေ `text` သို့ ပြောင်းပါတယ်။
+Loop အတွင်း အလုပ်လုပ်သောအခါ `tokens` key ထဲတွင် **token စာရင်း** (`list`) ကို သိမ်းထားသည်။
+ပြန်ပေးသောအခါတွင် ဤ list ကို `" ".join(...)` ဖြင့် **စာသားတစ်ခုတည်း** အဖြစ် ပြောင်းပြီး
+key အမည်ကိုလည်း `tokens` မှ `text` သို့ ပြောင်းသည်။
 
 ```python
 spans = [{"type": "PER", "tokens": ["Sundar", "Pichai"], "start": 0, "end": 2}]
@@ -449,8 +449,8 @@ Output —
 [{'type': 'PER', 'text': 'Sundar Pichai', 'start': 0, 'end': 2}]
 ```
 
-List comprehension တစ်ခုတည်းနဲ့ dictionary အသစ်များကို ဖန်တီးပါတယ်။ ပုံမှန် loop
-နဲ့ ရေးမယ်ဆိုရင် —
+List comprehension တစ်ခုတည်းဖြင့် dictionary အသစ်များကို ဖန်တီးသည်။ ပုံမှန် loop
+ဖြင့် ရေးမည်ဆိုလျှင် —
 
 ```python
 results = []
@@ -460,14 +460,14 @@ for s in spans:
 return results
 ```
 
-ဒီလို ခွဲထားတာကြောင့် **အတွင်းပိုင်း data structure (`tokens` list)** နဲ့
-**ပြင်ပသို့ ပေးတဲ့ format (`text` string)** ကို ခွဲထားနိုင်ပါတယ်။
+ဤသို့ ခွဲထားခြင်းကြောင့် **အတွင်းပိုင်း data structure (`tokens` list)** နှင့်
+**ပြင်ပသို့ ပေးသော format (`text` string)** ကို ခွဲထားနိုင်သည်။
 
 ---
 
 ## 12. Loop တစ်ခုချင်းစီ အလုပ်လုပ်ပုံ
 
-`tokens` နဲ့ `tags` ကို index အလိုက် လိုက်ကြည့်ပါ။
+`tokens` နှင့် `tags` ကို index အလိုက် လိုက်ကြည့်ပါ။
 
 | index | token | tag | Branch | `current` (ပြီးနောက်) | `spans` အရေအတွက် |
 | --- | --- | --- | --- | --- | --- |
@@ -481,7 +481,7 @@ return results
 | 7 | `2019` | `I-DATE` | I- | `DATE: 12 March 2019` | 2 |
 | 8 | `.` | `O` | else | `None` | 3 |
 
-Loop ပြီးတဲ့အခါ `spans` ထဲမှာ span သုံးခု ရှိပြီး `current` က `None` ဖြစ်ပါတယ်။
+Loop ပြီးသောအခါ `spans` ထဲတွင် span သုံးခု ရှိပြီး `current` သည် `None` ဖြစ်သည်။
 
 ---
 
@@ -493,8 +493,8 @@ for span in decode_bio(tokens, tags):
           % (span["type"], span["text"], span["start"], span["end"]))
 ```
 
-`%-5s` က စာသားကို ဘယ်ဘက်ညှိပြီး အကျယ် ၅ လုံး ယူပါတယ်။ `%-15s` ကလည်း
-အကျယ် ၁၅ လုံးပါ။ ဒီလိုလုပ်ရင် တိုင်တစ်လျှောက် ကော်လံများ တန်းနေပါတယ်။
+`%-5s` သည် စာသားကို ဘယ်ဘက်ညှိပြီး အကျယ် ၅ လုံး ယူသည်။ `%-15s` သည်လည်း
+အကျယ် ၁၅ လုံးဖြစ်သည်။ ဤသို့လုပ်လျှင် တိုင်တစ်လျှောက် ကော်လံများ တန်းနေသည်။
 
 Expected output —
 
@@ -504,8 +504,8 @@ LOC   London          tokens[3:4]
 DATE  12 March 2019   tokens[5:8]
 ```
 
-`tokens[5:8]` က `["12", "March", "2019"]` ဖြစ်ပါတယ်။ `end` က exclusive ဖြစ်တဲ့အတွက်
-index 8 မပါဝင်ပါဘူး။
+`tokens[5:8]` သည် `["12", "March", "2019"]` ဖြစ်သည်။ `end` သည် exclusive ဖြစ်သောကြောင့်
+index 8 မပါဝင်ပါ။
 
 ---
 
@@ -555,7 +555,7 @@ DATE  12 March 2019   tokens[5:8]
 
 ## 15. ကိုယ်တိုင်လေ့ကျင့်ကြည့်ပါ
 
-**မေးခွန်း** — အောက်ပါ input အတွက် `decode_bio()` က ဘယ် span မည်မျှ ပြန်ပေးမလဲ။
+**မေးခွန်း** — အောက်ပါ input အတွက် `decode_bio()` သည် span မည်မျှ ပြန်ပေးမည်နည်း။
 
 ```python
 tokens = ["Alice", "Chen", "founded", "Acme", "Corp"]
