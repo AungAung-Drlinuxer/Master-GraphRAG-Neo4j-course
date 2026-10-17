@@ -42,6 +42,7 @@ concept အသစ်များ (dictionary၊ tuple၊ set၊ while loop၊ li
 | Walkthrough | Exercise |
 |---|---|
 | `walkthroughs/01_pipeline_stage_ordering.md` | Exercise 1 — RAG Pipeline Stage Ordering (Topological Sorting) |
+| `walkthroughs/02_cosine_similarity_ranking.md` | Exercise 2 — Cosine Similarity Ranking |
 
 ## Prerequisites
 
